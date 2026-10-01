@@ -400,6 +400,10 @@ def ctr_at(curve, pos):
     return curve[lo - 1] + (curve[lo] - curve[lo - 1]) * (pos - lo)
 
 
+def fr(x):
+    return f"{x:.1f}".replace(".", ",")
+
+
 def dshift(d, n):
     return str(date.fromisoformat(d) + timedelta(days=n))
 
@@ -582,13 +586,13 @@ def detect(groups, qp_rows, curve, finals):
                 lost = round(i28 * (ctr_at(curve, p7) - ctr_at(curve, p3))) if curve else None
                 # Franchir un seuil ne compte que si le recul est réel (2,9 → 3,1 n'est que du bruit)
                 if p7 <= 10 < p3 and p3 - p7 >= 1:
-                    flags["top10"] = ("critique", f"Sort du top 10 : {p7:.1f} → {p3:.1f}", lost)
+                    flags["top10"] = ("critique", f"Sort du top 10 : {fr(p7)} → {fr(p3)}", lost)
                 elif p7 <= 3 < p3 and p3 - p7 >= 0.7:
-                    flags["top3"] = ("attention", f"Sort du top 3 : {p7:.1f} → {p3:.1f}", lost)
+                    flags["top3"] = ("attention", f"Sort du top 3 : {fr(p7)} → {fr(p3)}", lost)
                 elif p3 - p7 >= thr:
-                    flags["baisse"] = ("attention", f"Perd {p3 - p7:.1f} place(s) : {p7:.1f} → {p3:.1f} (3 derniers jours vs 7 jours précédents)", lost)
+                    flags["baisse"] = ("attention", f"Perd {fr(p3 - p7)} place{'s' if p3 - p7 >= 2 else ''} : {fr(p7)} → {fr(p3)} (3 derniers jours vs 7 jours précédents)", lost)
                 if p7 - p3 >= thr:
-                    flags["hausse"] = ("info", f"Gagne {p7 - p3:.1f} place(s) : {p7:.1f} → {p3:.1f}", -lost if lost else None)
+                    flags["hausse"] = ("info", f"Gagne {fr(p7 - p3)} place{'s' if p7 - p3 >= 2 else ''} : {fr(p7)} → {fr(p3)}", -lost if lost else None)
             if i7 >= 30 and i3 == 0 and g["page"] != SITE_LEVEL:
                 flags["disparue"] = ("critique", "La page suivie ne reçoit plus aucune impression sur ce mot-clé depuis 3 jours", None)
             if w0 >= 200 and w1 <= 0.7 * w0:
@@ -776,7 +780,7 @@ def notify():
             if aid not in sent:
                 new.append(a)
         if new:
-            lines.append(f"*{sp['label']}* (santé {sp['health']}/100) <{base}#/{sp['name']}/alertes|voir les alertes>")
+            lines.append(f"*{sp['label']}* (santé {sp['health']}/100) <{base}#/{sp['name']}|voir ce qui est à traiter>")
             lines += [f"• [{a['severity']}] {a.get('keyword') or a.get('page') or ''} : {a['text']}" for a in new[:10]]
     if datetime.now(timezone.utc).weekday() == 0:
         lines.append("\n*Récap de la semaine*")
