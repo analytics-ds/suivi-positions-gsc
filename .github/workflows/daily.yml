@@ -39,7 +39,12 @@ jobs:
 
       - name: Collecte GSC, inspection d'URL, mises à jour Google
         env:
-          SECRETS_JSON: ${{ toJSON(secrets) }}
+          GSC_CLIENT_ID: ${{ secrets.GSC_CLIENT_ID }}
+          GSC_CLIENT_SECRET: ${{ secrets.GSC_CLIENT_SECRET }}
+          GSC_REFRESH_TOKEN: ${{ secrets.GSC_REFRESH_TOKEN }}
+          # Comptes supplémentaires (scripts/oauth_login.py --label <nom>) : ajouter une ligne par compte, par ex.
+          # GSC_REFRESH_TOKEN_PIERRE: ${{ secrets.GSC_REFRESH_TOKEN_PIERRE }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         run: |
           ARGS="--days ${{ github.event.inputs.days || '10' }}"
           if [ -n "${{ github.event.inputs.site }}" ]; then ARGS="$ARGS --site ${{ github.event.inputs.site }}"; fi
@@ -50,7 +55,12 @@ jobs:
       - name: Digest Slack
         if: github.event_name == 'schedule'
         env:
-          SECRETS_JSON: ${{ toJSON(secrets) }}
+          GSC_CLIENT_ID: ${{ secrets.GSC_CLIENT_ID }}
+          GSC_CLIENT_SECRET: ${{ secrets.GSC_CLIENT_SECRET }}
+          GSC_REFRESH_TOKEN: ${{ secrets.GSC_REFRESH_TOKEN }}
+          # Comptes supplémentaires (scripts/oauth_login.py --label <nom>) : ajouter une ligne par compte, par ex.
+          # GSC_REFRESH_TOKEN_PIERRE: ${{ secrets.GSC_REFRESH_TOKEN_PIERRE }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         run: python scripts/tracker.py notify
 
       - name: Commit des données

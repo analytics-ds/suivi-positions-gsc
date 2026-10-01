@@ -51,7 +51,12 @@ jobs:
       - name: Mots-clés de départ du nouveau projet
         if: steps.apply.outputs.kind == 'projet'
         env:
-          SECRETS_JSON: ${{ toJSON(secrets) }}
+          GSC_CLIENT_ID: ${{ secrets.GSC_CLIENT_ID }}
+          GSC_CLIENT_SECRET: ${{ secrets.GSC_CLIENT_SECRET }}
+          GSC_REFRESH_TOKEN: ${{ secrets.GSC_REFRESH_TOKEN }}
+          # Comptes supplémentaires (scripts/oauth_login.py --label <nom>) : ajouter une ligne par compte, par ex.
+          # GSC_REFRESH_TOKEN_PIERRE: ${{ secrets.GSC_REFRESH_TOKEN_PIERRE }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         run: python scripts/tracker.py seed ${{ steps.apply.outputs.site }}
 
       - name: Recalcul (journal d'actions)
