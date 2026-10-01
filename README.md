@@ -41,7 +41,12 @@ pip install -r requirements.txt
 python scripts/oauth_login.py chemin/vers/client_secret.json --label pierre --env-file chemin/vers/.claude/secrets/.env
 ```
 
-Le navigateur s'ouvre, on se connecte, le script liste les propriétés accessibles et pose le secret `GSC_REFRESH_TOKEN_PIERRE`. Les projets de ce compte déclarent ensuite `account: pierre` dans `config/sites.yaml`. Sans `--label`, le script remplace le compte principal.
+Le navigateur s'ouvre, on se connecte, le script liste les propriétés accessibles et pose le secret `GSC_REFRESH_TOKEN_PIERRE`. Ensuite :
+
+1. ajouter la ligne `GSC_REFRESH_TOKEN_PIERRE: ${{ secrets.GSC_REFRESH_TOKEN_PIERRE }}` dans les blocs `env` de `.github/workflows/daily.yml` et `issues.yml` (GitHub bloque les workflows qui reçoivent tous les secrets d'un coup, chaque secret doit donc être nommé) ;
+2. déclarer `account: pierre` sur les projets de ce compte dans `config/sites.yaml`.
+
+Sans `--label`, le script remplace le compte principal.
 
 ## Digest Slack (optionnel)
 

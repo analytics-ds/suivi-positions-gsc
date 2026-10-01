@@ -9,7 +9,7 @@ Commandes :
 Authentification OAuth (voir README) :
   GSC_CLIENT_ID + GSC_CLIENT_SECRET + GSC_REFRESH_TOKEN pour le compte « default »,
   GSC_REFRESH_TOKEN_<COMPTE> pour un autre compte déclaré dans config/sites.yaml (account: <compte>).
-  En GitHub Actions, tous les secrets arrivent dans SECRETS_JSON.
+  En GitHub Actions, chaque secret est passé nommément dans le bloc env des workflows.
 """
 
 import argparse
