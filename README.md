@@ -28,21 +28,26 @@ Le mot-clé est matché à l'identique dans la GSC (pas de variante, pas de plur
 
 ## Connecter la Search Console
 
-Option recommandée, un compte de service Google :
+L'outil lit la GSC avec les droits d'un compte Google @datashake.fr, via OAuth. Aucun utilisateur n'est ajouté sur les propriétés clients (l'agence n'en a pas le droit).
 
-1. Dans Google Cloud, créer un compte de service, activer l'API « Google Search Console API » et générer une clé JSON.
-2. Dans chaque propriété GSC suivie : Paramètres > Utilisateurs et autorisations > ajouter l'e-mail du compte de service en accès « Restreint ».
-3. Dans le repo GitHub : Settings > Secrets and variables > Actions > nouveau secret `GSC_SERVICE_ACCOUNT_JSON` avec le contenu complet du fichier JSON.
+- App OAuth : client « Application de bureau » du projet Google Cloud `ds-suivi-positions-gsc` (organisation datashake.fr, écran de consentement en mode Interne, donc réservé aux comptes @datashake.fr et sans validation Google).
+- Compte connecté aujourd'hui : theo@datashake.fr. Seules les propriétés GSC où ce compte est déclaré sont accessibles.
+- Secrets GitHub du repo : `GSC_CLIENT_ID`, `GSC_CLIENT_SECRET`, `GSC_REFRESH_TOKEN`.
 
-Alternative OAuth utilisateur : secrets `GSC_CLIENT_ID`, `GSC_CLIENT_SECRET` et `GSC_REFRESH_TOKEN` (même app OAuth que `mcps/gsc/` dans le dossier SEO-Claude).
+Pour (re)connecter un compte, par exemple si le token est révoqué ou pour changer de compte :
 
-Sans secret, le workflow ne fait que régénérer le dashboard.
+```bash
+pip install -r requirements.txt
+python scripts/oauth_login.py chemin/vers/client_secret.json --env-file chemin/vers/.claude/secrets/.env
+```
+
+Le navigateur s'ouvre, on se connecte avec le compte voulu, le script vérifie l'accès et pose les trois secrets GitHub. Aucune valeur n'est affichée.
 
 ## Lancer en local
 
 ```bash
 pip install -r requirements.txt
-GSC_SERVICE_ACCOUNT_JSON="$(cat cle.json)" python scripts/tracker.py fetch --days 30
+GSC_CLIENT_ID=… GSC_CLIENT_SECRET=… GSC_REFRESH_TOKEN=… python scripts/tracker.py fetch --days 30
 python scripts/tracker.py build
 python -m http.server 8765 -d docs
 ```

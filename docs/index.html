@@ -327,11 +327,11 @@
     </div>
     <div class="drawer-body">
       <div class="mini-kpis" id="d-kpis"></div>
-      <h4>Position moyenne par jour</h4>
+      <h4>Position moyenne <span class="gran"></span></h4>
       <div class="chart-box"><canvas id="d-pos"></canvas></div>
-      <h4>Impressions par jour</h4>
+      <h4>Impressions <span class="gran"></span></h4>
       <div class="chart-box"><canvas id="d-impr"></canvas></div>
-      <h4>Historique quotidien</h4>
+      <h4>Historique quotidien (90 derniers jours)</h4>
       <div class="daily"><table>
         <thead><tr><th>Date</th><th class="num">Position</th><th class="num">Clics</th><th class="num">Impressions</th><th class="num">CTR</th></tr></thead>
         <tbody id="d-rows"></tbody>
@@ -507,16 +507,35 @@ function posScale(vals) {
   return { reverse: true, min: 1, suggestedMax: Math.max(5, Math.ceil(max) + 1), grid: { color: GRID }, border: { display: false }, ticks: { precision: 0 } };
 }
 
+// Au-delà de 3 mois, une courbe journalière est illisible : regroupement par semaine
+// (position pondérée par les impressions, clics et impressions additionnés), en partant du dernier jour.
+function series(k, dates) {
+  if (dates.length <= 92) return { labels: dates.map(fmtDate), pts: k.pts };
+  const labels = [], pts = [];
+  for (let end = dates.length; end > 0; end -= 7) {
+    const chunk = k.pts.slice(Math.max(0, end - 7), end).filter(Boolean);
+    labels.unshift("sem. du " + fmtDate(dates[Math.max(0, end - 7)]));
+    if (!chunk.length) { pts.unshift(null); continue; }
+    const impressions = chunk.reduce((a, p) => a + p.impressions, 0), clicks = chunk.reduce((a, p) => a + p.clicks, 0);
+    pts.unshift({ impressions, clicks, ctr: impressions ? clicks / impressions * 100 : 0,
+      position: impressions ? +(chunk.reduce((a, p) => a + p.position * p.impressions, 0) / impressions).toFixed(1) : chunk[0].position,
+      fresh: chunk.some(p => p.fresh) });
+  }
+  return { labels, pts };
+}
+
 function renderMain(kws, dates) {
   charts.main && charts.main.destroy();
-  const visible = kws.filter(k => k.on).sort((a, b) => sel.get(a.i) - sel.get(b.i));
+  const visible = kws.filter(k => k.on).sort((a, b) => sel.get(a.i) - sel.get(b.i))
+    .map(k => { const s = series(k, dates); return { ...k, pts: s.pts, labels: s.labels }; });
   const val = p => p ? (metric === "position" ? p.position : metric === "clicks" ? p.clicks : p.impressions) : null;
   const ds = visible.map(k => lineDs(k, k.pts.map(val), k.keyword));
+  const labels = visible.length ? visible[0].labels : dates.map(fmtDate);
   const yScale = metric === "position" ? posScale(ds.flatMap(d => d.data))
     : { beginAtZero: true, grid: { color: GRID }, border: { display: false } };
   charts.main = new Chart(document.getElementById("chart-main"), {
     type: "line",
-    data: { labels: dates.map(fmtDate), datasets: ds },
+    data: { labels, datasets: ds },
     options: {
       maintainAspectRatio: false, interaction: { mode: "index", intersect: false },
       scales: { y: yScale, x: { grid: { display: false }, border: { color: "#E8E8E8" }, ticks: { maxTicksLimit: 10, maxRotation: 0 } } },
@@ -629,23 +648,26 @@ function renderDrawer(k, dates) {
 
   charts.dpos && charts.dpos.destroy();
   charts.dimpr && charts.dimpr.destroy();
+  const s = series(k, dates);
+  document.querySelectorAll(".gran").forEach(e => e.textContent = s.pts.length < dates.length ? "par semaine" : "par jour");
+  k = { ...k, pts: s.pts };
   const vals = k.pts.map(p => p ? p.position : null);
   charts.dpos = new Chart(document.getElementById("d-pos"), {
-    type: "line", data: { labels: dates.map(fmtDate), datasets: [lineDs(k, vals, "Position")] },
+    type: "line", data: { labels: s.labels, datasets: [lineDs(k, vals, "Position")] },
     options: { maintainAspectRatio: false, interaction: { mode: "index", intersect: false },
       scales: { y: posScale(vals), x: { grid: { display: false }, ticks: { maxTicksLimit: 7, maxRotation: 0 } } },
       plugins: { legend: { display: false }, tooltip: tooltip({ label: c => ` Position : ${fmt1(c.parsed.y)}` }) } },
   });
   charts.dimpr = new Chart(document.getElementById("d-impr"), {
     type: "bar",
-    data: { labels: dates.map(fmtDate), datasets: [{ label: "Impressions", data: k.pts.map(p => p ? p.impressions : null),
+    data: { labels: s.labels, datasets: [{ label: "Impressions", data: k.pts.map(p => p ? p.impressions : null),
       backgroundColor: k.color, borderRadius: { topLeft: 4, topRight: 4 }, borderSkipped: "bottom", maxBarThickness: 22 }] },
     options: { maintainAspectRatio: false,
       scales: { y: { beginAtZero: true, grid: { color: GRID }, border: { display: false } }, x: { grid: { display: false }, ticks: { maxTicksLimit: 7, maxRotation: 0 } } },
       plugins: { legend: { display: false }, tooltip: tooltip({
         label: c => { const p = k.pts[c.dataIndex]; return p ? [` Impressions : ${fmt(p.impressions)}`, ` Clics : ${fmt(p.clicks)}`] : ""; } }) } },
   });
-  document.getElementById("d-rows").innerHTML = k.present.slice().reverse().map(p => `<tr>
+  document.getElementById("d-rows").innerHTML = k.present.slice(-90).reverse().map(p => `<tr>
     <td>${fmtDate(p.date)}${p.fresh ? '<span class="fresh-tag">provisoire</span>' : ""}</td>
     <td class="num">${fmt1(p.position)}</td><td class="num">${fmt(p.clicks)}</td>
     <td class="num">${fmt(p.impressions)}</td><td class="num">${fmt1(p.ctr)} %</td></tr>`).join("");
