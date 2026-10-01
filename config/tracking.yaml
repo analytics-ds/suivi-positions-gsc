@@ -1,0 +1,24 @@
+# Mots-clés et pages suivis, par site.
+# - name     : identifiant court du site (minuscules, sans espace), sert de clé dans les données
+# - label    : nom affiché dans le dashboard
+# - property : propriété GSC exacte (sc-domain:exemple.com ou https://www.exemple.com/)
+# - keywords : liste des couples mot-clé / page. Le mot-clé est matché à l'identique dans la GSC.
+#              Si "page" est omis, on suit la position globale du site sur le mot-clé (toutes pages confondues).
+
+sites:
+  - name: celio
+    label: Celio
+    property: sc-domain:celio.com
+    keywords:
+      - keyword: jean homme
+        page: https://www.celio.com/fr-fr/c/jeans
+      - keyword: veste homme
+        page: https://www.celio.com/fr-fr/c/blousons-et-manteaux-vestes
+      - keyword: pantalon homme
+        page: https://www.celio.com/fr-fr/c/pantalons
+      - keyword: manteau homme
+        page: https://www.celio.com/fr-fr/c/blousons-et-manteaux-manteaux
+      - keyword: blouson homme
+        page: https://www.celio.com/fr-fr/c/blousons-et-manteaux-blousons
+      - keyword: parka homme
+        page: https://www.celio.com/fr-fr/c/blousons-et-manteaux-parkas

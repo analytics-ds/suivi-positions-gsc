@@ -1,0 +1,56 @@
+name: Suivi de positions quotidien
+
+on:
+  schedule:
+    - cron: "0 6 * * *"   # tous les jours à 6h UTC (8h heure de Paris en été)
+  workflow_dispatch:
+    inputs:
+      days:
+        description: "Nombre de jours à (re)récupérer"
+        default: "10"
+  push:
+    paths:
+      - "config/**"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: tracker
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - run: pip install -r requirements.txt
+
+      - name: Récupération GSC
+        env:
+          GSC_SERVICE_ACCOUNT_JSON: ${{ secrets.GSC_SERVICE_ACCOUNT_JSON }}
+          GSC_CLIENT_ID: ${{ secrets.GSC_CLIENT_ID }}
+          GSC_CLIENT_SECRET: ${{ secrets.GSC_CLIENT_SECRET }}
+          GSC_REFRESH_TOKEN: ${{ secrets.GSC_REFRESH_TOKEN }}
+        run: |
+          if [ -z "$GSC_SERVICE_ACCOUNT_JSON" ] && [ -z "$GSC_REFRESH_TOKEN" ]; then
+            echo "::warning::Aucun secret GSC configuré, récupération ignorée (le dashboard est seulement régénéré)."
+          else
+            python scripts/tracker.py fetch --days "${{ github.event.inputs.days || '10' }}"
+          fi
+
+      - run: python scripts/tracker.py build
+
+      - name: Commit des données
+        run: |
+          git config user.name "suivi-positions-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data docs/data.json
+          git diff --cached --quiet || git commit -m "Données du $(date -u +%F)"
+          git push

@@ -1,0 +1,384 @@
+{
+ "generated_at": "2026-10-01T17:28+00:00",
+ "sites": [
+  {
+   "name": "celio",
+   "label": "Celio",
+   "property": "sc-domain:celio.com",
+   "keywords": [
+    {
+     "keyword": "jean homme",
+     "page": "https://www.celio.com/fr-fr/c/jeans",
+     "series": [
+      {
+       "date": "2026-09-22",
+       "position": 1.1,
+       "clicks": 13,
+       "impressions": 370,
+       "ctr": 3.51,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-23",
+       "position": 1.3,
+       "clicks": 7,
+       "impressions": 351,
+       "ctr": 1.99,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-24",
+       "position": 1.3,
+       "clicks": 13,
+       "impressions": 383,
+       "ctr": 3.39,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-25",
+       "position": 1.4,
+       "clicks": 9,
+       "impressions": 344,
+       "ctr": 2.62,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-26",
+       "position": 1.3,
+       "clicks": 14,
+       "impressions": 458,
+       "ctr": 3.06,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-27",
+       "position": 1.4,
+       "clicks": 16,
+       "impressions": 470,
+       "ctr": 3.4,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-28",
+       "position": 1.5,
+       "clicks": 15,
+       "impressions": 412,
+       "ctr": 3.64,
+       "fresh": false
+      }
+     ]
+    },
+    {
+     "keyword": "veste homme",
+     "page": "https://www.celio.com/fr-fr/c/blousons-et-manteaux-vestes",
+     "series": [
+      {
+       "date": "2026-09-22",
+       "position": 8.6,
+       "clicks": 1,
+       "impressions": 155,
+       "ctr": 0.65,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-23",
+       "position": 8.2,
+       "clicks": 1,
+       "impressions": 154,
+       "ctr": 0.65,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-24",
+       "position": 7.7,
+       "clicks": 0,
+       "impressions": 175,
+       "ctr": 0.0,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-25",
+       "position": 8.5,
+       "clicks": 2,
+       "impressions": 143,
+       "ctr": 1.4,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-26",
+       "position": 7.8,
+       "clicks": 8,
+       "impressions": 231,
+       "ctr": 3.46,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-27",
+       "position": 7.6,
+       "clicks": 7,
+       "impressions": 276,
+       "ctr": 2.54,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-28",
+       "position": 7.7,
+       "clicks": 2,
+       "impressions": 223,
+       "ctr": 0.9,
+       "fresh": false
+      }
+     ]
+    },
+    {
+     "keyword": "pantalon homme",
+     "page": "https://www.celio.com/fr-fr/c/pantalons",
+     "series": [
+      {
+       "date": "2026-09-22",
+       "position": 1.9,
+       "clicks": 22,
+       "impressions": 627,
+       "ctr": 3.51,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-23",
+       "position": 2.0,
+       "clicks": 17,
+       "impressions": 597,
+       "ctr": 2.85,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-24",
+       "position": 1.8,
+       "clicks": 25,
+       "impressions": 570,
+       "ctr": 4.39,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-25",
+       "position": 1.8,
+       "clicks": 17,
+       "impressions": 550,
+       "ctr": 3.09,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-26",
+       "position": 1.8,
+       "clicks": 27,
+       "impressions": 678,
+       "ctr": 3.98,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-27",
+       "position": 1.9,
+       "clicks": 27,
+       "impressions": 694,
+       "ctr": 3.89,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-28",
+       "position": 1.8,
+       "clicks": 30,
+       "impressions": 651,
+       "ctr": 4.61,
+       "fresh": false
+      }
+     ]
+    },
+    {
+     "keyword": "manteau homme",
+     "page": "https://www.celio.com/fr-fr/c/blousons-et-manteaux-manteaux",
+     "series": [
+      {
+       "date": "2026-09-22",
+       "position": 2.7,
+       "clicks": 13,
+       "impressions": 423,
+       "ctr": 3.07,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-23",
+       "position": 4.8,
+       "clicks": 3,
+       "impressions": 164,
+       "ctr": 1.83,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-24",
+       "position": 5.5,
+       "clicks": 2,
+       "impressions": 124,
+       "ctr": 1.61,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-25",
+       "position": 6.7,
+       "clicks": 7,
+       "impressions": 288,
+       "ctr": 2.43,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-26",
+       "position": 4.0,
+       "clicks": 15,
+       "impressions": 435,
+       "ctr": 3.45,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-27",
+       "position": 3.5,
+       "clicks": 18,
+       "impressions": 571,
+       "ctr": 3.15,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-28",
+       "position": 5.1,
+       "clicks": 16,
+       "impressions": 583,
+       "ctr": 2.74,
+       "fresh": false
+      }
+     ]
+    },
+    {
+     "keyword": "blouson homme",
+     "page": "https://www.celio.com/fr-fr/c/blousons-et-manteaux-blousons",
+     "series": [
+      {
+       "date": "2026-09-22",
+       "position": 3.0,
+       "clicks": 10,
+       "impressions": 284,
+       "ctr": 3.52,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-23",
+       "position": 3.3,
+       "clicks": 15,
+       "impressions": 277,
+       "ctr": 5.42,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-24",
+       "position": 3.4,
+       "clicks": 9,
+       "impressions": 233,
+       "ctr": 3.86,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-25",
+       "position": 3.6,
+       "clicks": 6,
+       "impressions": 242,
+       "ctr": 2.48,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-26",
+       "position": 4.0,
+       "clicks": 8,
+       "impressions": 248,
+       "ctr": 3.23,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-27",
+       "position": 3.6,
+       "clicks": 15,
+       "impressions": 308,
+       "ctr": 4.87,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-28",
+       "position": 3.3,
+       "clicks": 9,
+       "impressions": 293,
+       "ctr": 3.07,
+       "fresh": false
+      }
+     ]
+    },
+    {
+     "keyword": "parka homme",
+     "page": "https://www.celio.com/fr-fr/c/blousons-et-manteaux-parkas",
+     "series": [
+      {
+       "date": "2026-09-22",
+       "position": 5.4,
+       "clicks": 11,
+       "impressions": 236,
+       "ctr": 4.66,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-23",
+       "position": 4.6,
+       "clicks": 4,
+       "impressions": 218,
+       "ctr": 1.83,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-24",
+       "position": 5.2,
+       "clicks": 1,
+       "impressions": 204,
+       "ctr": 0.49,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-25",
+       "position": 5.9,
+       "clicks": 6,
+       "impressions": 121,
+       "ctr": 4.96,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-26",
+       "position": 5.2,
+       "clicks": 5,
+       "impressions": 180,
+       "ctr": 2.78,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-27",
+       "position": 5.8,
+       "clicks": 4,
+       "impressions": 214,
+       "ctr": 1.87,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-28",
+       "position": 4.7,
+       "clicks": 13,
+       "impressions": 258,
+       "ctr": 5.04,
+       "fresh": false
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

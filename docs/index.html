@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Suivi de positions · datashake</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  :root {
+    --white: #FFFFFF;
+    --beige: #F3EDE8;
+    --black: #101010;
+    --gray-1: #F5F5F5;
+    --gray-2: #E8E8E8;
+    --gray-3: #D4D4D4;
+    --text: #101010;
+    --text-muted: rgba(16, 16, 16, 0.7);
+    --text-light: rgba(16, 16, 16, 0.5);
+    --accent-blue: #77B0ED;
+    --accent-yellow: #FFFF7D;
+    --accent-kaki: #ADAC2F;
+    --status-ok: #4F8A4F;
+    --status-warn: #C9A227;
+    --status-ko: #C44A4A;
+    --radius-sm: 8px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--white); color: var(--text);
+    font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased;
+  }
+  .container { max-width: 1200px; margin: 0 auto; padding: 64px 48px; }
+  .header {
+    display: flex; justify-content: space-between; align-items: flex-start; gap: 24px;
+    padding-bottom: 40px; border-bottom: 1px solid var(--gray-2); margin-bottom: 56px;
+  }
+  .logo { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 22px; letter-spacing: -0.02em; }
+  .logo svg { width: 22px; height: 22px; }
+  .header-meta { text-align: right; color: var(--text-muted); font-size: 13px; }
+  .header-meta strong { color: var(--text); font-weight: 500; }
+  .title-block { margin-bottom: 40px; }
+  .eyebrow {
+    display: inline-block; background: var(--beige); padding: 6px 14px; border-radius: 999px;
+    font-size: 12px; font-weight: 500; margin-bottom: 20px;
+  }
+  .title-block h1 { font-size: 52px; font-weight: 600; letter-spacing: -0.03em; line-height: 1.05; margin-bottom: 20px; }
+  .lede { font-size: 17px; color: var(--text-muted); max-width: 760px; line-height: 1.55; }
+
+  .filters { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-bottom: 40px; }
+  .filters label { font-size: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+  select {
+    font: inherit; font-size: 14px; padding: 8px 14px; border: 1px solid var(--gray-2);
+    border-radius: 999px; background: var(--white); color: var(--text); cursor: pointer;
+  }
+  .seg { display: inline-flex; background: var(--gray-1); border-radius: 999px; padding: 4px; }
+  .seg button {
+    font: inherit; font-size: 13px; font-weight: 500; border: 0; background: transparent;
+    padding: 6px 14px; border-radius: 999px; cursor: pointer; color: var(--text-muted);
+  }
+  .seg button.active { background: var(--black); color: var(--white); }
+
+  .hero {
+    background: var(--black); color: var(--white); border-radius: var(--radius-lg);
+    padding: 48px; margin-bottom: 72px;
+    display: grid; grid-template-columns: 1fr 1.4fr; gap: 48px; align-items: center;
+  }
+  .hero-score .label { text-transform: uppercase; letter-spacing: 0.08em; font-size: 11px; color: rgba(255,255,255,0.5); font-weight: 500; }
+  .hero-score .value { font-size: 104px; font-weight: 600; letter-spacing: -0.04em; line-height: 1; margin: 12px 0; }
+  .hero-score .caption { color: rgba(255,255,255,0.65); font-size: 14px; max-width: 300px; }
+  .hero-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .hero-stat { border: 1px solid rgba(255,255,255,0.12); border-radius: var(--radius-md); padding: 22px; }
+  .hero-stat .num { font-size: 34px; font-weight: 600; letter-spacing: -0.02em; line-height: 1; margin-bottom: 8px; }
+  .hero-stat .num.blue { color: var(--accent-blue); }
+  .hero-stat .num.yellow { color: var(--accent-yellow); }
+  .hero-stat .lbl { font-size: 12px; color: rgba(255,255,255,0.65); text-transform: uppercase; letter-spacing: 0.05em; }
+
+  section { margin-bottom: 80px; }
+  .section-head {
+    display: flex; justify-content: space-between; align-items: flex-end; gap: 16px;
+    margin-bottom: 28px; padding-bottom: 16px; border-bottom: 1px solid var(--gray-2);
+  }
+  .section-head h2 { font-size: 30px; font-weight: 600; letter-spacing: -0.02em; }
+  .section-num { color: var(--text-light); font-size: 13px; font-weight: 500; letter-spacing: 0.05em; }
+  .section-sub { color: var(--text-muted); font-size: 14px; margin: -12px 0 24px; }
+
+  .card { border: 1px solid var(--gray-2); border-radius: var(--radius-md); padding: 28px; }
+  .chart-box { position: relative; height: 400px; }
+  .chart-box.small { height: 240px; }
+  .legend { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+  .legend button {
+    display: inline-flex; align-items: center; gap: 8px; font: inherit; font-size: 13px;
+    border: 1px solid var(--gray-2); background: var(--white); color: var(--text);
+    padding: 5px 12px; border-radius: 999px; cursor: pointer;
+  }
+  .legend button .sw { width: 10px; height: 10px; border-radius: 50%; }
+  .legend button.off { color: var(--text-light); }
+  .legend button.off .sw { opacity: 0.25; }
+
+  .table-wrap { border: 1px solid var(--gray-2); border-radius: var(--radius-md); overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th {
+    background: var(--gray-1); text-align: left; padding: 14px 18px; font-weight: 500;
+    color: var(--text-muted); font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em;
+    border-bottom: 1px solid var(--gray-2); white-space: nowrap;
+  }
+  th.num, td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  td { padding: 14px 18px; border-bottom: 1px solid var(--gray-1); vertical-align: middle; }
+  tr:last-child td { border-bottom: none; }
+  tbody tr { cursor: pointer; }
+  tbody tr:hover td, tbody tr.selected td { background: var(--gray-1); }
+  .kw { font-weight: 600; display: flex; align-items: center; gap: 8px; white-space: nowrap; }
+  .kw .sw { width: 10px; height: 10px; border-radius: 50%; flex: none; }
+  td code { white-space: nowrap; font-family: 'SFMono-Regular', Menlo, monospace; font-size: 12px; background: var(--gray-1); padding: 2px 8px; border-radius: 6px; }
+  tr.selected td code, tbody tr:hover td code { background: var(--white); }
+  .pos { font-size: 18px; font-weight: 600; }
+  .delta { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 500; padding: 3px 10px; border-radius: 999px; white-space: nowrap; }
+  .delta.up { background: #E8F4E8; color: var(--status-ok); }
+  .delta.down { background: #FBECEC; color: var(--status-ko); }
+  .delta.flat { background: var(--gray-1); color: var(--text-muted); }
+  .spark { display: block; }
+
+  .detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .detail-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; margin-bottom: 20px; }
+  .detail-head h3 { font-size: 20px; font-weight: 600; }
+  .detail-head a { color: var(--text-muted); font-size: 13px; word-break: break-all; }
+  .card h4 { font-size: 12px; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px; }
+
+  .note { background: var(--beige); border-radius: var(--radius-md); padding: 20px 24px; font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+  .note strong { color: var(--text); }
+  .note ul { margin: 8px 0 0 18px; }
+
+  .footer { display: flex; justify-content: space-between; gap: 16px; font-size: 12px; color: var(--text-light); padding-top: 32px; border-top: 1px solid var(--gray-2); }
+  .empty { padding: 40px; text-align: center; color: var(--text-muted); }
+
+  @media (max-width: 900px) {
+    .container { padding: 32px 16px; }
+    .header { flex-direction: column; }
+    .header-meta { text-align: left; }
+    .title-block h1 { font-size: 36px; }
+    .hero { grid-template-columns: 1fr; padding: 28px; gap: 28px; }
+    .hero-score .value { font-size: 72px; }
+    .detail-grid { grid-template-columns: 1fr; }
+    .chart-box { height: 320px; }
+    .section-head h2 { font-size: 24px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header">
+    <div class="logo">
+      <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M1.55607e-05 58.0954C1.60267e-05 52.6106 4.4208 48.1475 9.90547 48.1065C21.3582 48.0209 30.4387 48.0052 42.0095 48.0022C42.8693 48.002 43.7267 47.8913 44.5577 47.6708C44.5986 47.66 44.6395 47.6491 44.6804 47.6383C49.0177 46.4866 52.0055 42.5438 52.0049 38.0563L52.0013 10.0013C52.0006 4.47793 56.478 4.52739e-07 62.0013 9.5002e-07L90 3.47081e-06C95.5229 3.96805e-06 100 4.47716 100 10L100 42C100 47.5229 95.5229 52 90 52L58.2002 52L57.1548 52.0887C51.9782 52.5278 48 56.8577 48 62.0529L48 90C48 95.5228 43.5229 100 38 100L10 100C4.47716 100 1.23809e-05 95.5228 1.28501e-05 90L1.55607e-05 58.0954Z" fill="#101010"/>
+      </svg>
+      datashake
+    </div>
+    <div class="header-meta">
+      <div><strong>Site</strong> <span id="meta-site">…</span></div>
+      <div><strong>Propriété GSC</strong> <span id="meta-prop">…</span></div>
+      <div><strong>Dernière donnée</strong> <span id="meta-last">…</span></div>
+      <div><strong>Mise à jour</strong> <span id="meta-gen">…</span></div>
+    </div>
+  </div>
+
+  <div class="title-block">
+    <span class="eyebrow">Suivi de positions · Search Console</span>
+    <h1>Positions des mots-clés suivis</h1>
+    <p class="lede">Position moyenne quotidienne de chaque couple mot-clé et page, issue de la Search Console. La donnée est récupérée chaque matin. Les derniers jours, encore provisoires côté Google, sont tracés en pointillés.</p>
+  </div>
+
+  <div class="filters">
+    <label for="site-select">Site</label>
+    <select id="site-select"></select>
+    <label style="margin-left:12px">Période</label>
+    <div class="seg" id="period">
+      <button data-days="7" class="active">7 j</button>
+      <button data-days="28">28 j</button>
+      <button data-days="90">3 mois</button>
+      <button data-days="0">Tout</button>
+    </div>
+  </div>
+
+  <div class="hero">
+    <div class="hero-score">
+      <div class="label">Position moyenne pondérée</div>
+      <div class="value" id="hero-pos">–</div>
+      <div class="caption" id="hero-caption">Moyenne des positions sur la période, pondérée par les impressions.</div>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="num blue" id="hero-top3">–</div><div class="lbl">Mots-clés dans le top 3</div></div>
+      <div class="hero-stat"><div class="num yellow" id="hero-top10">–</div><div class="lbl">Mots-clés dans le top 10</div></div>
+      <div class="hero-stat"><div class="num" id="hero-clicks">–</div><div class="lbl">Clics sur la période</div></div>
+      <div class="hero-stat"><div class="num" id="hero-impr">–</div><div class="lbl">Impressions sur la période</div></div>
+    </div>
+  </div>
+
+  <section>
+    <div class="section-head"><h2>Évolution des positions</h2><span class="section-num">01</span></div>
+    <p class="section-sub">Position 1 en haut. Clique sur un mot-clé de la légende pour le masquer.</p>
+    <div class="card">
+      <div class="legend" id="legend"></div>
+      <div class="chart-box"><canvas id="chart-all"></canvas></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head"><h2>Tableau de suivi</h2><span class="section-num">02</span></div>
+    <p class="section-sub">Variation entre le premier et le dernier jour de la période. Clique sur une ligne pour le détail.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr>
+          <th>Mot-clé</th><th>Page suivie</th><th class="num">Position</th><th>Variation</th><th>Tendance</th>
+          <th class="num">Clics</th><th class="num">Impressions</th><th class="num">CTR</th>
+        </tr></thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head"><h2>Détail du mot-clé</h2><span class="section-num">03</span></div>
+    <div class="detail-head"><h3 id="detail-title">–</h3><a id="detail-url" href="#" target="_blank" rel="noopener"></a></div>
+    <div class="detail-grid">
+      <div class="card"><h4>Position moyenne par jour</h4><div class="chart-box small"><canvas id="chart-pos"></canvas></div></div>
+      <div class="card"><h4>Impressions par jour</h4><div class="chart-box small"><canvas id="chart-impr"></canvas></div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="note">
+      <strong>Comment lire ces chiffres</strong>
+      <ul>
+        <li>La Search Console donne une position moyenne pondérée par les impressions, pas un rang mesuré à un instant T comme un rank tracker.</li>
+        <li>Un jour sans impression n'a pas de donnée : la courbe s'interrompt, ça ne veut pas dire une position à 0.</li>
+        <li>Les 3 derniers jours sont provisoires et sont réécrits avec la donnée consolidée aux runs suivants.</li>
+        <li>Seules les impressions de la page suivie sont comptées. Si une autre URL du site ranke sur le mot-clé, elle n'apparaît pas ici.</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="footer">
+    <div>datashake · Suivi de positions GSC</div>
+    <div id="footer-date"></div>
+  </div>
+</div>
+
+<script>
+// Palette catégorielle validée (ordre fixe, jamais cyclé). Au-delà de 8 mots-clés, utiliser le filtre de légende.
+const PALETTE = ["#2a78d6", "#eb6834", "#1baf7a", "#eda100", "#e87ba4", "#008300", "#4a3aa7", "#e34948"];
+const INK = "#101010", MUTED = "rgba(16,16,16,0.55)", GRID = "#EDEDED";
+const fmt = n => n.toLocaleString("fr-FR");
+const fmtPos = n => n == null ? "–" : n.toLocaleString("fr-FR", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+const fmtDate = d => new Date(d + "T12:00:00").toLocaleDateString("fr-FR", { day: "2-digit", month: "short" });
+const path = u => { try { return new URL(u).pathname; } catch { return u === "*" ? "Toutes pages" : u; } };
+
+let DATA, site, days = 7, hidden = new Set(), selected = 0, charts = {};
+
+Chart.defaults.font.family = "Inter, -apple-system, sans-serif";
+Chart.defaults.font.size = 12;
+Chart.defaults.color = MUTED;
+
+fetch("data.json?v=" + Date.now()).then(r => r.json()).then(d => {
+  DATA = d;
+  const sel = document.getElementById("site-select");
+  d.sites.forEach((s, i) => sel.add(new Option(s.label, i)));
+  const fromHash = d.sites.findIndex(s => s.name === location.hash.slice(1));
+  sel.value = fromHash >= 0 ? fromHash : 0;
+  sel.onchange = () => { location.hash = d.sites[sel.value].name; hidden.clear(); selected = 0; render(); };
+  document.querySelectorAll("#period button").forEach(b => b.onclick = () => {
+    document.querySelectorAll("#period button").forEach(x => x.classList.remove("active"));
+    b.classList.add("active"); days = +b.dataset.days; render();
+  });
+  document.getElementById("meta-gen").textContent = new Date(d.generated_at).toLocaleString("fr-FR", { dateStyle: "medium", timeStyle: "short" });
+  document.getElementById("footer-date").textContent = new Date(d.generated_at).toLocaleDateString("fr-FR", { dateStyle: "long" });
+  render();
+});
+
+function dateRange() {
+  const all = site.keywords.flatMap(k => k.series.map(p => p.date)).sort();
+  if (!all.length) return [];
+  // Dates calculées en UTC pour ne pas décaler d'un jour selon le fuseau du navigateur
+  const last = new Date(all[all.length - 1] + "T00:00:00Z");
+  const first = days ? new Date(last.getTime() - (days - 1) * 864e5) : new Date(all[0] + "T00:00:00Z");
+  const out = [];
+  for (let t = first; t <= last; t = new Date(t.getTime() + 864e5)) out.push(t.toISOString().slice(0, 10));
+  return out;
+}
+
+function render() {
+  site = DATA.sites[document.getElementById("site-select").value];
+  document.getElementById("meta-site").textContent = site.label;
+  document.getElementById("meta-prop").textContent = site.property;
+  const dates = dateRange();
+  document.getElementById("meta-last").textContent = dates.length ? fmtDate(dates[dates.length - 1]) : "aucune";
+
+  const kws = site.keywords.map((k, i) => {
+    const byDate = Object.fromEntries(k.series.map(p => [p.date, p]));
+    const pts = dates.map(d => byDate[d] || null);
+    const present = pts.filter(Boolean);
+    const clicks = present.reduce((a, p) => a + p.clicks, 0);
+    const impr = present.reduce((a, p) => a + p.impressions, 0);
+    const wpos = impr ? present.reduce((a, p) => a + p.position * p.impressions, 0) / impr : null;
+    return { ...k, color: PALETTE[i % PALETTE.length], i, pts, present, clicks, impr, wpos,
+      first: present[0] || null, last: present[present.length - 1] || null };
+  });
+
+  // Hero
+  const tImpr = kws.reduce((a, k) => a + k.impr, 0);
+  const tClicks = kws.reduce((a, k) => a + k.clicks, 0);
+  const wAll = tImpr ? kws.reduce((a, k) => a + (k.wpos || 0) * k.impr, 0) / tImpr : null;
+  document.getElementById("hero-pos").textContent = fmtPos(wAll);
+  document.getElementById("hero-caption").textContent =
+    `Sur ${kws.length} mots-clés suivis, du ${fmtDate(dates[0])} au ${fmtDate(dates[dates.length - 1])}, pondérée par les impressions.`;
+  document.getElementById("hero-top3").textContent = kws.filter(k => k.last && k.last.position <= 3).length + " / " + kws.length;
+  document.getElementById("hero-top10").textContent = kws.filter(k => k.last && k.last.position <= 10).length + " / " + kws.length;
+  document.getElementById("hero-clicks").textContent = fmt(tClicks);
+  document.getElementById("hero-impr").textContent = fmt(tImpr);
+
+  renderLegend(kws);
+  renderAll(kws, dates);
+  renderTable(kws);
+  renderDetail(kws, dates);
+}
+
+function lineDataset(k, label) {
+  return {
+    label, data: k.pts.map(p => p ? p.position : null),
+    borderColor: k.color, backgroundColor: k.color, borderWidth: 2,
+    pointRadius: 4, pointHoverRadius: 6, pointBorderColor: "#fff", pointBorderWidth: 2,
+    tension: 0.25, spanGaps: false, hidden: hidden.has(k.i),
+    segment: { borderDash: ctx => (k.pts[ctx.p1DataIndex] || {}).fresh ? [5, 4] : undefined },
+  };
+}
+
+function positionScale(max) {
+  return { reverse: true, min: 1, suggestedMax: Math.max(10, Math.ceil(max) + 1),
+    grid: { color: GRID }, border: { display: false }, ticks: { precision: 0 },
+    title: { display: true, text: "Position", color: MUTED } };
+}
+
+function tooltip(extra) {
+  return { backgroundColor: "#fff", titleColor: INK, bodyColor: INK, borderColor: "#E8E8E8", borderWidth: 1,
+    padding: 12, boxPadding: 6, usePointStyle: true, callbacks: extra };
+}
+
+function renderLegend(kws) {
+  const el = document.getElementById("legend");
+  el.innerHTML = "";
+  kws.forEach(k => {
+    const b = document.createElement("button");
+    b.className = hidden.has(k.i) ? "off" : "";
+    b.innerHTML = `<span class="sw" style="background:${k.color}"></span>${k.keyword}`;
+    b.onclick = () => { hidden.has(k.i) ? hidden.delete(k.i) : hidden.add(k.i); render(); };
+    el.appendChild(b);
+  });
+}
+
+function renderAll(kws, dates) {
+  charts.all && charts.all.destroy();
+  const max = Math.max(...kws.filter(k => !hidden.has(k.i)).flatMap(k => k.present.map(p => p.position)), 1);
+  charts.all = new Chart(document.getElementById("chart-all"), {
+    type: "line",
+    data: { labels: dates.map(fmtDate), datasets: kws.map(k => lineDataset(k, k.keyword)) },
+    options: {
+      maintainAspectRatio: false, interaction: { mode: "index", intersect: false },
+      scales: { y: positionScale(max), x: { grid: { display: false }, border: { color: "#D4D4D4" } } },
+      plugins: { legend: { display: false }, tooltip: tooltip({
+        label: c => ` ${c.dataset.label} : ${fmtPos(c.parsed.y)}${(kws[c.datasetIndex].pts[c.dataIndex] || {}).fresh ? " (provisoire)" : ""}`,
+      }) },
+    },
+  });
+}
+
+function sparkline(k) {
+  const vals = k.pts.map(p => p ? p.position : null), ok = vals.filter(v => v != null);
+  if (ok.length < 2) return "";
+  const w = 96, h = 28, lo = Math.min(...ok), hi = Math.max(...ok), span = hi - lo || 1;
+  let d = "", pen = false;
+  vals.forEach((v, i) => {
+    if (v == null) { pen = false; return; }
+    const x = (i / (vals.length - 1)) * (w - 4) + 2, y = ((v - lo) / span) * (h - 4) + 2; // position 1 en haut
+    d += (pen ? "L" : "M") + x.toFixed(1) + " " + y.toFixed(1); pen = true;
+  });
+  return `<svg class="spark" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}"><path d="${d}" fill="none" stroke="${k.color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+}
+
+function deltaBadge(k) {
+  if (!k.first || !k.last || k.first === k.last) return `<span class="delta flat">–</span>`;
+  const d = +(k.first.position - k.last.position).toFixed(1); // positif = gain de places
+  if (Math.abs(d) < 0.1) return `<span class="delta flat">= stable</span>`;
+  return d > 0 ? `<span class="delta up" title="Places gagnées">▲ +${fmtPos(d)}</span>`
+               : `<span class="delta down" title="Places perdues">▼ −${fmtPos(-d)}</span>`;
+}
+
+function renderTable(kws) {
+  const tb = document.getElementById("tbody");
+  if (!kws.length) { tb.innerHTML = `<tr><td colspan="8" class="empty">Aucun mot-clé suivi pour ce site.</td></tr>`; return; }
+  tb.innerHTML = kws.map(k => `
+    <tr data-i="${k.i}" class="${k.i === selected ? "selected" : ""}">
+      <td><span class="kw"><span class="sw" style="background:${k.color}"></span>${k.keyword}</span></td>
+      <td><code>${path(k.page)}</code></td>
+      <td class="num"><span class="pos">${fmtPos(k.last && k.last.position)}</span></td>
+      <td>${deltaBadge(k)}</td>
+      <td>${sparkline(k)}</td>
+      <td class="num">${fmt(k.clicks)}</td>
+      <td class="num">${fmt(k.impr)}</td>
+      <td class="num">${k.impr ? (k.clicks / k.impr * 100).toLocaleString("fr-FR", { maximumFractionDigits: 1 }) + " %" : "–"}</td>
+    </tr>`).join("");
+  tb.querySelectorAll("tr[data-i]").forEach(tr => tr.onclick = () => {
+    selected = +tr.dataset.i; render();
+    document.getElementById("detail-title").scrollIntoView({ behavior: "smooth", block: "center" });
+  });
+}
+
+function renderDetail(kws, dates) {
+  const k = kws[selected] || kws[0];
+  if (!k) return;
+  document.getElementById("detail-title").textContent = k.keyword;
+  const a = document.getElementById("detail-url");
+  a.textContent = k.page === "*" ? "Toutes pages du site" : k.page;
+  a.href = k.page === "*" ? "#" : k.page;
+
+  charts.pos && charts.pos.destroy();
+  charts.impr && charts.impr.destroy();
+  const max = Math.max(...k.present.map(p => p.position), 1);
+  charts.pos = new Chart(document.getElementById("chart-pos"), {
+    type: "line",
+    data: { labels: dates.map(fmtDate), datasets: [{ ...lineDataset(k, "Position"), hidden: false }] },
+    options: { maintainAspectRatio: false, interaction: { mode: "index", intersect: false },
+      scales: { y: positionScale(max), x: { grid: { display: false } } },
+      plugins: { legend: { display: false }, tooltip: tooltip({ label: c => ` Position : ${fmtPos(c.parsed.y)}` }) } },
+  });
+  charts.impr = new Chart(document.getElementById("chart-impr"), {
+    type: "bar",
+    data: { labels: dates.map(fmtDate), datasets: [{
+      label: "Impressions", data: k.pts.map(p => p ? p.impressions : null),
+      backgroundColor: k.color, borderRadius: { topLeft: 4, topRight: 4 }, borderSkipped: "bottom",
+      maxBarThickness: 28, categoryPercentage: 0.8, barPercentage: 0.9,
+    }] },
+    options: { maintainAspectRatio: false,
+      scales: { y: { beginAtZero: true, grid: { color: GRID }, border: { display: false } }, x: { grid: { display: false } } },
+      plugins: { legend: { display: false }, tooltip: tooltip({
+        label: c => { const p = k.pts[c.dataIndex]; return p ? [` Impressions : ${fmt(p.impressions)}`, ` Clics : ${fmt(p.clicks)}`, ` CTR : ${p.ctr.toLocaleString("fr-FR")} %`] : ""; },
+      }) } },
+  });
+}
+</script>
+</body>
+</html>
