@@ -478,7 +478,7 @@ date,site,segment,position,clicks,impressions,data_state
 2026-09-27,celio,brand,2.2,16085,30911,final
 2026-09-28,celio,brand,2.5,15578,31047,final
 2026-09-29,celio,brand,2.7,14279,28410,fresh
-2026-09-30,celio,brand,2.5,14222,28003,fresh
+2026-09-30,celio,brand,2.5,14805,29123,fresh
 2025-06-08,celio,nonbrand,13.2,3902,146584,final
 2025-06-09,celio,nonbrand,12.0,4884,152043,final
 2025-06-10,celio,nonbrand,12.9,4503,147377,final
@@ -958,7 +958,7 @@ date,site,segment,position,clicks,impressions,data_state
 2026-09-27,celio,nonbrand,6.9,2470,84269,final
 2026-09-28,celio,nonbrand,7.2,2225,78207,final
 2026-09-29,celio,nonbrand,7.4,1997,70720,fresh
-2026-09-30,celio,nonbrand,7.7,2078,80334,fresh
+2026-09-30,celio,nonbrand,7.6,2142,82955,fresh
 2025-06-08,celio,total,26.8,18291,644123,final
 2025-06-09,celio,total,22.8,23317,627926,final
 2025-06-10,celio,total,21.0,21163,563227,final
@@ -1438,4 +1438,4 @@ date,site,segment,position,clicks,impressions,data_state
 2026-09-27,celio,total,7.7,22738,259215,final
 2026-09-28,celio,total,7.8,21999,253286,final
 2026-09-29,celio,total,8.0,20505,245898,fresh
-2026-09-30,celio,total,8.3,20301,241740,fresh
+2026-09-30,celio,total,8.2,21080,250987,fresh
