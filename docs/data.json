@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-01T19:20+00:00",
+ "generated_at": "2026-10-01T19:41+00:00",
  "sites": [
   {
    "name": "celio",
@@ -374,6 +374,1246 @@
        "clicks": 13,
        "impressions": 258,
        "ctr": 5.04,
+       "fresh": false
+      }
+     ]
+    },
+    {
+     "keyword": "costume homme",
+     "page": "https://www.celio.com/fr-fr/c/costumes",
+     "series": [
+      {
+       "date": "2026-09-22",
+       "position": 3.2,
+       "clicks": 54,
+       "impressions": 1094,
+       "ctr": 4.94,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-23",
+       "position": 2.9,
+       "clicks": 62,
+       "impressions": 1181,
+       "ctr": 5.25,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-24",
+       "position": 3.9,
+       "clicks": 49,
+       "impressions": 1050,
+       "ctr": 4.67,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-25",
+       "position": 3.7,
+       "clicks": 45,
+       "impressions": 1087,
+       "ctr": 4.14,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-26",
+       "position": 3.7,
+       "clicks": 51,
+       "impressions": 1320,
+       "ctr": 3.86,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-27",
+       "position": 3.1,
+       "clicks": 74,
+       "impressions": 1394,
+       "ctr": 5.31,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-28",
+       "position": 3.6,
+       "clicks": 48,
+       "impressions": 1115,
+       "ctr": 4.3,
+       "fresh": false
+      }
+     ]
+    },
+    {
+     "keyword": "chemise homme",
+     "page": "https://www.celio.com/fr-fr/c/chemises",
+     "series": [
+      {
+       "date": "2026-09-22",
+       "position": 2.6,
+       "clicks": 18,
+       "impressions": 835,
+       "ctr": 2.16,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-23",
+       "position": 2.5,
+       "clicks": 27,
+       "impressions": 853,
+       "ctr": 3.17,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-24",
+       "position": 2.4,
+       "clicks": 24,
+       "impressions": 818,
+       "ctr": 2.93,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-25",
+       "position": 2.5,
+       "clicks": 37,
+       "impressions": 816,
+       "ctr": 4.53,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-26",
+       "position": 2.9,
+       "clicks": 33,
+       "impressions": 983,
+       "ctr": 3.36,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-27",
+       "position": 3.0,
+       "clicks": 34,
+       "impressions": 876,
+       "ctr": 3.88,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-28",
+       "position": 2.9,
+       "clicks": 28,
+       "impressions": 830,
+       "ctr": 3.37,
+       "fresh": false
+      }
+     ]
+    },
+    {
+     "keyword": "pyjama homme",
+     "page": "https://www.celio.com/fr-fr/c/sous-vetements-pyjamas",
+     "series": [
+      {
+       "date": "2026-09-22",
+       "position": 6.2,
+       "clicks": 13,
+       "impressions": 737,
+       "ctr": 1.76,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-23",
+       "position": 4.6,
+       "clicks": 44,
+       "impressions": 750,
+       "ctr": 5.87,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-24",
+       "position": 6.1,
+       "clicks": 27,
+       "impressions": 652,
+       "ctr": 4.14,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-25",
+       "position": 3.3,
+       "clicks": 26,
+       "impressions": 707,
+       "ctr": 3.68,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-26",
+       "position": 3.7,
+       "clicks": 49,
+       "impressions": 871,
+       "ctr": 5.63,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-27",
+       "position": 4.2,
+       "clicks": 34,
+       "impressions": 958,
+       "ctr": 3.55,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-28",
+       "position": 5.1,
+       "clicks": 31,
+       "impressions": 887,
+       "ctr": 3.49,
+       "fresh": false
+      }
+     ]
+    },
+    {
+     "keyword": "pantalon cargo homme",
+     "page": "https://www.celio.com/fr-fr/c/pantalons-pantalons-cargos",
+     "series": [
+      {
+       "date": "2026-09-22",
+       "position": 3.9,
+       "clicks": 22,
+       "impressions": 489,
+       "ctr": 4.5,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-23",
+       "position": 2.3,
+       "clicks": 25,
+       "impressions": 577,
+       "ctr": 4.33,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-24",
+       "position": 2.4,
+       "clicks": 27,
+       "impressions": 559,
+       "ctr": 4.83,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-25",
+       "position": 2.5,
+       "clicks": 26,
+       "impressions": 533,
+       "ctr": 4.88,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-26",
+       "position": 2.1,
+       "clicks": 54,
+       "impressions": 621,
+       "ctr": 8.7,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-27",
+       "position": 2.1,
+       "clicks": 41,
+       "impressions": 651,
+       "ctr": 6.3,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-28",
+       "position": 2.4,
+       "clicks": 36,
+       "impressions": 598,
+       "ctr": 6.02,
+       "fresh": false
+      }
+     ]
+    },
+    {
+     "keyword": "pull homme",
+     "page": "https://www.celio.com/fr-fr/c/pulls",
+     "series": [
+      {
+       "date": "2026-09-22",
+       "position": 1.4,
+       "clicks": 34,
+       "impressions": 825,
+       "ctr": 4.12,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-23",
+       "position": 1.5,
+       "clicks": 30,
+       "impressions": 750,
+       "ctr": 4.0,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-24",
+       "position": 1.6,
+       "clicks": 20,
+       "impressions": 713,
+       "ctr": 2.81,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-25",
+       "position": 1.9,
+       "clicks": 9,
+       "impressions": 573,
+       "ctr": 1.57,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-26",
+       "position": 2.5,
+       "clicks": 20,
+       "impressions": 731,
+       "ctr": 2.74,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-27",
+       "position": 1.8,
+       "clicks": 33,
+       "impressions": 975,
+       "ctr": 3.38,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-28",
+       "position": 1.9,
+       "clicks": 27,
+       "impressions": 948,
+       "ctr": 2.85,
+       "fresh": false
+      }
+     ]
+    },
+    {
+     "keyword": "cardigan homme",
+     "page": "https://www.celio.com/fr-fr/c/pulls-gilets-et-cardigans",
+     "series": [
+      {
+       "date": "2026-09-22",
+       "position": 2.2,
+       "clicks": 22,
+       "impressions": 471,
+       "ctr": 4.67,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-23",
+       "position": 3.3,
+       "clicks": 19,
+       "impressions": 432,
+       "ctr": 4.4,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-24",
+       "position": 3.4,
+       "clicks": 10,
+       "impressions": 415,
+       "ctr": 2.41,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-25",
+       "position": 3.5,
+       "clicks": 5,
+       "impressions": 386,
+       "ctr": 1.3,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-26",
+       "position": 3.1,
+       "clicks": 20,
+       "impressions": 496,
+       "ctr": 4.03,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-27",
+       "position": 3.6,
+       "clicks": 18,
+       "impressions": 621,
+       "ctr": 2.9,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-28",
+       "position": 4.7,
+       "clicks": 13,
+       "impressions": 437,
+       "ctr": 2.97,
+       "fresh": false
+      }
+     ]
+    },
+    {
+     "keyword": "polo homme",
+     "page": "https://www.celio.com/fr-fr/c/polos",
+     "series": [
+      {
+       "date": "2026-09-22",
+       "position": 2.3,
+       "clicks": 20,
+       "impressions": 413,
+       "ctr": 4.84,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-23",
+       "position": 2.9,
+       "clicks": 15,
+       "impressions": 318,
+       "ctr": 4.72,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-24",
+       "position": 3.6,
+       "clicks": 12,
+       "impressions": 320,
+       "ctr": 3.75,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-25",
+       "position": 3.2,
+       "clicks": 9,
+       "impressions": 305,
+       "ctr": 2.95,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-26",
+       "position": 2.2,
+       "clicks": 18,
+       "impressions": 323,
+       "ctr": 5.57,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-27",
+       "position": 2.1,
+       "clicks": 15,
+       "impressions": 416,
+       "ctr": 3.61,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-28",
+       "position": 2.5,
+       "clicks": 13,
+       "impressions": 354,
+       "ctr": 3.67,
+       "fresh": false
+      }
+     ]
+    },
+    {
+     "keyword": "pantalon lin homme",
+     "page": "https://www.celio.com/fr-fr/c/pantalons-pantalons-en-lin",
+     "series": [
+      {
+       "date": "2026-09-22",
+       "position": 1.4,
+       "clicks": 14,
+       "impressions": 185,
+       "ctr": 7.57,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-23",
+       "position": 1.6,
+       "clicks": 13,
+       "impressions": 223,
+       "ctr": 5.83,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-24",
+       "position": 1.4,
+       "clicks": 9,
+       "impressions": 170,
+       "ctr": 5.29,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-25",
+       "position": 1.6,
+       "clicks": 16,
+       "impressions": 185,
+       "ctr": 8.65,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-26",
+       "position": 1.5,
+       "clicks": 11,
+       "impressions": 174,
+       "ctr": 6.32,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-27",
+       "position": 1.9,
+       "clicks": 24,
+       "impressions": 226,
+       "ctr": 10.62,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-28",
+       "position": 1.5,
+       "clicks": 15,
+       "impressions": 215,
+       "ctr": 6.98,
+       "fresh": false
+      }
+     ]
+    },
+    {
+     "keyword": "pantalon chino homme",
+     "page": "https://www.celio.com/fr-fr/c/pantalons-pantalons-chinos",
+     "series": [
+      {
+       "date": "2026-09-22",
+       "position": 1.5,
+       "clicks": 14,
+       "impressions": 286,
+       "ctr": 4.9,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-23",
+       "position": 1.5,
+       "clicks": 16,
+       "impressions": 301,
+       "ctr": 5.32,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-24",
+       "position": 1.4,
+       "clicks": 14,
+       "impressions": 287,
+       "ctr": 4.88,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-25",
+       "position": 1.3,
+       "clicks": 19,
+       "impressions": 293,
+       "ctr": 6.48,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-26",
+       "position": 1.3,
+       "clicks": 23,
+       "impressions": 341,
+       "ctr": 6.74,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-27",
+       "position": 1.4,
+       "clicks": 7,
+       "impressions": 326,
+       "ctr": 2.15,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-28",
+       "position": 1.4,
+       "clicks": 22,
+       "impressions": 306,
+       "ctr": 7.19,
+       "fresh": false
+      }
+     ]
+    },
+    {
+     "keyword": "sweat homme",
+     "page": "https://www.celio.com/fr-fr/c/sweats",
+     "series": [
+      {
+       "date": "2026-09-22",
+       "position": 2.1,
+       "clicks": 8,
+       "impressions": 402,
+       "ctr": 1.99,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-23",
+       "position": 2.0,
+       "clicks": 8,
+       "impressions": 378,
+       "ctr": 2.12,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-24",
+       "position": 2.0,
+       "clicks": 13,
+       "impressions": 353,
+       "ctr": 3.68,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-25",
+       "position": 2.0,
+       "clicks": 11,
+       "impressions": 324,
+       "ctr": 3.4,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-26",
+       "position": 1.8,
+       "clicks": 13,
+       "impressions": 394,
+       "ctr": 3.3,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-27",
+       "position": 2.1,
+       "clicks": 12,
+       "impressions": 492,
+       "ctr": 2.44,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-28",
+       "position": 2.3,
+       "clicks": 15,
+       "impressions": 447,
+       "ctr": 3.36,
+       "fresh": false
+      }
+     ]
+    },
+    {
+     "keyword": "chemise blanche homme",
+     "page": "https://www.celio.com/fr-fr/c/chemises-chemises-blanches",
+     "series": [
+      {
+       "date": "2026-09-22",
+       "position": 1.9,
+       "clicks": 8,
+       "impressions": 221,
+       "ctr": 3.62,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-23",
+       "position": 2.7,
+       "clicks": 7,
+       "impressions": 212,
+       "ctr": 3.3,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-24",
+       "position": 2.7,
+       "clicks": 17,
+       "impressions": 220,
+       "ctr": 7.73,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-25",
+       "position": 2.4,
+       "clicks": 6,
+       "impressions": 179,
+       "ctr": 3.35,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-26",
+       "position": 3.4,
+       "clicks": 7,
+       "impressions": 190,
+       "ctr": 3.68,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-27",
+       "position": 2.4,
+       "clicks": 2,
+       "impressions": 202,
+       "ctr": 0.99,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-28",
+       "position": 1.9,
+       "clicks": 11,
+       "impressions": 218,
+       "ctr": 5.05,
+       "fresh": false
+      }
+     ]
+    },
+    {
+     "keyword": "pantalon blanc homme",
+     "page": "https://www.celio.com/fr-fr/c/pantalons-pantalons-blancs",
+     "series": [
+      {
+       "date": "2026-09-22",
+       "position": 1.9,
+       "clicks": 10,
+       "impressions": 148,
+       "ctr": 6.76,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-23",
+       "position": 1.7,
+       "clicks": 11,
+       "impressions": 132,
+       "ctr": 8.33,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-24",
+       "position": 2.4,
+       "clicks": 9,
+       "impressions": 161,
+       "ctr": 5.59,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-25",
+       "position": 1.8,
+       "clicks": 9,
+       "impressions": 133,
+       "ctr": 6.77,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-26",
+       "position": 1.7,
+       "clicks": 7,
+       "impressions": 158,
+       "ctr": 4.43,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-27",
+       "position": 1.9,
+       "clicks": 10,
+       "impressions": 159,
+       "ctr": 6.29,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-28",
+       "position": 2.0,
+       "clicks": 7,
+       "impressions": 137,
+       "ctr": 5.11,
+       "fresh": false
+      }
+     ]
+    },
+    {
+     "keyword": "short homme",
+     "page": "https://www.celio.com/fr-fr/c/bermudas",
+     "series": [
+      {
+       "date": "2026-09-22",
+       "position": 1.9,
+       "clicks": 13,
+       "impressions": 308,
+       "ctr": 4.22,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-23",
+       "position": 2.0,
+       "clicks": 4,
+       "impressions": 317,
+       "ctr": 1.26,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-24",
+       "position": 1.9,
+       "clicks": 4,
+       "impressions": 287,
+       "ctr": 1.39,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-25",
+       "position": 2.0,
+       "clicks": 9,
+       "impressions": 287,
+       "ctr": 3.14,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-26",
+       "position": 1.8,
+       "clicks": 7,
+       "impressions": 317,
+       "ctr": 2.21,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-27",
+       "position": 2.3,
+       "clicks": 2,
+       "impressions": 337,
+       "ctr": 0.59,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-28",
+       "position": 2.1,
+       "clicks": 6,
+       "impressions": 304,
+       "ctr": 1.97,
+       "fresh": false
+      }
+     ]
+    },
+    {
+     "keyword": "pantalon en lin homme",
+     "page": "https://www.celio.com/fr-fr/c/pantalons-pantalons-en-lin",
+     "series": [
+      {
+       "date": "2026-09-22",
+       "position": 1.3,
+       "clicks": 9,
+       "impressions": 78,
+       "ctr": 11.54,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-23",
+       "position": 1.2,
+       "clicks": 9,
+       "impressions": 80,
+       "ctr": 11.25,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-24",
+       "position": 1.5,
+       "clicks": 4,
+       "impressions": 67,
+       "ctr": 5.97,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-25",
+       "position": 1.5,
+       "clicks": 4,
+       "impressions": 73,
+       "ctr": 5.48,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-26",
+       "position": 1.2,
+       "clicks": 10,
+       "impressions": 78,
+       "ctr": 12.82,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-27",
+       "position": 1.4,
+       "clicks": 11,
+       "impressions": 92,
+       "ctr": 11.96,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-28",
+       "position": 1.4,
+       "clicks": 4,
+       "impressions": 85,
+       "ctr": 4.71,
+       "fresh": false
+      }
+     ]
+    },
+    {
+     "keyword": "ensemble homme",
+     "page": "https://www.celio.com/fr-fr/c/saisonniers-ensemble",
+     "series": [
+      {
+       "date": "2026-09-22",
+       "position": 5.6,
+       "clicks": 1,
+       "impressions": 310,
+       "ctr": 0.32,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-23",
+       "position": 5.4,
+       "clicks": 4,
+       "impressions": 338,
+       "ctr": 1.18,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-24",
+       "position": 5.1,
+       "clicks": 3,
+       "impressions": 287,
+       "ctr": 1.05,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-25",
+       "position": 4.4,
+       "clicks": 3,
+       "impressions": 233,
+       "ctr": 1.29,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-26",
+       "position": 3.3,
+       "clicks": 2,
+       "impressions": 340,
+       "ctr": 0.59,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-27",
+       "position": 4.1,
+       "clicks": 12,
+       "impressions": 342,
+       "ctr": 3.51,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-28",
+       "position": 6.0,
+       "clicks": 6,
+       "impressions": 278,
+       "ctr": 2.16,
+       "fresh": false
+      }
+     ]
+    },
+    {
+     "keyword": "costume 3 pièces homme",
+     "page": "https://www.celio.com/fr-fr/c/costumes-costume-3-pieces-pour-homme",
+     "series": [
+      {
+       "date": "2026-09-22",
+       "position": 1.4,
+       "clicks": 4,
+       "impressions": 90,
+       "ctr": 4.44,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-23",
+       "position": 2.4,
+       "clicks": 5,
+       "impressions": 108,
+       "ctr": 4.63,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-24",
+       "position": 2.5,
+       "clicks": 5,
+       "impressions": 107,
+       "ctr": 4.67,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-25",
+       "position": 2.9,
+       "clicks": 7,
+       "impressions": 85,
+       "ctr": 8.24,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-26",
+       "position": 2.7,
+       "clicks": 6,
+       "impressions": 118,
+       "ctr": 5.08,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-27",
+       "position": 3.1,
+       "clicks": 7,
+       "impressions": 115,
+       "ctr": 6.09,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-28",
+       "position": 3.1,
+       "clicks": 4,
+       "impressions": 103,
+       "ctr": 3.88,
+       "fresh": false
+      }
+     ]
+    },
+    {
+     "keyword": "chino",
+     "page": "https://www.celio.com/fr-fr/c/pantalons-pantalons-chinos",
+     "series": [
+      {
+       "date": "2026-09-22",
+       "position": 3.2,
+       "clicks": 9,
+       "impressions": 304,
+       "ctr": 2.96,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-23",
+       "position": 2.7,
+       "clicks": 6,
+       "impressions": 310,
+       "ctr": 1.94,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-24",
+       "position": 2.7,
+       "clicks": 4,
+       "impressions": 317,
+       "ctr": 1.26,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-25",
+       "position": 3.0,
+       "clicks": 5,
+       "impressions": 301,
+       "ctr": 1.66,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-26",
+       "position": 2.9,
+       "clicks": 8,
+       "impressions": 385,
+       "ctr": 2.08,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-27",
+       "position": 2.6,
+       "clicks": 9,
+       "impressions": 370,
+       "ctr": 2.43,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-28",
+       "position": 2.6,
+       "clicks": 7,
+       "impressions": 334,
+       "ctr": 2.1,
+       "fresh": false
+      }
+     ]
+    },
+    {
+     "keyword": "cargo homme",
+     "page": "https://www.celio.com/fr-fr/c/pantalons-pantalons-cargos",
+     "series": [
+      {
+       "date": "2026-09-22",
+       "position": 6.1,
+       "clicks": 2,
+       "impressions": 174,
+       "ctr": 1.15,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-23",
+       "position": 3.8,
+       "clicks": 9,
+       "impressions": 218,
+       "ctr": 4.13,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-24",
+       "position": 3.2,
+       "clicks": 9,
+       "impressions": 195,
+       "ctr": 4.62,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-25",
+       "position": 3.3,
+       "clicks": 6,
+       "impressions": 167,
+       "ctr": 3.59,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-26",
+       "position": 2.4,
+       "clicks": 9,
+       "impressions": 218,
+       "ctr": 4.13,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-27",
+       "position": 2.7,
+       "clicks": 8,
+       "impressions": 227,
+       "ctr": 3.52,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-28",
+       "position": 2.8,
+       "clicks": 8,
+       "impressions": 206,
+       "ctr": 3.88,
+       "fresh": false
+      }
+     ]
+    },
+    {
+     "keyword": "costume homme pas cher",
+     "page": "https://www.celio.com/fr-fr/c/costumes-costumes-a---de-100e",
+     "series": [
+      {
+       "date": "2026-09-22",
+       "position": 1.5,
+       "clicks": 1,
+       "impressions": 40,
+       "ctr": 2.5,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-23",
+       "position": 1.5,
+       "clicks": 8,
+       "impressions": 64,
+       "ctr": 12.5,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-24",
+       "position": 1.2,
+       "clicks": 5,
+       "impressions": 53,
+       "ctr": 9.43,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-25",
+       "position": 1.2,
+       "clicks": 6,
+       "impressions": 46,
+       "ctr": 13.04,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-26",
+       "position": 1.3,
+       "clicks": 14,
+       "impressions": 60,
+       "ctr": 23.33,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-27",
+       "position": 1.2,
+       "clicks": 11,
+       "impressions": 46,
+       "ctr": 23.91,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-28",
+       "position": 1.3,
+       "clicks": 6,
+       "impressions": 51,
+       "ctr": 11.76,
+       "fresh": false
+      }
+     ]
+    },
+    {
+     "keyword": "tee shirt homme",
+     "page": "https://www.celio.com/fr-fr/c/t-shirts",
+     "series": [
+      {
+       "date": "2026-09-22",
+       "position": 5.1,
+       "clicks": 9,
+       "impressions": 331,
+       "ctr": 2.72,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-23",
+       "position": 2.9,
+       "clicks": 5,
+       "impressions": 411,
+       "ctr": 1.22,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-24",
+       "position": 4.1,
+       "clicks": 5,
+       "impressions": 380,
+       "ctr": 1.32,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-25",
+       "position": 3.2,
+       "clicks": 5,
+       "impressions": 325,
+       "ctr": 1.54,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-26",
+       "position": 1.9,
+       "clicks": 10,
+       "impressions": 369,
+       "ctr": 2.71,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-27",
+       "position": 2.0,
+       "clicks": 11,
+       "impressions": 423,
+       "ctr": 2.6,
+       "fresh": false
+      },
+      {
+       "date": "2026-09-28",
+       "position": 1.9,
+       "clicks": 18,
+       "impressions": 462,
+       "ctr": 3.9,
        "fresh": false
       }
      ]

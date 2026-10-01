@@ -112,8 +112,14 @@
   .tabs button.active { background: var(--white); color: var(--text); box-shadow: var(--shadow); }
   .legend { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
   .legend button { display: inline-flex; align-items: center; gap: 7px; font-size: 12px; font-weight: 500; border: 1px solid var(--gray-2); background: var(--white); padding: 3px 10px; border-radius: 999px; cursor: pointer; }
-  .legend button.off { color: var(--text-light); }
-  .legend button.off .sw { opacity: 0.2; }
+  .legend button .x { color: var(--text-light); margin-left: 2px; }
+  .legend button:hover .x { color: var(--text); }
+  .legend .hint { font-size: 12px; color: var(--text-light); align-self: center; margin-left: 4px; }
+  .pick { width: 16px; height: 16px; border-radius: 5px; border: 1.5px solid var(--gray-3); background: var(--white); cursor: pointer; display: grid; place-items: center; padding: 0; flex: none; }
+  .pick:hover { border-color: var(--text-muted); }
+  .pick.on { border-color: transparent; }
+  .pick.on::after { content: ""; width: 6px; height: 6px; border-radius: 2px; background: var(--white); }
+  .pick:disabled { opacity: 0.35; cursor: not-allowed; }
   .sw { width: 8px; height: 8px; border-radius: 50%; flex: none; }
   .chart-box { position: relative; height: 320px; }
 
@@ -137,20 +143,20 @@
   .search input { border: 0; outline: 0; font: inherit; font-size: 13px; width: 220px; background: none; color: var(--text); }
   .table-wrap { overflow-x: auto; }
   table { width: 100%; border-collapse: collapse; font-size: 13px; }
-  th { text-align: left; padding: 10px 16px; font-weight: 500; color: var(--text-light); font-size: 12px; border-bottom: 1px solid var(--gray-2); white-space: nowrap; user-select: none; }
+  th { text-align: left; padding: 10px 12px; font-weight: 500; color: var(--text-light); font-size: 12px; border-bottom: 1px solid var(--gray-2); white-space: nowrap; user-select: none; }
   th[data-sort] { cursor: pointer; }
   th[data-sort]:hover { color: var(--text); }
   th .arrow { opacity: 0.35; margin-left: 4px; }
   th.sorted { color: var(--text); }
   th.sorted .arrow { opacity: 1; }
   th.num, td.num { text-align: right; font-variant-numeric: tabular-nums; }
-  td { padding: 12px 16px; border-bottom: 1px solid var(--gray-1); vertical-align: middle; white-space: nowrap; }
+  td { padding: 12px 12px; border-bottom: 1px solid var(--gray-1); vertical-align: middle; white-space: nowrap; }
   tbody tr { cursor: pointer; transition: background .1s; }
   tbody tr:hover td { background: #FBFBFA; }
   tbody tr.selected td { background: var(--gray-1); }
   tr:last-child td { border-bottom: 0; }
   .kw { display: flex; align-items: center; gap: 8px; font-weight: 600; }
-  .url { display: inline-flex; align-items: center; gap: 6px; color: var(--text-muted); text-decoration: none; font-size: 12px; max-width: 300px; overflow: hidden; text-overflow: ellipsis; }
+  .url { display: inline-flex; align-items: center; gap: 6px; color: var(--text-muted); text-decoration: none; font-size: 12px; max-width: 240px; overflow: hidden; text-overflow: ellipsis; }
   .url:hover { color: var(--text); }
   .url svg.i { width: 13px; height: 13px; }
   .pos-cell { display: inline-flex; align-items: center; gap: 8px; justify-content: flex-end; }
@@ -289,6 +295,7 @@
         <div class="table-wrap">
           <table>
             <thead><tr id="thead">
+              <th style="width:32px" title="Afficher sur le graphique"></th>
               <th data-sort="keyword">Mot-clé<span class="arrow">↕</span></th>
               <th data-sort="page">Page suivie<span class="arrow">↕</span></th>
               <th class="num" data-sort="pos">Position<span class="arrow">↕</span></th>
@@ -302,7 +309,7 @@
             <tbody id="tbody"></tbody>
           </table>
         </div>
-        <div class="table-foot"><span id="table-count"></span><span>Évolution : dernier jour vs premier jour de la période. Clique sur une ligne pour le détail.</span></div>
+        <div class="table-foot"><span id="table-count"></span><span>Coche jusqu'à 8 mots-clés pour le graphique. Évolution : dernier jour vs premier jour de la période. Clique sur une ligne pour le détail.</span></div>
       </div>
 
       <p class="footnote">Données Google Search Console : position moyenne pondérée par les impressions, pour la page suivie uniquement. Un jour sans impression n'a pas de valeur. Les 3 derniers jours sont provisoires (tracés en pointillés) et réécrits à la synchro suivante.</p>
@@ -344,7 +351,8 @@ const fmtDate = d => new Date(d + "T12:00:00").toLocaleDateString("fr-FR", { day
 const path = u => { if (u === "*") return "Toutes pages"; try { return new URL(u).pathname; } catch { return u; } };
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 
-let DATA, site, days = 7, metric = "position", hidden = new Set(), sort = { key: "impr", dir: -1 }, query = "", openKw = null;
+const MAX_SEL = 8, NEUTRAL = "#9A9A9A";
+let DATA, site, days = 7, metric = "position", sel = new Map(), sort = { key: "impr", dir: -1 }, query = "", openKw = null;
 const charts = {};
 
 Chart.defaults.font.family = "Inter, -apple-system, sans-serif";
@@ -384,7 +392,7 @@ function bind() {
 function route() {
   const name = location.hash.slice(1);
   site = DATA.sites.find(s => s.name === name) || DATA.sites[0];
-  hidden.clear(); closeDrawer();
+  sel = null; closeDrawer();
   document.getElementById("app").classList.remove("nav-open");
   render();
 }
@@ -423,7 +431,13 @@ function render() {
   document.getElementById("chip-prop").textContent = site.property;
   document.title = `${site.label} · Positions · datashake`;
 
-  const kws = site.keywords.map((k, i) => ({ ...k, i, color: PALETTE[i % PALETTE.length], ...stats(k, dates), prev: stats(k, prevDates) }));
+  const kws = site.keywords.map((k, i) => ({ ...k, i, ...stats(k, dates), prev: stats(k, prevDates) }));
+  if (!sel) {
+    // Sélection par défaut : les 8 mots-clés qui font le plus de clics sur la période
+    sel = new Map();
+    kws.slice().sort((a, b) => b.clicks - a.clicks).slice(0, MAX_SEL).forEach((k, slot) => sel.set(k.i, slot));
+  }
+  kws.forEach(k => { k.on = sel.has(k.i); k.color = k.on ? PALETTE[sel.get(k.i)] : NEUTRAL; });
   renderKpis(kws, dates);
   renderLegend(kws);
   renderMain(kws, dates);
@@ -459,10 +473,21 @@ function renderKpis(kws, dates) {
   ].join("");
 }
 
+function toggleSel(i) {
+  if (sel.has(i)) sel.delete(i);
+  else if (sel.size < MAX_SEL) {
+    const used = new Set(sel.values());
+    sel.set(i, [...Array(MAX_SEL).keys()].find(s => !used.has(s))); // premier emplacement couleur libre
+  }
+  render();
+}
+
 function renderLegend(kws) {
   const el = document.getElementById("legend");
-  el.innerHTML = kws.map(k => `<button data-i="${k.i}" class="${hidden.has(k.i) ? "off" : ""}"><span class="sw" style="background:${k.color}"></span>${esc(k.keyword)}</button>`).join("");
-  el.querySelectorAll("button").forEach(b => b.onclick = () => { const i = +b.dataset.i; hidden.has(i) ? hidden.delete(i) : hidden.add(i); render(); });
+  const on = kws.filter(k => k.on).sort((a, b) => sel.get(a.i) - sel.get(b.i));
+  el.innerHTML = on.map(k => `<button data-i="${k.i}" title="Retirer du graphique"><span class="sw" style="background:${k.color}"></span>${esc(k.keyword)}<span class="x">×</span></button>`).join("")
+    + `<span class="hint">${on.length} / ${MAX_SEL} affichés${on.length ? "" : " : coche des mots-clés dans le tableau"}</span>`;
+  el.querySelectorAll("button").forEach(b => b.onclick = () => toggleSel(+b.dataset.i));
 }
 
 function tooltip(cb) {
@@ -479,12 +504,12 @@ function lineDs(k, values, label) {
 
 function posScale(vals) {
   const max = Math.max(1, ...vals.filter(v => v != null));
-  return { reverse: true, min: 1, suggestedMax: Math.max(10, Math.ceil(max) + 1), grid: { color: GRID }, border: { display: false }, ticks: { precision: 0 } };
+  return { reverse: true, min: 1, suggestedMax: Math.max(5, Math.ceil(max) + 1), grid: { color: GRID }, border: { display: false }, ticks: { precision: 0 } };
 }
 
 function renderMain(kws, dates) {
   charts.main && charts.main.destroy();
-  const visible = kws.filter(k => !hidden.has(k.i));
+  const visible = kws.filter(k => k.on).sort((a, b) => sel.get(a.i) - sel.get(b.i));
   const val = p => p ? (metric === "position" ? p.position : metric === "clicks" ? p.clicks : p.impressions) : null;
   const ds = visible.map(k => lineDs(k, k.pts.map(val), k.keyword));
   const yScale = metric === "position" ? posScale(ds.flatMap(d => d.data))
@@ -557,7 +582,9 @@ function renderTable(kws) {
   tb.innerHTML = rows.length ? rows.map(k => {
     const pos = k.last ? k.last.position : null;
     const rank = pos == null ? "" : pos <= 3 ? '<span class="rank top3">TOP 3</span>' : pos <= 10 ? '<span class="rank">TOP 10</span>' : "";
+    const pick = `<button class="pick ${k.on ? "on" : ""}" data-pick="${k.i}" ${!k.on && sel.size >= MAX_SEL ? "disabled" : ""} style="${k.on ? `background:${k.color}` : ""}" title="${k.on ? "Retirer du graphique" : "Afficher sur le graphique"}" aria-label="Graphique : ${esc(k.keyword)}"></button>`;
     return `<tr data-i="${k.i}" class="${k.i === openKw ? "selected" : ""}">
+      <td>${pick}</td>
       <td><span class="kw"><span class="sw" style="background:${k.color}"></span>${esc(k.keyword)}</span></td>
       <td>${k.page === "*" ? '<span class="url">Toutes pages</span>' : `<a class="url" href="${esc(k.page)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">${esc(path(k.page))}${EXT}</a>`}</td>
       <td class="num"><span class="pos-cell">${rank}<span class="pos">${fmt1(pos)}</span></span></td>
@@ -568,8 +595,9 @@ function renderTable(kws) {
       <td class="num">${fmt(k.impr)}</td>
       <td class="num">${k.ctr == null ? "–" : fmt1(k.ctr) + " %"}</td>
     </tr>`;
-  }).join("") : `<tr><td colspan="9" class="empty-note" style="text-align:center;padding:32px">Aucun mot-clé ne correspond.</td></tr>`;
+  }).join("") : `<tr><td colspan="10" class="empty-note" style="text-align:center;padding:32px">Aucun mot-clé ne correspond.</td></tr>`;
   tb.querySelectorAll("tr[data-i]").forEach(tr => tr.onclick = () => openDrawer(+tr.dataset.i));
+  tb.querySelectorAll("[data-pick]").forEach(b => b.onclick = e => { e.stopPropagation(); toggleSel(+b.dataset.pick); });
   const n = rows.length;
   document.getElementById("table-count").textContent = `${n} mot${n > 1 ? "s" : ""}-clé${n > 1 ? "s" : ""} sur ${kws.length}`;
 }
@@ -589,6 +617,7 @@ function closeDrawer() {
 }
 
 function renderDrawer(k, dates) {
+  if (!k.on) k = { ...k, color: PALETTE[0] };
   document.getElementById("d-title").textContent = k.keyword;
   const a = document.getElementById("d-url");
   a.innerHTML = k.page === "*" ? "Toutes pages du site" : esc(k.page) + EXT;
