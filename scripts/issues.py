@@ -24,7 +24,9 @@ LABELS = {
     "Intitulé": "titre", "Détail": "description", "Consultant": "auteur", "Mot-clé": "mot_cle", "Page suivie": "page",
     "Variantes": "variantes", "Tags": "tags", "Note": "note", "Identifiant": "nom", "Nom affiché": "label",
     "Propriété GSC": "propriete", "Compte Google connecté": "compte", "Consultant référent": "referent", "Regex de marque": "marque",
+    "Mots-clés": "mots_cles", "Statut": "statut", "Objectif de position": "objectif", "Pays suivis": "pays",
 }
+STATUTS = {"à travailler": "à travailler", "en cours": "en cours", "acquis": "acquis"}
 
 
 def parse(body):
@@ -97,28 +99,63 @@ def main():
         s = d.get("projet", "").strip().lower()
         if s not in sites():
             fail(f"Projet « {s} » inconnu. Projets existants : {', '.join(sites())}.")
-        kw = d.get("mot_cle", "").strip().lower()
-        if not kw:
-            fail("Mot-clé manquant.")
+        # Un mot-clé par ligne, « mot-clé | URL » pour fixer la page (ancien formulaire : champ « Mot-clé » unique)
+        raw = d.get("mots_cles") or d.get("mot_cle") or ""
+        default_page = d.get("page", "").strip()
+        items = []
+        for line in raw.splitlines():
+            line = line.strip().strip("`").strip()
+            if not line:
+                continue
+            kw, _, pg = line.partition("|")
+            kw, pg = kw.strip().lower(), (pg.strip() or default_page)
+            if kw:
+                items.append((kw, pg))
+        if not items:
+            fail("Aucun mot-clé saisi.")
+        bad = [pg for _, pg in items if pg and not pg.startswith("http")]
+        if bad:
+            fail(f"La page doit être une URL complète (https://…) : {bad[0]}")
+        statut = STATUTS.get(d.get("statut", "").strip().lower())
+        objectif = d.get("objectif", "").strip().replace(",", ".")
+        if objectif:
+            try:
+                objectif = float(objectif)
+                objectif = int(objectif) if objectif.is_integer() else objectif
+                assert 1 <= objectif <= 100
+            except (ValueError, AssertionError):
+                fail("Objectif de position invalide : un nombre entre 1 et 100 (ex. 3).")
         path = CONF / "keywords" / f"{s}.yaml"
         existing = (yaml.safe_load(path.read_text(encoding="utf-8")) or {}).get("keywords") or [] if path.exists() else []
-        page = d.get("page", "").strip()
-        if any(str(k["keyword"]) == kw and (k.get("page") or "") == page for k in existing):
-            fail(f"« {kw} » est déjà suivi sur cette page.")
-        if page and not page.startswith("http"):
-            fail("La page doit être une URL complète (https://…).")
-        lines = [f"  - keyword: {q(kw)}"]
-        if page:
-            lines.append(f"    page: {page}")
+        known = {(str(k["keyword"]), k.get("page") or "") for k in existing}
         split = lambda v: [x.strip() for x in (v or "").split(",") if x.strip()]
-        if split(d.get("variantes")):
-            lines.append(f"    variants: [{', '.join(q(x.lower()) for x in split(d['variantes']))}]")
-        if split(d.get("tags")):
-            lines.append(f"    tags: [{', '.join(q(x) for x in split(d['tags']))}]")
-        if d.get("note"):
-            lines.append(f"    note: {q(d['note'])}")
+        added, skipped, lines = [], [], []
+        for kw, pg in items:
+            if (kw, pg) in known:
+                skipped.append(kw)
+                continue
+            known.add((kw, pg))
+            lines.append(f"  - keyword: {q(kw)}")
+            if pg:
+                lines.append(f"    page: {pg}")
+            if len(items) == 1 and split(d.get("variantes")):
+                lines.append(f"    variants: [{', '.join(q(x.lower()) for x in split(d['variantes']))}]")
+            if split(d.get("tags")):
+                lines.append(f"    tags: [{', '.join(q(x) for x in split(d['tags']))}]")
+            if statut:
+                lines.append(f"    status: {statut}")
+            if objectif:
+                lines.append(f"    target: {objectif}")
+            if d.get("note"):
+                lines.append(f"    note: {q(d['note'])}")
+            added.append(kw)
+        if not added:
+            fail(f"Déjà suivi{'s' if len(skipped) > 1 else ''} sur cette page : {', '.join(skipped)}.")
         append_item(path, "keywords", lines)
-        print(f"RESULT=« {kw} » ajouté au suivi de {s}. Les 16 mois d'historique arrivent avec la synchro qui vient d'être lancée.")
+        msg = f"{len(added)} mot{'s' if len(added) > 1 else ''}-clé{'s' if len(added) > 1 else ''} ajouté{'s' if len(added) > 1 else ''} au suivi de {s} : {', '.join(added[:20])}{'…' if len(added) > 20 else ''}."
+        if skipped:
+            msg += f" Déjà suivi{'s' if len(skipped) > 1 else ''} : {', '.join(skipped)}."
+        print(f"RESULT={msg} Les 16 mois d'historique arrivent avec la synchro qui vient d'être lancée.")
         print(f"SITE={s}\nKIND=mot-cle")
 
     elif "projet" in labels:
@@ -134,9 +171,14 @@ def main():
             re.compile(d.get("marque", ""))
         except re.error:
             fail("La regex de marque est invalide.")
+        pays = [x.strip().lower() for x in re.split(r"[,\s]+", d.get("pays", "")) if x.strip()]
+        if any(not re.fullmatch(r"[a-z]{3}", x) for x in pays):
+            fail("Pays invalides : codes à 3 lettres séparés par des virgules (ex. fra, bel).")
         lines = [f"  - name: {name}", f"    label: {q(d.get('label') or name)}", f"    property: {prop}",
                  f"    account: {d.get('compte') or 'default'}", f"    owner: {q(d.get('referent') or author)}",
                  f"    brand_regex: {q(d.get('marque', ''))}"]
+        if pays:
+            lines.append(f"    countries: [{', '.join(pays)}]")
         append_item(CONF / "sites.yaml", "sites", lines)
         (CONF / "actions" / f"{name}.yaml").write_text("# Journal des actions SEO (voir config/actions/celio.yaml pour les champs).\n\nactions: []\n", encoding="utf-8")
         print(f"RESULT=Projet « {name} » créé. Les 20 premiers mots-clés hors marque sont pré-remplis et l'historique arrive avec la synchro.")

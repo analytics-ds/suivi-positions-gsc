@@ -5,6 +5,10 @@
 # - account     : compte Google connecté qui a accès à la propriété (voir README, « Connecter la Search Console »)
 # - owner       : consultant référent
 # - brand_regex : regex (RE2, insensible à la casse) des requêtes de marque, fautes de frappe comprises
+# - countries   : pays proposés dans le dashboard (code ISO 3 lettres de la GSC : fra, bel, che…), le premier est
+#                 celui affiché par défaut. Forme longue possible : {code: fra, label: France, path: /fr-fr/}, où path
+#                 limite les totaux du site et les suggestions aux URL qui contiennent ce dossier. « Tous pays » est
+#                 toujours proposé. Ajouter un pays déclenche la récupération de 16 mois d'historique pour ce pays.
 # Les mots-clés de chaque projet sont dans config/keywords/<name>.yaml, les actions dans config/actions/<name>.yaml.
 
 sites:
@@ -14,3 +18,6 @@ sites:
     account: default
     owner: Théo
     brand_regex: "c[eé]lio|celi[io0]|cel[iu]o|celuo|celii|cellio|selio|czlio|crlio|cilio|cama[iï]eu|camaieu"
+    countries:
+      - {code: fra, label: France, path: /fr-fr/}
+      - bel

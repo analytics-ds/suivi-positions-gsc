@@ -1,6 +1,6 @@
-name: Suivre un mot-clé
-description: Ajouter un mot-clé (et sa page) au suivi d'un projet. L'historique de 16 mois est récupéré automatiquement.
-title: "Mot-clé : "
+name: Suivre des mots-clés
+description: Ajouter un ou plusieurs mots-clés (et leur page) au suivi d'un projet. L'historique de 16 mois est récupéré automatiquement.
+title: "Mots-clés : "
 labels: ["mot-cle"]
 body:
   - type: input
@@ -10,28 +10,44 @@ body:
       description: Identifiant du projet (ex. celio)
     validations:
       required: true
-  - type: input
-    id: mot_cle
+  - type: textarea
+    id: mots_cles
     attributes:
-      label: Mot-clé
-      description: Requête exacte telle qu'elle apparaît dans la Search Console
+      label: Mots-clés
+      description: "Un mot-clé par ligne, tel qu'il apparaît dans la Search Console. Pour fixer la page d'un mot-clé : « mot-clé | URL » (ex. jean homme | https://www.celio.com/fr-fr/c/jeans)."
     validations:
       required: true
   - type: input
     id: page
     attributes:
       label: Page suivie
-      description: URL complète. Laisser vide pour suivre la position globale du site.
+      description: URL complète, utilisée pour les lignes sans « | URL ». Laisser vide pour suivre la position globale du site.
   - type: input
     id: variantes
     attributes:
       label: Variantes
-      description: Autres formulations à regrouper, séparées par des virgules (ex. jeans homme)
+      description: Autres formulations à regrouper, séparées par des virgules (ex. jeans homme). Uniquement si un seul mot-clé est saisi.
   - type: input
     id: tags
     attributes:
       label: Tags
-      description: Séparés par des virgules (ex. Pantalons, prioritaire)
+      description: Séparés par des virgules (ex. Pantalons, prioritaire), appliqués à tous les mots-clés saisis
+  - type: dropdown
+    id: statut
+    attributes:
+      label: Statut
+      description: Appliqué à tous les mots-clés saisis
+      options:
+        - Non renseigné
+        - À travailler
+        - En cours
+        - Acquis
+      default: 0
+  - type: input
+    id: objectif
+    attributes:
+      label: Objectif de position
+      description: Position visée (ex. 3 pour le top 3, 1 pour la 1re place), appliquée à tous les mots-clés saisis
   - type: textarea
     id: note
     attributes:

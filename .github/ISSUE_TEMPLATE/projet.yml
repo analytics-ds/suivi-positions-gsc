@@ -42,3 +42,9 @@ body:
       description: Requêtes de marque, fautes de frappe comprises (ex. labiche|la biche)
     validations:
       required: true
+  - type: input
+    id: pays
+    attributes:
+      label: Pays suivis
+      description: Codes pays à 3 lettres de la Search Console, séparés par des virgules, le premier est celui affiché par défaut (ex. fra, bel). Laisser vide pour tous pays uniquement.
+      value: fra
