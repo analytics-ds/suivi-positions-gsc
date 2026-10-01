@@ -236,7 +236,7 @@
    "pageFetchState": "SUCCESSFUL",
    "googleCanonical": "https://www.celio.com/fr-fr/c/saisonniers-ensemble",
    "userCanonical": "https://www.celio.com/fr-fr/c/saisonniers-ensemble",
-   "lastCrawlTime": "2026-10-01T19:22:19Z",
+   "lastCrawlTime": "2026-10-01T20:20:39Z",
    "crawledAs": "MOBILE",
    "checked": "2026-10-01"
   },
@@ -273,6 +273,18 @@
    "googleCanonical": "https://www.celio.com/fr-fr/c/t-shirts",
    "userCanonical": "https://www.celio.com/fr-fr/c/t-shirts",
    "lastCrawlTime": "2026-10-01T18:30:03Z",
+   "crawledAs": "MOBILE",
+   "checked": "2026-10-01"
+  },
+  "https://www.celio.com/fr-fr/c/blousons-et-manteaux-doudounes": {
+   "verdict": "PASS",
+   "coverageState": "Envoyée et indexée",
+   "indexingState": "INDEXING_ALLOWED",
+   "robotsTxtState": "ALLOWED",
+   "pageFetchState": "SUCCESSFUL",
+   "googleCanonical": "https://www.celio.com/fr-fr/c/blousons-et-manteaux-doudounes",
+   "userCanonical": "https://www.celio.com/fr-fr/c/blousons-et-manteaux-doudounes",
+   "lastCrawlTime": "2026-09-29T22:30:05Z",
    "crawledAs": "MOBILE",
    "checked": "2026-10-01"
   }
