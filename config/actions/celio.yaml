@@ -1,0 +1,9 @@
+# Journal des actions SEO menées sur Celio, saisies à la main (ou via le bouton « Ajouter une action » du dashboard).
+# - date        : date de mise en ligne (AAAA-MM-JJ)
+# - page        : URL concernée (l'impact est mesuré sur les mots-clés suivis de cette page)
+# - type        : contenu | technique | maillage | netlinking | autre
+# - title       : intitulé court
+# - description : détail libre (optionnel)
+# - author      : consultant
+
+actions: []

@@ -1,0 +1,89 @@
+# Mots-clés suivis pour Celio.
+# - keyword  : requête exacte telle qu'elle apparaît dans la GSC
+# - page     : page suivie (si omise : position globale du site, toutes pages confondues)
+# - variants : autres formulations regroupées avec le mot-clé (pluriel, orthographe), additionnées dans les courbes
+# - tags     : silo, type de page, priorité… (filtres du dashboard)
+# - note     : contexte libre affiché dans le détail du mot-clé
+
+keywords:
+  - keyword: jean homme
+    page: https://www.celio.com/fr-fr/c/jeans
+    variants: [jeans homme]
+    tags: [Jeans]
+  - keyword: veste homme
+    page: https://www.celio.com/fr-fr/c/blousons-et-manteaux-vestes
+    tags: [Outerwear]
+    note: "2026-09-07 : cannibalisation confirmée, 4 URL actives sur la requête (vestes, page 2 de pagination, blousons-et-manteaux, vestes-legeres)."
+  - keyword: pantalon homme
+    page: https://www.celio.com/fr-fr/c/pantalons
+    tags: [Pantalons]
+  - keyword: manteau homme
+    page: https://www.celio.com/fr-fr/c/blousons-et-manteaux-manteaux
+    tags: [Outerwear]
+  - keyword: blouson homme
+    page: https://www.celio.com/fr-fr/c/blousons-et-manteaux-blousons
+    tags: [Outerwear]
+  - keyword: parka homme
+    page: https://www.celio.com/fr-fr/c/blousons-et-manteaux-parkas
+    tags: [Outerwear]
+  - keyword: costume homme
+    page: https://www.celio.com/fr-fr/c/costumes
+    tags: [Costumes]
+  - keyword: chemise homme
+    page: https://www.celio.com/fr-fr/c/chemises
+    tags: [Chemises]
+  - keyword: pyjama homme
+    page: https://www.celio.com/fr-fr/c/sous-vetements-pyjamas
+    tags: [Nuit]
+  - keyword: pantalon cargo homme
+    page: https://www.celio.com/fr-fr/c/pantalons-pantalons-cargos
+    tags: [Pantalons]
+  - keyword: pull homme
+    page: https://www.celio.com/fr-fr/c/pulls
+    tags: [Maille]
+  - keyword: cardigan homme
+    page: https://www.celio.com/fr-fr/c/pulls-gilets-et-cardigans
+    tags: [Maille]
+  - keyword: polo homme
+    page: https://www.celio.com/fr-fr/c/polos
+    tags: [Hauts]
+  - keyword: pantalon lin homme
+    page: https://www.celio.com/fr-fr/c/pantalons-pantalons-en-lin
+    tags: [Pantalons]
+  - keyword: pantalon chino homme
+    page: https://www.celio.com/fr-fr/c/pantalons-pantalons-chinos
+    tags: [Pantalons]
+  - keyword: sweat homme
+    page: https://www.celio.com/fr-fr/c/sweats
+    tags: [Hauts]
+  - keyword: chemise blanche homme
+    page: https://www.celio.com/fr-fr/c/chemises-chemises-blanches
+    tags: [Chemises]
+  - keyword: pantalon blanc homme
+    page: https://www.celio.com/fr-fr/c/pantalons-pantalons-blancs
+    tags: [Pantalons]
+  - keyword: short homme
+    page: https://www.celio.com/fr-fr/c/bermudas
+    tags: [Shorts]
+  - keyword: pantalon en lin homme
+    page: https://www.celio.com/fr-fr/c/pantalons-pantalons-en-lin
+    tags: [Pantalons]
+  - keyword: ensemble homme
+    page: https://www.celio.com/fr-fr/c/saisonniers-ensemble
+    tags: [Ensembles]
+  - keyword: costume 3 pièces homme
+    page: https://www.celio.com/fr-fr/c/costumes-costume-3-pieces-pour-homme
+    tags: [Costumes]
+  - keyword: chino
+    page: https://www.celio.com/fr-fr/c/pantalons-pantalons-chinos
+    tags: [Pantalons]
+  - keyword: cargo homme
+    page: https://www.celio.com/fr-fr/c/pantalons-pantalons-cargos
+    tags: [Pantalons]
+  - keyword: costume homme pas cher
+    page: https://www.celio.com/fr-fr/c/costumes-costumes-a---de-100e
+    tags: [Costumes]
+  - keyword: tee shirt homme
+    page: https://www.celio.com/fr-fr/c/t-shirts
+    variants: [t shirt homme, tshirt homme]
+    tags: [Hauts]

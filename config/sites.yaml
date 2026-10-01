@@ -1,0 +1,16 @@
+# Projets suivis.
+# - name        : identifiant court (minuscules, sans espace), sert de clé partout (fichiers, URL du dashboard)
+# - label       : nom affiché
+# - property    : propriété GSC exacte (sc-domain:exemple.com ou https://www.exemple.com/)
+# - account     : compte Google connecté qui a accès à la propriété (voir README, « Connecter la Search Console »)
+# - owner       : consultant référent
+# - brand_regex : regex (RE2, insensible à la casse) des requêtes de marque, fautes de frappe comprises
+# Les mots-clés de chaque projet sont dans config/keywords/<name>.yaml, les actions dans config/actions/<name>.yaml.
+
+sites:
+  - name: celio
+    label: Celio
+    property: sc-domain:celio.com
+    account: default
+    owner: Théo
+    brand_regex: "c[eé]lio|celi[io0]|cel[iu]o|celuo|celii|cellio|selio|czlio|crlio|cilio|cama[iï]eu|camaieu"

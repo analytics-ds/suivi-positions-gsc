@@ -1,0 +1,38 @@
+name: Suivre un mot-clé
+description: Ajouter un mot-clé (et sa page) au suivi d'un projet. L'historique de 16 mois est récupéré automatiquement.
+title: "Mot-clé : "
+labels: ["mot-cle"]
+body:
+  - type: input
+    id: projet
+    attributes:
+      label: Projet
+      description: Identifiant du projet (ex. celio)
+    validations:
+      required: true
+  - type: input
+    id: mot_cle
+    attributes:
+      label: Mot-clé
+      description: Requête exacte telle qu'elle apparaît dans la Search Console
+    validations:
+      required: true
+  - type: input
+    id: page
+    attributes:
+      label: Page suivie
+      description: URL complète. Laisser vide pour suivre la position globale du site.
+  - type: input
+    id: variantes
+    attributes:
+      label: Variantes
+      description: Autres formulations à regrouper, séparées par des virgules (ex. jeans homme)
+  - type: input
+    id: tags
+    attributes:
+      label: Tags
+      description: Séparés par des virgules (ex. Pantalons, prioritaire)
+  - type: textarea
+    id: note
+    attributes:
+      label: Note

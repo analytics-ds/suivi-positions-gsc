@@ -8,9 +8,14 @@ on:
       days:
         description: "Nombre de jours à (re)récupérer"
         default: "10"
+      site:
+        description: "Limiter à un projet (vide = tous)"
+        default: ""
   push:
+    branches: [main]
     paths:
       - "config/**"
+      - "scripts/tracker.py"
 
 permissions:
   contents: write
@@ -32,25 +37,27 @@ jobs:
 
       - run: pip install -r requirements.txt
 
-      - name: Récupération GSC
+      - name: Collecte GSC, inspection d'URL, mises à jour Google
         env:
-          GSC_SERVICE_ACCOUNT_JSON: ${{ secrets.GSC_SERVICE_ACCOUNT_JSON }}
-          GSC_CLIENT_ID: ${{ secrets.GSC_CLIENT_ID }}
-          GSC_CLIENT_SECRET: ${{ secrets.GSC_CLIENT_SECRET }}
-          GSC_REFRESH_TOKEN: ${{ secrets.GSC_REFRESH_TOKEN }}
+          SECRETS_JSON: ${{ toJSON(secrets) }}
         run: |
-          if [ -z "$GSC_SERVICE_ACCOUNT_JSON" ] && [ -z "$GSC_REFRESH_TOKEN" ]; then
-            echo "::warning::Aucun secret GSC configuré, récupération ignorée (le dashboard est seulement régénéré)."
-          else
-            python scripts/tracker.py fetch --days "${{ github.event.inputs.days || '10' }}"
-          fi
+          ARGS="--days ${{ github.event.inputs.days || '10' }}"
+          if [ -n "${{ github.event.inputs.site }}" ]; then ARGS="$ARGS --site ${{ github.event.inputs.site }}"; fi
+          python scripts/tracker.py fetch $ARGS
 
       - run: python scripts/tracker.py build
+
+      - name: Digest Slack
+        if: github.event_name == 'schedule'
+        env:
+          SECRETS_JSON: ${{ toJSON(secrets) }}
+        run: python scripts/tracker.py notify
 
       - name: Commit des données
         run: |
           git config user.name "suivi-positions-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add data docs/data.json
+          git add data docs/data
           git diff --cached --quiet || git commit -m "Données du $(date -u +%F)"
+          git pull --rebase
           git push

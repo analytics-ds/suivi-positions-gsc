@@ -1,0 +1,44 @@
+name: Nouveau projet
+description: Ajouter un site à suivre. Les 20 premiers mots-clés hors marque sont pré-remplis automatiquement.
+title: "Projet : "
+labels: ["projet"]
+body:
+  - type: input
+    id: nom
+    attributes:
+      label: Identifiant
+      description: Minuscules, sans espace ni accent (ex. maison-labiche)
+    validations:
+      required: true
+  - type: input
+    id: label
+    attributes:
+      label: Nom affiché
+    validations:
+      required: true
+  - type: input
+    id: propriete
+    attributes:
+      label: Propriété GSC
+      description: Exactement comme dans la Search Console (sc-domain:exemple.com ou https://www.exemple.com/)
+    validations:
+      required: true
+  - type: input
+    id: compte
+    attributes:
+      label: Compte Google connecté
+      description: « default » pour theo@datashake.fr, sinon le nom du compte connecté avec scripts/oauth_login.py --label
+      value: default
+    validations:
+      required: true
+  - type: input
+    id: referent
+    attributes:
+      label: Consultant référent
+  - type: input
+    id: marque
+    attributes:
+      label: Regex de marque
+      description: Requêtes de marque, fautes de frappe comprises (ex. labiche|la biche)
+    validations:
+      required: true
