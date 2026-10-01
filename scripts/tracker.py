@@ -177,7 +177,7 @@ def build():
             tracked.append({"keyword": k["keyword"], "page": page, "series": series})
         out["sites"].append({"name": site["name"], "label": site.get("label", site["name"]),
                              "property": site["property"], "keywords": tracked})
-    OUT.write_text(json.dumps(out, ensure_ascii=False, indent=1), encoding="utf-8")
+    OUT.write_text(json.dumps(out, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
     print(f"docs/data.json généré ({len(rows)} lignes)")
 
 
