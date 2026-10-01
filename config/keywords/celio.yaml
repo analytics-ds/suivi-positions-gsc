@@ -87,3 +87,7 @@ keywords:
     page: https://www.celio.com/fr-fr/c/t-shirts
     variants: [t shirt homme, tshirt homme]
     tags: [Hauts]
+  - keyword: "doudoune homme"
+    page: https://www.celio.com/fr-fr/c/blousons-et-manteaux-doudounes
+    variants: ["doudounes homme"]
+    tags: ["Outerwear"]
