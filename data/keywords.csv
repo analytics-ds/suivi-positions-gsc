@@ -479,7 +479,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,all,blouson homme,3.3,9,315,final
 2026-09-29,celio,all,blouson homme,3.3,14,311,final
 2026-09-30,celio,all,blouson homme,3.1,19,370,fresh
-2026-10-01,celio,all,blouson homme,3.3,9,159,fresh
+2026-10-01,celio,all,blouson homme,3.1,18,324,fresh
 2025-06-08,celio,all,cardigan homme,5.1,11,384,final
 2025-06-09,celio,all,cardigan homme,4.1,12,411,final
 2025-06-10,celio,all,cardigan homme,5.0,12,388,final
@@ -960,7 +960,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,all,cardigan homme,4.9,13,476,final
 2026-09-29,celio,all,cardigan homme,5.4,8,439,final
 2026-09-30,celio,all,cardigan homme,2.5,24,541,fresh
-2026-10-01,celio,all,cardigan homme,1.8,11,189,fresh
+2026-10-01,celio,all,cardigan homme,2.0,28,485,fresh
 2025-06-08,celio,all,cargo homme,7.2,4,309,final
 2025-06-09,celio,all,cargo homme,7.1,5,316,final
 2025-06-10,celio,all,cargo homme,7.8,5,315,final
@@ -1440,7 +1440,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,all,cargo homme,2.8,8,211,final
 2026-09-29,celio,all,cargo homme,3.1,8,212,final
 2026-09-30,celio,all,cargo homme,3.7,10,208,fresh
-2026-10-01,celio,all,cargo homme,4.1,3,81,fresh
+2026-10-01,celio,all,cargo homme,4.2,5,181,fresh
 2025-06-08,celio,all,chemise blanche homme,2.0,10,328,final
 2025-06-09,celio,all,chemise blanche homme,2.1,21,369,final
 2025-06-10,celio,all,chemise blanche homme,2.6,17,365,final
@@ -1921,7 +1921,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,all,chemise blanche homme,2.3,11,229,final
 2026-09-29,celio,all,chemise blanche homme,2.7,7,202,final
 2026-09-30,celio,all,chemise blanche homme,3.4,8,242,fresh
-2026-10-01,celio,all,chemise blanche homme,2.2,2,95,fresh
+2026-10-01,celio,all,chemise blanche homme,2.3,9,227,fresh
 2025-06-08,celio,all,chemise homme,1.7,48,1546,final
 2025-06-09,celio,all,chemise homme,1.6,67,1765,final
 2025-06-10,celio,all,chemise homme,1.7,62,1720,final
@@ -2402,7 +2402,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,all,chemise homme,3.1,28,882,final
 2026-09-29,celio,all,chemise homme,3.4,35,925,final
 2026-09-30,celio,all,chemise homme,4.0,36,780,fresh
-2026-10-01,celio,all,chemise homme,3.9,12,355,fresh
+2026-10-01,celio,all,chemise homme,4.1,22,754,fresh
 2025-06-08,celio,all,chino,24.3,0,383,final
 2025-06-09,celio,all,chino,17.1,1,527,final
 2025-06-10,celio,all,chino,19.3,1,580,final
@@ -2878,7 +2878,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,all,chino,3.7,8,364,final
 2026-09-29,celio,all,chino,3.4,11,396,final
 2026-09-30,celio,all,chino,3.8,10,385,fresh
-2026-10-01,celio,all,chino,4.0,3,187,fresh
+2026-10-01,celio,all,chino,4.0,4,350,fresh
 2025-06-08,celio,all,costume 3 pièces homme,3.6,11,189,final
 2025-06-09,celio,all,costume 3 pièces homme,4.3,20,209,final
 2025-06-10,celio,all,costume 3 pièces homme,4.5,11,164,final
@@ -3359,7 +3359,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,all,costume 3 pièces homme,3.1,4,110,final
 2026-09-29,celio,all,costume 3 pièces homme,2.9,11,81,final
 2026-09-30,celio,all,costume 3 pièces homme,2.3,6,88,fresh
-2026-10-01,celio,all,costume 3 pièces homme,2.1,3,27,fresh
+2026-10-01,celio,all,costume 3 pièces homme,2.4,5,59,fresh
 2025-06-08,celio,all,costume homme,2.5,125,2244,final
 2025-06-09,celio,all,costume homme,2.5,128,2415,final
 2025-06-10,celio,all,costume homme,2.4,98,2111,final
@@ -3840,7 +3840,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,all,costume homme,3.8,49,1211,final
 2026-09-29,celio,all,costume homme,3.7,44,1177,final
 2026-09-30,celio,all,costume homme,3.7,48,1271,fresh
-2026-10-01,celio,all,costume homme,4.1,12,461,fresh
+2026-10-01,celio,all,costume homme,4.1,41,1135,fresh
 2025-06-08,celio,all,costume homme pas cher,6.7,3,66,final
 2025-06-09,celio,all,costume homme pas cher,6.2,4,99,final
 2025-06-10,celio,all,costume homme pas cher,5.5,6,54,final
@@ -4321,7 +4321,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,all,costume homme pas cher,4.0,6,58,final
 2026-09-29,celio,all,costume homme pas cher,3.7,7,51,final
 2026-09-30,celio,all,costume homme pas cher,4.6,5,60,fresh
-2026-10-01,celio,all,costume homme pas cher,2.6,0,24,fresh
+2026-10-01,celio,all,costume homme pas cher,4.8,1,41,fresh
 2025-06-08,celio,all,doudoune homme,13.2,0,244,final
 2025-06-09,celio,all,doudoune homme,13.2,0,198,final
 2025-06-10,celio,all,doudoune homme,13.9,0,201,final
@@ -4802,7 +4802,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,all,doudoune homme,13.7,1,100,final
 2026-09-29,celio,all,doudoune homme,10.7,2,152,final
 2026-09-30,celio,all,doudoune homme,6.1,5,294,fresh
-2026-10-01,celio,all,doudoune homme,4.7,0,189,fresh
+2026-10-01,celio,all,doudoune homme,4.3,2,436,fresh
 2025-06-08,celio,all,doudounes homme,17.6,0,24,final
 2025-06-09,celio,all,doudounes homme,20.0,0,28,final
 2025-06-10,celio,all,doudounes homme,25.6,0,27,final
@@ -5738,7 +5738,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,all,ensemble homme,5.8,6,299,final
 2026-09-29,celio,all,ensemble homme,4.1,9,322,final
 2026-09-30,celio,all,ensemble homme,2.6,3,354,fresh
-2026-10-01,celio,all,ensemble homme,3.1,6,153,fresh
+2026-10-01,celio,all,ensemble homme,3.5,11,343,fresh
 2025-06-08,celio,all,jean homme,1.7,13,438,final
 2025-06-09,celio,all,jean homme,1.7,15,513,final
 2025-06-10,celio,all,jean homme,1.7,21,402,final
@@ -6219,7 +6219,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,all,jean homme,1.8,16,423,final
 2026-09-29,celio,all,jean homme,1.7,17,424,final
 2026-09-30,celio,all,jean homme,1.9,19,456,fresh
-2026-10-01,celio,all,jean homme,1.4,9,170,fresh
+2026-10-01,celio,all,jean homme,1.7,16,414,fresh
 2025-06-08,celio,all,jeans homme,4.0,11,398,final
 2025-06-09,celio,all,jeans homme,4.3,16,356,final
 2025-06-10,celio,all,jeans homme,4.6,5,363,final
@@ -6700,7 +6700,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,all,jeans homme,5.4,4,312,final
 2026-09-29,celio,all,jeans homme,5.2,4,280,final
 2026-09-30,celio,all,jeans homme,5.2,8,349,fresh
-2026-10-01,celio,all,jeans homme,4.5,1,159,fresh
+2026-10-01,celio,all,jeans homme,4.3,8,338,fresh
 2025-06-08,celio,all,manteau homme,7.8,2,235,final
 2025-06-09,celio,all,manteau homme,7.1,2,193,final
 2025-06-10,celio,all,manteau homme,7.8,2,191,final
@@ -7181,7 +7181,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,all,manteau homme,5.2,17,607,final
 2026-09-29,celio,all,manteau homme,3.1,20,510,final
 2026-09-30,celio,all,manteau homme,2.8,28,635,fresh
-2026-10-01,celio,all,manteau homme,2.0,10,221,fresh
+2026-10-01,celio,all,manteau homme,2.8,18,557,fresh
 2025-06-08,celio,all,pantalon blanc homme,2.5,22,273,final
 2025-06-09,celio,all,pantalon blanc homme,2.1,27,344,final
 2025-06-10,celio,all,pantalon blanc homme,2.4,27,335,final
@@ -7662,7 +7662,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,all,pantalon blanc homme,2.9,7,158,final
 2026-09-29,celio,all,pantalon blanc homme,2.9,6,130,final
 2026-09-30,celio,all,pantalon blanc homme,3.8,3,150,fresh
-2026-10-01,celio,all,pantalon blanc homme,2.6,0,41,fresh
+2026-10-01,celio,all,pantalon blanc homme,2.8,1,96,fresh
 2025-06-08,celio,all,pantalon cargo homme,2.6,57,875,final
 2025-06-09,celio,all,pantalon cargo homme,2.6,42,880,final
 2025-06-10,celio,all,pantalon cargo homme,3.7,33,759,final
@@ -8143,7 +8143,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,all,pantalon cargo homme,2.7,36,635,final
 2026-09-29,celio,all,pantalon cargo homme,2.7,40,667,final
 2026-09-30,celio,all,pantalon cargo homme,3.2,26,648,fresh
-2026-10-01,celio,all,pantalon cargo homme,4.0,9,264,fresh
+2026-10-01,celio,all,pantalon cargo homme,4.1,20,609,fresh
 2025-06-08,celio,all,pantalon chino homme,3.4,12,455,final
 2025-06-09,celio,all,pantalon chino homme,3.2,15,473,final
 2025-06-10,celio,all,pantalon chino homme,3.5,13,435,final
@@ -8624,7 +8624,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,all,pantalon chino homme,1.8,23,328,final
 2026-09-29,celio,all,pantalon chino homme,2.1,14,307,final
 2026-09-30,celio,all,pantalon chino homme,2.8,13,329,fresh
-2026-10-01,celio,all,pantalon chino homme,1.8,4,137,fresh
+2026-10-01,celio,all,pantalon chino homme,2.2,8,292,fresh
 2025-06-08,celio,all,pantalon en lin homme,1.4,47,533,final
 2025-06-09,celio,all,pantalon en lin homme,1.4,64,587,final
 2025-06-10,celio,all,pantalon en lin homme,1.4,81,623,final
@@ -9105,7 +9105,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,all,pantalon en lin homme,1.6,4,89,final
 2026-09-29,celio,all,pantalon en lin homme,1.9,6,74,final
 2026-09-30,celio,all,pantalon en lin homme,2.1,3,57,fresh
-2026-10-01,celio,all,pantalon en lin homme,2.5,0,28,fresh
+2026-10-01,celio,all,pantalon en lin homme,2.2,6,63,fresh
 2025-06-08,celio,all,pantalon homme,2.7,28,739,final
 2025-06-09,celio,all,pantalon homme,2.8,29,771,final
 2025-06-10,celio,all,pantalon homme,4.8,18,688,final
@@ -9586,7 +9586,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,all,pantalon homme,2.7,30,708,final
 2026-09-29,celio,all,pantalon homme,2.0,22,686,final
 2026-09-30,celio,all,pantalon homme,3.1,20,719,fresh
-2026-10-01,celio,all,pantalon homme,2.7,5,268,fresh
+2026-10-01,celio,all,pantalon homme,2.6,18,685,fresh
 2025-06-08,celio,all,pantalon lin homme,1.4,72,791,final
 2025-06-09,celio,all,pantalon lin homme,1.3,104,961,final
 2025-06-10,celio,all,pantalon lin homme,1.3,109,871,final
@@ -10067,7 +10067,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,all,pantalon lin homme,2.4,15,231,final
 2026-09-29,celio,all,pantalon lin homme,2.5,12,187,final
 2026-09-30,celio,all,pantalon lin homme,3.4,10,196,fresh
-2026-10-01,celio,all,pantalon lin homme,1.7,4,56,fresh
+2026-10-01,celio,all,pantalon lin homme,1.9,7,140,fresh
 2025-06-08,celio,all,parka homme,6.0,3,192,final
 2025-06-09,celio,all,parka homme,6.4,3,141,final
 2025-06-10,celio,all,parka homme,6.8,0,168,final
@@ -10548,7 +10548,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,all,parka homme,5.0,13,274,final
 2026-09-29,celio,all,parka homme,3.2,13,308,final
 2026-09-30,celio,all,parka homme,4.1,18,338,fresh
-2026-10-01,celio,all,parka homme,3.6,5,150,fresh
+2026-10-01,celio,all,parka homme,4.1,9,287,fresh
 2025-06-08,celio,all,polo homme,2.7,36,1171,final
 2025-06-09,celio,all,polo homme,2.6,60,1323,final
 2025-06-10,celio,all,polo homme,2.4,56,1350,final
@@ -11029,7 +11029,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,all,polo homme,2.8,13,408,final
 2026-09-29,celio,all,polo homme,2.4,19,472,final
 2026-09-30,celio,all,polo homme,3.4,21,393,fresh
-2026-10-01,celio,all,polo homme,4.1,6,171,fresh
+2026-10-01,celio,all,polo homme,4.9,10,347,fresh
 2025-06-08,celio,all,pull homme,2.6,10,357,final
 2025-06-09,celio,all,pull homme,2.3,6,419,final
 2025-06-10,celio,all,pull homme,3.1,9,365,final
@@ -11510,7 +11510,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,all,pull homme,2.2,27,1000,final
 2026-09-29,celio,all,pull homme,2.6,18,871,final
 2026-09-30,celio,all,pull homme,2.6,25,907,fresh
-2026-10-01,celio,all,pull homme,1.9,6,350,fresh
+2026-10-01,celio,all,pull homme,2.1,27,809,fresh
 2025-06-08,celio,all,pyjama homme,2.0,52,942,final
 2025-06-09,celio,all,pyjama homme,1.8,56,1101,final
 2025-06-10,celio,all,pyjama homme,1.8,53,1044,final
@@ -11991,7 +11991,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,all,pyjama homme,5.4,31,955,final
 2026-09-29,celio,all,pyjama homme,3.5,35,821,final
 2026-09-30,celio,all,pyjama homme,3.2,44,984,fresh
-2026-10-01,celio,all,pyjama homme,2.9,22,364,fresh
+2026-10-01,celio,all,pyjama homme,2.9,45,888,fresh
 2025-06-08,celio,all,short homme,4.2,26,1363,final
 2025-06-09,celio,all,short homme,3.9,46,1931,final
 2025-06-10,celio,all,short homme,2.8,56,2047,final
@@ -12472,7 +12472,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,all,short homme,2.4,6,313,final
 2026-09-29,celio,all,short homme,2.5,6,298,final
 2026-09-30,celio,all,short homme,2.6,8,285,fresh
-2026-10-01,celio,all,short homme,2.1,0,119,fresh
+2026-10-01,celio,all,short homme,2.2,0,233,fresh
 2025-06-08,celio,all,sweat homme,1.9,7,413,final
 2025-06-09,celio,all,sweat homme,2.0,13,418,final
 2025-06-10,celio,all,sweat homme,2.3,8,388,final
@@ -12953,7 +12953,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,all,sweat homme,2.4,15,459,final
 2026-09-29,celio,all,sweat homme,2.4,9,433,final
 2026-09-30,celio,all,sweat homme,2.4,20,457,fresh
-2026-10-01,celio,all,sweat homme,2.6,9,190,fresh
+2026-10-01,celio,all,sweat homme,2.7,17,417,fresh
 2025-06-08,celio,all,t shirt homme,2.6,14,731,final
 2025-06-09,celio,all,t shirt homme,2.4,30,881,final
 2025-06-10,celio,all,t shirt homme,3.2,21,857,final
@@ -13434,7 +13434,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,all,t shirt homme,5.9,3,282,final
 2026-09-29,celio,all,t shirt homme,5.4,1,300,final
 2026-09-30,celio,all,t shirt homme,3.9,11,282,fresh
-2026-10-01,celio,all,t shirt homme,3.9,2,122,fresh
+2026-10-01,celio,all,t shirt homme,4.6,8,272,fresh
 2025-06-08,celio,all,tee shirt homme,4.9,28,1251,final
 2025-06-09,celio,all,tee shirt homme,4.7,31,1577,final
 2025-06-10,celio,all,tee shirt homme,3.9,34,1520,final
@@ -13915,7 +13915,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,all,tee shirt homme,2.0,18,472,final
 2026-09-29,celio,all,tee shirt homme,2.1,10,437,final
 2026-09-30,celio,all,tee shirt homme,2.2,15,512,fresh
-2026-10-01,celio,all,tee shirt homme,1.8,3,163,fresh
+2026-10-01,celio,all,tee shirt homme,2.0,6,365,fresh
 2025-06-08,celio,all,tshirt homme,3.2,7,444,final
 2025-06-09,celio,all,tshirt homme,2.8,11,500,final
 2025-06-10,celio,all,tshirt homme,2.9,4,494,final
@@ -14395,7 +14395,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,all,tshirt homme,3.4,4,148,final
 2026-09-29,celio,all,tshirt homme,3.4,4,181,final
 2026-09-30,celio,all,tshirt homme,6.0,2,133,fresh
-2026-10-01,celio,all,tshirt homme,6.2,1,68,fresh
+2026-10-01,celio,all,tshirt homme,6.0,3,135,fresh
 2025-06-08,celio,all,veste homme,4.5,17,933,final
 2025-06-09,celio,all,veste homme,4.6,21,906,final
 2025-06-10,celio,all,veste homme,5.0,18,841,final
@@ -14876,7 +14876,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,all,veste homme,7.8,5,366,final
 2026-09-29,celio,all,veste homme,9.6,5,549,final
 2026-09-30,celio,all,veste homme,8.0,7,422,fresh
-2026-10-01,celio,all,veste homme,8.2,1,169,fresh
+2026-10-01,celio,all,veste homme,8.4,2,410,fresh
 2025-06-08,celio,bel,blouson homme,1.2,0,4,final
 2025-06-09,celio,bel,blouson homme,1.9,0,7,final
 2025-06-10,celio,bel,blouson homme,1.5,0,2,final
@@ -15345,7 +15345,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,bel,blouson homme,3.5,0,8,final
 2026-09-29,celio,bel,blouson homme,3,2,8,final
 2026-09-30,celio,bel,blouson homme,4,1,2,fresh
-2026-10-01,celio,bel,blouson homme,2.7,0,3,fresh
+2026-10-01,celio,bel,blouson homme,3.1,0,7,fresh
 2025-06-08,celio,bel,cardigan homme,10.6,0,21,final
 2025-06-09,celio,bel,cardigan homme,10.3,0,20,final
 2025-06-10,celio,bel,cardigan homme,10.6,0,16,final
@@ -15825,7 +15825,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,bel,cardigan homme,7.3,0,24,final
 2026-09-29,celio,bel,cardigan homme,9.5,0,18,final
 2026-09-30,celio,bel,cardigan homme,8.7,0,13,fresh
-2026-10-01,celio,bel,cardigan homme,12.5,0,2,fresh
+2026-10-01,celio,bel,cardigan homme,12.4,0,5,fresh
 2025-06-08,celio,bel,cargo homme,8.7,0,3,final
 2025-06-09,celio,bel,cargo homme,10.3,0,6,final
 2025-06-10,celio,bel,cargo homme,13,0,2,final
@@ -16125,6 +16125,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,bel,cargo homme,6,0,1,final
 2026-09-29,celio,bel,cargo homme,4,0,1,final
 2026-09-30,celio,bel,cargo homme,3.8,0,4,fresh
+2026-10-01,celio,bel,cargo homme,5,0,1,fresh
 2025-06-08,celio,bel,chemise blanche homme,2.9,0,8,final
 2025-06-09,celio,bel,chemise blanche homme,3.8,0,8,final
 2025-06-10,celio,bel,chemise blanche homme,4.8,0,9,final
@@ -16605,7 +16606,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,bel,chemise blanche homme,3.5,0,4,final
 2026-09-29,celio,bel,chemise blanche homme,3.3,0,7,final
 2026-09-30,celio,bel,chemise blanche homme,3.7,1,7,fresh
-2026-10-01,celio,bel,chemise blanche homme,2.7,0,3,fresh
+2026-10-01,celio,bel,chemise blanche homme,3.3,0,7,fresh
 2025-06-08,celio,bel,chemise homme,5.5,0,20,final
 2025-06-09,celio,bel,chemise homme,5.5,0,11,final
 2025-06-10,celio,bel,chemise homme,4.0,3,51,final
@@ -17085,7 +17086,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,bel,chemise homme,10.3,0,23,final
 2026-09-29,celio,bel,chemise homme,9.8,0,25,final
 2026-09-30,celio,bel,chemise homme,5.8,0,13,fresh
-2026-10-01,celio,bel,chemise homme,5.7,0,6,fresh
+2026-10-01,celio,bel,chemise homme,7.8,0,15,fresh
 2025-06-08,celio,bel,chino,12,0,12,final
 2025-06-09,celio,bel,chino,11.2,0,12,final
 2025-06-10,celio,bel,chino,11.7,0,14,final
@@ -17566,7 +17567,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,bel,chino,5.1,1,15,final
 2026-09-29,celio,bel,chino,5.5,0,24,final
 2026-09-30,celio,bel,chino,9.8,2,20,fresh
-2026-10-01,celio,bel,chino,3.7,0,7,fresh
+2026-10-01,celio,bel,chino,3.4,0,8,fresh
 2025-06-08,celio,bel,costume 3 pièces homme,2.3,1,3,final
 2025-06-09,celio,bel,costume 3 pièces homme,3,0,2,final
 2025-06-10,celio,bel,costume 3 pièces homme,4.5,0,4,final
@@ -18039,7 +18040,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,bel,costume 3 pièces homme,1.8,0,4,final
 2026-09-29,celio,bel,costume 3 pièces homme,1,1,4,final
 2026-09-30,celio,bel,costume 3 pièces homme,1,0,1,fresh
-2026-10-01,celio,bel,costume 3 pièces homme,1,0,2,fresh
+2026-10-01,celio,bel,costume 3 pièces homme,1,0,3,fresh
 2025-06-08,celio,bel,costume homme,1.7,8,158,final
 2025-06-09,celio,bel,costume homme,1.8,6,149,final
 2025-06-10,celio,bel,costume homme,1.8,10,157,final
@@ -18520,7 +18521,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,bel,costume homme,6.0,1,75,final
 2026-09-29,celio,bel,costume homme,5.5,1,65,final
 2026-09-30,celio,bel,costume homme,4.4,1,64,fresh
-2026-10-01,celio,bel,costume homme,4.6,0,24,fresh
+2026-10-01,celio,bel,costume homme,4.3,1,55,fresh
 2025-06-08,celio,bel,costume homme pas cher,10.3,0,3,final
 2025-06-09,celio,bel,costume homme pas cher,6.6,0,5,final
 2025-06-10,celio,bel,costume homme pas cher,5,0,2,final
@@ -18981,7 +18982,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,bel,costume homme pas cher,3,0,2,final
 2026-09-29,celio,bel,costume homme pas cher,4.5,0,2,final
 2026-09-30,celio,bel,costume homme pas cher,2.5,1,2,fresh
-2026-10-01,celio,bel,costume homme pas cher,1,0,1,fresh
+2026-10-01,celio,bel,costume homme pas cher,3.7,0,3,fresh
 2025-06-20,celio,bel,doudoune homme,18.5,0,2,final
 2025-06-24,celio,bel,doudoune homme,8,0,2,final
 2025-06-26,celio,bel,doudoune homme,6.5,0,2,final
@@ -20093,7 +20094,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,bel,ensemble homme,1.9,0,14,final
 2026-09-29,celio,bel,ensemble homme,3.1,0,16,final
 2026-09-30,celio,bel,ensemble homme,1.9,0,18,fresh
-2026-10-01,celio,bel,ensemble homme,1,0,3,fresh
+2026-10-01,celio,bel,ensemble homme,1.2,1,10,fresh
 2025-06-08,celio,bel,jean homme,4.2,0,4,final
 2025-06-09,celio,bel,jean homme,3.7,0,6,final
 2025-06-10,celio,bel,jean homme,2,0,2,final
@@ -20517,7 +20518,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,bel,jean homme,2,0,3,final
 2026-09-29,celio,bel,jean homme,3,0,6,final
 2026-09-30,celio,bel,jean homme,1.7,0,6,fresh
-2026-10-01,celio,bel,jean homme,5,0,3,fresh
+2026-10-01,celio,bel,jean homme,4.6,0,5,fresh
 2025-06-08,celio,bel,jeans homme,3.9,0,36,final
 2025-06-09,celio,bel,jeans homme,3.3,0,30,final
 2025-06-10,celio,bel,jeans homme,3.8,2,27,final
@@ -20992,6 +20993,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,bel,jeans homme,3.6,0,7,final
 2026-09-29,celio,bel,jeans homme,7.2,0,5,final
 2026-09-30,celio,bel,jeans homme,4.3,0,3,fresh
+2026-10-01,celio,bel,jeans homme,4.6,0,5,fresh
 2025-06-08,celio,bel,manteau homme,7.2,0,5,final
 2025-06-09,celio,bel,manteau homme,7.7,0,10,final
 2025-06-10,celio,bel,manteau homme,6,0,5,final
@@ -21470,7 +21472,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,bel,manteau homme,5.5,1,11,final
 2026-09-29,celio,bel,manteau homme,5.6,0,14,final
 2026-09-30,celio,bel,manteau homme,5.1,0,14,fresh
-2026-10-01,celio,bel,manteau homme,3.5,2,6,fresh
+2026-10-01,celio,bel,manteau homme,4.4,2,12,fresh
 2025-06-08,celio,bel,pantalon blanc homme,11.9,0,13,final
 2025-06-09,celio,bel,pantalon blanc homme,11.7,0,9,final
 2025-06-10,celio,bel,pantalon blanc homme,10.6,1,10,final
@@ -21951,7 +21953,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,bel,pantalon blanc homme,9.1,0,11,final
 2026-09-29,celio,bel,pantalon blanc homme,9.2,0,9,final
 2026-09-30,celio,bel,pantalon blanc homme,8,0,10,fresh
-2026-10-01,celio,bel,pantalon blanc homme,12,0,2,fresh
+2026-10-01,celio,bel,pantalon blanc homme,11.7,0,3,fresh
 2025-06-08,celio,bel,pantalon cargo homme,7,0,28,final
 2025-06-09,celio,bel,pantalon cargo homme,6.0,3,37,final
 2025-06-10,celio,bel,pantalon cargo homme,5.9,1,36,final
@@ -22432,7 +22434,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,bel,pantalon cargo homme,5.9,0,15,final
 2026-09-29,celio,bel,pantalon cargo homme,5.3,0,29,final
 2026-09-30,celio,bel,pantalon cargo homme,3.2,0,10,fresh
-2026-10-01,celio,bel,pantalon cargo homme,4,2,7,fresh
+2026-10-01,celio,bel,pantalon cargo homme,4.2,2,16,fresh
 2025-06-08,celio,bel,pantalon chino homme,6.4,0,5,final
 2025-06-09,celio,bel,pantalon chino homme,9.1,0,8,final
 2025-06-10,celio,bel,pantalon chino homme,9.3,0,12,final
@@ -22913,7 +22915,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,bel,pantalon chino homme,1.9,1,7,final
 2026-09-29,celio,bel,pantalon chino homme,1.2,0,10,final
 2026-09-30,celio,bel,pantalon chino homme,1.3,0,16,fresh
-2026-10-01,celio,bel,pantalon chino homme,1.5,0,6,fresh
+2026-10-01,celio,bel,pantalon chino homme,1.5,0,10,fresh
 2025-06-08,celio,bel,pantalon en lin homme,2.6,2,26,final
 2025-06-09,celio,bel,pantalon en lin homme,3.1,1,10,final
 2025-06-10,celio,bel,pantalon en lin homme,2.3,2,23,final
@@ -23367,7 +23369,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,bel,pantalon en lin homme,3,0,2,final
 2026-09-29,celio,bel,pantalon en lin homme,2.2,1,10,final
 2026-09-30,celio,bel,pantalon en lin homme,1.8,0,4,fresh
-2026-10-01,celio,bel,pantalon en lin homme,1.3,0,3,fresh
+2026-10-01,celio,bel,pantalon en lin homme,1.5,0,6,fresh
 2025-06-08,celio,bel,pantalon homme,6.3,1,17,final
 2025-06-09,celio,bel,pantalon homme,5.5,0,23,final
 2025-06-10,celio,bel,pantalon homme,8.6,0,10,final
@@ -23848,7 +23850,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,bel,pantalon homme,8.8,0,26,final
 2026-09-29,celio,bel,pantalon homme,7.6,0,18,final
 2026-09-30,celio,bel,pantalon homme,6.7,0,9,fresh
-2026-10-01,celio,bel,pantalon homme,4.3,0,3,fresh
+2026-10-01,celio,bel,pantalon homme,7.8,0,9,fresh
 2025-06-08,celio,bel,pantalon lin homme,2.3,1,14,final
 2025-06-09,celio,bel,pantalon lin homme,2.3,2,21,final
 2025-06-10,celio,bel,pantalon lin homme,2.4,3,10,final
@@ -24328,7 +24330,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,bel,pantalon lin homme,7.7,0,6,final
 2026-09-29,celio,bel,pantalon lin homme,1.8,0,6,final
 2026-09-30,celio,bel,pantalon lin homme,1.8,1,4,fresh
-2026-10-01,celio,bel,pantalon lin homme,1,0,1,fresh
+2026-10-01,celio,bel,pantalon lin homme,1.3,0,3,fresh
 2025-06-08,celio,bel,parka homme,9.7,2,7,final
 2025-06-09,celio,bel,parka homme,7.8,0,4,final
 2025-06-10,celio,bel,parka homme,12,0,5,final
@@ -25242,7 +25244,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,bel,polo homme,6.6,0,12,final
 2026-09-29,celio,bel,polo homme,7.2,0,18,final
 2026-09-30,celio,bel,polo homme,6.7,0,7,fresh
-2026-10-01,celio,bel,polo homme,11.5,0,2,fresh
+2026-10-01,celio,bel,polo homme,11.7,0,3,fresh
 2025-06-08,celio,bel,pull homme,3.1,1,18,final
 2025-06-09,celio,bel,pull homme,2.8,0,9,final
 2025-06-10,celio,bel,pull homme,2.9,1,17,final
@@ -25702,7 +25704,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,bel,pull homme,5.9,0,40,final
 2026-09-29,celio,bel,pull homme,7.8,0,20,final
 2026-09-30,celio,bel,pull homme,6,1,22,fresh
-2026-10-01,celio,bel,pull homme,4.2,0,5,fresh
+2026-10-01,celio,bel,pull homme,3.9,0,10,fresh
 2025-06-08,celio,bel,pyjama homme,7.2,1,28,final
 2025-06-09,celio,bel,pyjama homme,5.6,1,42,final
 2025-06-10,celio,bel,pyjama homme,4.6,2,35,final
@@ -26183,7 +26185,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,bel,pyjama homme,8.8,0,42,final
 2026-09-29,celio,bel,pyjama homme,10.3,0,36,final
 2026-09-30,celio,bel,pyjama homme,9.9,2,23,fresh
-2026-10-01,celio,bel,pyjama homme,6.4,1,8,fresh
+2026-10-01,celio,bel,pyjama homme,8.6,1,29,fresh
 2025-06-08,celio,bel,short homme,5.9,1,26,final
 2025-06-09,celio,bel,short homme,6.0,1,42,final
 2025-06-10,celio,bel,short homme,4.7,1,34,final
@@ -28985,7 +28987,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,bel,veste homme,7.4,2,29,final
 2026-09-29,celio,bel,veste homme,8.9,1,17,final
 2026-09-30,celio,bel,veste homme,7.8,0,20,fresh
-2026-10-01,celio,bel,veste homme,6.1,0,9,fresh
+2026-10-01,celio,bel,veste homme,6.2,0,12,fresh
 2025-06-08,celio,fra,blouson homme,1.6,19,283,final
 2025-06-09,celio,fra,blouson homme,1.6,17,278,final
 2025-06-10,celio,fra,blouson homme,1.6,9,340,final
@@ -29466,7 +29468,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,fra,blouson homme,3.4,9,279,final
 2026-09-29,celio,fra,blouson homme,3.3,10,282,final
 2026-09-30,celio,fra,blouson homme,3.0,16,340,fresh
-2026-10-01,celio,fra,blouson homme,2.9,8,147,fresh
+2026-10-01,celio,fra,blouson homme,2.8,17,292,fresh
 2025-06-08,celio,fra,cardigan homme,4.3,11,286,final
 2025-06-09,celio,fra,cardigan homme,4.2,11,304,final
 2025-06-10,celio,fra,cardigan homme,4.3,10,265,final
@@ -29947,7 +29949,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,fra,cardigan homme,4.8,12,411,final
 2026-09-29,celio,fra,cardigan homme,5.3,7,375,final
 2026-09-30,celio,fra,cardigan homme,2.3,24,473,fresh
-2026-10-01,celio,fra,cardigan homme,1.7,9,177,fresh
+2026-10-01,celio,fra,cardigan homme,1.8,25,443,fresh
 2025-06-08,celio,fra,cargo homme,7.1,3,241,final
 2025-06-09,celio,fra,cargo homme,6.8,5,262,final
 2025-06-10,celio,fra,cargo homme,8.1,5,310,final
@@ -30428,7 +30430,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,fra,cargo homme,2.9,8,239,final
 2026-09-29,celio,fra,cargo homme,2.9,8,227,final
 2026-09-30,celio,fra,cargo homme,3.2,10,204,fresh
-2026-10-01,celio,fra,cargo homme,4.2,3,91,fresh
+2026-10-01,celio,fra,cargo homme,4.1,4,180,fresh
 2025-06-08,celio,fra,chemise blanche homme,1.7,9,241,final
 2025-06-09,celio,fra,chemise blanche homme,1.6,19,271,final
 2025-06-10,celio,fra,chemise blanche homme,2.3,17,256,final
@@ -30909,7 +30911,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,fra,chemise blanche homme,1.9,8,200,final
 2026-09-29,celio,fra,chemise blanche homme,2.6,6,173,final
 2026-09-30,celio,fra,chemise blanche homme,2.6,6,204,fresh
-2026-10-01,celio,fra,chemise blanche homme,1.7,2,75,fresh
+2026-10-01,celio,fra,chemise blanche homme,1.9,8,186,fresh
 2025-06-08,celio,fra,chemise homme,1.2,44,1288,final
 2025-06-09,celio,fra,chemise homme,1.1,63,1460,final
 2025-06-10,celio,fra,chemise homme,1.1,56,1342,final
@@ -31390,7 +31392,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,fra,chemise homme,2.6,26,739,final
 2026-09-29,celio,fra,chemise homme,3.0,29,746,final
 2026-09-30,celio,fra,chemise homme,3.9,33,644,fresh
-2026-10-01,celio,fra,chemise homme,3.7,12,294,fresh
+2026-10-01,celio,fra,chemise homme,3.7,20,580,fresh
 2025-06-08,celio,fra,chino,10.6,0,356,final
 2025-06-09,celio,fra,chino,10.7,1,652,final
 2025-06-10,celio,fra,chino,11.2,1,777,final
@@ -31871,7 +31873,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,fra,chino,2.1,7,295,final
 2026-09-29,celio,fra,chino,2.1,11,298,final
 2026-09-30,celio,fra,chino,2.4,7,283,fresh
-2026-10-01,celio,fra,chino,2.2,3,135,fresh
+2026-10-01,celio,fra,chino,2.5,4,259,fresh
 2025-06-08,celio,fra,costume 3 pièces homme,3.6,10,163,final
 2025-06-09,celio,fra,costume 3 pièces homme,4.2,19,186,final
 2025-06-10,celio,fra,costume 3 pièces homme,4.4,11,132,final
@@ -32352,7 +32354,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,fra,costume 3 pièces homme,3.3,4,96,final
 2026-09-29,celio,fra,costume 3 pièces homme,2.9,9,69,final
 2026-09-30,celio,fra,costume 3 pièces homme,2.4,6,78,fresh
-2026-10-01,celio,fra,costume 3 pièces homme,2.0,2,21,fresh
+2026-10-01,celio,fra,costume 3 pièces homme,2.6,4,61,fresh
 2025-06-08,celio,fra,costume homme,2.3,112,1733,final
 2025-06-09,celio,fra,costume homme,2.2,113,1806,final
 2025-06-10,celio,fra,costume homme,2.1,82,1470,final
@@ -32833,7 +32835,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,fra,costume homme,3.4,45,1021,final
 2026-09-29,celio,fra,costume homme,3.5,39,968,final
 2026-09-30,celio,fra,costume homme,3.5,42,1056,fresh
-2026-10-01,celio,fra,costume homme,4.0,11,381,fresh
+2026-10-01,celio,fra,costume homme,3.9,33,912,fresh
 2025-06-08,celio,fra,costume homme pas cher,6.3,3,52,final
 2025-06-09,celio,fra,costume homme pas cher,6.5,4,84,final
 2025-06-10,celio,fra,costume homme pas cher,5.3,6,42,final
@@ -33314,7 +33316,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,fra,costume homme pas cher,1.4,6,51,final
 2026-09-29,celio,fra,costume homme pas cher,1.9,7,45,final
 2026-09-30,celio,fra,costume homme pas cher,3.3,4,63,fresh
-2026-10-01,celio,fra,costume homme pas cher,2.0,0,24,fresh
+2026-10-01,celio,fra,costume homme pas cher,3.1,1,46,fresh
 2025-06-08,celio,fra,doudoune homme,11.8,0,113,final
 2025-06-09,celio,fra,doudoune homme,11.3,0,63,final
 2025-06-10,celio,fra,doudoune homme,12.0,0,58,final
@@ -33795,7 +33797,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,fra,doudoune homme,10.0,1,68,final
 2026-09-29,celio,fra,doudoune homme,9.7,2,123,final
 2026-09-30,celio,fra,doudoune homme,4.1,3,248,fresh
-2026-10-01,celio,fra,doudoune homme,1.7,0,159,fresh
+2026-10-01,celio,fra,doudoune homme,2.0,2,374,fresh
 2025-06-10,celio,fra,doudounes homme,18.5,0,4,final
 2025-06-13,celio,fra,doudounes homme,21.7,0,3,final
 2025-06-15,celio,fra,doudounes homme,13,0,4,final
@@ -34737,7 +34739,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,fra,ensemble homme,6.0,6,262,final
 2026-09-29,celio,fra,ensemble homme,4.2,9,278,final
 2026-09-30,celio,fra,ensemble homme,2.4,3,295,fresh
-2026-10-01,celio,fra,ensemble homme,3.1,6,142,fresh
+2026-10-01,celio,fra,ensemble homme,3.4,10,307,fresh
 2025-06-08,celio,fra,jean homme,1.5,12,325,final
 2025-06-09,celio,fra,jean homme,1.6,15,423,final
 2025-06-10,celio,fra,jean homme,1.5,20,330,final
@@ -35218,7 +35220,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,fra,jean homme,2.1,16,454,final
 2026-09-29,celio,fra,jean homme,1.8,16,425,final
 2026-09-30,celio,fra,jean homme,1.6,18,466,fresh
-2026-10-01,celio,fra,jean homme,1.8,8,187,fresh
+2026-10-01,celio,fra,jean homme,1.9,14,430,fresh
 2025-06-08,celio,fra,jeans homme,2.3,11,281,final
 2025-06-09,celio,fra,jeans homme,3.2,16,257,final
 2025-06-10,celio,fra,jeans homme,2.6,3,242,final
@@ -35699,7 +35701,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,fra,jeans homme,6.3,4,322,final
 2026-09-29,celio,fra,jeans homme,5.6,4,273,final
 2026-09-30,celio,fra,jeans homme,5.3,8,345,fresh
-2026-10-01,celio,fra,jeans homme,4.7,1,190,fresh
+2026-10-01,celio,fra,jeans homme,4.5,7,353,fresh
 2025-06-08,celio,fra,manteau homme,2.6,1,120,final
 2025-06-09,celio,fra,manteau homme,2.6,2,89,final
 2025-06-10,celio,fra,manteau homme,3.1,2,89,final
@@ -36180,7 +36182,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,fra,manteau homme,5.1,16,575,final
 2026-09-29,celio,fra,manteau homme,3.0,19,467,final
 2026-09-30,celio,fra,manteau homme,2.5,28,584,fresh
-2026-10-01,celio,fra,manteau homme,1.8,7,202,fresh
+2026-10-01,celio,fra,manteau homme,2.3,15,495,fresh
 2025-06-08,celio,fra,pantalon blanc homme,1.6,21,219,final
 2025-06-09,celio,fra,pantalon blanc homme,1.4,27,300,final
 2025-06-10,celio,fra,pantalon blanc homme,1.8,26,283,final
@@ -36661,7 +36663,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,fra,pantalon blanc homme,2.3,7,139,final
 2026-09-29,celio,fra,pantalon blanc homme,2.3,5,110,final
 2026-09-30,celio,fra,pantalon blanc homme,2.6,3,108,fresh
-2026-10-01,celio,fra,pantalon blanc homme,1.6,0,36,fresh
+2026-10-01,celio,fra,pantalon blanc homme,2.1,1,86,fresh
 2025-06-08,celio,fra,pantalon cargo homme,2.1,55,717,final
 2025-06-09,celio,fra,pantalon cargo homme,2.1,38,699,final
 2025-06-10,celio,fra,pantalon cargo homme,2.8,32,553,final
@@ -37142,7 +37144,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,fra,pantalon cargo homme,2.8,36,609,final
 2026-09-29,celio,fra,pantalon cargo homme,2.6,35,622,final
 2026-09-30,celio,fra,pantalon cargo homme,2.9,26,599,fresh
-2026-10-01,celio,fra,pantalon cargo homme,4.1,6,254,fresh
+2026-10-01,celio,fra,pantalon cargo homme,4.2,16,581,fresh
 2025-06-08,celio,fra,pantalon chino homme,3.2,12,389,final
 2025-06-09,celio,fra,pantalon chino homme,3.0,14,407,final
 2025-06-10,celio,fra,pantalon chino homme,3.1,13,354,final
@@ -37623,7 +37625,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,fra,pantalon chino homme,2.0,21,319,final
 2026-09-29,celio,fra,pantalon chino homme,2.0,13,301,final
 2026-09-30,celio,fra,pantalon chino homme,2.3,10,295,fresh
-2026-10-01,celio,fra,pantalon chino homme,2.0,4,125,fresh
+2026-10-01,celio,fra,pantalon chino homme,2.1,8,262,fresh
 2025-06-08,celio,fra,pantalon en lin homme,3.8,41,712,final
 2025-06-09,celio,fra,pantalon en lin homme,3.5,55,773,final
 2025-06-10,celio,fra,pantalon en lin homme,1.1,77,538,final
@@ -38104,7 +38106,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,fra,pantalon en lin homme,1.6,4,81,final
 2026-09-29,celio,fra,pantalon en lin homme,1.8,5,56,final
 2026-09-30,celio,fra,pantalon en lin homme,1.7,3,54,fresh
-2026-10-01,celio,fra,pantalon en lin homme,1.8,0,21,fresh
+2026-10-01,celio,fra,pantalon en lin homme,1.9,6,53,fresh
 2025-06-08,celio,fra,pantalon homme,1.4,23,504,final
 2025-06-09,celio,fra,pantalon homme,1.5,26,533,final
 2025-06-10,celio,fra,pantalon homme,3.3,17,468,final
@@ -38585,7 +38587,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,fra,pantalon homme,2.3,26,640,final
 2026-09-29,celio,fra,pantalon homme,2.0,22,624,final
 2026-09-30,celio,fra,pantalon homme,2.5,18,627,fresh
-2026-10-01,celio,fra,pantalon homme,2.1,4,251,fresh
+2026-10-01,celio,fra,pantalon homme,2.1,17,614,fresh
 2025-06-08,celio,fra,pantalon lin homme,3.3,66,947,final
 2025-06-09,celio,fra,pantalon lin homme,3.2,93,1188,final
 2025-06-10,celio,fra,pantalon lin homme,1.1,99,760,final
@@ -39066,7 +39068,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,fra,pantalon lin homme,1.5,15,188,final
 2026-09-29,celio,fra,pantalon lin homme,1.6,11,151,final
 2026-09-30,celio,fra,pantalon lin homme,1.8,8,148,fresh
-2026-10-01,celio,fra,pantalon lin homme,1.1,4,47,fresh
+2026-10-01,celio,fra,pantalon lin homme,1.3,7,117,fresh
 2025-06-08,celio,fra,parka homme,3.4,1,107,final
 2025-06-09,celio,fra,parka homme,3.7,3,82,final
 2025-06-10,celio,fra,parka homme,3.3,0,72,final
@@ -39547,7 +39549,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,fra,parka homme,4.7,13,247,final
 2026-09-29,celio,fra,parka homme,2.9,13,278,final
 2026-09-30,celio,fra,parka homme,3.0,18,301,fresh
-2026-10-01,celio,fra,parka homme,1.7,5,133,fresh
+2026-10-01,celio,fra,parka homme,2.6,9,246,fresh
 2025-06-08,celio,fra,polo homme,2.3,36,980,final
 2025-06-09,celio,fra,polo homme,2.7,58,1235,final
 2025-06-10,celio,fra,polo homme,2.7,56,1267,final
@@ -40028,7 +40030,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,fra,polo homme,2.5,13,386,final
 2026-09-29,celio,fra,polo homme,2.4,19,442,final
 2026-09-30,celio,fra,polo homme,3.0,21,387,fresh
-2026-10-01,celio,fra,polo homme,3.3,6,179,fresh
+2026-10-01,celio,fra,polo homme,4.0,9,334,fresh
 2025-06-08,celio,fra,pull homme,5.0,8,239,final
 2025-06-09,celio,fra,pull homme,3.0,6,304,final
 2025-06-10,celio,fra,pull homme,3.8,7,207,final
@@ -40509,7 +40511,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,fra,pull homme,2.1,27,937,final
 2026-09-29,celio,fra,pull homme,2.4,18,825,final
 2026-09-30,celio,fra,pull homme,2.4,24,840,fresh
-2026-10-01,celio,fra,pull homme,1.9,6,330,fresh
+2026-10-01,celio,fra,pull homme,2.0,27,760,fresh
 2025-06-08,celio,fra,pyjama homme,1.3,48,799,final
 2025-06-09,celio,fra,pyjama homme,1.3,49,933,final
 2025-06-10,celio,fra,pyjama homme,1.3,49,853,final
@@ -40990,7 +40992,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,fra,pyjama homme,5.3,30,873,final
 2026-09-29,celio,fra,pyjama homme,3.1,33,735,final
 2026-09-30,celio,fra,pyjama homme,2.6,38,892,fresh
-2026-10-01,celio,fra,pyjama homme,2.7,20,336,fresh
+2026-10-01,celio,fra,pyjama homme,2.6,42,803,fresh
 2025-06-08,celio,fra,short homme,3.5,23,1155,final
 2025-06-09,celio,fra,short homme,3.4,44,1705,final
 2025-06-10,celio,fra,short homme,2.4,54,1834,final
@@ -41471,7 +41473,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,fra,short homme,2.1,5,294,final
 2026-09-29,celio,fra,short homme,2.1,5,272,final
 2026-09-30,celio,fra,short homme,1.9,7,251,fresh
-2026-10-01,celio,fra,short homme,1.7,0,107,fresh
+2026-10-01,celio,fra,short homme,1.9,0,210,fresh
 2025-06-08,celio,fra,sweat homme,1.6,7,320,final
 2025-06-09,celio,fra,sweat homme,1.6,13,321,final
 2025-06-10,celio,fra,sweat homme,1.5,8,282,final
@@ -41952,7 +41954,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,fra,sweat homme,2.3,15,439,final
 2026-09-29,celio,fra,sweat homme,1.9,9,399,final
 2026-09-30,celio,fra,sweat homme,2.1,20,436,fresh
-2026-10-01,celio,fra,sweat homme,2.0,7,167,fresh
+2026-10-01,celio,fra,sweat homme,2.1,14,377,fresh
 2025-06-08,celio,fra,t shirt homme,1.9,13,592,final
 2025-06-09,celio,fra,t shirt homme,1.7,28,756,final
 2025-06-10,celio,fra,t shirt homme,2.7,21,735,final
@@ -42433,7 +42435,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,fra,t shirt homme,4.8,3,258,final
 2026-09-29,celio,fra,t shirt homme,4.7,1,280,final
 2026-09-30,celio,fra,t shirt homme,3.3,10,259,fresh
-2026-10-01,celio,fra,t shirt homme,2.6,2,112,fresh
+2026-10-01,celio,fra,t shirt homme,2.8,8,258,fresh
 2025-06-08,celio,fra,tee shirt homme,4.8,28,1285,final
 2025-06-09,celio,fra,tee shirt homme,4.7,31,1596,final
 2025-06-10,celio,fra,tee shirt homme,3.8,34,1485,final
@@ -42914,7 +42916,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,fra,tee shirt homme,2.0,18,459,final
 2026-09-29,celio,fra,tee shirt homme,2.1,10,427,final
 2026-09-30,celio,fra,tee shirt homme,2.0,15,491,fresh
-2026-10-01,celio,fra,tee shirt homme,1.7,3,161,fresh
+2026-10-01,celio,fra,tee shirt homme,1.8,6,348,fresh
 2025-06-08,celio,fra,tshirt homme,2.8,7,407,final
 2025-06-09,celio,fra,tshirt homme,2.5,11,462,final
 2025-06-10,celio,fra,tshirt homme,2.5,4,453,final
@@ -43395,7 +43397,7 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,fra,tshirt homme,3.1,4,129,final
 2026-09-29,celio,fra,tshirt homme,3.5,4,178,final
 2026-09-30,celio,fra,tshirt homme,6.1,1,109,fresh
-2026-10-01,celio,fra,tshirt homme,6.0,0,60,fresh
+2026-10-01,celio,fra,tshirt homme,5.9,2,124,fresh
 2025-06-08,celio,fra,veste homme,3.4,16,639,final
 2025-06-09,celio,fra,veste homme,3.5,19,643,final
 2025-06-10,celio,fra,veste homme,3.6,18,535,final
@@ -43876,4 +43878,4 @@ date,site,country,query,position,clicks,impressions,data_state
 2026-09-28,celio,fra,veste homme,7.5,3,242,final
 2026-09-29,celio,fra,veste homme,10.0,2,434,final
 2026-09-30,celio,fra,veste homme,7.1,5,220,fresh
-2026-10-01,celio,fra,veste homme,6.9,1,79,fresh
+2026-10-01,celio,fra,veste homme,7.6,2,211,fresh
