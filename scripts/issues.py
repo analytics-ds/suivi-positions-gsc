@@ -25,6 +25,7 @@ LABELS = {
     "Variantes": "variantes", "Tags": "tags", "Note": "note", "Identifiant": "nom", "Nom affiché": "label",
     "Propriété GSC": "propriete", "Compte Google connecté": "compte", "Consultant référent": "referent", "Regex de marque": "marque",
     "Mots-clés": "mots_cles", "Statut": "statut", "Objectif de position": "objectif", "Pays suivis": "pays",
+    "Pages à vérifier": "pages",
 }
 STATUTS = {"à travailler": "à travailler", "en cours": "en cours", "acquis": "acquis"}
 
@@ -193,8 +194,19 @@ def main():
         (CONF / "actions" / f"{name}.yaml").write_text("# Journal des actions SEO (voir config/actions/celio.yaml pour les champs).\n\nactions: []\n", encoding="utf-8")
         print(f"RESULT=Projet « {name} » créé. Les 20 premiers mots-clés hors marque sont pré-remplis et l'historique arrive avec la synchro.")
         print(f"SITE={name}\nKIND=projet")
+    elif "inspection" in labels:
+        s = d.get("projet", "").strip().lower()
+        if s not in sites():
+            fail(f"Projet « {s} » inconnu. Projets existants : {', '.join(sites())}.")
+        pages = [l.strip() for l in d.get("pages", "").splitlines() if l.strip()]
+        bad = [u for u in pages if not u.startswith("http")]
+        if bad:
+            fail(f"Chaque ligne doit être une URL complète (https://…) : {bad[0]}")
+        Path("pages.txt").write_text("\n".join(pages), encoding="utf-8")
+        print(f"RESULT=Vérification lancée sur {len(pages) if pages else 'toutes les'} page{'s' if len(pages) != 1 else ''} suivie{'s' if len(pages) != 1 else ''} de {s}.")
+        print(f"SITE={s}\nKIND=inspection")
     else:
-        fail("Issue sans label reconnu (action, mot-cle, projet).")
+        fail("Issue sans label reconnu (action, mot-cle, projet, inspection).")
 
 
 if __name__ == "__main__":

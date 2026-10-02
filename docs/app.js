@@ -542,6 +542,8 @@ const vsPct = (cur, ref) => ref ? `<span>${deltaPill(pct(cur, ref), { pct: true 
 const posCell = st => st.pos == null ? `<span class="light">${NA}</span>`
   : `<span class="pos-cell">${rankTag(st.pos)}<span class="pos ${st.exact ? "" : "stale"}" ${st.exact ? "" : `title="Pas d'impression ce jour-là : dernière position connue, le ${fmtDate(st.cur[0])}"`}>${fmt1(st.pos)}</span></span>`;
 const viewBar = (left, right = "") => `<div class="view-bar"><div class="left">${left}</div><div class="right">${right}</div></div>`;
+const recheck = (pages = []) => issue("inspection.yml", { projet: P.name, pages: pages.join("\n"), title: `Indexation : ${P.label}${pages.length === 1 ? " " + path(pages[0]) : ""}` });
+const checkedTag = insp => insp && insp.checked ? `<span class="badge">Vérifiée le ${fmtDate(insp.checked)}</span>` : '<span class="badge">Jamais vérifiée</span>';
 const btnLink = (href, label, cls = "btn") => `<a class="${cls}" href="${href}" target="_blank" rel="noopener">${PLUS}${label}</a>`;
 
 function sortable(tableId, render) {
@@ -979,19 +981,22 @@ function renderByPage() {
     return `<details class="card page-card"><summary>
         <span class="badge ${insp.verdict === "PASS" ? "ok" : insp.verdict ? "ko" : ""}">${insp.verdict === "PASS" ? "Indexée" : esc(insp.coverageState || "Non vérifiée")}</span>
         ${canon ? '<span class="badge warn">Google retient une autre canonique</span>' : ""}
+        ${checkedTag(insp)}
         <b>${esc(path(url))}</b><span class="light">${kws.map(k => esc(k.keyword)).join(", ")}</span>
         <span class="spacer"></span><span class="muted">${fmt(tc)} clics sur 28 j</span></summary>
       <div class="body">
         <div class="insp"><a class="url" href="${esc(url)}" target="_blank" rel="noopener">${esc(url)}${EXT}</a>
           <span class="badge">Dernier passage de Google : ${insp.lastCrawlTime ? fmtDate(insp.lastCrawlTime.slice(0, 10)) : NA}</span>
-          ${canon ? `<span class="badge warn">Canonique retenue : ${esc(path(insp.googleCanonical))}</span>` : ""}</div>
+          ${canon ? `<span class="badge warn">Canonique retenue : ${esc(path(insp.googleCanonical))}</span>` : ""}
+          <a class="btn ghost sm" href="${recheck([url])}" target="_blank" rel="noopener">Revérifier l'indexation</a></div>
         ${hist.length ? `<div class="note-box">${hist.map(h => `${fmtDate(h.date)} : ${esc(h.field)} passe de « ${esc(h.old)} » à « ${esc(h.new)} »`).join("<br>")}</div>` : ""}
         <div class="box"><table><thead><tr><th>Requête (28 j, en gras les mots-clés suivis)</th><th class="num">Clics</th><th class="num">Impressions</th><th class="num">Position moy.</th><th class="num">vs 28 j préc.</th></tr></thead><tbody>
         ${cur.slice(0, 30).map(r => { const p = prev.get(r[0]); return `<tr ${tracked.has(r[0]) ? 'style="font-weight:600"' : ""}><td>${esc(r[0])}</td>
           <td class="num">${fmt(r[1])}</td><td class="num">${fmt(r[2])}</td><td class="num">${fmt1(r[3])}</td><td class="num">${p ? placesPill(p[3] - r[3]) : '<span class="badge info">nouvelle</span>'}</td></tr>`; }).join("") || '<tr><td colspan="5" class="empty">Pas de donnée.</td></tr>'}
         </tbody></table></div></div></details>`;
   }).join("");
-  $("kw-body").innerHTML = cards || '<div class="card empty">Aucune page suivie.</div>';
+  $("kw-body").innerHTML = (cards ? `<div class="view-bar"><span class="light ref-note">L'indexation est vérifiée à l'ajout d'une page, puis à la demande.</span><a class="btn ghost sm" href="${recheck()}" target="_blank" rel="noopener">Vérifier toutes les pages</a></div>` : "")
+    + (cards || '<div class="card empty">Aucune page suivie.</div>');
 }
 
 // ---------------------------------------------------------------- panneau de détail d'un mot-clé
@@ -1036,7 +1041,8 @@ function openDrawer(i) {
         ${k.pages.map(p => `<tr ${p.tracked ? 'style="font-weight:600"' : ""}><td>${urlLink(p.page)}${p.tracked ? ' <span class="badge info">suivie</span>' : ""}</td><td class="num">${fmt1(p.share)} %</td><td class="num">${fmt1(p.share7)} %</td><td class="num">${fmt1(p.pos)}</td><td class="num">${fmt(p.clicks)}</td></tr>`).join("")}</tbody></table></div>` : ""}
       ${k.variants_detail && k.variants_detail.length > 1 ? `<h4>Détail des variantes <span class="light">28 derniers jours définitifs</span></h4><div class="box"><table><thead><tr><th>Requête</th><th class="num">Position moy.</th><th class="num">Clics</th><th class="num">Impressions</th></tr></thead><tbody>
         ${k.variants_detail.map(v => `<tr><td>${esc(v.query)}</td><td class="num">${fmt1(v.pos)}</td><td class="num">${fmt(v.clicks)}</td><td class="num">${fmt(v.impr)}</td></tr>`).join("")}</tbody></table></div>` : ""}
-      ${insp ? `<h4>La page vue par Google</h4><div class="insp"><span class="badge ${insp.verdict === "PASS" ? "ok" : "ko"}">${insp.verdict === "PASS" ? "Indexée" : esc(insp.coverageState || insp.verdict)}</span>
+      ${k.page !== "*" ? `<h4><span>La page vue par Google</span><a class="btn ghost sm" href="${recheck([k.page])}" target="_blank" rel="noopener">Revérifier</a></h4>` : ""}
+      ${insp ? `<div class="insp">${checkedTag(insp)}<span class="badge ${insp.verdict === "PASS" ? "ok" : "ko"}">${insp.verdict === "PASS" ? "Indexée" : esc(insp.coverageState || insp.verdict)}</span>
         <span class="badge">Dernier passage ${insp.lastCrawlTime ? fmtDate(insp.lastCrawlTime.slice(0, 10)) : NA}</span>
         ${insp.googleCanonical && norm(insp.googleCanonical) !== norm(insp.userCanonical) ? `<span class="badge warn">Canonique retenue : ${esc(path(insp.googleCanonical))}</span>` : '<span class="badge ok">Canonique respectée</span>'}</div>` : ""}
       <details class="fold"><summary>Appareils${P.market === "all" ? ", pays" : ""} et historique jour par jour</summary><div>
@@ -1444,6 +1450,7 @@ function renderGuide() {
     <div class="card"><h2>Saisir</h2><ol>
       <li><b>Suivre des mots-clés</b> : un mot-clé par ligne, suivi si besoin de « | URL » pour fixer la page (ex. <code>jean homme | https://www.celio.com/fr-fr/c/jeans</code>). Statut, objectif et tags s'appliquent à toute la liste. Depuis Opportunités, cocher des requêtes puis « Suivre la sélection » pré-remplit la liste.</li>
       <li><b>Ajouter une action</b> dès qu'une optimisation est en ligne : son effet est mesuré à 7 puis 28 jours.</li>
+      <li><b>Vérifier l'indexation</b> : elle est vérifiée automatiquement la première fois qu'une page est suivie, puis à la demande (bouton « Revérifier » dans le détail d'un mot-clé, ou « Vérifier toutes les pages » dans Mots-clés, Par page). Utile après une mise en ligne, une migration ou une alerte.</li>
       <li><b>Nouveau projet</b> : propriété GSC, regex de marque et pays suivis. Les 20 requêtes hors marque qui font le plus de clics sont ajoutées.</li>
       <li>Les formulaires passent par GitHub (compte collaborateur du repo). Compter 2 à 3 minutes avant de voir le résultat.</li>
     </ol></div>

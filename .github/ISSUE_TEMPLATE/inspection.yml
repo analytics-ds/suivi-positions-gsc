@@ -1,0 +1,17 @@
+name: Vérifier l'indexation
+description: Demande à Google l'état d'indexation et la canonique des pages suivies d'un projet (après une mise en ligne, une migration, un doute).
+title: "Indexation : "
+labels: ["inspection"]
+body:
+  - type: input
+    id: projet
+    attributes:
+      label: Projet
+      description: Identifiant du projet (ex. celio)
+    validations:
+      required: true
+  - type: textarea
+    id: pages
+    attributes:
+      label: Pages à vérifier
+      description: Une URL par ligne, parmi les pages suivies. Laisser vide pour vérifier toutes les pages suivies du projet.

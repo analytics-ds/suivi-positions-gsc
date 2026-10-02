@@ -15,7 +15,7 @@ concurrency:
 
 jobs:
   apply:
-    if: contains(fromJSON('["action","mot-cle","projet"]'), github.event.issue.labels[0].name)
+    if: contains(fromJSON('["action","mot-cle","projet","inspection"]'), github.event.issue.labels[0].name)
     runs-on: ubuntu-latest
     steps:
       - name: Vérifier que l'auteur a accès au repo
@@ -59,9 +59,18 @@ jobs:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         run: python scripts/tracker.py seed ${{ steps.apply.outputs.site }}
 
-      - name: Recalcul (journal d'actions)
-        if: steps.apply.outputs.kind == 'action'
-        run: python scripts/tracker.py build
+      - name: Vérifier l'indexation
+        id: inspect
+        if: steps.apply.outputs.kind == 'inspection'
+        env:
+          GSC_CLIENT_ID: ${{ secrets.GSC_CLIENT_ID }}
+          GSC_CLIENT_SECRET: ${{ secrets.GSC_CLIENT_SECRET }}
+          GSC_REFRESH_TOKEN: ${{ secrets.GSC_REFRESH_TOKEN }}
+          # Comptes supplémentaires (scripts/oauth_login.py --label <nom>) : ajouter une ligne par compte, par ex.
+          # GSC_REFRESH_TOKEN_PIERRE: ${{ secrets.GSC_REFRESH_TOKEN_PIERRE }}
+        run: |
+          python scripts/tracker.py inspect ${{ steps.apply.outputs.site }} --pages-file pages.txt | tee out2.txt
+          echo "result=$(grep '^RESULT=' out2.txt | cut -d= -f2-)" >> $GITHUB_OUTPUT
 
       - name: Commit
         env:
@@ -69,22 +78,28 @@ jobs:
         run: |
           git config user.name "suivi-positions-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add config docs/data
-          git commit -m "$TITLE (#${{ github.event.issue.number }})"
+          git add config data
+          git diff --cached --quiet || git commit -m "$TITLE (#${{ github.event.issue.number }})"
           git pull --rebase
           git push
 
-      - name: Lancer la synchro du projet
-        if: steps.apply.outputs.kind != 'action'
+      - name: Lancer la synchro du projet (mot-clé, projet)
+        if: steps.apply.outputs.kind == 'mot-cle' || steps.apply.outputs.kind == 'projet'
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh workflow run daily.yml -R ${{ github.repository }} -f site=${{ steps.apply.outputs.site }} -f days=10
+
+      - name: Publier le dashboard (action, indexation)
+        if: steps.apply.outputs.kind == 'action' || steps.apply.outputs.kind == 'inspection'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run deploy.yml -R ${{ github.repository }}
 
       - name: Répondre et fermer
         if: always() && steps.apply.outcome != 'skipped'
         env:
           GH_TOKEN: ${{ github.token }}
-          RESULT: ${{ steps.apply.outputs.result }}
+          RESULT: ${{ steps.inspect.outputs.result || steps.apply.outputs.result }}
         run: |
           gh issue comment ${{ github.event.issue.number }} -R ${{ github.repository }} --body "${RESULT:-Erreur pendant le traitement, voir les logs du workflow.}"
           gh issue close ${{ github.event.issue.number }} -R ${{ github.repository }}

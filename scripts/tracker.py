@@ -1,7 +1,8 @@
 """Suivi de positions GSC datashake.
 
 Commandes :
-  python scripts/tracker.py fetch [--days 10] [--site celio]   collecte GSC + inspection d'URL + mises à jour Google
+  python scripts/tracker.py fetch [--days 10] [--site celio]   collecte GSC + mises à jour Google (+ inspection des pages jamais vérifiées)
+  python scripts/tracker.py inspect <site> [--pages-file f]     vérifie l'indexation (inspection d'URL) des pages suivies, ou de celles du fichier
   python scripts/tracker.py build                               calculs (alertes, impact, opportunités…) et docs/data/*.json
   python scripts/tracker.py seed <site> [--n 20]                pré-remplit les mots-clés d'un nouveau projet (top hors marque)
   python scripts/tracker.py notify                              digest Slack (si SLACK_WEBHOOK_URL est défini)
@@ -104,6 +105,41 @@ def suffix(code):
     return "" if code == ALL else "." + code
 
 
+def pdir(name):
+    """Dossier de données d'un projet : data/<projet>/ (CSV, extras, inspection)."""
+    return DATA / name
+
+
+def migrate_layout():
+    """Ancienne organisation (un CSV global par type, data/extras/, data/inspection/) vers un dossier par projet."""
+    moved = False
+    for fname, fields in (("positions.csv", F_POS), ("keywords.csv", F_KW), ("query_pages.csv", F_QP), ("site.csv", F_SITE)):
+        g = DATA / fname
+        if not g.exists():
+            continue
+        per = defaultdict(list)
+        for r in read_csv(g):
+            per[r["site"]].append(r)
+        for name, rows in per.items():
+            dest = pdir(name) / fname
+            write_csv(dest, fields, read_csv(dest) + rows, lambda r: (r["country"], r["date"]))
+        g.unlink()
+        moved = True
+    for sub in ("extras", "inspection"):
+        d = DATA / sub
+        if not d.is_dir():
+            continue
+        for f in d.glob("*.json"):
+            name, _, rest = f.name.partition(".")
+            target = pdir(name) / ("inspection.json" if sub == "inspection" else f"extras.{rest}" if rest != "json" else "extras.json")
+            target.parent.mkdir(parents=True, exist_ok=True)
+            f.replace(target)
+        d.rmdir()
+        moved = True
+    if moved:
+        print("Données réorganisées : un dossier par projet dans data/")
+
+
 def read_csv(p):
     if not p.exists():
         return []
@@ -204,6 +240,7 @@ def norm_url(u):
 # ---------------------------------------------------------------- collecte
 
 def fetch(days, only=None):
+    migrate_layout()
     sites = [s for s in load_sites() if not only or s["name"] == only]
     status = read_json(DATA / "status.json", {})
     backfilled = read_json(DATA / "backfilled.json", {})
@@ -238,10 +275,10 @@ def fetch(days, only=None):
                 print(f"[{name}/{mk}] fenêtre {window} jours ({start} → {end}), {len(queries)} requêtes, {len(pages)} pages")
 
                 def upsert(fname, fields, new_rows, key, prune_before=None):
-                    old = [r for r in read_csv(DATA / fname)
-                           if not (r["site"] == name and r["country"] == mk and r["date"] in dates_window)
-                           and not (prune_before and r["site"] == name and r["date"] < prune_before)]
-                    write_csv(DATA / fname, fields, old + new_rows, key)
+                    path = pdir(name) / fname
+                    old = [r for r in read_csv(path)
+                           if not (r["country"] == mk and r["date"] in dates_window) and not (prune_before and r["date"] < prune_before)]
+                    write_csv(path, fields, old + new_rows, key)
 
                 if queries:
                     # Couples mot-clé / page suivie, historique complet
@@ -281,12 +318,12 @@ def fetch(days, only=None):
                 upsert("site.csv", F_SITE, seg, lambda r: (r["site"], r["country"], r["segment"], r["date"]))
 
                 extras = fetch_extras(tok, s, queries, pages, end, brand, geo, scope)
-                write_json(DATA / "extras" / f"{name}{suffix(mk)}.json", extras, compact=True)
+                write_json(pdir(name) / f"extras{suffix(mk)}.json", extras, compact=True)
                 done |= keys
                 backfilled[name] = sorted(done)
 
-            inspect_pages(tok, s, pages)
-            last = max((r["date"] for r in read_csv(DATA / "site.csv") if r["site"] == name), default=None)
+            inspect_pages(tok, s, pages, only_new=True)   # l'indexation ne se vérifie qu'à la demande, sauf pages jamais vérifiées
+            last = max((r["date"] for r in read_csv(pdir(name) / "site.csv")), default=None)
             st.update({"ok": True, "error": None, "last_data_date": last, "last_success": st["last_run"]})
         except Exception as e:  # on note l'erreur dans le statut et on passe au projet suivant
             print(f"[{name}] ERREUR : {e}")
@@ -341,12 +378,18 @@ def fetch_extras(tok, s, queries, pages, end, brand, geo=(), scope=()):
     return out
 
 
-def inspect_pages(tok, s, pages):
-    p = DATA / "inspection" / f"{s['name']}.json"
+def inspect_pages(tok, s, pages, only_new=False, tracked=None):
+    """Inspection d'URL (état d'indexation, canonique). only_new : seulement les pages jamais vérifiées.
+    tracked : toutes les pages suivies du projet (l'état des pages qui ne sont plus suivies est retiré)."""
+    p = pdir(s["name"]) / "inspection.json"
     store = read_json(p, {"current": {}, "history": []})
     today = str(datetime.now(timezone.utc).date())
     fields = ["verdict", "coverageState", "indexingState", "robotsTxtState", "pageFetchState", "googleCanonical", "userCanonical"]
-    for url in pages:
+    todo = [u for u in pages if not only_new or u not in store["current"]]
+    if todo:
+        print(f"  inspection de {len(todo)} page(s)")
+    done = []
+    for url in todo:
         try:
             r = post(INSPECT_API, tok, {"inspectionUrl": url, "siteUrl": s["property"], "languageCode": "fr-FR"})
         except Exception as e:
@@ -361,9 +404,40 @@ def inspect_pages(tok, s, pages):
                 if old.get(k) != cur.get(k):
                     store["history"].append({"date": today, "url": url, "field": k, "old": old.get(k), "new": cur.get(k)})
         store["current"][url] = cur
-    store["current"] = {u: v for u, v in store["current"].items() if u in pages}
+        done.append((url, cur))
+    keep = set(tracked if tracked is not None else pages)
+    store["current"] = {u: v for u, v in store["current"].items() if u in keep}
     store["history"] = store["history"][-500:]
     write_json(p, store)
+    return done
+
+
+def inspect(site_name, pages_file=None):
+    """Vérification d'indexation à la demande (formulaire « Vérifier l'indexation » ou ligne de commande)."""
+    migrate_layout()
+    s = next(x for x in load_sites() if x["name"] == site_name)
+    tracked = sorted({k["page"] for k in s["keywords"] if k["page"] != SITE_LEVEL})
+    wanted = [l.strip() for l in Path(pages_file).read_text(encoding="utf-8").splitlines() if l.strip()] if pages_file else []
+    pages = [u for u in tracked if not wanted or norm_url(u) in {norm_url(w) for w in wanted}]
+    extra = [w for w in wanted if norm_url(w) not in {norm_url(u) for u in tracked}]
+    if extra:
+        print("  pages non suivies ignorées : " + ", ".join(extra))
+    done = inspect_pages(token(s["account"]), s, pages, tracked=tracked) if pages else []
+    ok = [u for u, c in done if c.get("verdict") == "PASS"]
+    ko = [f"{path_of(u)} ({c.get('coverageState') or c.get('verdict')})" for u, c in done if c.get("verdict") != "PASS"]
+    msg = f"{len(done)} page{'s' if len(done) > 1 else ''} vérifiée{'s' if len(done) > 1 else ''} : {len(ok)} indexée{'s' if len(ok) > 1 else ''}"
+    msg += f", {len(ko)} avec un problème : {', '.join(ko)}." if ko else "."
+    if extra:
+        msg += f" Ignorées car non suivies : {', '.join(extra)}."
+    print(f"RESULT={msg} Le dashboard est mis à jour dans 1 à 2 minutes.")
+
+
+def path_of(u):
+    try:
+        from urllib.parse import urlparse
+        return urlparse(u).path or u
+    except Exception:
+        return u
 
 
 def fetch_google_updates():
@@ -464,12 +538,13 @@ def pos_at(series_map, d, lookback=LOOKBACK):
 
 
 def build():
+    migrate_layout()
     sites = load_sites()
-    raw = {n: read_csv(DATA / n) for n in ("positions.csv", "keywords.csv", "query_pages.csv", "site.csv")}
-    by = {n: defaultdict(list) for n in raw}
-    for n, rows in raw.items():
-        for r in rows:
-            by[n][(r["site"], r["country"])].append(r)
+    by = {n: defaultdict(list) for n in ("positions.csv", "keywords.csv", "query_pages.csv", "site.csv")}
+    for s in sites:
+        for n in by:
+            for r in read_csv(pdir(s["name"]) / n):
+                by[n][(s["name"], r["country"])].append(r)
     status = read_json(DATA / "status.json", {})
     updates = read_json(DATA / "google_updates.json", [])
     generated = datetime.now(timezone.utc).isoformat(timespec="minutes")
@@ -481,10 +556,10 @@ def build():
     for s in sites:
         name = s["name"]
         ms, dm = markets(s), default_market(s)
-        insp = read_json(DATA / "inspection" / f"{name}.json", {"current": {}, "history": []})
+        insp = read_json(pdir(name) / "inspection.json", {"current": {}, "history": []})
         for m in ms:
             key = (name, m["code"])
-            extras = read_json(DATA / "extras" / f"{name}{suffix(m['code'])}.json", {})
+            extras = read_json(pdir(name) / f"extras{suffix(m['code'])}.json", {})
             p = build_project(s, m, ms, dm, by["positions.csv"][key], by["keywords.csv"][key], by["query_pages.csv"][key],
                               by["site.csv"][key], extras, insp, status.get(name, {}), generated)
             write_json(OUT / f"{name}{suffix(m['code'])}.json", p, compact=True)
@@ -545,9 +620,9 @@ def build_project(s, m, ms, dm, pos_rows, kw_rows, qp_rows, site_rows, extras, i
     alerts, events, moves = detect(groups, qp_rows, curve, finals)
     for url, cur in insp.get("current", {}).items():
         if cur.get("verdict") and cur["verdict"] != "PASS":
-            alerts.append(alert("critique", "indexation", None, url, f"Page non indexée : {cur.get('coverageState')}", lf))
+            alerts.append(alert("critique", "indexation", None, url, f"Page non indexée : {cur.get('coverageState')} (vérifié le {cur.get('checked')})", lf))
         elif cur.get("googleCanonical") and cur.get("userCanonical") and norm_url(cur["googleCanonical"]) != norm_url(cur["userCanonical"]):
-            alerts.append(alert("attention", "canonical", None, url, f"Google retient une autre canonique : {cur['googleCanonical']}", lf))
+            alerts.append(alert("attention", "canonical", None, url, f"Google retient une autre canonique : {cur['googleCanonical']} (vérifié le {cur.get('checked')})", lf))
     for h in insp.get("history", []):
         events.append({"date": h["date"], "severity": "attention", "type": "inspection", "page": h["url"],
                        "text": f"Inspection : {h['field']} passe de « {h['old']} » à « {h['new']} »"})
@@ -872,6 +947,9 @@ if __name__ == "__main__":
     fa.add_argument("--days", type=int, default=10)
     fa.add_argument("--site")
     sub.add_parser("build")
+    ia = sub.add_parser("inspect")
+    ia.add_argument("site")
+    ia.add_argument("--pages-file")
     sa = sub.add_parser("seed")
     sa.add_argument("site")
     sa.add_argument("--n", type=int, default=20)
@@ -881,6 +959,8 @@ if __name__ == "__main__":
         fetch(a.days, a.site)
     elif a.cmd == "build":
         build()
+    elif a.cmd == "inspect":
+        inspect(a.site, a.pages_file)
     elif a.cmd == "seed":
         seed(a.site, a.n)
     else:

@@ -17,6 +17,14 @@ Outil datashake de suivi et de reporting SEO à partir de la Google Search Conso
 - **Rapport** : rapport mensuel figé sur son mois (positions au dernier jour du mois, alertes du mois), synthèse et prochaines étapes modifiables, blocs au choix, impression PDF.
 - **Repères** sur les courbes : G = mise à jour de classement Google, A = action SEO.
 
+## Indexation
+
+L'état d'indexation (inspection d'URL) est vérifié automatiquement la première fois qu'une page est suivie, puis à la demande : bouton « Revérifier » dans le détail d'un mot-clé, « Vérifier toutes les pages » dans Mots-clés > Par page (formulaire `inspection.yml`), ou `python scripts/tracker.py inspect <projet> [--pages-file liste.txt]`. Une inspection prend environ 6 à 7 secondes par page, d'où l'abandon de la vérification quotidienne.
+
+## Publication
+
+`daily.yml` collecte et enregistre `data/`, puis lance `deploy.yml`, qui recalcule `docs/data/` et publie `docs/` sur GitHub Pages (source « GitHub Actions »). Une modification du front (`docs/`), un formulaire d'action ou d'indexation déclenchent aussi `deploy.yml`.
+
 ## Saisir depuis le dashboard
 
 Les boutons « Ajouter une action », « Suivre un mot-clé » et « Nouveau projet » ouvrent un formulaire GitHub (issue). À l'envoi, le workflow `issues.yml` vérifie que l'auteur est collaborateur du repo, écrit dans `config/`, recalcule ou relance la synchro, commente l'issue puis la ferme. Il faut un compte GitHub collaborateur du repo `analytics-ds/suivi-positions-gsc`.
@@ -63,12 +71,9 @@ Chaque projet peut déclarer ses pays dans `config/sites.yaml` (`countries: [fra
 
 ## Données et calculs
 
-- `data/positions.csv` : couples mot-clé / page suivie, 16 mois, par marché (colonne `country`, `all` = tous pays).
-- `data/keywords.csv` : mots-clés toutes pages confondues (position du site), 16 mois, par marché.
-- `data/query_pages.csv` : toutes les pages qui reçoivent des impressions sur les mots-clés suivis, 90 jours, par marché.
-- `data/site.csv` : totaux du site, de la marque et du hors marque, 16 mois, par marché.
-- `data/extras/<projet>[.<pays>].json`, `data/inspection/`, `data/google_updates.json`, `data/status.json` : répartitions, requêtes par page, suggestions, inspection d'URL, mises à jour Google, statut de synchro.
-- `docs/data/<projet>.json` (tous pays) et `docs/data/<projet>.<pays>.json` : tout le calculé d'un marché.
+- `data/<projet>/` : un dossier par projet, avec `positions.csv` (couples mot-clé / page suivie, 16 mois, colonne `country`, `all` = tous pays), `keywords.csv` (position du site par mot-clé), `query_pages.csv` (pages qui reçoivent des impressions sur les mots-clés suivis, 90 jours), `site.csv` (totaux marque / hors marque), `extras[.<pays>].json` (répartitions, requêtes par page, suggestions) et `inspection.json` (état d'indexation).
+- `data/status.json`, `data/backfilled.json`, `data/google_updates.json` : statut de synchro, historiques déjà récupérés, mises à jour Google.
+- `docs/data/` : fichiers du dashboard, **recalculés et publiés sur GitHub Pages par `.github/workflows/deploy.yml`, jamais enregistrés dans le repo** (l'historique git ne grossit qu'avec les données brutes).
 - Position : celle du jour (point quotidien de la GSC). Variations : jour J contre J-7, J-28 ou dernier jour de la période de comparaison.
 - Alertes et mouvements : variation J contre J-7 au dernier jour définitif, 20 impressions minimum chacun des deux jours. Recul : 1 place si top 3, 2 si top 10, 3 sinon. Sortie du top 3 ou du top 10 : recul d'au moins 1 place. Les règles sont évaluées sur tout l'historique : le rapport d'un mois passé reprend les alertes de ce mois.
 - Courbe de CTR : calculée par position sur les mots-clés suivis du client (90 jours), sans courbe générique.
@@ -82,7 +87,7 @@ Chaque projet peut déclarer ses pays dans `config/sites.yaml` (`countries: [fra
 pip install -r requirements.txt
 GSC_CLIENT_ID=… GSC_CLIENT_SECRET=… GSC_REFRESH_TOKEN=… python scripts/tracker.py fetch --days 10
 python scripts/tracker.py build
-python -m http.server 8765 -d docs
+python -m http.server 8765 -d docs   # docs/data/ est généré par build
 ```
 
 ## Limites
