@@ -11,7 +11,7 @@ const MAX_SEL = 8, NEUTRAL = "#9A9A9A", INK = "#101010", MUTED = "rgba(16,16,16,
 const NA = "-";
 const EXT = '<svg class="i" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg>';
 const PLUS = '<svg class="i" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>';
-const VIEWS = [["", "À traiter"], ["mots-cles", "Mots-clés"], ["trafic", "Trafic du site"], ["actions", "Actions"], ["opportunites", "Opportunités"], ["rapport", "Rapport"]];
+const VIEWS = [["mots-cles", "Mots-clés"], ["trafic", "Trafic du site"], ["actions", "Actions"], ["opportunites", "Opportunités"], ["rapport", "Rapport"], ["a-traiter", "À traiter"]];
 const RANGE_VIEWS = ["mots-cles", "trafic"];
 const FRESH_VIEWS = ["mots-cles", "trafic", "opportunites"];
 const SEV = { critique: "Urgent", attention: "À surveiller", info: "Info" };
@@ -91,7 +91,8 @@ const ui = {
   cols: new Set(store.json("cols", defaultCols())), sort: store.json("sort", { key: "demand", dir: -1 }),
   sel: {}, query: "", tags: new Set(), statuses: new Set(), view: "", openKw: null, pendingKw: null,
   sug: "all", sugSel: new Set(), month: null, kwMode: "kw", who: store.get("who") || "",
-  chartOpen: store.get("chartOpen") === "1", chartMode: store.get("chartMode") || "dist", metric: "position", trafSeg: "nonbrand",
+  chartOpen: store.get("chartOpen") === "1", metric: "position", trafSeg: "nonbrand",
+  ovOpen: store.get("ovOpen") !== "0", ovBase: store.get("ovBase") || "cmp", ovChart: store.get("ovChart") || "pos",
 };
 
 Chart.defaults.font.family = "Inter, -apple-system, sans-serif";
@@ -157,7 +158,8 @@ async function project(name, market) {
 async function onRoute() {
   const parts = location.hash.replace(/^#\/?/, "").split("/").filter(Boolean);
   let site = parts[0] || null, view = parts[1] || "";
-  if (view === "alertes") view = "";                          // anciennes adresses
+  if (view === "alertes") view = "a-traiter";                 // anciennes adresses
+  if (site && site !== "guide" && !view) view = "mots-cles";   // onglet d'arrivée d'un projet
   if (view === "pages") { view = "mots-cles"; ui.kwMode = "page"; }
   closeDrawer();
   closeCmdk();
@@ -182,7 +184,7 @@ async function onRoute() {
 function renderView() {
   destroyCharts();
   if (!P) return renderPortfolio();
-  ({ "": renderToday, "mots-cles": renderKeywords, trafic: renderTraffic, actions: renderActions, opportunites: renderOpps, rapport: renderReport }[route.view] || renderToday)();
+  ({ "a-traiter": renderToday, "mots-cles": renderKeywords, trafic: renderTraffic, actions: renderActions, opportunites: renderOpps, rapport: renderReport }[route.view] || renderKeywords)();
   if (ui.pendingKw != null) { const i = ui.pendingKw; ui.pendingKw = null; openDrawer(i); }
 }
 
@@ -304,8 +306,8 @@ function renderChrome() {
   crumbs.innerHTML = `<span>${esc(P.label)}</span><span class="sep">/</span><span class="muted">${vlabel}</span><span class="chip" title="Propriété Search Console">${esc(P.property)}</span>`;
   const n = P.alerts.length;
   $("subnav").hidden = false;
-  $("subnav").innerHTML = VIEWS.map(([v, l]) => `<a href="#/${P.name}${v ? "/" + v : ""}" class="${view === v ? "active" : ""}">${l}${
-    v === "" && n ? ` <span class="badge ${P.alerts.some(a => a.severity === "critique") ? "ko" : "warn"}">${n}</span>` : ""}${
+  $("subnav").innerHTML = VIEWS.map(([v, l]) => `<a href="#/${P.name}/${v}" class="${view === v ? "active" : ""}${v === "a-traiter" ? " last" : ""}">${l}${
+    v === "a-traiter" && n ? ` <span class="badge ${P.alerts.some(a => a.severity === "critique") ? "ko" : "warn"}">${n}</span>` : ""}${
     v === "actions" && P.actions.length ? ` <span class="badge">${P.actions.length}</span>` : ""}</a>`).join("");
   document.title = `${P.label} · ${vlabel} · Positions`;
   syncTopbar();
@@ -425,7 +427,7 @@ function toggleSel(i) {
   else if (sel.size < MAX_SEL) {
     const used = new Set(sel.values());
     sel.set(i, [...Array(MAX_SEL).keys()].find(s => !used.has(s)));
-    ui.chartMode = "lines"; ui.chartOpen = true; store.set("chartMode", "lines"); store.set("chartOpen", "1");
+    ui.chartOpen = true; store.set("chartOpen", "1");
   }
   renderKeywords();
 }
@@ -521,7 +523,7 @@ function renderPortfolio() {
     return `<tr class="click" onclick="location.hash='#/${p.name}'">
     <td><span class="kw"><span class="avatar">${esc(p.label[0])}</span>${esc(p.label)}</span><div class="light" style="font-size:12px">${esc(p.property)} · ${esc(p.market_label || "Tous pays")}</div></td>
     <td>${esc(p.owner || NA)}</td>
-    <td>${p.alerts.critique ? `<span class="badge ko">${p.alerts.critique} urgent${p.alerts.critique > 1 ? "es" : "e"}</span> ` : ""}${p.alerts.attention ? `<span class="badge warn">${p.alerts.attention} à surveiller</span>` : ""}${!nAlerts(p) ? '<span class="badge ok">Rien à signaler</span>' : ""}</td>
+    <td onclick="event.stopPropagation();location.hash='#/${p.name}/a-traiter'" title="Ouvrir À traiter">${p.alerts.critique ? `<span class="badge ko">${p.alerts.critique} urgent${p.alerts.critique > 1 ? "es" : "e"}</span> ` : ""}${p.alerts.attention ? `<span class="badge warn">${p.alerts.attention} à surveiller</span>` : ""}${!nAlerts(p) ? '<span class="badge ok">Rien à signaler</span>' : ""}</td>
     <td class="num">${fmt(p.nonbrand_clicks)}</td>
     <td class="num">${deltaPill(p.nonbrand_vs_n1, { pct: true })}</td>
     <td class="num">${fmt1(pos)} ${placesPill(pos != null && prev != null ? prev - pos : null)}</td>
@@ -624,9 +626,12 @@ function renderKeywords() {
       ${kpi("Top 10", `${t10}<small> / ${kws.length}</small>`, sub(countPill(c10 == null ? null : t10 - c10)), "top")}
       ${kpi("Clics", fmt(clicks), R.cmp ? vsPct(clicks, cClicks) : "", "clicsSuivis")}
       ${kpi("Visibilité", vis == null ? NA : fmt1(vis) + "<small> %</small>", sub(deltaPill(vis != null && cVis != null ? vis - cVis : null, { suffix: " pt" })), "visibilite")}
-    </div><div id="kw-body"></div>`;
+    </div>${mode === "kw" ? `<details class="card overview" id="ov" ${ui.ovOpen ? "open" : ""}><summary><h2>Vue d'ensemble</h2><span class="hint" id="ov-hint"></span></summary><div id="ov-body"></div></details>` : ""}<div id="kw-body"></div>`;
   document.querySelectorAll("#kw-mode button").forEach(b => b.onclick = () => { ui.kwMode = b.dataset.m; renderKeywords(); });
-  mode === "page" ? renderByPage() : renderByKeyword(all, kws, R);
+  if (mode === "page") return renderByPage();
+  renderByKeyword(all, kws, R);
+  $("ov").addEventListener("toggle", e => { ui.ovOpen = e.target.open; store.set("ovOpen", ui.ovOpen ? "1" : "0"); if (ui.ovOpen) renderOverview(kws, R); });
+  renderOverview(kws, R);
 }
 
 function renderByKeyword(all, kws, R) {
@@ -656,10 +661,9 @@ function renderByKeyword(all, kws, R) {
       <div class="table-foot"><span id="t-count"></span><span>Pointillés et valeurs en gris : jours provisoires ou dernière position connue ${info("provisoire")}</span></div>
     </div>
     <details class="card chart-card" id="chart-fold" ${ui.chartOpen ? "open" : ""}>
-      <summary><h2>Graphique</h2><span class="hint">${ui.chartMode === "dist" ? "répartition des positions dans le temps" : `${sel.size} mot${sel.size > 1 ? "s" : ""}-clé${sel.size > 1 ? "s" : ""} coché${sel.size > 1 ? "s" : ""}`}</span></summary>
+      <summary><h2>Courbes des mots-clés cochés</h2><span class="hint">${sel.size ? plural(sel.size, "mot-clé", "mots-clés") : "coche des lignes du tableau"}</span></summary>
       <div class="card-body">
-        <div class="chart-tools"><div class="tabs" id="c-mode"><button data-m="dist" class="${ui.chartMode === "dist" ? "active" : ""}">Répartition</button><button data-m="lines" class="${ui.chartMode === "lines" ? "active" : ""}">Mots-clés cochés</button></div>
-          ${ui.chartMode === "lines" ? `<div class="tabs" id="metric">${[["position", "Position"], ["clicks", "Clics"], ["impressions", "Impressions"]].map(([m, l]) => `<button data-m="${m}" class="${ui.metric === m ? "active" : ""}">${l}</button>`).join("")}</div>` : ""}</div>
+        <div class="chart-tools"><div class="tabs" id="metric">${[["position", "Position"], ["clicks", "Clics"], ["impressions", "Impressions"]].map(([m, l]) => `<button data-m="${m}" class="${ui.metric === m ? "active" : ""}">${l}</button>`).join("")}</div></div>
         <div class="legend" id="legend"></div><div class="chart-box"><canvas id="c-main"></canvas></div><div id="marks-main"></div></div>
     </details>`;
 
@@ -694,7 +698,6 @@ function renderByKeyword(all, kws, R) {
   document.querySelectorAll("#chips [data-s]").forEach(b => b.onclick = () => { const s = b.dataset.s; ui.statuses.has(s) ? ui.statuses.delete(s) : ui.statuses.add(s); ui.view = ""; renderKeywords(); });
   if ($("clear")) $("clear").onclick = () => { ui.tags.clear(); ui.statuses.clear(); ui.query = ""; ui.view = ""; renderKeywords(); };
   $("chart-fold").addEventListener("toggle", e => { ui.chartOpen = e.target.open; store.set("chartOpen", ui.chartOpen ? "1" : "0"); if (ui.chartOpen) drawMainChart(kws, R); });
-  document.querySelectorAll("#c-mode button").forEach(b => b.onclick = () => { ui.chartMode = b.dataset.m; store.set("chartMode", ui.chartMode); renderKeywords(); });
   document.querySelectorAll("#metric button").forEach(b => b.onclick = () => { ui.metric = b.dataset.m; renderKeywords(); });
   renderKwTable(all, alertKw, R);
   if (ui.chartOpen) drawMainChart(kws, R);
@@ -702,21 +705,6 @@ function renderByKeyword(all, kws, R) {
 
 function drawMainChart(kws, R) {
   const dates = R.dates;
-  if (ui.chartMode === "dist") {
-    // Répartition des mots-clés (filtrés) par tranche de position, jour par jour (semaine par semaine au-delà de 3 mois)
-    const per = kws.map(k => bucket(dates.map(d => k.map.get(d) || null), dates));
-    const base = per[0] || bucket(dates.map(() => null), dates);
-    const ds = DIST.map(b => ({ label: b.name, data: base.labels.map((_, i) => per.filter(x => b.test(x.pts[i] ? x.pts[i][1] : null)).length),
-      backgroundColor: b.color, borderWidth: 0, borderRadius: 2, maxBarThickness: 26, stack: "s" }));
-    $("legend").innerHTML = DIST.map(b => `<span class="lg"><span class="sw sq" style="background:${b.color}"></span>${b.name}</span>`).join("");
-    const mk = marksFor(base.ranges);
-    chart("c-main", { type: "bar", data: { labels: base.labels, datasets: ds },
-      options: { maintainAspectRatio: false, interaction: { mode: "index", intersect: false }, layout: { padding: { top: 12 } },
-        scales: { y: { ...linScale(), stacked: true, ticks: { precision: 0 } }, x: { ...xScale(), stacked: true } },
-        plugins: { legend: { display: false }, marks: { items: mk.items }, tooltip: tooltip({ label: c => ` ${c.dataset.label} : ${c.parsed.y}` }) } } });
-    $("marks-main").innerHTML = mk.html;
-    return;
-  }
   const sel = selection();
   const on = P.keywords.filter(k => sel.has(k.i)).sort((a, b) => sel.get(a.i) - sel.get(b.i));
   $("legend").innerHTML = on.length ? on.map(k => `<button data-i="${k.i}" title="Retirer du graphique"><span class="sw" style="background:${colorOf(k)}"></span>${esc(k.keyword)}<span class="x">×</span></button>`).join("")
@@ -732,6 +720,122 @@ function drawMainChart(kws, R) {
       scales: { y: ui.metric === "position" ? posScale(ds.flatMap(d => d.data)) : linScale(), x: xScale() },
       plugins: { legend: { display: false }, marks: { items: mk.items }, tooltip: tooltip({ label: c => ` ${c.dataset.label} : ${ui.metric === "position" ? fmt1(c.parsed.y) : fmt(c.parsed.y)}` }) } } });
   $("marks-main").innerHTML = mk.html;
+}
+
+// ---------------------------------------------------------------- Vue d'ensemble des mots-clés (haut de l'onglet)
+
+// Variation de chaque mot-clé entre un jour de base et le jour de référence
+function ovRows(kws, refD) {
+  return kws.map(k => {
+    const a = posAt(k.map, refD), b = k.st.cur;
+    return { k, p0: a && a[1], p1: b && b[1], d: a && b ? +(a[1] - b[1]).toFixed(1) : null };
+  });
+}
+
+// Série globale jour par jour (semaine par semaine au-delà de 3 mois) : position moyenne, visibilité ou clics
+function globalSeries(kws, dates, metric) {
+  const day = d => {
+    if (metric === "pos") { const v = kws.map(k => posAt(k.map, d)).filter(Boolean).map(x => x[1]); return v.length ? v.reduce((a, b) => a + b, 0) / v.length : null; }
+    if (metric === "vis") return visibilityAt(kws, d);
+    let c = 0, any = false; kws.forEach(k => { const x = k.map.get(d); if (x) { c += x[2]; any = true; } }); return any ? c : null;
+  };
+  const vals = dates.map(day);
+  if (dates.length <= 92) return { labels: dates.map(fmtDate), ranges: dates.map(d => [d, d]), vals, fresh: dates.map(d => d > P.last_final) };
+  const labels = [], ranges = [], out = [], fresh = [];
+  for (let end = dates.length; end > 0; end -= 7) {
+    const a = Math.max(0, end - 7), chunk = vals.slice(a, end).filter(v => v != null);
+    labels.unshift("sem. du " + fmtDate(dates[a])); ranges.unshift([dates[a], dates[end - 1]]); fresh.unshift(dates[end - 1] > P.last_final);
+    out.unshift(chunk.length ? (metric === "clicks" ? chunk.reduce((s, v) => s + v, 0) : chunk.reduce((s, v) => s + v, 0) / chunk.length) : null);
+  }
+  return { labels, ranges, vals: out, fresh };
+}
+
+function renderOverview(kws, R) {
+  if (!ui.ovOpen || !$("ov-body")) return;
+  const base = ui.ovBase === "cmp" && !R.cmp ? "d28" : ui.ovBase;
+  const refD = base === "cmp" ? R.cmp.to : shift(R.to, base === "d7" ? -7 : -28);
+  const rows = ovRows(kws, refD), valid = rows.filter(r => r.d != null);
+  const ups = valid.filter(r => r.d >= 0.5).sort((a, b) => b.d - a.d), downs = valid.filter(r => r.d <= -0.5).sort((a, b) => a.d - b.d);
+  const stable = valid.length - ups.length - downs.length;
+  const cross = lim => ({ in: rows.filter(r => r.p1 != null && r.p1 <= lim && (r.p0 == null || r.p0 > lim)),
+    out: rows.filter(r => r.p0 != null && r.p0 <= lim && (r.p1 == null || r.p1 > lim)) });
+  const c3 = cross(3), c10 = cross(10);
+  const fd = refD.slice(0, 4) === R.to.slice(0, 4) ? fmtDate : fmtDateY;
+  $("ov-hint").textContent = `${fd(refD)} → ${fd(R.to)} · ${ups.length} en hausse, ${downs.length} en baisse, ${stable} stable${stable > 1 ? "s" : ""}`;
+
+  const moveTable = (list, empty) => `<table class="mini"><thead><tr><th>Mot-clé</th><th class="num" title="${fd(refD)} → ${fd(R.to)}">Position</th><th class="num">Variation</th></tr></thead><tbody>
+    ${list.slice(0, 6).map(r => `<tr class="click" data-i="${r.k.i}"><td><b>${esc(r.k.keyword)}</b><div class="light sub" title="${esc(DEF.demande)}">${fmt(r.k.st.demand)} impr./mois</div></td><td class="num">${fmt1(r.p0)} → <b>${fmt1(r.p1)}</b></td><td class="num">${placesPill(r.d)}</td></tr>`).join("")
+      || `<tr><td colspan="3" class="empty-note">${empty}</td></tr>`}</tbody></table>`;
+  const chips = (list, cls) => list.length ? list.map(r => `<button class="kchip ${cls}" data-i="${r.k.i}" title="${fmt1(r.p0)} → ${fmt1(r.p1)}">${esc(r.k.keyword)}</button>`).join("") : '<span class="light">aucun</span>';
+
+  // Par tag : position moyenne, variation sur la même base, clics vs comparaison
+  const tags = [...new Set(kws.flatMap(k => k.tags))];
+  const byTag = tags.map(tg => {
+    const rs = rows.filter(r => r.k.tags.includes(tg)), ks = rs.map(r => r.k);
+    const now = rs.filter(r => r.p1 != null).map(r => r.p1), pr = rs.filter(r => r.d != null);
+    const mean = a => a.length ? a.reduce((s, v) => s + v, 0) / a.length : null;
+    const clicks = trackedClicks(ks, R.dates), cc = R.cmp ? trackedClicks(ks, R.cmp.dates) : null;
+    return { tg, n: ks.length, pos: mean(now), d: pr.length ? mean(pr.map(r => r.p0)) - mean(pr.map(r => r.p1)) : null, top3: now.filter(v => v <= 3).length, clicks, dc: cc ? pct(clicks, cc) : null };
+  }).sort((a, b) => b.clicks - a.clicks);
+
+  const baseTabs = [["cmp", R.cmp ? cmpLabel() : "vs comparaison"], ["d7", "vs 7 j"], ["d28", "vs 28 j"]];
+  const charts_ = [["pos", "Position moyenne"], ["vis", "Visibilité"], ["clicks", "Clics"], ["dist", "Répartition"]];
+  $("ov-body").innerHTML = `
+    <div class="ov-tools"><span class="light">Variation</span><div class="tabs" id="ov-base">${baseTabs.map(([v, l]) => `<button data-v="${v}" class="${base === v ? "active" : ""}" ${v === "cmp" && !R.cmp ? "disabled" : ""}>${l}</button>`).join("")}</div></div>
+    <div class="ov-grid3">
+      <div class="ov-card"><h3>Plus fortes hausses <span class="badge ok">${ups.length}</span></h3>${moveTable(ups, "Aucune hausse d'au moins une demi-place.")}</div>
+      <div class="ov-card"><h3>Plus fortes baisses <span class="badge ko">${downs.length}</span></h3>${moveTable(downs, "Aucune baisse d'au moins une demi-place.")}</div>
+      <div class="ov-card"><h3>Entrées et sorties</h3>
+        <div class="io"><div class="l">Entrent dans le top 3</div><div>${chips(c3.in, "up")}</div></div>
+        <div class="io"><div class="l">Sortent du top 3</div><div>${chips(c3.out, "down")}</div></div>
+        <div class="io"><div class="l">Entrent dans le top 10</div><div>${chips(c10.in, "up")}</div></div>
+        <div class="io"><div class="l">Sortent du top 10</div><div>${chips(c10.out, "down")}</div></div></div>
+    </div>
+    <div class="grid-eq" style="margin:12px 0 0">
+      <div class="ov-card"><div class="ov-head"><h3>Évolution, ${rangeText(R)}</h3><div class="tabs" id="ov-chart">${charts_.map(([v, l]) => `<button data-v="${v}" class="${ui.ovChart === v ? "active" : ""}">${l}</button>`).join("")}</div></div>
+        <div class="legend" id="ov-legend"></div><div class="chart-box sm"><canvas id="c-ov"></canvas></div><div id="ov-marks"></div></div>
+      <div class="ov-card"><h3>Par tag</h3>${byTag.length ? `<div class="table-wrap"><table class="mini"><thead><tr><th>Tag</th><th class="num def" title="${esc(DEF.posMoy)}">Position moy.</th><th class="num">Variation</th><th class="num">Top 3</th><th class="num">Clics</th>${R.cmp ? `<th class="num">${cmpLabel()}</th>` : ""}</tr></thead><tbody>
+        ${byTag.map(x => `<tr class="click" data-tag="${esc(x.tg)}" title="Filtrer le tableau sur ce tag"><td><span class="tag">${esc(x.tg)}</span> <span class="light">${x.n}</span></td><td class="num">${fmt1(x.pos)}</td><td class="num">${placesPill(x.d)}</td><td class="num">${x.top3}/${x.n}</td><td class="num">${fmt(x.clicks)}</td>${R.cmp ? `<td class="num">${deltaPill(x.dc, { pct: true })}</td>` : ""}</tr>`).join("")}
+        </tbody></table></div>` : '<p class="empty-note">Aucun tag sur ces mots-clés. Les tags se saisissent avec les mots-clés (silo, type de page, priorité…).</p>'}</div>
+    </div>`;
+  document.querySelectorAll("#ov-body [data-i]").forEach(el => el.onclick = () => openDrawer(+el.dataset.i));
+  document.querySelectorAll("#ov-body [data-tag]").forEach(el => el.onclick = () => { ui.tags = new Set([el.dataset.tag]); ui.view = ""; renderKeywords(); document.querySelector("#t-kw").scrollIntoView({ behavior: "smooth", block: "start" }); });
+  document.querySelectorAll("#ov-base button").forEach(b => b.onclick = () => { ui.ovBase = b.dataset.v; store.set("ovBase", ui.ovBase); renderOverview(kws, R); });
+  document.querySelectorAll("#ov-chart button").forEach(b => b.onclick = () => { ui.ovChart = b.dataset.v; store.set("ovChart", ui.ovChart); renderOverview(kws, R); });
+  drawOverviewChart(kws, R);
+}
+
+function drawOverviewChart(kws, R) {
+  const m = ui.ovChart;
+  if (m === "dist") {
+    // Combien de mots-clés dans chaque tranche de position, jour par jour
+    const per = kws.map(k => bucket(R.dates.map(d => k.map.get(d) || null), R.dates));
+    const base = per[0] || bucket(R.dates.map(() => null), R.dates);
+    const ds = DIST.map(b => ({ label: b.name, data: base.labels.map((_, i) => per.filter(x => b.test(x.pts[i] ? x.pts[i][1] : null)).length),
+      backgroundColor: b.color, borderWidth: 0, borderRadius: 2, maxBarThickness: 22, stack: "s" }));
+    $("ov-legend").innerHTML = DIST.map(b => `<span class="lg"><span class="sw sq" style="background:${b.color}"></span>${b.name}</span>`).join("");
+    const mk = marksFor(base.ranges);
+    chart("c-ov", { type: "bar", data: { labels: base.labels, datasets: ds },
+      options: { maintainAspectRatio: false, interaction: { mode: "index", intersect: false }, layout: { padding: { top: 12 } },
+        scales: { y: { ...linScale(), stacked: true, ticks: { precision: 0 } }, x: { ...xScale(), stacked: true } },
+        plugins: { legend: { display: false }, marks: { items: mk.items }, tooltip: tooltip({ label: c => ` ${c.dataset.label} : ${c.parsed.y}` }) } } });
+    $("ov-marks").innerHTML = mk.html;
+    return;
+  }
+  const cur = globalSeries(kws, R.dates, m);
+  const ds = [lineDs(rangeText(R), cur.vals, INK, { fresh: cur.fresh })];
+  if (R.cmp) {
+    const c = globalSeries(kws, R.cmp.dates, m);
+    ds.push(lineDs(rangeText(R.cmp), cur.labels.map((_, n) => c.vals[n] ?? null), CMP, { dash: [4, 4], width: 1.5 }));
+  }
+  $("ov-legend").innerHTML = `<span class="lg"><span class="line-sw" style="border-color:${INK}"></span>${rangeText(R)}</span>${R.cmp ? `<span class="lg"><span class="line-sw dash" style="border-color:${CMP}"></span>${rangeText(R.cmp)}</span>` : ""}`;
+  const mk = marksFor(cur.ranges);
+  const f = v => m === "pos" ? fmt1(v) : m === "vis" ? fmt1(v) + " %" : fmt(v);
+  chart("c-ov", { type: "line", data: { labels: cur.labels, datasets: ds },
+    options: { maintainAspectRatio: false, interaction: { mode: "index", intersect: false }, layout: { padding: { top: 12 } },
+      scales: { y: m === "pos" ? posScale(ds.flatMap(d => d.data)) : linScale(), x: xScale() },
+      plugins: { legend: { display: false }, marks: { items: mk.items }, tooltip: tooltip({ label: c => ` ${c.dataset.label} : ${f(c.parsed.y)}` }) } } });
+  $("ov-marks").innerHTML = mk.html;
 }
 
 function renderKwTable(all, alertKw, R) {
@@ -1149,7 +1253,7 @@ function cmdkRender() {
   const q = fold($("cmdk-q").value.trim());
   const items = [{ group: "Navigation", label: "Portefeuille", go: "#/" }, { group: "Navigation", label: "Guide d'utilisation", go: "#/guide" }];
   IDX.projects.forEach(p => items.push({ group: "Projets", label: p.label, hint: p.property, go: `#/${p.name}` }));
-  if (P) VIEWS.forEach(([v, l]) => items.push({ group: P.label, label: l, go: `#/${P.name}${v ? "/" + v : ""}` }));
+  if (P) VIEWS.forEach(([v, l]) => items.push({ group: P.label, label: l, go: `#/${P.name}/${v}` }));
   // Mots-clés de tous les projets, le projet ouvert en premier
   IDX.projects.slice().sort((a, b) => (P && b.name === P.name) - (P && a.name === P.name)).forEach(p => (p.kw || []).forEach(([i, kw]) =>
     items.push({ group: "Mots-clés · " + p.label, label: kw, kw: i, site: p.name, hint: P && P.name === p.name ? path((P.keywords.find(k => k.i === i) || {}).page) : "" })));
@@ -1183,12 +1287,12 @@ function renderGuide() {
   $("view").innerHTML = `<div class="guide">
     ${viewBar("<h1>Guide d'utilisation</h1>")}
     <div class="card"><h2>Les onglets</h2><div class="qa">
-      <a href="#/${first}"><b>À traiter</b><span>Alertes et mouvements sur 7 jours, au dernier jour définitif.</span></a>
-      <a href="#/${first}/mots-cles"><b>Mots-clés</b><span>La position du jour de chaque mot-clé suivi, ses variations et son potentiel. Par page : indexation et requêtes de chaque page suivie.</span></a>
+      <a href="#/${first}/mots-cles"><b>Mots-clés</b><span>L'onglet d'arrivée : vue d'ensemble (hausses, baisses, entrées et sorties du top, évolution globale, tags), puis la position du jour de chaque mot-clé. Par page : indexation et requêtes de chaque page suivie.</span></a>
       <a href="#/${first}/trafic"><b>Trafic du site</b><span>Clics hors marque, marque, total et impressions, comparés à la période choisie.</span></a>
       <a href="#/${first}/actions"><b>Actions</b><span>Journal des optimisations et leur effet mesuré.</span></a>
       <a href="#/${first}/opportunites"><b>Opportunités</b><span>Mots-clés suivis à pousser et requêtes à ajouter au suivi.</span></a>
       <a href="#/${first}/rapport"><b>Rapport</b><span>Rapport mensuel figé sur son mois, modifiable, imprimable en PDF.</span></a>
+      <a href="#/${first}/a-traiter"><b>À traiter</b><span>Alertes et mouvements sur 7 jours, au dernier jour définitif.</span></a>
     </div></div>
     <div class="card"><h2>La position</h2><ul>
       <li><b>Une seule définition</b> : la position Google de la page suivie <b>un jour donné</b>, le jour de référence. Par défaut c'est le dernier jour disponible dans la Search Console. Décocher « Jours provisoires » prend le dernier jour consolidé (la Search Console garde 2 à 3 jours provisoires).</li>

@@ -848,7 +848,7 @@ def notify():
             if aid not in sent:
                 new.append(a)
         if new:
-            lines.append(f"*{sp['label']}* ({sp.get('market_label') or 'Tous pays'}) <{base}#/{sp['name']}|voir ce qui est à traiter>")
+            lines.append(f"*{sp['label']}* ({sp.get('market_label') or 'Tous pays'}) <{base}#/{sp['name']}/a-traiter|voir ce qui est à traiter>")
             lines += [f"• [{a['severity']}] {a.get('keyword') or a.get('page') or ''} : {a['text']}" for a in new[:10]]
     if datetime.now(timezone.utc).weekday() == 0:
         lines.append("\n*Récap de la semaine*")
