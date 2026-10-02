@@ -2,7 +2,7 @@ name: Suivi de positions quotidien
 
 on:
   schedule:
-    - cron: "0 6 * * *"   # tous les jours à 6h UTC (8h heure de Paris en été)
+    - cron: "17 5 * * *"  # tous les jours à 5h17 UTC (7h17 à Paris en été) : hors heure pleine, moins de retard de GitHub
   workflow_dispatch:
     inputs:
       days:
