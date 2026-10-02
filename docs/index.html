@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
-<link rel="stylesheet" href="app.css?v=17">
+<link rel="stylesheet" href="app.css?v=18">
 </head>
 <body>
 <div class="app" id="app">
@@ -47,21 +47,16 @@
       <div class="filters" id="filters">
         <select id="f-market" class="ctl" aria-label="Pays" hidden></select>
         <span class="ctl-group" id="g-range" hidden>
-          <select id="f-range" class="ctl" aria-label="Période">
-            <option value="7">7 derniers jours</option>
-            <option value="28">28 derniers jours</option>
-            <option value="90">3 derniers mois</option>
-            <option value="365">12 derniers mois</option>
-            <option value="0">Tout l'historique</option>
-            <option value="custom">Dates au choix</option>
-          </select>
+          <div class="seg" id="f-range" role="group" aria-label="Période">
+            <button data-v="7">7 j</button><button data-v="28">28 j</button><button data-v="90">90 j</button><button data-v="365">12 mois</button><button data-v="0">Tout</button><button data-v="custom" title="Dates au choix">Dates</button>
+          </div>
           <span class="dates" id="d-range" hidden><input type="date" id="f-from" class="ctl" aria-label="Début"><input type="date" id="f-to" class="ctl" aria-label="Fin"></span>
         </span>
         <span class="ctl-group" id="g-cmp" hidden>
           <select id="f-cmp" class="ctl" aria-label="Comparaison">
-            <option value="n1">vs année précédente</option>
-            <option value="prev">vs période précédente</option>
-            <option value="custom">vs dates au choix</option>
+            <option value="n1">vs N-1</option>
+            <option value="prev">vs période préc.</option>
+            <option value="custom">vs dates</option>
             <option value="none">Sans comparaison</option>
           </select>
           <span class="dates" id="d-cmp" hidden><input type="date" id="f-cfrom" class="ctl" aria-label="Début de la comparaison"><input type="date" id="f-cto" class="ctl" aria-label="Fin de la comparaison"></span>
@@ -84,6 +79,6 @@
   </div>
 </div>
 
-<script src="app.js?v=17"></script>
+<script src="app.js?v=18"></script>
 </body>
 </html>

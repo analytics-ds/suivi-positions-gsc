@@ -220,11 +220,11 @@ function bindChrome() {
     renderChrome(); renderView();
     if (keep != null) openDrawer(keep);
   };
-  $("f-range").onchange = e => {
-    const v = e.target.value;
+  document.querySelectorAll("#f-range button").forEach(b => b.onclick = () => {
+    const v = b.dataset.v;
     ui.range = v === "custom" ? { preset: "custom", from: ui.range.from || (P ? shift(refDay(), -27) : null), to: ui.range.to || (P ? refDay() : null) } : { preset: v };
     store.put("range", ui.range); renderChrome(); rerender();
-  };
+  });
   ["f-from", "f-to"].forEach(id => $(id).onchange = () => {
     ui.range = { preset: "custom", from: $("f-from").value, to: $("f-to").value };
     if (ui.range.from && ui.range.to && ui.range.from <= ui.range.to) { store.put("range", ui.range); rerender(); }
@@ -288,12 +288,12 @@ function renderChrome() {
   const anyFilter = [$("f-market"), $("g-range"), $("g-fresh")].some(el => !el.hidden);
   $("filters-btn").hidden = !anyFilter;
   if (anyFilter) {
-    const rl = { "7": "7 j", "28": "28 j", "90": "3 mois", "365": "12 mois", "0": "Tout", custom: "Dates" }[String(ui.range.preset)];
+    const rl = { "7": "7 j", "28": "28 j", "90": "90 j", "365": "12 mois", "0": "Tout", custom: "Dates" }[String(ui.range.preset)];
     $("filters-btn").textContent = "Filtres · " + [!$("f-market").hidden && P ? P.market_label : null, showRange ? rl : null, showRange && ui.cmp.mode !== "none" ? cmpLabel() : null].filter(Boolean).join(" · ");
   }
   if (showRange) {
     const R = ranges();
-    $("f-range").value = String(ui.range.preset);
+    document.querySelectorAll("#f-range button").forEach(b => b.classList.toggle("active", b.dataset.v === String(ui.range.preset)));
     $("d-range").hidden = ui.range.preset !== "custom";
     $("f-from").value = R.from; $("f-to").value = R.to;
     $("f-from").min = $("f-to").min = P.dates[0] || ""; $("f-from").max = $("f-to").max = refDay();
@@ -350,8 +350,8 @@ function ranges() {
 const cmpLabel = () => ({ n1: "vs N-1", prev: "vs période préc.", custom: "vs comparaison" }[ui.cmp.mode] || "");
 const rangeText = R => `${fmtDateY(R.from)} au ${fmtDateY(R.to)}`;
 const dShort = (d, ref) => fmtDate(d) + (ref && d.slice(0, 4) !== ref.slice(0, 4) ? " " + d.slice(2, 4) : "");
-// Jour de comparaison des positions : fin de la période de comparaison, à défaut 28 jours plus tôt
-const cmpDay = R => R.cmp ? R.cmp.to : shift(R.to, -28);
+// Jour de départ des mouvements de la vue d'ensemble : la veille du premier jour de la période (7 j = J-7, 28 j = J-28)
+const periodBase = R => shift(R.from, -1);
 
 // Position au jour d, sinon dernière position connue dans les 7 jours précédents
 function posAt(m, d, lookback = 7) {
@@ -772,9 +772,9 @@ function globalSeries(kws, dates, metric) {
   return { labels, ranges, vals: out, fresh };
 }
 
-// Données de la vue d'ensemble : variations entre le jour de comparaison et le jour de référence
+// Données de la vue d'ensemble : variations sur la période choisie
 function ovData(kws, R) {
-  const refD = cmpDay(R);
+  const refD = periodBase(R);
   const rows = ovRows(kws, refD), valid = rows.filter(r => r.d != null);
   const ups = valid.filter(r => r.d >= 0.5).sort((a, b) => b.d - a.d), downs = valid.filter(r => r.d <= -0.5).sort((a, b) => a.d - b.d);
   const cross = lim => ({ in: rows.filter(r => r.p1 != null && r.p1 <= lim && (r.p0 == null || r.p0 > lim)),
@@ -789,7 +789,7 @@ function renderOverview(kws, R) {
   // Résumé lisible même replié
   $("ov-hint").innerHTML = `<span class="ov-sum"><b class="up">${ups.length}</b> en hausse</span><span class="ov-sum"><b class="down">${downs.length}</b> en baisse</span>`
     + `<span class="ov-sum"><b class="up">${c3.in.length}</b> entrent dans le top 3</span><span class="ov-sum"><b class="down">${c3.out.length}</b> en sortent</span>`
-    + `<span class="light">${R.cmp ? cmpLabel() : "vs 28 j"}, ${span}</span>`;
+    + `<span class="light">sur la période, ${span}</span>`;
   if (!ui.ovOpen || !$("ov-body")) return;
 
   const moveTable = (list, empty) => `<table class="mini"><thead><tr><th>Mot-clé</th><th class="num">Position</th><th class="num">Variation</th></tr></thead><tbody>
@@ -821,7 +821,7 @@ function renderOverview(kws, R) {
     <div class="grid-eq" style="margin:12px 0 0">
       <div class="ov-card"><div class="ov-head"><h3>Évolution, ${rangeText(R)}</h3><div class="tabs" id="ov-chart">${charts_.map(([v, l]) => `<button data-v="${v}" class="${ui.ovChart === v ? "active" : ""}">${l}</button>`).join("")}</div></div>
         <div class="legend" id="ov-legend"></div><div class="chart-box sm"><canvas id="c-ov"></canvas></div><div id="ov-marks"></div></div>
-      <div class="ov-card"><h3>Par tag</h3>${byTag.length ? `<div class="table-wrap"><table class="mini"><thead><tr><th>Tag</th><th class="num def" title="${esc(DEF.posMoy)}">Position moy.</th><th class="num">Position ${R.cmp ? cmpLabel() : "vs 28 j"}</th><th class="num">Top 3</th><th class="num">Clics</th>${R.cmp ? `<th class="num">Clics ${cmpLabel()}</th>` : ""}</tr></thead><tbody>
+      <div class="ov-card"><h3>Par tag</h3>${byTag.length ? `<div class="table-wrap"><table class="mini"><thead><tr><th>Tag</th><th class="num def" title="${esc(DEF.posMoy)}">Position moy.</th><th class="num" title="Sur la période, ${span}">Évol. position</th><th class="num">Top 3</th><th class="num">Clics</th>${R.cmp ? `<th class="num">Clics ${cmpLabel()}</th>` : ""}</tr></thead><tbody>
         ${byTag.map(x => `<tr class="click" data-tag="${esc(x.tg)}" title="Filtrer le tableau sur ce tag"><td><span class="tag">${esc(x.tg)}</span> <span class="light">${x.n}</span></td><td class="num">${fmt1(x.pos)}</td><td class="num">${placesPill(x.d)}</td><td class="num">${x.top3}/${x.n}</td><td class="num">${fmt(x.clicks)}</td>${R.cmp ? `<td class="num">${deltaPill(x.dc, { pct: true })}</td>` : ""}</tr>`).join("")}
         </tbody></table></div>` : '<p class="empty-note">Aucun tag sur ces mots-clés. Les tags se saisissent avec les mots-clés (silo, type de page, priorité…).</p>'}</div>
     </div>`;
@@ -1332,7 +1332,7 @@ function renderGuide() {
     </ul></div>
     <div class="card"><h2>La barre du haut</h2><ul>
       <li><b>Pays</b> : chaque projet peut déclarer ses pays (et un dossier d'URL par pays). Tout l'outil se recalcule pour le pays choisi : positions, alertes, trafic, suggestions, rapport. « Tous pays » reste disponible.</li>
-      <li><b>Période</b> : 7 jours, 28 jours, 3 mois, 12 mois, tout l'historique ou des dates au choix. Elle fixe le jour de référence (sa fin) et les cumuls (clics, meilleure position, graphiques).</li>
+      <li><b>Période</b> : boutons 7 j, 28 j, 90 j, 12 mois, Tout ou Dates (dates au choix). Elle fixe le jour de référence (sa fin), les cumuls (clics, meilleure position, graphiques) et les mouvements de la vue d'ensemble (hausses, baisses, entrées et sorties : position la veille du premier jour contre position du dernier jour).</li>
       <li><b>Comparaison</b> : année précédente (par défaut, mêmes jours de la semaine), période précédente, dates au choix, ou aucune.</li>
       <li><b>⌘K</b> (Ctrl+K sur Windows) : aller directement à un projet, un onglet ou un mot-clé.</li>
     </ul></div>

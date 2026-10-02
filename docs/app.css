@@ -332,6 +332,8 @@ input[type=date].ctl { padding: 5px 8px; width: 140px; }
 .kbd-btn { display: inline-flex; align-items: center; gap: 6px; color: var(--text-muted); }
 .kbd-btn kbd { font: inherit; font-size: 11px; font-weight: 600; background: var(--gray-1); border-radius: 4px; padding: 1px 5px; }
 .crumbs .chip { margin-left: 4px; }
+.filters .seg button { padding: 5px 9px; }
+@media (max-width: 1560px) { .crumbs .chip { display: none; } }
 
 /* Barre d'outils de vue (remplace les titres et phrases d'introduction) */
 .view-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 14px; flex-wrap: wrap; }
