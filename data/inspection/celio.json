@@ -10,7 +10,7 @@
    "userCanonical": "https://www.celio.com/fr-fr/c/bermudas",
    "lastCrawlTime": "2026-10-01T06:55:30Z",
    "crawledAs": "MOBILE",
-   "checked": "2026-10-01"
+   "checked": "2026-10-02"
   },
   "https://www.celio.com/fr-fr/c/blousons-et-manteaux-blousons": {
    "verdict": "PASS",
@@ -20,9 +20,9 @@
    "pageFetchState": "SUCCESSFUL",
    "googleCanonical": "https://www.celio.com/fr-fr/c/blousons-et-manteaux-blousons",
    "userCanonical": "https://www.celio.com/fr-fr/c/blousons-et-manteaux-blousons",
-   "lastCrawlTime": "2026-10-01T16:01:33Z",
+   "lastCrawlTime": "2026-10-02T05:17:14Z",
    "crawledAs": "MOBILE",
-   "checked": "2026-10-01"
+   "checked": "2026-10-02"
   },
   "https://www.celio.com/fr-fr/c/blousons-et-manteaux-manteaux": {
    "verdict": "PASS",
@@ -32,9 +32,9 @@
    "pageFetchState": "SUCCESSFUL",
    "googleCanonical": "https://www.celio.com/fr-fr/c/blousons-et-manteaux-manteaux",
    "userCanonical": "https://www.celio.com/fr-fr/c/blousons-et-manteaux-manteaux",
-   "lastCrawlTime": "2026-10-01T04:01:44Z",
+   "lastCrawlTime": "2026-10-01T21:50:49Z",
    "crawledAs": "MOBILE",
-   "checked": "2026-10-01"
+   "checked": "2026-10-02"
   },
   "https://www.celio.com/fr-fr/c/blousons-et-manteaux-parkas": {
    "verdict": "PASS",
@@ -46,7 +46,7 @@
    "userCanonical": "https://www.celio.com/fr-fr/c/blousons-et-manteaux-parkas",
    "lastCrawlTime": "2026-10-01T13:35:41Z",
    "crawledAs": "MOBILE",
-   "checked": "2026-10-01"
+   "checked": "2026-10-02"
   },
   "https://www.celio.com/fr-fr/c/blousons-et-manteaux-vestes": {
    "verdict": "PASS",
@@ -56,9 +56,9 @@
    "pageFetchState": "SUCCESSFUL",
    "googleCanonical": "https://www.celio.com/fr-fr/c/blousons-et-manteaux-vestes",
    "userCanonical": "https://www.celio.com/fr-fr/c/blousons-et-manteaux-vestes",
-   "lastCrawlTime": "2026-10-01T20:40:46Z",
+   "lastCrawlTime": "2026-10-01T23:43:46Z",
    "crawledAs": "MOBILE",
-   "checked": "2026-10-01"
+   "checked": "2026-10-02"
   },
   "https://www.celio.com/fr-fr/c/chemises": {
    "verdict": "PASS",
@@ -68,9 +68,9 @@
    "pageFetchState": "SUCCESSFUL",
    "googleCanonical": "https://www.celio.com/fr-fr/c/chemises",
    "userCanonical": "https://www.celio.com/fr-fr/c/chemises",
-   "lastCrawlTime": "2026-10-01T21:04:58Z",
+   "lastCrawlTime": "2026-10-02T00:05:49Z",
    "crawledAs": "MOBILE",
-   "checked": "2026-10-01"
+   "checked": "2026-10-02"
   },
   "https://www.celio.com/fr-fr/c/chemises-chemises-blanches": {
    "verdict": "PASS",
@@ -82,7 +82,7 @@
    "userCanonical": "https://www.celio.com/fr-fr/c/chemises-chemises-blanches",
    "lastCrawlTime": "2026-10-01T07:02:23Z",
    "crawledAs": "MOBILE",
-   "checked": "2026-10-01"
+   "checked": "2026-10-02"
   },
   "https://www.celio.com/fr-fr/c/costumes": {
    "verdict": "PASS",
@@ -94,7 +94,7 @@
    "userCanonical": "https://www.celio.com/fr-fr/c/costumes",
    "lastCrawlTime": "2026-10-01T21:21:02Z",
    "crawledAs": "MOBILE",
-   "checked": "2026-10-01"
+   "checked": "2026-10-02"
   },
   "https://www.celio.com/fr-fr/c/costumes-costume-3-pieces-pour-homme": {
    "verdict": "PASS",
@@ -104,9 +104,9 @@
    "pageFetchState": "SUCCESSFUL",
    "googleCanonical": "https://www.celio.com/fr-fr/c/costumes-costume-3-pieces-pour-homme",
    "userCanonical": "https://www.celio.com/fr-fr/c/costumes-costume-3-pieces-pour-homme",
-   "lastCrawlTime": "2026-09-30T13:53:11Z",
+   "lastCrawlTime": "2026-10-02T01:50:06Z",
    "crawledAs": "MOBILE",
-   "checked": "2026-10-01"
+   "checked": "2026-10-02"
   },
   "https://www.celio.com/fr-fr/c/costumes-costumes-a---de-100e": {
    "verdict": "PASS",
@@ -118,7 +118,7 @@
    "userCanonical": "https://www.celio.com/fr-fr/c/costumes-costumes-a---de-100e",
    "lastCrawlTime": "2026-10-01T16:07:33Z",
    "crawledAs": "MOBILE",
-   "checked": "2026-10-01"
+   "checked": "2026-10-02"
   },
   "https://www.celio.com/fr-fr/c/jeans": {
    "verdict": "PASS",
@@ -128,9 +128,9 @@
    "pageFetchState": "SUCCESSFUL",
    "googleCanonical": "https://www.celio.com/fr-fr/c/jeans",
    "userCanonical": "https://www.celio.com/fr-fr/c/jeans",
-   "lastCrawlTime": "2026-10-01T19:20:18Z",
+   "lastCrawlTime": "2026-10-01T22:23:21Z",
    "crawledAs": "MOBILE",
-   "checked": "2026-10-01"
+   "checked": "2026-10-02"
   },
   "https://www.celio.com/fr-fr/c/pantalons": {
    "verdict": "PASS",
@@ -140,9 +140,9 @@
    "pageFetchState": "SUCCESSFUL",
    "googleCanonical": "https://www.celio.com/fr-fr/c/pantalons",
    "userCanonical": "https://www.celio.com/fr-fr/c/pantalons",
-   "lastCrawlTime": "2026-10-01T20:16:38Z",
+   "lastCrawlTime": "2026-10-01T23:17:39Z",
    "crawledAs": "MOBILE",
-   "checked": "2026-10-01"
+   "checked": "2026-10-02"
   },
   "https://www.celio.com/fr-fr/c/pantalons-pantalons-blancs": {
    "verdict": "PASS",
@@ -154,7 +154,7 @@
    "userCanonical": "https://www.celio.com/fr-fr/c/pantalons-pantalons-blancs",
    "lastCrawlTime": "2026-10-01T16:17:39Z",
    "crawledAs": "MOBILE",
-   "checked": "2026-10-01"
+   "checked": "2026-10-02"
   },
   "https://www.celio.com/fr-fr/c/pantalons-pantalons-cargos": {
    "verdict": "PASS",
@@ -166,7 +166,7 @@
    "userCanonical": "https://www.celio.com/fr-fr/c/pantalons-pantalons-cargos",
    "lastCrawlTime": "2026-10-01T17:27:14Z",
    "crawledAs": "MOBILE",
-   "checked": "2026-10-01"
+   "checked": "2026-10-02"
   },
   "https://www.celio.com/fr-fr/c/pantalons-pantalons-chinos": {
    "verdict": "PASS",
@@ -176,9 +176,9 @@
    "pageFetchState": "SUCCESSFUL",
    "googleCanonical": "https://www.celio.com/fr-fr/c/pantalons-pantalons-chinos",
    "userCanonical": "https://www.celio.com/fr-fr/c/pantalons-pantalons-chinos",
-   "lastCrawlTime": "2026-10-01T19:24:20Z",
+   "lastCrawlTime": "2026-10-01T22:29:23Z",
    "crawledAs": "MOBILE",
-   "checked": "2026-10-01"
+   "checked": "2026-10-02"
   },
   "https://www.celio.com/fr-fr/c/pantalons-pantalons-en-lin": {
    "verdict": "PASS",
@@ -188,9 +188,9 @@
    "pageFetchState": "SUCCESSFUL",
    "googleCanonical": "https://www.celio.com/fr-fr/c/pantalons-pantalons-en-lin",
    "userCanonical": "https://www.celio.com/fr-fr/c/pantalons-pantalons-en-lin",
-   "lastCrawlTime": "2026-10-01T05:32:43Z",
+   "lastCrawlTime": "2026-10-02T01:51:08Z",
    "crawledAs": "MOBILE",
-   "checked": "2026-10-01"
+   "checked": "2026-10-02"
   },
   "https://www.celio.com/fr-fr/c/polos": {
    "verdict": "PASS",
@@ -200,9 +200,9 @@
    "pageFetchState": "SUCCESSFUL",
    "googleCanonical": "https://www.celio.com/fr-fr/c/polos",
    "userCanonical": "https://www.celio.com/fr-fr/c/polos",
-   "lastCrawlTime": "2026-10-01T16:01:33Z",
+   "lastCrawlTime": "2026-10-01T22:09:17Z",
    "crawledAs": "MOBILE",
-   "checked": "2026-10-01"
+   "checked": "2026-10-02"
   },
   "https://www.celio.com/fr-fr/c/pulls": {
    "verdict": "PASS",
@@ -212,9 +212,9 @@
    "pageFetchState": "SUCCESSFUL",
    "googleCanonical": "https://www.celio.com/fr-fr/c/pulls",
    "userCanonical": "https://www.celio.com/fr-fr/c/pulls",
-   "lastCrawlTime": "2026-10-01T19:10:15Z",
+   "lastCrawlTime": "2026-10-01T22:11:18Z",
    "crawledAs": "MOBILE",
-   "checked": "2026-10-01"
+   "checked": "2026-10-02"
   },
   "https://www.celio.com/fr-fr/c/pulls-gilets-et-cardigans": {
    "verdict": "PASS",
@@ -224,9 +224,9 @@
    "pageFetchState": "SUCCESSFUL",
    "googleCanonical": "https://www.celio.com/fr-fr/c/pulls-gilets-et-cardigans",
    "userCanonical": "https://www.celio.com/fr-fr/c/pulls-gilets-et-cardigans",
-   "lastCrawlTime": "2026-10-01T20:04:32Z",
+   "lastCrawlTime": "2026-10-01T23:07:35Z",
    "crawledAs": "MOBILE",
-   "checked": "2026-10-01"
+   "checked": "2026-10-02"
   },
   "https://www.celio.com/fr-fr/c/saisonniers-ensemble": {
    "verdict": "PASS",
@@ -236,9 +236,9 @@
    "pageFetchState": "SUCCESSFUL",
    "googleCanonical": "https://www.celio.com/fr-fr/c/saisonniers-ensemble",
    "userCanonical": "https://www.celio.com/fr-fr/c/saisonniers-ensemble",
-   "lastCrawlTime": "2026-10-01T20:20:39Z",
+   "lastCrawlTime": "2026-10-02T02:54:41Z",
    "crawledAs": "MOBILE",
-   "checked": "2026-10-01"
+   "checked": "2026-10-02"
   },
   "https://www.celio.com/fr-fr/c/sous-vetements-pyjamas": {
    "verdict": "PASS",
@@ -248,9 +248,9 @@
    "pageFetchState": "SUCCESSFUL",
    "googleCanonical": "https://www.celio.com/fr-fr/c/sous-vetements-pyjamas",
    "userCanonical": "https://www.celio.com/fr-fr/c/sous-vetements-pyjamas",
-   "lastCrawlTime": "2026-10-01T16:52:55Z",
+   "lastCrawlTime": "2026-10-02T02:47:32Z",
    "crawledAs": "MOBILE",
-   "checked": "2026-10-01"
+   "checked": "2026-10-02"
   },
   "https://www.celio.com/fr-fr/c/sweats": {
    "verdict": "PASS",
@@ -260,9 +260,9 @@
    "pageFetchState": "SUCCESSFUL",
    "googleCanonical": "https://www.celio.com/fr-fr/c/sweats",
    "userCanonical": "https://www.celio.com/fr-fr/c/sweats",
-   "lastCrawlTime": "2026-10-01T19:50:28Z",
+   "lastCrawlTime": "2026-10-01T22:43:26Z",
    "crawledAs": "MOBILE",
-   "checked": "2026-10-01"
+   "checked": "2026-10-02"
   },
   "https://www.celio.com/fr-fr/c/t-shirts": {
    "verdict": "PASS",
@@ -274,7 +274,7 @@
    "userCanonical": "https://www.celio.com/fr-fr/c/t-shirts",
    "lastCrawlTime": "2026-10-01T21:31:06Z",
    "crawledAs": "MOBILE",
-   "checked": "2026-10-01"
+   "checked": "2026-10-02"
   },
   "https://www.celio.com/fr-fr/c/blousons-et-manteaux-doudounes": {
    "verdict": "PASS",
@@ -286,7 +286,7 @@
    "userCanonical": "https://www.celio.com/fr-fr/c/blousons-et-manteaux-doudounes",
    "lastCrawlTime": "2026-10-01T20:17:40Z",
    "crawledAs": "MOBILE",
-   "checked": "2026-10-01"
+   "checked": "2026-10-02"
   }
  },
  "history": []
