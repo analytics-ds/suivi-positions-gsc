@@ -7,7 +7,7 @@ const REPO = "analytics-ds/suivi-positions-gsc";
 const GH = "https://github.com/" + REPO;
 // Palette catégorielle validée (ordre fixe par mot-clé sélectionné, jamais cyclée sur le rang).
 const PALETTE = ["#2a78d6", "#eb6834", "#1baf7a", "#eda100", "#e87ba4", "#008300", "#4a3aa7", "#e34948"];
-const MAX_SEL = 8, NEUTRAL = "#9A9A9A", INK = "#101010", MUTED = "rgba(16,16,16,0.5)", GRID = "#F0F0EF", CMP = "#B9B9B9";
+const MAX_SEL = 8, NEUTRAL = "#9A9A9A", INK = "#101010", MUTED = "rgba(16,16,16,0.62)", GRID = "#F0F0EF", CMP = "#B9B9B9";
 const NA = "-";
 const EXT = '<svg class="i" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg>';
 const PLUS = '<svg class="i" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>';
@@ -92,7 +92,7 @@ const ui = {
   sel: {}, query: "", tags: new Set(), statuses: new Set(), view: "", openKw: null, pendingKw: null,
   sug: "all", sugSel: new Set(), month: null, kwMode: "kw", who: store.get("who") || "",
   chartOpen: store.get("chartOpen") === "1", metric: "position", trafSeg: "nonbrand",
-  ovOpen: store.get("ovOpen") !== "0", ovBase: store.get("ovBase") || "cmp", ovChart: store.get("ovChart") || "pos",
+  ovOpen: store.get("ovOpen2") === "1", ovChart: store.get("ovChart") || "pos",
 };
 
 Chart.defaults.font.family = "Inter, -apple-system, sans-serif";
@@ -202,6 +202,7 @@ function bindChrome() {
   });
   document.addEventListener("click", e => { if (!e.target.closest(".menu-wrap")) closeMenus(); });
   $("cmdk-btn").onclick = openCmdk;
+  $("filters-btn").onclick = () => { document.querySelector(".topbar").classList.toggle("f-open"); syncTopbar(); };
   $("cmdk").onclick = e => { if (e.target.id === "cmdk") closeCmdk(); };
   $("lnk-project").href = issue("projet.yml", { title: "Projet : " });
   $("lnk-sync").href = `${GH}/actions/workflows/daily.yml`;
@@ -284,6 +285,12 @@ function renderChrome() {
   $("g-range").hidden = $("g-cmp").hidden = !showRange;
   $("g-fresh").hidden = P ? !FRESH_VIEWS.includes(view) : route.site === "guide";
   $("f-fresh").checked = ui.fresh;
+  const anyFilter = [$("f-market"), $("g-range"), $("g-fresh")].some(el => !el.hidden);
+  $("filters-btn").hidden = !anyFilter;
+  if (anyFilter) {
+    const rl = { "7": "7 j", "28": "28 j", "90": "3 mois", "365": "12 mois", "0": "Tout", custom: "Dates" }[String(ui.range.preset)];
+    $("filters-btn").textContent = "Filtres · " + [!$("f-market").hidden && P ? P.market_label : null, showRange ? rl : null, showRange && ui.cmp.mode !== "none" ? cmpLabel() : null].filter(Boolean).join(" · ");
+  }
   if (showRange) {
     const R = ranges();
     $("f-range").value = String(ui.range.preset);
@@ -300,6 +307,7 @@ function renderChrome() {
     crumbs.innerHTML = route.site === "guide" ? "Guide d'utilisation" : (ui.who ? `Projets de ${esc(ui.who)}` : "Portefeuille");
     $("subnav").hidden = true;
     document.title = `${route.site === "guide" ? "Guide" : "Portefeuille"} · Positions · datashake`;
+    syncTopbar();
     return;
   }
   const vlabel = (VIEWS.find(v => v[0] === view) || VIEWS[0])[1];
@@ -314,7 +322,11 @@ function renderChrome() {
 }
 
 // La sous-navigation colle sous la barre du haut, dont la hauteur varie avec les filtres affichés
-const syncTopbar = () => requestAnimationFrame(() => document.documentElement.style.setProperty("--tb", document.querySelector(".topbar").offsetHeight + "px"));
+const syncTopbar = () => requestAnimationFrame(() => {
+  const s = document.documentElement.style;
+  s.setProperty("--tb", document.querySelector(".topbar").offsetHeight + "px");
+  s.setProperty("--sn", ($("subnav").hidden ? 0 : $("subnav").offsetHeight) + "px");
+});
 window.addEventListener("resize", syncTopbar);
 
 // ---------------------------------------------------------------- jour de référence, périodes, comparaisons
@@ -337,6 +349,9 @@ function ranges() {
 }
 const cmpLabel = () => ({ n1: "vs N-1", prev: "vs période préc.", custom: "vs comparaison" }[ui.cmp.mode] || "");
 const rangeText = R => `${fmtDateY(R.from)} au ${fmtDateY(R.to)}`;
+const dShort = (d, ref) => fmtDate(d) + (ref && d.slice(0, 4) !== ref.slice(0, 4) ? " " + d.slice(2, 4) : "");
+// Jour de comparaison des positions : fin de la période de comparaison, à défaut 28 jours plus tôt
+const cmpDay = R => R.cmp ? R.cmp.to : shift(R.to, -28);
 
 // Position au jour d, sinon dernière position connue dans les 7 jours précédents
 function posAt(m, d, lookback = 7) {
@@ -486,7 +501,7 @@ const rankTag = pos => pos == null ? "" : pos <= 3 ? '<span class="rank top3">TO
 const sevTag = s => `<span class="sev ${s}">${SEV[s] || s}</span>`;
 const statusTag = s => s ? `<span class="st st-${s.replace(/\W+/g, "")}">${STATUS[s] || esc(s)}</span>` : "";
 const targetLabel = t => t == null ? NA : t <= 1 ? "1re place" : t === 3 ? "Top 3" : t === 10 ? "Top 10" : "≤ " + fmt(t);
-const kpi = (lbl, val, sub, key) => `<div class="card kpi"><div class="lbl"><span>${lbl}</span>${key ? info(key) : ""}</div><div class="val">${val}</div><div class="sub">${sub || ""}</div></div>`;
+const kpi = (lbl, val, sub, key) => `<div class="stat"><div class="lbl${key ? " def" : ""}" ${key ? `title="${esc(DEF[key])}"` : ""}>${lbl}</div><div class="row"><span class="val">${val}</span><span class="sub">${sub || ""}</span></div></div>`;
 const vsPct = (cur, ref) => ref ? `<span>${deltaPill(pct(cur, ref), { pct: true })} ${cmpLabel()}</span>` : "";
 const posCell = st => st.pos == null ? `<span class="light">${NA}</span>`
   : `<span class="pos-cell">${rankTag(st.pos)}<span class="pos ${st.exact ? "" : "stale"}" ${st.exact ? "" : `title="Pas d'impression ce jour-là : dernière position connue, le ${fmtDate(st.cur[0])}"`}>${fmt1(st.pos)}</span></span>`;
@@ -550,10 +565,17 @@ function renderToday() {
   const ups = moves.filter(x => x.d >= 0.5).sort((a, b) => b.d - a.d).slice(0, 8);
   const downs = moves.filter(x => x.d <= -0.5).sort((a, b) => a.d - b.d).slice(0, 8);
   const measuring = P.actions.filter(a => a.days_after >= 0 && a.days_after < 28);
+  // Dernier point connu après la date de l'alerte (souvent provisoire) : montre si le recul est confirmé ou déjà rattrapé
+  const since = a => {
+    const k = a.i != null && P.keywords.find(x => x.i === a.i), last = k && k.s.length ? k.s[k.s.length - 1] : null;
+    if (!last || last[0] <= a.date || last[1] == null) return "";
+    const back = (a.type === "top3" && last[1] <= 3) || (a.type === "top10" && last[1] <= 10);
+    return `<div class="since">Depuis : <b>${fmt1(last[1])}</b> le ${fmtDate(last[0])}${last[4] ? " (provisoire)" : ""}${back ? ` <span class="badge ok">revenu dans le ${a.type === "top3" ? "top 3" : "top 10"}</span>` : ""}</div>`;
+  };
   const alertCard = a => `<div class="card item">${sevTag(a.severity)}<div>
-      <h3>${a.keyword ? esc(a.keyword) : esc(TYPES[a.type] || a.type)} <span class="light" style="font-weight:500">· ${esc(TYPES[a.type] || a.type)}</span></h3><p>${esc(a.text)}</p>
+      <h3>${a.keyword ? esc(a.keyword) : esc(TYPES[a.type] || a.type)} <span class="light" style="font-weight:500">· ${esc(TYPES[a.type] || a.type)}</span></h3><p>${esc(a.text)}</p>${since(a)}
       <div class="meta">${a.page && a.page !== "*" ? urlLink(a.page) : ""}<span>au ${fmtDate(a.date)}</span></div></div>
-      <div class="num">${a.impact ? `<div class="pos">${fmt(a.impact)}</div><div class="light" style="font-size:11px">clics / mois en jeu</div>` : ""}
+      <div class="num">${a.impact ? `<div class="pos">${fmt(a.impact)}</div><div class="light" style="font-size:12px">clics / mois en jeu</div>` : ""}
       ${a.i != null ? `<button class="btn ghost sm" data-open="${a.i}" style="margin-top:6px">Ouvrir</button>` : ""}</div></div>`;
   const moveRow = x => `<tr class="click" data-i="${x.k.i}"><td><b>${esc(x.k.keyword)}</b></td><td class="num">${fmt1(x.p0)} → <b>${fmt1(x.p1)}</b></td><td class="num">${placesPill(x.d)}</td></tr>`;
   const evs = P.events.filter(e => e.date >= shift(lf, -30) && (e.severity !== "info" || e.type === "hausse")).slice(0, 60);
@@ -615,12 +637,12 @@ function renderKeywords() {
   const clicks = trackedClicks(kws, R.dates), cClicks = R.cmp ? trackedClicks(kws, R.cmp.dates) : null;
   const vis = visibilityAt(kws, R.to), cVis = R.cmp ? visibilityAt(kws, R.cmp.to) : null;
   const cl = cmpLabel();
-  const sub = x => R.cmp ? `<span>${x} ${cl}</span>` : "";
+  const sub = x => R.cmp ? `<span>${x} vs ${dShort(R.cmp.to, R.to)}</span>` : "";
 
   $("view").innerHTML = viewBar(`<div class="tabs" id="kw-mode"><button data-m="kw" class="${mode === "kw" ? "active" : ""}">Par mot-clé</button><button data-m="page" class="${mode === "page" ? "active" : ""}">Par page</button></div>
-      <span class="light ref-note">Positions au ${fmtDateL(R.to)}${P.last_date === R.to && P.last_date !== P.last_final ? " (provisoire)" : ""}${filtered ? ` · ${kws.length} mots-clés sur ${all.length}` : ""}</span>`,
+      <span class="light ref-note">Positions au ${fmtDateL(R.to)}${P.last_date === R.to && P.last_date !== P.last_final ? " (provisoire)" : ""}${R.cmp ? `, comparées au ${fmtDateL(R.cmp.to)}` : ""}${filtered ? ` · ${kws.length} mots-clés sur ${all.length}` : ""}</span>`,
       btnLink(issue("mot-cle.yml", { projet: P.name, title: "Mots-clés : " }), "Suivre des mots-clés", "btn sm"))
-    + `<div class="kpis k5">
+    + `<div class="card stats">
       ${kpi("Position moyenne", fmt1(avg), sub(placesPill(dAvg)), "posMoy")}
       ${kpi("Top 3", `${t3}<small> / ${kws.length}</small>`, sub(countPill(c3 == null ? null : t3 - c3)), "top")}
       ${kpi("Top 10", `${t10}<small> / ${kws.length}</small>`, sub(countPill(c10 == null ? null : t10 - c10)), "top")}
@@ -630,7 +652,7 @@ function renderKeywords() {
   document.querySelectorAll("#kw-mode button").forEach(b => b.onclick = () => { ui.kwMode = b.dataset.m; renderKeywords(); });
   if (mode === "page") return renderByPage();
   renderByKeyword(all, kws, R);
-  $("ov").addEventListener("toggle", e => { ui.ovOpen = e.target.open; store.set("ovOpen", ui.ovOpen ? "1" : "0"); if (ui.ovOpen) renderOverview(kws, R); });
+  $("ov").addEventListener("toggle", e => { ui.ovOpen = e.target.open; store.set("ovOpen2", ui.ovOpen ? "1" : "0"); if (ui.ovOpen) renderOverview(kws, R); });
   renderOverview(kws, R);
 }
 
@@ -750,23 +772,30 @@ function globalSeries(kws, dates, metric) {
   return { labels, ranges, vals: out, fresh };
 }
 
-function renderOverview(kws, R) {
-  if (!ui.ovOpen || !$("ov-body")) return;
-  const base = ui.ovBase === "cmp" && !R.cmp ? "d28" : ui.ovBase;
-  const refD = base === "cmp" ? R.cmp.to : shift(R.to, base === "d7" ? -7 : -28);
+// Données de la vue d'ensemble : variations entre le jour de comparaison et le jour de référence
+function ovData(kws, R) {
+  const refD = cmpDay(R);
   const rows = ovRows(kws, refD), valid = rows.filter(r => r.d != null);
   const ups = valid.filter(r => r.d >= 0.5).sort((a, b) => b.d - a.d), downs = valid.filter(r => r.d <= -0.5).sort((a, b) => a.d - b.d);
-  const stable = valid.length - ups.length - downs.length;
   const cross = lim => ({ in: rows.filter(r => r.p1 != null && r.p1 <= lim && (r.p0 == null || r.p0 > lim)),
     out: rows.filter(r => r.p0 != null && r.p0 <= lim && (r.p1 == null || r.p1 > lim)) });
-  const c3 = cross(3), c10 = cross(10);
-  const fd = refD.slice(0, 4) === R.to.slice(0, 4) ? fmtDate : fmtDateY;
-  $("ov-hint").textContent = `${fd(refD)} → ${fd(R.to)} · ${ups.length} en hausse, ${downs.length} en baisse, ${stable} stable${stable > 1 ? "s" : ""}`;
+  return { refD, rows, ups, downs, stable: valid.length - ups.length - downs.length, c3: cross(3), c10: cross(10) };
+}
 
-  const moveTable = (list, empty) => `<table class="mini"><thead><tr><th>Mot-clé</th><th class="num" title="${fd(refD)} → ${fd(R.to)}">Position</th><th class="num">Variation</th></tr></thead><tbody>
+function renderOverview(kws, R) {
+  if (!$("ov-hint")) return;
+  const { refD, rows, ups, downs, stable, c3, c10 } = ovData(kws, R);
+  const span = `${dShort(refD, R.to)} → ${dShort(R.to, refD)}`;
+  // Résumé lisible même replié
+  $("ov-hint").innerHTML = `<span class="ov-sum"><b class="up">${ups.length}</b> en hausse</span><span class="ov-sum"><b class="down">${downs.length}</b> en baisse</span>`
+    + `<span class="ov-sum"><b class="up">${c3.in.length}</b> entrent dans le top 3</span><span class="ov-sum"><b class="down">${c3.out.length}</b> en sortent</span>`
+    + `<span class="light">${R.cmp ? cmpLabel() : "vs 28 j"}, ${span}</span>`;
+  if (!ui.ovOpen || !$("ov-body")) return;
+
+  const moveTable = (list, empty) => `<table class="mini"><thead><tr><th>Mot-clé</th><th class="num">Position</th><th class="num">Variation</th></tr></thead><tbody>
     ${list.slice(0, 6).map(r => `<tr class="click" data-i="${r.k.i}"><td><b>${esc(r.k.keyword)}</b><div class="light sub" title="${esc(DEF.demande)}">${fmt(r.k.st.demand)} impr./mois</div></td><td class="num">${fmt1(r.p0)} → <b>${fmt1(r.p1)}</b></td><td class="num">${placesPill(r.d)}</td></tr>`).join("")
       || `<tr><td colspan="3" class="empty-note">${empty}</td></tr>`}</tbody></table>`;
-  const chips = (list, cls) => list.length ? list.map(r => `<button class="kchip ${cls}" data-i="${r.k.i}" title="${fmt1(r.p0)} → ${fmt1(r.p1)}">${esc(r.k.keyword)}</button>`).join("") : '<span class="light">aucun</span>';
+  const chips = (list, cls) => list.length ? list.map(r => `<button class="kchip ${cls}" data-i="${r.k.i}" title="${esc(r.k.keyword)} : ${r.p0 == null ? "absent" : fmt1(r.p0)} → ${r.p1 == null ? "absent" : fmt1(r.p1)}">${esc(r.k.keyword)} <span class="kp">${r.p0 == null ? "absent" : fmt1(r.p0)} → ${r.p1 == null ? "absent" : fmt1(r.p1)}</span></button>`).join("") : '<span class="light">aucun</span>';
 
   // Par tag : position moyenne, variation sur la même base, clics vs comparaison
   const tags = [...new Set(kws.flatMap(k => k.tags))];
@@ -778,14 +807,12 @@ function renderOverview(kws, R) {
     return { tg, n: ks.length, pos: mean(now), d: pr.length ? mean(pr.map(r => r.p0)) - mean(pr.map(r => r.p1)) : null, top3: now.filter(v => v <= 3).length, clicks, dc: cc ? pct(clicks, cc) : null };
   }).sort((a, b) => b.clicks - a.clicks);
 
-  const baseTabs = [["cmp", R.cmp ? cmpLabel() : "vs comparaison"], ["d7", "vs 7 j"], ["d28", "vs 28 j"]];
   const charts_ = [["pos", "Position moyenne"], ["vis", "Visibilité"], ["clicks", "Clics"], ["dist", "Répartition"]];
   $("ov-body").innerHTML = `
-    <div class="ov-tools"><span class="light">Variation</span><div class="tabs" id="ov-base">${baseTabs.map(([v, l]) => `<button data-v="${v}" class="${base === v ? "active" : ""}" ${v === "cmp" && !R.cmp ? "disabled" : ""}>${l}</button>`).join("")}</div></div>
     <div class="ov-grid3">
-      <div class="ov-card"><h3>Plus fortes hausses <span class="badge ok">${ups.length}</span></h3>${moveTable(ups, "Aucune hausse d'au moins une demi-place.")}</div>
-      <div class="ov-card"><h3>Plus fortes baisses <span class="badge ko">${downs.length}</span></h3>${moveTable(downs, "Aucune baisse d'au moins une demi-place.")}</div>
-      <div class="ov-card"><h3>Entrées et sorties</h3>
+      <div class="ov-card"><h3>Plus fortes hausses <span class="badge ok">${ups.length}</span><span class="light h-note">${span}</span></h3>${moveTable(ups, "Aucune hausse d'au moins une demi-place.")}</div>
+      <div class="ov-card"><h3>Plus fortes baisses <span class="badge ko">${downs.length}</span><span class="light h-note">${span}</span></h3>${moveTable(downs, "Aucune baisse d'au moins une demi-place.")}</div>
+      <div class="ov-card"><h3>Entrées et sorties <span class="light h-note">${span}</span></h3>
         <div class="io"><div class="l">Entrent dans le top 3</div><div>${chips(c3.in, "up")}</div></div>
         <div class="io"><div class="l">Sortent du top 3</div><div>${chips(c3.out, "down")}</div></div>
         <div class="io"><div class="l">Entrent dans le top 10</div><div>${chips(c10.in, "up")}</div></div>
@@ -794,13 +821,12 @@ function renderOverview(kws, R) {
     <div class="grid-eq" style="margin:12px 0 0">
       <div class="ov-card"><div class="ov-head"><h3>Évolution, ${rangeText(R)}</h3><div class="tabs" id="ov-chart">${charts_.map(([v, l]) => `<button data-v="${v}" class="${ui.ovChart === v ? "active" : ""}">${l}</button>`).join("")}</div></div>
         <div class="legend" id="ov-legend"></div><div class="chart-box sm"><canvas id="c-ov"></canvas></div><div id="ov-marks"></div></div>
-      <div class="ov-card"><h3>Par tag</h3>${byTag.length ? `<div class="table-wrap"><table class="mini"><thead><tr><th>Tag</th><th class="num def" title="${esc(DEF.posMoy)}">Position moy.</th><th class="num">Variation</th><th class="num">Top 3</th><th class="num">Clics</th>${R.cmp ? `<th class="num">${cmpLabel()}</th>` : ""}</tr></thead><tbody>
+      <div class="ov-card"><h3>Par tag</h3>${byTag.length ? `<div class="table-wrap"><table class="mini"><thead><tr><th>Tag</th><th class="num def" title="${esc(DEF.posMoy)}">Position moy.</th><th class="num">Position ${R.cmp ? cmpLabel() : "vs 28 j"}</th><th class="num">Top 3</th><th class="num">Clics</th>${R.cmp ? `<th class="num">Clics ${cmpLabel()}</th>` : ""}</tr></thead><tbody>
         ${byTag.map(x => `<tr class="click" data-tag="${esc(x.tg)}" title="Filtrer le tableau sur ce tag"><td><span class="tag">${esc(x.tg)}</span> <span class="light">${x.n}</span></td><td class="num">${fmt1(x.pos)}</td><td class="num">${placesPill(x.d)}</td><td class="num">${x.top3}/${x.n}</td><td class="num">${fmt(x.clicks)}</td>${R.cmp ? `<td class="num">${deltaPill(x.dc, { pct: true })}</td>` : ""}</tr>`).join("")}
         </tbody></table></div>` : '<p class="empty-note">Aucun tag sur ces mots-clés. Les tags se saisissent avec les mots-clés (silo, type de page, priorité…).</p>'}</div>
     </div>`;
   document.querySelectorAll("#ov-body [data-i]").forEach(el => el.onclick = () => openDrawer(+el.dataset.i));
   document.querySelectorAll("#ov-body [data-tag]").forEach(el => el.onclick = () => { ui.tags = new Set([el.dataset.tag]); ui.view = ""; renderKeywords(); document.querySelector("#t-kw").scrollIntoView({ behavior: "smooth", block: "start" }); });
-  document.querySelectorAll("#ov-base button").forEach(b => b.onclick = () => { ui.ovBase = b.dataset.v; store.set("ovBase", ui.ovBase); renderOverview(kws, R); });
   document.querySelectorAll("#ov-chart button").forEach(b => b.onclick = () => { ui.ovChart = b.dataset.v; store.set("ovChart", ui.ovChart); renderOverview(kws, R); });
   drawOverviewChart(kws, R);
 }
@@ -843,11 +869,11 @@ function renderKwTable(all, alertKw, R) {
   const empty = { status: !P.keywords.some(k => k.status), target: !P.keywords.some(k => k.target) };
   const C = id => ui.cols.has(id) && !empty[id];
   const cl = cmpLabel();
-  const th = (label, key, def, cls = "num") => `<th class="${cls}${def ? " def" : ""}" data-sort="${key}" ${def ? `title="${esc(DEF[def])}"` : ""}>${label}<span class="arrow">↕</span></th>`;
+  const th = (label, key, def, cls = "num", sub = "") => `<th class="${cls}${def ? " def" : ""}" data-sort="${key}" ${def ? `title="${esc(DEF[def])}"` : ""}>${label}<span class="arrow">↕</span>${sub ? `<span class="th-sub">${sub}</span>` : ""}</th>`;
   $("thead").innerHTML = `<tr><th style="width:30px" title="Tracer la courbe (8 maximum)"></th>${th("Mot-clé", "keyword", "", "")}
     ${C("page") ? th("Page suivie", "page", "", "") : ""}${C("url") && !C("page") ? `<th class="def" title="${esc(DEF.url)}">URL du jour</th>` : ""}
-    ${th("Position", "pos", "position")}
-    ${C("dcmp") && R.cmp ? th(cl, "dcmp", "dcmp") : ""}${C("d7") ? th("7 j", "d7", "d7") : ""}${C("d28") ? th("28 j", "d28", "d28") : ""}
+    ${th("Position", "pos", "position", "num", dShort(R.to))}
+    ${C("dcmp") && R.cmp ? th(cl, "dcmp", "dcmp", "num", "vs " + dShort(R.cmp.to, R.to)) : ""}${C("d7") ? th("7 j", "d7", "d7", "num", "vs " + dShort(shift(R.to, -7))) : ""}${C("d28") ? th("28 j", "d28", "d28", "num", "vs " + dShort(shift(R.to, -28))) : ""}
     ${C("best") ? th("Meilleure", "best", "best") : ""}${C("demand") ? th("Impr./mois", "demand", "demande") : ""}
     ${C("clicks") ? th("Clics", "clicks", "clicsSuivis") : ""}${C("impr") ? th("Impressions", "impr", "") : ""}${C("ctr") ? th("Taux de clic", "ctr", "") : ""}
     ${C("potential") ? th("À gagner", "potential", "aGagner") : ""}
@@ -881,6 +907,9 @@ function renderKwTable(all, alertKw, R) {
   }).join("") || `<tr><td colspan="20" class="empty">Aucun mot-clé ne correspond.</td></tr>`;
   $("tbody").querySelectorAll("tr[data-i]").forEach(tr => tr.onclick = () => openDrawer(+tr.dataset.i));
   $("tbody").querySelectorAll("[data-pick]").forEach(b => b.onclick = e => { e.stopPropagation(); toggleSel(+b.dataset.pick); });
+  const wrap = $("t-kw").closest(".table-wrap");
+  wrap.classList.remove("sticky");
+  requestAnimationFrame(() => wrap.classList.toggle("sticky", wrap.scrollWidth <= wrap.clientWidth + 1 && innerWidth > 860));
   $("t-count").textContent = `${rows.length} mot${rows.length > 1 ? "s" : ""}-clé${rows.length > 1 ? "s" : ""} sur ${all.length}`;
   sortable("t-kw", () => renderKwTable(all, alertKw, R));
 }
@@ -1028,7 +1057,7 @@ function renderTraffic() {
   const months = []; const lm = R.to.slice(0, 7);
   for (let i = 12; i >= 0; i--) months.push(shiftMonth(lm, -i));
   $("view").innerHTML = viewBar(`<span class="light ref-note">${rangeText(R)}${R.cmp ? ` · comparé au ${rangeText(R.cmp)}` : ""}${P.market !== "all" ? ` · ${esc(P.market_label)}${P.market_path ? ` (URL contenant ${esc(P.market_path)})` : ""}` : ""}</span>`)
-    + `<div class="kpis k4">
+    + `<div class="card stats">
       ${kpi("Clics hors marque", fmt(S.nonbrand.clicks), sub(S.nonbrand.clicks, S.nonbrandc && S.nonbrandc.clicks), "horsMarque")}
       ${kpi("Clics marque", fmt(S.brand.clicks), sub(S.brand.clicks, S.brandc && S.brandc.clicks), "marque")}
       ${kpi("Clics au total", fmt(S.total.clicks), sub(S.total.clicks, S.totalc && S.totalc.clicks))}
