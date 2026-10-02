@@ -6,4 +6,9 @@
 # - description : détail libre (optionnel)
 # - author      : consultant
 
-actions: []
+actions:
+  - date: 2020-08-24
+    page: https://www.celio.com/fr-fr/c/blousons-et-manteaux-parkas
+    type: contenu
+    title: "Optimisation de la page Parka"
+    author: "analytics-ds"
