@@ -488,4 +488,21 @@ details.overview > summary .hint { display: flex; gap: 14px; flex-wrap: wrap; al
 }
 @media (hover: none) and (max-width: 860px) { #cmdk-btn { display: none; } }
 
+/* Actions */
+.act { padding: 16px 20px; }
+.act-head { display: grid; grid-template-columns: auto 1fr auto; gap: 14px; align-items: start; }
+.act-head > .badge, .act-verdict { justify-self: start; }
+.act-title h3 { font-size: 15px; font-weight: 600; }
+.act .meta { font-size: 12px; color: var(--text-light); margin-top: 4px; display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+.act .meta .k { cursor: pointer; text-decoration: underline; color: var(--text-muted); }
+.act-desc { font-size: 13px; color: var(--text-muted); margin-top: 8px; }
+.act-sentence { font-size: 14px; line-height: 1.6; margin-top: 10px; padding: 10px 14px; background: var(--beige); border-radius: var(--radius-md); }
+.act-chart { position: relative; height: 220px; margin-top: 12px; }
+.act-sum { font-size: 13px; color: var(--text-muted); display: inline-flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.act-sum b { color: var(--text); }
+.progress { height: 6px; background: var(--gray-1); border-radius: 999px; overflow: hidden; margin-top: 12px; }
+.progress div { height: 100%; background: var(--accent-blue); border-radius: 999px; }
+.click-hint { font-size: 12px; color: var(--text-light); margin-top: 6px; }
+@media (max-width: 860px) { .act-head { grid-template-columns: 1fr; } .act-chart { height: 180px; } }
+
 [hidden] { display: none !important; }

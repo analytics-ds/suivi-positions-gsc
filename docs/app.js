@@ -92,7 +92,7 @@ const ui = {
   sel: {}, query: "", tags: new Set(), statuses: new Set(), view: "", openKw: null, pendingKw: null,
   sug: "all", sugSel: new Set(), month: null, kwMode: "kw", who: store.get("who") || "",
   chartOpen: store.get("chartOpen") === "1", metric: "position", trafSeg: "nonbrand",
-  ovOpen: store.get("ovOpen2") === "1", ovChart: store.get("ovChart") || "pos",
+  actMetric: store.get("actMetric") || "position", ovOpen: store.get("ovOpen2") === "1", ovChart: store.get("ovChart") || "pos",
 };
 
 Chart.defaults.font.family = "Inter, -apple-system, sans-serif";
@@ -119,6 +119,42 @@ Chart.register({
       ctx.fillStyle = "#fff"; ctx.font = "700 8px Inter, sans-serif"; ctx.textAlign = "center"; ctx.textBaseline = "middle";
       ctx.fillText(m.kind === "a" ? "A" : "G", px, a.top + 5);
     });
+    ctx.restore();
+  },
+});
+
+// Annotation avant / après d'une action : période après la mise en ligne ombrée, moyennes avant et après en pointillés
+Chart.register({
+  id: "beforeAfter",
+  beforeDatasetsDraw(chart, args, o) {
+    if (!o || o.idx == null) return;
+    const { ctx, chartArea: a, scales: { x } } = chart;
+    const px = x.getPixelForValue(o.idx);
+    ctx.save();
+    ctx.fillStyle = "rgba(255, 253, 210, 0.75)";
+    ctx.fillRect(px, a.top, a.right - px, a.bottom - a.top);
+    ctx.restore();
+  },
+  afterDatasetsDraw(chart, args, o) {
+    if (!o || o.idx == null) return;
+    const { ctx, chartArea: a, scales: { x, y } } = chart;
+    const px = x.getPixelForValue(o.idx);
+    ctx.save();
+    ctx.strokeStyle = INK; ctx.lineWidth = 1.5; ctx.setLineDash([]);
+    ctx.beginPath(); ctx.moveTo(px, a.top); ctx.lineTo(px, a.bottom); ctx.stroke();
+    ctx.font = "600 11px Inter, sans-serif"; ctx.fillStyle = INK; ctx.textBaseline = "top";
+    ctx.textAlign = "left"; ctx.fillText(o.label || "Mise en ligne", px + 6, a.top + 2);
+    const seg = (v, x0, x1, txt) => {
+      if (v == null) return;
+      const py = y.getPixelForValue(v);
+      if (py < a.top || py > a.bottom) return;
+      ctx.strokeStyle = "rgba(16,16,16,0.55)"; ctx.setLineDash([5, 4]); ctx.lineWidth = 1.5;
+      ctx.beginPath(); ctx.moveTo(x0, py); ctx.lineTo(x1, py); ctx.stroke();
+      ctx.setLineDash([]); ctx.font = "500 11px Inter, sans-serif"; ctx.fillStyle = "rgba(16,16,16,0.7)";
+      ctx.textAlign = "right"; ctx.textBaseline = "bottom"; ctx.fillText(txt, x1 - 4, py - 3);
+    };
+    seg(o.before, a.left, px, o.beforeText);
+    seg(o.after, px, a.right, o.afterText);
     ctx.restore();
   },
 });
@@ -1026,8 +1062,14 @@ function openDrawer(i) {
   chart("d-pos", { type: "line", data: { labels: b.labels, datasets: ds },
     options: { maintainAspectRatio: false, interaction: { mode: "index", intersect: false }, layout: { padding: { top: 12 } },
       scales: { y: posScale(ds.flatMap(d => d.data)), x: xScale() },
+      onHover: (e, els, ch) => { ch.canvas.style.cursor = k.page !== "*" ? "copy" : "default"; },
+      onClick: (e, els, ch) => {
+        if (k.page === "*") return;
+        const n = Math.max(0, Math.min(b.ranges.length - 1, Math.round(ch.scales.x.getValueForPixel(e.x))));
+        window.open(issue("action.yml", { projet: P.name, page: k.page, date: b.ranges[n][0], title: "Action : " }), "_blank", "noopener");
+      },
       plugins: { legend: { display: false }, marks: { items: mk.items }, tooltip: tooltip({ label: c => ` ${c.dataset.label} : ${fmt1(c.parsed.y)}` }) } } });
-  $("d-marks").innerHTML = mk.html;
+  $("d-marks").innerHTML = mk.html + (k.page !== "*" ? '<div class="click-hint">Clique sur la courbe pour consigner une action à cette date.</div>' : "");
   chart("d-impr", { type: "bar", data: { labels: b.labels, datasets: [
       { label: "Impressions", data: b.pts.map(p => p && p[3]), backgroundColor: color, borderRadius: { topLeft: 4, topRight: 4 }, borderSkipped: "bottom", maxBarThickness: 18 }] },
     options: { maintainAspectRatio: false, scales: { y: linScale(), x: xScale() },
@@ -1075,7 +1117,7 @@ function renderTraffic() {
   const tb = bucket(segPts(R.dates), R.dates);
   const ds = [lineDs(rangeText(R), tb.pts.map(p => p && p[idx]), INK, { fresh: tb.pts.map(p => p && p[4]) })];
   if (R.cmp) { const tc = bucket(segPts(R.cmp.dates), R.cmp.dates); ds.push(lineDs(rangeText(R.cmp), tb.labels.map((_, n) => tc.pts[n] ? tc.pts[n][idx] : null), CMP, { dash: [4, 4], width: 1.5 })); }
-  const mk = marksFor(tb.ranges, { actions: false });
+  const mk = marksFor(tb.ranges);
   chart("c-traffic", { type: "line", data: { labels: tb.labels, datasets: ds },
     options: { maintainAspectRatio: false, interaction: { mode: "index", intersect: false }, layout: { padding: { top: 12 } }, scales: { y: linScale(), x: xScale() },
       plugins: { legend: { display: false }, marks: { items: mk.items }, tooltip: tooltip({ label: c => ` ${c.dataset.label} : ${fmt(c.parsed.y)}` }) } } });
@@ -1090,26 +1132,82 @@ function renderTraffic() {
 
 function renderActions() {
   const kwName = i => (P.keywords.find(k => k.i === i) || {}).keyword;
+  const measured = P.actions.filter(a => a.impact && a.impact.clicks_month_adjusted != null);
+  const total = measured.reduce((s, a) => s + a.impact.clicks_month_adjusted, 0);
+  const running = P.actions.filter(a => a.days_after >= 0 && a.days_after < 28 && a.keywords && a.keywords.length);
+  const metricTabs = `<div class="tabs" id="act-metric">${[["position", "Position"], ["clicks", "Clics"]].map(([v, l]) => `<button data-v="${v}" class="${ui.actMetric === v ? "active" : ""}">${l}</button>`).join("")}</div>`;
+
   const cards = P.actions.map(a => {
-    const im = a.impact;
-    const adj = im && im.clicks_month_adjusted;
-    const verdict = adj == null ? "" : adj > 0 ? `<span class="pill up">▲ +${fmt(adj)} clics / mois</span>` : adj < 0 ? `<span class="pill down">▼ ${fmt(adj)} clics / mois</span>` : '<span class="pill flat">Pas d\'effet mesurable</span>';
-    const body = im ? `<div class="impact">
+    const im = a.impact, adj = im && im.clicks_month_adjusted;
+    const kws = (a.keywords || []).map(kwName).filter(Boolean);
+    const verdictPill = adj == null ? "" : adj > 0 ? `<span class="pill up">▲ +${fmt(adj)} clics / mois</span>` : adj < 0 ? `<span class="pill down">▼ ${fmt(adj)} clics / mois</span>` : '<span class="pill flat">Pas d\'effet mesurable</span>';
+    // Verdict en clair, reprenable tel quel pour le client
+    let sentence = "";
+    if (im && im.pos_before != null && im.pos_after != null) {
+      const who = kws.length === 1 ? `« ${esc(kws[0])} »` : `les ${kws.length} mots-clés suivis de la page`;
+      const ctrl = im.control_ratio ? Math.round((im.control_ratio - 1) * 100) : null;
+      const moved = im.pos_after < im.pos_before ? "est passé" : "a reculé";
+      sentence = `Depuis la mise en ligne, ${who} ${kws.length === 1 ? moved : moved.replace("est passé", "sont passés").replace("a reculé", "ont reculé")} de la position ${fmt1(im.pos_before)} à ${fmt1(im.pos_after)} en moyenne`
+        + (adj != null ? `, et la page ${adj >= 0 ? "gagne" : "perd"} environ ${fmt(Math.abs(adj))} clics par mois une fois retirée la tendance des mots-clés non touchés${ctrl != null ? ` (${ctrl >= 0 ? "+" : ""}${ctrl} % sur la même période)` : ""}.` : ".");
+    }
+    const progress = a.days_after >= 0 && a.days_after < 28 && kws.length
+      ? `<div class="progress"><div style="width:${Math.round(Math.min(a.days_after, 28) / 28 * 100)}%"></div></div><div class="meta">Mesure en cours : ${a.days_after} / 28 jours${a.days_after < 7 ? ", premier résultat à 7 jours" : ", résultat provisoire"}</div>` : "";
+    const tiles = im ? `<div class="impact">
         <div><div class="l">Position moy. avant → après</div><div class="v">${fmt1(im.pos_before)} → ${fmt1(im.pos_after)}</div></div>
         <div><div class="l">Clics par jour avant → après</div><div class="v">${fmt1(im.clicks_day_before)} → ${fmt1(im.clicks_day_after)}</div></div>
         <div><div class="l">Impressions par jour</div><div class="v">${fmt(im.impr_day_before)} → ${fmt(im.impr_day_after)}</div></div>
-        <div><div class="l">Effet de l'action ${info("impact")}</div><div class="v">${verdict}</div></div></div>
-        <div class="meta" style="margin-top:8px">Mesuré sur ${im.window_after} jours après la mise en ligne${im.window_after < 28 ? " (définitif à 28 jours)" : ""}.</div>`
-      : `<div class="meta" style="margin-top:8px">${esc(a.reason || "")}</div>`;
-    return `<div class="card item"><span class="badge">${esc(a.type || "autre")}</span><div>
-      <h3>${esc(a.title || "Action")}</h3>${a.description ? `<p>${esc(a.description)}</p>` : ""}
-      <div class="meta"><span>${fmtDateL(a.date)}</span>${a.page ? urlLink(a.page) : ""}${a.author ? `<span>${esc(a.author)}</span>` : ""}
-      ${a.keywords && a.keywords.length ? `<span>Mesuré sur : ${a.keywords.map(i => `<span class="k" data-i="${i}" style="cursor:pointer;text-decoration:underline">${esc(kwName(i))}</span>`).join(", ")}</span>` : ""}</div>${body}</div><div></div></div>`;
+        <div><div class="l">Effet de l'action ${info("impact")}</div><div class="v">${verdictPill}</div></div></div>` : "";
+    return `<div class="card act" id="act-${a.id}">
+      <div class="act-head"><span class="badge">${esc(a.type || "autre")}</span><div class="act-title"><h3>${esc(a.title || "Action")}</h3>
+        <div class="meta"><span>${fmtDateL(a.date)}</span>${a.page ? urlLink(a.page) : ""}${a.author ? `<span>${esc(a.author)}</span>` : ""}
+        ${a.keywords && a.keywords.length ? `<span>Mesuré sur : ${a.keywords.map(i => `<span class="k" data-i="${i}">${esc(kwName(i))}</span>`).join(", ")}</span>` : ""}</div></div>
+        <div class="act-verdict">${verdictPill}</div></div>
+      ${a.description ? `<p class="act-desc">${esc(a.description)}</p>` : ""}
+      ${sentence ? `<p class="act-sentence">${sentence}</p>` : ""}
+      ${progress}
+      ${!im ? `<div class="meta">${esc(a.reason || "")}</div>` : ""}
+      ${a.keywords && a.keywords.length ? `<div class="act-chart"><canvas id="act-c-${a.id}"></canvas></div>` : ""}
+      ${tiles}
+      ${im ? `<div class="meta" style="margin-top:8px">Mesuré sur ${im.window_after} jours après la mise en ligne${im.window_after < 28 ? " (définitif à 28 jours)" : ""}, comparé aux 28 jours d'avant.</div>` : ""}
+    </div>`;
   }).join("");
-  $("view").innerHTML = viewBar(`<span class="light ref-note">${plural(P.actions.length, "action", "actions")}</span>`, btnLink(issue("action.yml", { projet: P.name, title: "Action : " }), "Ajouter une action"))
-    + `<div class="list">${cards || `<div class="card big-empty">Aucune action consignée.</div>`}</div>
-    <details class="fold"><summary>Méthode de mesure</summary><div class="explain">28 jours avant la mise en ligne contre 28 jours après (7 minimum), sur les mots-clés suivis de la page, en position moyenne et en clics. La tendance des mots-clés non touchés (groupe témoin) est retirée, puis le résultat est ramené à un mois. L'action apparaît en repère « A » sur les courbes.</div></details>`;
-  document.querySelectorAll("[data-i]").forEach(el => el.onclick = () => openDrawer(+el.dataset.i));
+
+  $("view").innerHTML = viewBar(`<span class="act-sum"><b>${plural(P.actions.length, "action", "actions")}</b>${measured.length ? ` · ${measured.length} mesurée${measured.length > 1 ? "s" : ""} · effet cumulé <span class="pill ${total > 0 ? "up" : total < 0 ? "down" : "flat"}">${total > 0 ? "▲ +" : total < 0 ? "▼ " : ""}${fmt(total)} clics / mois</span>` : ""}${running.length ? ` · ${running.length} en cours de mesure` : ""}</span>${P.actions.length ? metricTabs : ""}`,
+      btnLink(issue("action.yml", { projet: P.name, title: "Action : " }), "Ajouter une action"))
+    + `<div class="list">${cards || `<div class="card big-empty">Aucune action consignée. Tu peux aussi cliquer sur la courbe d'un mot-clé (panneau de détail) pour consigner une action à cette date.</div>`}</div>
+    <details class="fold"><summary>Méthode de mesure</summary><div class="explain">28 jours avant la mise en ligne contre 28 jours après (7 minimum), sur les mots-clés suivis de la page, en position moyenne et en clics. La tendance des mots-clés non touchés (groupe témoin) est retirée, puis le résultat est ramené à un mois. Sur le graphique : la zone jaune est la période après la mise en ligne, les pointillés sont les moyennes avant et après. L'action apparaît aussi en repère « A » sur les autres courbes.</div></details>`;
+  document.querySelectorAll(".act [data-i]").forEach(el => el.onclick = () => openDrawer(+el.dataset.i));
+  document.querySelectorAll("#act-metric button").forEach(b => b.onclick = () => { ui.actMetric = b.dataset.v; store.set("actMetric", ui.actMetric); renderActions(); });
+  P.actions.forEach(drawActionChart);
+}
+
+// Graphique avant / après d'une action : 28 jours avant, jusqu'à 28 jours après, sur les mots-clés suivis de la page
+function drawActionChart(a) {
+  if (!$(`act-c-${a.id}`) || !a.keywords || !a.keywords.length) return;
+  const ks = P.keywords.filter(k => a.keywords.includes(k.i));
+  const end = [shift(a.date, 28), P.last_date].sort()[0];
+  const dates = calDates(shift(a.date, -28), end < a.date ? a.date : end);
+  const pos = ui.actMetric === "position";
+  const vals = dates.map(d => {
+    const pts = ks.map(k => k.map.get(d)).filter(Boolean);
+    if (!pts.length) return null;
+    if (!pos) return pts.reduce((s, p) => s + p[2], 0);
+    const i = pts.reduce((s, p) => s + p[3], 0);
+    return i ? pts.reduce((s, p) => s + p[1] * p[3], 0) / i : null;
+  });
+  const fresh = dates.map(d => d > P.last_final);
+  const idx = dates.indexOf(a.date);
+  const im = a.impact;
+  const before = im ? (pos ? im.pos_before : im.clicks_day_before) : null, after = im ? (pos ? im.pos_after : im.clicks_day_after) : null;
+  const f = v => pos ? fmt1(v) : fmt1(v);
+  const ds = [lineDs(pos ? "Position" : "Clics", vals, INK, { fresh })];
+  chart(`act-c-${a.id}`, { type: "line", data: { labels: dates.map(fmtDate), datasets: ds },
+    options: { maintainAspectRatio: false, interaction: { mode: "index", intersect: false }, layout: { padding: { top: 18 } },
+      scales: { y: pos ? posScale(vals) : linScale(), x: xScale() },
+      plugins: { legend: { display: false },
+        beforeAfter: { idx: idx >= 0 ? idx : null, label: `Mise en ligne, ${fmtDate(a.date)}`,
+          before, after, beforeText: before != null ? `moy. avant ${f(before)}` : "", afterText: after != null ? `moy. après ${f(after)}` : "" },
+        tooltip: tooltip({ label: c => ` ${pos ? "Position" : "Clics"} : ${pos ? fmt1(c.parsed.y) : fmt(c.parsed.y)}` }) } } });
 }
 
 // ---------------------------------------------------------------- Opportunités

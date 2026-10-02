@@ -84,15 +84,25 @@ def main():
             dt = date.fromisoformat(d.get("date", "").strip())
         except ValueError:
             fail("Date invalide, format attendu AAAA-MM-JJ.")
+        # Garde-fou : la date doit tomber dans l'historique de la Search Console (16 mois) et pas dans le futur
+        today = date.today()
+        if dt > today:
+            fail(f"La date {dt} est dans le futur. Indique la date réelle de mise en ligne (AAAA-MM-JJ).")
+        if (today - dt).days > 480:
+            fail(f"La date {dt} est trop ancienne : la Search Console ne garde que 16 mois, l'effet ne pourrait pas être mesuré. Vérifie l'année.")
         page = d.get("page", "").strip()
         if not page.startswith("http"):
             fail("La page doit être une URL complète (https://…).")
+        kpath = CONF / "keywords" / f"{s}.yaml"
+        tracked = (yaml.safe_load(kpath.read_text(encoding="utf-8")) or {}).get("keywords") or [] if kpath.exists() else []
+        measurable = any((k.get("page") or "").rstrip("/") == page.rstrip("/") for k in tracked)
         lines = [f"  - date: {dt}", f"    page: {page}", f"    type: {d.get('type') or 'autre'}", f"    title: {q(d.get('titre', '').strip())}"]
         if d.get("description"):
             lines.append(f"    description: {q(d['description'])}")
         lines.append(f"    author: {q(d.get('auteur') or author)}")
         append_item(CONF / "actions" / f"{s}.yaml", "actions", lines)
-        print(f"RESULT=Action ajoutée au journal de {s} ({dt}, {page}). L'impact sera calculé dès 7 jours de recul.")
+        warn = "" if measurable else " Attention : aucun mot-clé suivi n'a cette page comme page suivie, l'effet ne sera pas mesuré tant qu'un mot-clé n'y est pas rattaché."
+        print(f"RESULT=Action ajoutée au journal de {s} ({dt}, {page}). L'effet sera mesuré dès 7 jours de recul.{warn}")
         print(f"SITE={s}\nKIND=action")
 
     elif "mot-cle" in labels:

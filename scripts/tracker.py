@@ -721,6 +721,9 @@ def impact(actions, groups, finals):
         if not aff:
             res["impact"] = None
             res["reason"] = "Aucun mot-clé suivi sur cette page"
+        elif D < dshift(finals[0], 28):
+            res["impact"] = None
+            res["reason"] = f"Date trop proche du début des données ({finals[0]}) : il faut 28 jours d'historique avant l'action pour la mesurer"
         elif days_after < 7:
             res["impact"] = None
             res["reason"] = f"Pas assez de recul ({max(days_after, 0)} jour{'s' if days_after > 1 else ''} de données définitives après l'action, 7 minimum)"
