@@ -45,6 +45,7 @@ jobs:
           GSC_REFRESH_TOKEN: ${{ secrets.GSC_REFRESH_TOKEN }}
           # Comptes supplémentaires (scripts/oauth_login.py --label <nom>) : ajouter une ligne par compte, par ex.
           # GSC_REFRESH_TOKEN_PIERRE: ${{ secrets.GSC_REFRESH_TOKEN_PIERRE }}
+          GSC_REFRESH_TOKEN_ANALYTICS: ${{ secrets.GSC_REFRESH_TOKEN_ANALYTICS }}
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         run: |
           ARGS="--days ${{ github.event.inputs.days || '10' }}"
@@ -61,6 +62,7 @@ jobs:
           GSC_REFRESH_TOKEN: ${{ secrets.GSC_REFRESH_TOKEN }}
           # Comptes supplémentaires (scripts/oauth_login.py --label <nom>) : ajouter une ligne par compte, par ex.
           # GSC_REFRESH_TOKEN_PIERRE: ${{ secrets.GSC_REFRESH_TOKEN_PIERRE }}
+          GSC_REFRESH_TOKEN_ANALYTICS: ${{ secrets.GSC_REFRESH_TOKEN_ANALYTICS }}
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         run: python scripts/tracker.py notify
 
