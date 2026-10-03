@@ -34,8 +34,9 @@ def main():
     a = ap.parse_args()
 
     flow = InstalledAppFlow.from_client_secrets_file(a.client_secret, SCOPES)
-    # prompt=consent garantit qu'un refresh token est renvoyé même si l'app a déjà été autorisée
-    creds = flow.run_local_server(port=0, prompt="consent", access_type="offline")
+    # select_account force le choix du compte (sinon Google reprend la session ouverte),
+    # consent garantit qu'un refresh token est renvoyé même si l'app a déjà été autorisée
+    creds = flow.run_local_server(port=0, prompt="select_account consent", access_type="offline")
     if not creds.refresh_token:
         sys.exit("Pas de refresh token renvoyé par Google.")
 

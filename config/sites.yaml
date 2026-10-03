@@ -21,3 +21,12 @@ sites:
     countries:
       - {code: fra, label: France, path: /fr-fr/}
       - bel
+
+  - name: pranarom
+    label: Pranarôm
+    property: https://pranarom.fr/
+    account: upearly
+    owner: Théo
+    brand_regex: "pranar[oô]m|prana ?r[oô]m|panar[oô]m|pranar[oô]n|pranrom|parnarom|inula"
+    countries:
+      - {code: fra, label: France}

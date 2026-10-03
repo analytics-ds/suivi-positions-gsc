@@ -190,9 +190,13 @@ def token(account):
     s = secrets()
     suffix = "" if account == "default" else "_" + re.sub(r"\W", "_", account).upper()
     refresh = s.get("GSC_REFRESH_TOKEN" + suffix)
-    if not refresh or not s.get("GSC_CLIENT_ID"):
+    # Un compte hors organisation datashake.fr passe par une autre app OAuth : GSC_CLIENT_ID_<COMPTE> et
+    # GSC_CLIENT_SECRET_<COMPTE>, sinon l'app interne commune
+    client_id = s.get("GSC_CLIENT_ID" + suffix) or s.get("GSC_CLIENT_ID")
+    client_secret = s.get("GSC_CLIENT_SECRET" + suffix) or s.get("GSC_CLIENT_SECRET")
+    if not refresh or not client_id:
         raise RuntimeError(f"pas de jeton OAuth pour le compte « {account} » (secret GSC_REFRESH_TOKEN{suffix})")
-    c = Credentials(None, refresh_token=refresh, client_id=s["GSC_CLIENT_ID"], client_secret=s["GSC_CLIENT_SECRET"],
+    c = Credentials(None, refresh_token=refresh, client_id=client_id, client_secret=client_secret,
                     token_uri="https://oauth2.googleapis.com/token")
     c.refresh(gat.Request())
     _tokens[account] = c.token

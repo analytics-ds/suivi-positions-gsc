@@ -1,0 +1,44 @@
+# Mots-clés suivis pour Pranarôm, pré-remplis avec les 20 premières requêtes hors marque par clics (28 jours).
+# Voir config/keywords/celio.yaml pour le détail des champs.
+
+keywords:
+  - keyword: "huile de nigelle bienfaits"
+    page: https://pranarom.fr/blogs/conseils-experts/les-bienfaits-de-la-miraculeuse-huile-de-nigelle
+  - keyword: "allergie piqure moustique"
+    page: https://pranarom.fr/blogs/conseils-experts/allergie-piqure-moustique
+  - keyword: "huile de coco poux"
+    page: https://pranarom.fr/blogs/conseils-experts/lhuile-de-coco-est-elle-efficace-contre-les-poux
+  - keyword: "baume pectoral bébé"
+    page: https://pranarom.fr/products/baume-pectoral-bebe-bio
+  - keyword: "huile de nigelle"
+    page: https://pranarom.fr/blogs/conseils-experts/les-bienfaits-de-la-miraculeuse-huile-de-nigelle
+  - keyword: "comment soigner une infection urinaire en 10 minutes"
+    page: https://pranarom.fr/blogs/conseils-experts/conseils-experts-infection-urinaire-traitement-naturel-solutions-efficaces
+  - keyword: "infection urinaire remède rapide"
+    page: https://pranarom.fr/blogs/conseils-experts/infection-urinaire-traitement-naturel-solutions-efficaces
+  - keyword: "allergie moustique"
+    page: https://pranarom.fr/blogs/conseils-experts/allergie-piqure-moustique
+  - keyword: "infection urinaire traitement"
+    page: https://pranarom.fr/blogs/conseils-experts/infection-urinaire-traitement-naturel-solutions-efficaces
+  - keyword: "oleobiotic"
+    page: https://pranarom.fr/products/oleobiotic%C2%AE-sante-respiratoire
+  - keyword: "huile nigelle bienfaits"
+    page: https://pranarom.fr/blogs/conseils-experts/les-bienfaits-de-la-miraculeuse-huile-de-nigelle
+  - keyword: "piqûre moustique qui gonfle et durcit et chauffe"
+    page: https://pranarom.fr/blogs/conseils-experts/allergie-piqure-moustique
+  - keyword: "huile essentielle infection urinaire"
+    page: https://pranarom.fr/blogs/conseils-experts/quelle-huile-essentielle-utiliser-en-cas-dinfection-urinaire
+  - keyword: "piqure moustique tigre"
+    page: https://pranarom.fr/blogs/conseils-experts/allergie-piqure-moustique-tigre
+  - keyword: "reaction piqure moustique"
+    page: https://pranarom.fr/blogs/conseils-experts/allergie-piqure-moustique
+  - keyword: "poux huile de coco"
+    page: https://pranarom.fr/blogs/conseils-experts/lhuile-de-coco-est-elle-efficace-contre-les-poux
+  - keyword: "copaiba huile essentielle"
+    page: https://pranarom.fr/blogs/conseils-experts/huile-essentielle-de-copaiba-un-tresor-cache
+  - keyword: "huile de nigelle bienfait"
+    page: https://pranarom.fr/blogs/conseils-experts/les-bienfaits-de-la-miraculeuse-huile-de-nigelle
+  - keyword: "aromaforce"
+    page: https://pranarom.fr/collections/aromaforce
+  - keyword: "huile coco poux"
+    page: https://pranarom.fr/blogs/conseils-experts/lhuile-de-coco-est-elle-efficace-contre-les-poux

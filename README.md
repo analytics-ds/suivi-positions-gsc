@@ -61,6 +61,8 @@ Le navigateur s'ouvre, on se connecte, le script liste les propriétés accessib
 
 Sans `--label`, le script remplace le compte principal.
 
+Compte hors organisation datashake.fr (ex. analytics@upearly.fr) : l'app interne le refuse (« org_internal »). On réutilise alors le jeton d'une autre app OAuth déjà autorisée pour ce compte, en posant trois secrets `GSC_CLIENT_ID_<COMPTE>`, `GSC_CLIENT_SECRET_<COMPTE>` et `GSC_REFRESH_TOKEN_<COMPTE>`, déclarés tous les trois dans les blocs `env` des workflows. Sans `GSC_CLIENT_ID_<COMPTE>`, c'est l'app interne qui est utilisée.
+
 ## Digest Slack (optionnel)
 
 Avec un secret `SLACK_WEBHOOK_URL` (webhook entrant Slack), la synchro du matin poste les nouvelles alertes, et le lundi un récap de tous les projets. Sans ce secret, l'étape ne fait rien.
