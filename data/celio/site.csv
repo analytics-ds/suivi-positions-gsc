@@ -480,7 +480,7 @@ date,site,country,segment,position,clicks,impressions,data_state
 2026-09-29,celio,all,brand,2.7,14354,29708,final
 2026-09-30,celio,all,brand,2.4,15159,29946,final
 2026-10-01,celio,all,brand,2.7,13790,28418,fresh
-2026-10-02,celio,all,brand,2.5,12618,26788,fresh
+2026-10-02,celio,all,brand,2.6,12961,27737,fresh
 2025-06-08,celio,all,nonbrand,13.2,3902,146584,final
 2025-06-09,celio,all,nonbrand,12.0,4884,152043,final
 2025-06-10,celio,all,nonbrand,12.9,4503,147377,final
@@ -962,7 +962,7 @@ date,site,country,segment,position,clicks,impressions,data_state
 2026-09-29,celio,all,nonbrand,7.0,2159,74319,final
 2026-09-30,celio,all,nonbrand,7.5,2177,84545,final
 2026-10-01,celio,all,nonbrand,7.7,1905,89215,fresh
-2026-10-02,celio,all,nonbrand,7.6,1655,82252,fresh
+2026-10-02,celio,all,nonbrand,7.7,1719,86554,fresh
 2025-06-08,celio,all,total,26.8,18291,644123,final
 2025-06-09,celio,all,total,22.8,23317,627926,final
 2025-06-10,celio,all,total,21.0,21163,563227,final
@@ -1444,7 +1444,7 @@ date,site,country,segment,position,clicks,impressions,data_state
 2026-09-29,celio,all,total,8.0,20536,245919,final
 2026-09-30,celio,all,total,8.1,21578,255841,final
 2026-10-01,celio,all,total,8.2,19553,262369,fresh
-2026-10-02,celio,all,total,8.3,17678,232868,fresh
+2026-10-02,celio,all,total,8.4,18212,244813,fresh
 2025-06-08,celio,bel,brand,1.1,276,1227,final
 2025-06-09,celio,bel,brand,1.1,307,1085,final
 2025-06-10,celio,bel,brand,1.0,233,1112,final
@@ -1926,7 +1926,7 @@ date,site,country,segment,position,clicks,impressions,data_state
 2026-09-29,celio,bel,brand,2.3,511,1210,final
 2026-09-30,celio,bel,brand,1.5,501,1220,final
 2026-10-01,celio,bel,brand,1.2,429,1173,fresh
-2026-10-02,celio,bel,brand,1.3,351,1081,fresh
+2026-10-02,celio,bel,brand,1.3,359,1106,fresh
 2025-06-08,celio,bel,nonbrand,9.2,143,8830,final
 2025-06-09,celio,bel,nonbrand,8.6,160,4842,final
 2025-06-10,celio,bel,nonbrand,8.6,157,4495,final
@@ -2408,7 +2408,7 @@ date,site,country,segment,position,clicks,impressions,data_state
 2026-09-29,celio,bel,nonbrand,8.6,98,6896,final
 2026-09-30,celio,bel,nonbrand,7.3,92,5222,final
 2026-10-01,celio,bel,nonbrand,7.7,88,4795,fresh
-2026-10-02,celio,bel,nonbrand,7.5,75,5069,fresh
+2026-10-02,celio,bel,nonbrand,7.7,76,5370,fresh
 2025-06-08,celio,bel,total,9.4,603,17808,final
 2025-06-09,celio,bel,total,9.3,641,13693,final
 2025-06-10,celio,bel,total,9.2,571,13130,final
@@ -2890,7 +2890,7 @@ date,site,country,segment,position,clicks,impressions,data_state
 2026-09-29,celio,bel,total,8.8,820,12482,final
 2026-09-30,celio,bel,total,8.7,770,12423,final
 2026-10-01,celio,bel,total,8.7,682,12053,fresh
-2026-10-02,celio,bel,total,8.7,590,11528,fresh
+2026-10-02,celio,bel,total,8.8,602,11965,fresh
 2025-06-08,celio,fra,brand,2.5,4847,204732,final
 2025-06-09,celio,fra,brand,2.7,6250,238197,final
 2025-06-10,celio,fra,brand,2.9,5375,224634,final
@@ -3372,7 +3372,7 @@ date,site,country,segment,position,clicks,impressions,data_state
 2026-09-29,celio,fra,brand,2.7,4581,144630,final
 2026-09-30,celio,fra,brand,2.2,4892,140032,final
 2026-10-01,celio,fra,brand,2.3,4262,127853,fresh
-2026-10-02,celio,fra,brand,2.3,4123,124229,fresh
+2026-10-02,celio,fra,brand,2.3,4222,127653,fresh
 2025-06-08,celio,fra,nonbrand,6.8,3224,117557,final
 2025-06-09,celio,fra,nonbrand,6.6,4132,134028,final
 2025-06-10,celio,fra,nonbrand,6.0,3743,114731,final
@@ -3854,7 +3854,7 @@ date,site,country,segment,position,clicks,impressions,data_state
 2026-09-29,celio,fra,nonbrand,6.7,1700,62901,final
 2026-09-30,celio,fra,nonbrand,5.1,1722,53381,final
 2026-10-01,celio,fra,nonbrand,5.3,1404,52534,fresh
-2026-10-02,celio,fra,nonbrand,5.3,1255,47465,fresh
+2026-10-02,celio,fra,nonbrand,5.3,1301,49067,fresh
 2025-06-08,celio,fra,total,4.0,8071,322289,final
 2025-06-09,celio,fra,total,4.1,10382,372225,final
 2025-06-10,celio,fra,total,3.9,9118,339365,final
@@ -4336,4 +4336,4 @@ date,site,country,segment,position,clicks,impressions,data_state
 2026-09-29,celio,fra,total,3.9,6281,207531,final
 2026-09-30,celio,fra,total,3.0,6614,193413,final
 2026-10-01,celio,fra,total,3.2,5666,180387,fresh
-2026-10-02,celio,fra,total,3.1,5378,171694,fresh
+2026-10-02,celio,fra,total,3.1,5523,176720,fresh

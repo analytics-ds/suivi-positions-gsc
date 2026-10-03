@@ -251,8 +251,8 @@ date,site,country,query,page,position,clicks,impressions
 2026-10-01,celio,all,blouson homme,https://www.celio.com/fr-fr/store?StoreID=0224,2,0,2
 2026-10-01,celio,all,blouson homme,https://www.celio.com/fr-fr/store?StoreID=0702,6,0,2
 2026-10-01,celio,all,blouson homme,https://www.celio.com/fr-fr/store?StoreID=1461,2.3,0,3
-2026-10-02,celio,all,blouson homme,https://www.celio.com/fr-be/c/manteaux-blousons,5.4,0,10
-2026-10-02,celio,all,blouson homme,https://www.celio.com/fr-fr/c/blousons-et-manteaux-blousons,3.0,12,271
+2026-10-02,celio,all,blouson homme,https://www.celio.com/fr-be/c/manteaux-blousons,5.4,0,11
+2026-10-02,celio,all,blouson homme,https://www.celio.com/fr-fr/c/blousons-et-manteaux-blousons,3.0,13,277
 2026-07-05,celio,all,cardigan homme,https://www.celio.com/fr-be/c/pulls-gilets-et-cardigans,12,0,2
 2026-07-05,celio,all,cardigan homme,https://www.celio.com/fr-fr/c/gilets-et-cardigans-gilets-et-cardigans-en-laine,88,0,2
 2026-07-05,celio,all,cardigan homme,https://www.celio.com/fr-fr/c/gilets-et-cardigans-gilets-et-cardigans-noirs,77.7,0,3
@@ -475,8 +475,8 @@ date,site,country,query,page,position,clicks,impressions
 2026-10-01,celio,all,cardigan homme,https://www.celio.com/fr-be/c/pulls-gilets-et-cardigans,12.6,0,5
 2026-10-01,celio,all,cardigan homme,https://www.celio.com/fr-fr/c/pulls-gilets-et-cardigans,1.7,32,510
 2026-10-01,celio,all,cardigan homme,https://www.celio.com/fr-fr/store?StoreID=0671,10,0,3
-2026-10-02,celio,all,cardigan homme,https://www.celio.com/fr-be/c/pulls-gilets-et-cardigans,11,0,2
-2026-10-02,celio,all,cardigan homme,https://www.celio.com/fr-fr/c/pulls-gilets-et-cardigans,1.5,25,449
+2026-10-02,celio,all,cardigan homme,https://www.celio.com/fr-be/c/pulls-gilets-et-cardigans,12,0,3
+2026-10-02,celio,all,cardigan homme,https://www.celio.com/fr-fr/c/pulls-gilets-et-cardigans,1.5,25,464
 2026-07-05,celio,all,cargo homme,https://www.celio.com/fr-fr/c/pantalons-pantalons-cargos,2.3,1,165
 2026-07-06,celio,all,cargo homme,https://www.celio.com/fr-be/c/pantalons-pantalons-cargos,4.7,0,3
 2026-07-06,celio,all,cargo homme,https://www.celio.com/fr-fr/c/pantalons-pantalons-cargos,1.9,3,149
@@ -739,7 +739,7 @@ date,site,country,query,page,position,clicks,impressions
 2026-10-01,celio,all,cargo homme,https://www.celio.com/fr-fr/store?StoreID=0002,5,0,2
 2026-10-01,celio,all,cargo homme,https://www.celio.com/fr-fr/store?StoreID=0025,5.3,0,3
 2026-10-01,celio,all,cargo homme,https://www.celio.com/fr-fr/store?StoreID=0770,5.5,0,2
-2026-10-02,celio,all,cargo homme,https://www.celio.com/fr-fr/c/pantalons-pantalons-cargos,3.4,8,138
+2026-10-02,celio,all,cargo homme,https://www.celio.com/fr-fr/c/pantalons-pantalons-cargos,3.5,8,143
 2026-10-02,celio,all,cargo homme,https://www.celio.com/fr-fr/store?StoreID=0002,5.8,0,4
 2026-10-02,celio,all,cargo homme,https://www.celio.com/fr-fr/store?StoreID=0230,5.3,0,3
 2026-10-02,celio,all,cargo homme,https://www.celio.com/fr-fr/store?StoreID=0763,4,0,2
@@ -937,7 +937,7 @@ date,site,country,query,page,position,clicks,impressions
 2026-10-01,celio,all,chemise blanche homme,https://www.celio.com/fr-be/c/chemises-chemises-blanches,4.7,0,7
 2026-10-01,celio,all,chemise blanche homme,https://www.celio.com/fr-fr/c/chemises-chemises-blanches,1.9,9,216
 2026-10-02,celio,all,chemise blanche homme,https://www.celio.com/fr-be/c/chemises-chemises-blanches,3,0,5
-2026-10-02,celio,all,chemise blanche homme,https://www.celio.com/fr-fr/c/chemises-chemises-blanches,1.4,7,191
+2026-10-02,celio,all,chemise blanche homme,https://www.celio.com/fr-fr/c/chemises-chemises-blanches,1.4,7,196
 2026-07-05,celio,all,chemise homme,https://www.celio.com/fr-be/c/chemises,9.5,0,19
 2026-07-05,celio,all,chemise homme,https://www.celio.com/fr-fr/c/chemises,2.1,29,1016
 2026-07-05,celio,all,chemise homme,https://www.celio.com/fr-fr/store?StoreID=0012,4,0,2
@@ -1359,7 +1359,7 @@ date,site,country,query,page,position,clicks,impressions
 2026-10-01,celio,all,chemise homme,https://www.celio.com/fr-fr/store?StoreID=1675,6,0,2
 2026-10-02,celio,all,chemise homme,https://www.celio.com/fr-be/c/chemises,11.2,0,12
 2026-10-02,celio,all,chemise homme,https://www.celio.com/fr-be/c/chemises-chemises-habillees,1,0,2
-2026-10-02,celio,all,chemise homme,https://www.celio.com/fr-fr/c/chemises,4.1,21,624
+2026-10-02,celio,all,chemise homme,https://www.celio.com/fr-fr/c/chemises,4.0,22,645
 2026-10-02,celio,all,chemise homme,https://www.celio.com/fr-fr/store?StoreID=0235,4.5,0,4
 2026-10-02,celio,all,chemise homme,https://www.celio.com/fr-fr/store?StoreID=0263,10,0,2
 2026-10-02,celio,all,chemise homme,https://www.celio.com/fr-fr/store?StoreID=0292,6,0,2
@@ -1646,7 +1646,7 @@ date,site,country,query,page,position,clicks,impressions
 2026-10-01,celio,all,chino,https://www.celio.com/fr-be/c/pantalons-pantalons-chinos,7,0,6
 2026-10-01,celio,all,chino,https://www.celio.com/fr-fr/c/pantalons-pantalons-chinos,3.1,4,335
 2026-10-02,celio,all,chino,https://www.celio.com/fr-be/c/pantalons-pantalons-chinos,3.1,0,8
-2026-10-02,celio,all,chino,https://www.celio.com/fr-fr/c/pantalons-pantalons-chinos,3.5,4,298
+2026-10-02,celio,all,chino,https://www.celio.com/fr-fr/c/pantalons-pantalons-chinos,3.5,4,313
 2026-07-05,celio,all,costume 3 pièces homme,https://www.celio.com/fr-be/c/costumes-costume-3-pieces-pour-homme,1,0,4
 2026-07-05,celio,all,costume 3 pièces homme,https://www.celio.com/fr-fr/c/costumes-costume-3-pieces-pour-homme,2.6,8,137
 2026-07-06,celio,all,costume 3 pièces homme,https://www.celio.com/fr-be/c/costumes-costume-3-pieces-pour-homme,1.2,1,5
@@ -1823,8 +1823,8 @@ date,site,country,query,page,position,clicks,impressions
 2026-09-30,celio,all,costume 3 pièces homme,https://www.celio.com/fr-fr/c/costumes-costume-3-pieces-pour-homme,2.3,6,85
 2026-10-01,celio,all,costume 3 pièces homme,https://www.celio.com/fr-be/c/costumes-costume-3-pieces-pour-homme,1,0,3
 2026-10-01,celio,all,costume 3 pièces homme,https://www.celio.com/fr-fr/c/costumes-costume-3-pieces-pour-homme,2.5,6,73
-2026-10-02,celio,all,costume 3 pièces homme,https://www.celio.com/fr-be/c/costumes-costume-3-pieces-pour-homme,1,0,2
-2026-10-02,celio,all,costume 3 pièces homme,https://www.celio.com/fr-fr/c/costumes-costume-3-pieces-pour-homme,2.2,9,67
+2026-10-02,celio,all,costume 3 pièces homme,https://www.celio.com/fr-be/c/costumes-costume-3-pieces-pour-homme,1,0,3
+2026-10-02,celio,all,costume 3 pièces homme,https://www.celio.com/fr-fr/c/costumes-costume-3-pieces-pour-homme,2.3,9,70
 2026-07-05,celio,all,costume homme,https://www.celio.com/fr-be/c/costumes,4.2,3,45
 2026-07-05,celio,all,costume homme,https://www.celio.com/fr-fr/c/costumes,3.8,41,1295
 2026-07-05,celio,all,costume homme,https://www.celio.com/fr-fr/store?StoreID=0037,1,0,2
@@ -2190,8 +2190,8 @@ date,site,country,query,page,position,clicks,impressions
 2026-10-01,celio,all,costume homme,https://www.celio.com/fr-fr/store?StoreID=0025,2,0,2
 2026-10-01,celio,all,costume homme,https://www.celio.com/fr-fr/store?StoreID=1531,2,0,2
 2026-10-01,celio,all,costume homme,https://www.celio.com/fr-fr/store?StoreID=1693,2,0,3
-2026-10-02,celio,all,costume homme,https://www.celio.com/fr-be/c/costumes,4.2,1,45
-2026-10-02,celio,all,costume homme,https://www.celio.com/fr-fr/c/costumes,4.0,40,1004
+2026-10-02,celio,all,costume homme,https://www.celio.com/fr-be/c/costumes,4.1,1,47
+2026-10-02,celio,all,costume homme,https://www.celio.com/fr-fr/c/costumes,4.0,42,1036
 2026-10-02,celio,all,costume homme,https://www.celio.com/fr-fr/store?StoreID=0037,2,0,2
 2026-10-02,celio,all,costume homme,https://www.celio.com/fr-fr/store?StoreID=0623,2,0,2
 2026-10-02,celio,all,costume homme,https://www.celio.com/fr-fr/store?StoreID=0676,4,0,2
@@ -2655,9 +2655,9 @@ date,site,country,query,page,position,clicks,impressions
 2026-10-01,celio,all,doudoune homme,https://www.celio.com/,1,0,13
 2026-10-01,celio,all,doudoune homme,https://www.celio.com/fr-be/c/manteaux-doudounes,12.4,0,5
 2026-10-01,celio,all,doudoune homme,https://www.celio.com/fr-fr/c/blousons-et-manteaux-doudounes,2.1,3,430
-2026-10-02,celio,all,doudoune homme,https://www.celio.com/,1,0,26
+2026-10-02,celio,all,doudoune homme,https://www.celio.com/,1,0,27
 2026-10-02,celio,all,doudoune homme,https://www.celio.com/fr-be/c/manteaux-doudounes,14.8,0,4
-2026-10-02,celio,all,doudoune homme,https://www.celio.com/fr-fr/c/blousons-et-manteaux-doudounes,3.1,1,270
+2026-10-02,celio,all,doudoune homme,https://www.celio.com/fr-fr/c/blousons-et-manteaux-doudounes,3.1,1,283
 2026-07-05,celio,all,doudounes homme,https://www.celio.com/fr-fr/c/blousons-et-manteaux-doudounes,11.4,0,13
 2026-07-06,celio,all,doudounes homme,https://www.celio.com/fr-be/c/manteaux-doudounes,12,0,2
 2026-07-06,celio,all,doudounes homme,https://www.celio.com/fr-fr/c/blousons-et-manteaux-doudounes,9.7,0,18
@@ -3017,7 +3017,7 @@ date,site,country,query,page,position,clicks,impressions
 2026-10-01,celio,all,ensemble homme,https://www.celio.com/fr-be/c/saisonniers-ensemble,1.1,1,10
 2026-10-01,celio,all,ensemble homme,https://www.celio.com/fr-fr/c/saisonniers-ensemble,3.4,11,335
 2026-10-02,celio,all,ensemble homme,https://www.celio.com/fr-be/c/saisonniers-ensemble,1.2,0,5
-2026-10-02,celio,all,ensemble homme,https://www.celio.com/fr-fr/c/saisonniers-ensemble,3.8,2,272
+2026-10-02,celio,all,ensemble homme,https://www.celio.com/fr-fr/c/saisonniers-ensemble,3.8,2,277
 2026-07-05,celio,all,jean homme,https://www.celio.com/fr-fr/c/jeans,1.6,3,264
 2026-07-06,celio,all,jean homme,https://www.celio.com/fr-fr/c/jeans,1.4,5,211
 2026-07-07,celio,all,jean homme,https://www.celio.com/fr-be/c/jeans,13.5,0,2
@@ -3395,7 +3395,9 @@ date,site,country,query,page,position,clicks,impressions
 2026-10-01,celio,all,jean homme,https://www.celio.com/fr-fr/store?StoreID=0769,4.5,0,2
 2026-10-01,celio,all,jean homme,https://www.celio.com/fr-fr/store?StoreID=1664,2,0,2
 2026-10-01,celio,all,jean homme,https://www.celio.com/fr-fr/store?StoreID=1683,4.5,0,2
-2026-10-02,celio,all,jean homme,https://www.celio.com/fr-fr/c/jeans,1.5,14,359
+2026-10-02,celio,all,jean homme,https://www.celio.com/fr-be/c/jeans,4,0,2
+2026-10-02,celio,all,jean homme,https://www.celio.com/fr-be/store?StoreID=3507,6.5,0,2
+2026-10-02,celio,all,jean homme,https://www.celio.com/fr-fr/c/jeans,1.5,15,375
 2026-10-02,celio,all,jean homme,https://www.celio.com/fr-fr/store?StoreID=0012,4.5,0,4
 2026-10-02,celio,all,jean homme,https://www.celio.com/fr-fr/store?StoreID=0044,4.5,0,4
 2026-10-02,celio,all,jean homme,https://www.celio.com/fr-fr/store?StoreID=0061,12,0,2
@@ -4040,9 +4042,10 @@ date,site,country,query,page,position,clicks,impressions
 2026-10-01,celio,all,jeans homme,https://www.celio.com/fr-fr/store?StoreID=1638,5,0,2
 2026-10-01,celio,all,jeans homme,https://www.celio.com/fr-fr/store?StoreID=1664,2,0,2
 2026-10-01,celio,all,jeans homme,https://www.celio.com/fr-fr/store?StoreID=1688,2,0,3
+2026-10-02,celio,all,jeans homme,https://www.celio.com/fr-be/c/jeans,19,0,2
 2026-10-02,celio,all,jeans homme,https://www.celio.com/fr-be/store?StoreID=0389,1,0,2
-2026-10-02,celio,all,jeans homme,https://www.celio.com/fr-be/store?StoreID=3507,2,0,4
-2026-10-02,celio,all,jeans homme,https://www.celio.com/fr-fr/c/jeans,5.4,6,392
+2026-10-02,celio,all,jeans homme,https://www.celio.com/fr-be/store?StoreID=3507,2,0,5
+2026-10-02,celio,all,jeans homme,https://www.celio.com/fr-fr/c/jeans,5.4,6,403
 2026-10-02,celio,all,jeans homme,https://www.celio.com/fr-fr/store?StoreID=0012,2.5,0,4
 2026-10-02,celio,all,jeans homme,https://www.celio.com/fr-fr/store?StoreID=0035,1.5,0,2
 2026-10-02,celio,all,jeans homme,https://www.celio.com/fr-fr/store?StoreID=0108,1,0,4
@@ -4322,8 +4325,8 @@ date,site,country,query,page,position,clicks,impressions
 2026-10-01,celio,all,manteau homme,https://www.celio.com/fr-be/store?StoreID=0334,3,0,2
 2026-10-01,celio,all,manteau homme,https://www.celio.com/fr-fr/c/blousons-et-manteaux-manteaux,2.5,17,571
 2026-10-01,celio,all,manteau homme,https://www.celio.com/fr-fr/store?StoreID=0123,7,0,3
-2026-10-02,celio,all,manteau homme,https://www.celio.com/fr-be/c/manteaux-manteaux,5,0,5
-2026-10-02,celio,all,manteau homme,https://www.celio.com/fr-fr/c/blousons-et-manteaux-manteaux,2.5,22,513
+2026-10-02,celio,all,manteau homme,https://www.celio.com/fr-be/c/manteaux-manteaux,5.2,0,6
+2026-10-02,celio,all,manteau homme,https://www.celio.com/fr-fr/c/blousons-et-manteaux-manteaux,2.5,23,534
 2026-07-05,celio,all,pantalon blanc homme,https://www.celio.com/fr-be/c/pantalons-pantalons-blancs,6.8,0,13
 2026-07-05,celio,all,pantalon blanc homme,https://www.celio.com/fr-fr/c/pantalons-chinos-pantalon-chino-slim,1,0,2
 2026-07-05,celio,all,pantalon blanc homme,https://www.celio.com/fr-fr/c/pantalons-chinos-pantalons-chinos-stretch,1,0,2
@@ -4634,10 +4637,10 @@ date,site,country,query,page,position,clicks,impressions
 2026-09-30,celio,all,pantalon blanc homme,https://www.celio.com/fr-fr/c/pantalons-pantalons-blancs,2.9,3,129
 2026-10-01,celio,all,pantalon blanc homme,https://www.celio.com/fr-be/c/pantalons-pantalons-blancs,10.6,0,5
 2026-10-01,celio,all,pantalon blanc homme,https://www.celio.com/fr-fr/c/pantalons-pantalons-blancs,2.0,1,96
-2026-10-02,celio,all,pantalon blanc homme,https://www.celio.com/fr-be/c/pantalons-pantalons-blancs,8.7,0,3
+2026-10-02,celio,all,pantalon blanc homme,https://www.celio.com/fr-be/c/pantalons-pantalons-blancs,9.8,0,4
 2026-10-02,celio,all,pantalon blanc homme,https://www.celio.com/fr-be/c/pantalons-pantalons-roses,12,0,2
 2026-10-02,celio,all,pantalon blanc homme,https://www.celio.com/fr-fr/c/pantalons-chinos-pantalons-chino-blancs,11,0,2
-2026-10-02,celio,all,pantalon blanc homme,https://www.celio.com/fr-fr/c/pantalons-pantalons-blancs,1.5,9,107
+2026-10-02,celio,all,pantalon blanc homme,https://www.celio.com/fr-fr/c/pantalons-pantalons-blancs,1.5,9,108
 2026-10-02,celio,all,pantalon blanc homme,https://www.celio.com/fr-fr/p/pantalon-straight-100-lin---blanc/1124635.html,5.5,0,2
 2026-07-05,celio,all,pantalon cargo homme,https://www.celio.com/fr-be/c/pantalons-pantalons-cargos,4.1,1,21
 2026-07-05,celio,all,pantalon cargo homme,https://www.celio.com/fr-fr/c/pantalons-pantalons-cargos,2.5,12,454
@@ -5189,8 +5192,8 @@ date,site,country,query,page,position,clicks,impressions
 2026-10-01,celio,all,pantalon cargo homme,https://www.celio.com/fr-fr/store?StoreID=1683,5.2,0,5
 2026-10-01,celio,all,pantalon cargo homme,https://www.celio.com/fr-fr/store?StoreID=1688,6.7,0,3
 2026-10-02,celio,all,pantalon cargo homme,https://www.celio.com/fr-be/c/pantalons-pantalons-cargos,7.1,1,13
-2026-10-02,celio,all,pantalon cargo homme,https://www.celio.com/fr-fr/c/pantalons-pantalons-cargos,3.8,22,476
-2026-10-02,celio,all,pantalon cargo homme,https://www.celio.com/fr-fr/store?StoreID=0080,5,0,2
+2026-10-02,celio,all,pantalon cargo homme,https://www.celio.com/fr-fr/c/pantalons-pantalons-cargos,3.8,22,490
+2026-10-02,celio,all,pantalon cargo homme,https://www.celio.com/fr-fr/store?StoreID=0080,5.3,0,3
 2026-10-02,celio,all,pantalon cargo homme,https://www.celio.com/fr-fr/store?StoreID=0118,7.7,0,3
 2026-10-02,celio,all,pantalon cargo homme,https://www.celio.com/fr-fr/store?StoreID=0206,7,0,2
 2026-10-02,celio,all,pantalon cargo homme,https://www.celio.com/fr-fr/store?StoreID=0230,5.5,0,2
@@ -5523,7 +5526,7 @@ date,site,country,query,page,position,clicks,impressions
 2026-10-02,celio,all,pantalon chino homme,https://www.celio.com/fr-fr/c/pantalons-chinos-pantalon-chino-noir,38,0,2
 2026-10-02,celio,all,pantalon chino homme,https://www.celio.com/fr-fr/c/pantalons-chinos-pantalons-chinos-beiges,13,0,3
 2026-10-02,celio,all,pantalon chino homme,https://www.celio.com/fr-fr/c/pantalons-chinos-pantalons-chinos-vert,15.5,0,2
-2026-10-02,celio,all,pantalon chino homme,https://www.celio.com/fr-fr/c/pantalons-pantalons-chinos,1.6,13,258
+2026-10-02,celio,all,pantalon chino homme,https://www.celio.com/fr-fr/c/pantalons-pantalons-chinos,1.6,13,262
 2026-10-02,celio,all,pantalon chino homme,https://www.celio.com/fr-fr/store?StoreID=0080,10,0,2
 2026-10-02,celio,all,pantalon chino homme,https://www.celio.com/fr-fr/store?StoreID=0218,10.5,0,2
 2026-10-02,celio,all,pantalon chino homme,https://www.celio.com/fr-fr/store?StoreID=0263,7,0,2
@@ -5820,7 +5823,7 @@ date,site,country,query,page,position,clicks,impressions
 2026-10-01,celio,all,pantalon en lin homme,https://www.celio.com/fr-be/c/pantalons-pantalons-en-lin,1.4,0,5
 2026-10-01,celio,all,pantalon en lin homme,https://www.celio.com/fr-fr/c/pantalons-pantalons-en-lin,2,6,64
 2026-10-02,celio,all,pantalon en lin homme,https://www.celio.com/fr-be/c/pantalons-pantalons-en-lin,2,0,5
-2026-10-02,celio,all,pantalon en lin homme,https://www.celio.com/fr-fr/c/pantalons-pantalons-en-lin,1.6,2,62
+2026-10-02,celio,all,pantalon en lin homme,https://www.celio.com/fr-fr/c/pantalons-pantalons-en-lin,1.6,2,66
 2026-10-02,celio,all,pantalon en lin homme,https://www.celio.com/fr-fr/store?StoreID=1636,7,0,4
 2026-07-05,celio,all,pantalon homme,https://www.celio.com/fr-be/c/pantalons,6,1,22
 2026-07-05,celio,all,pantalon homme,https://www.celio.com/fr-fr/c/pantalons,2.1,14,467
@@ -6406,13 +6409,14 @@ date,site,country,query,page,position,clicks,impressions
 2026-10-01,celio,all,pantalon homme,https://www.celio.com/fr-fr/store?StoreID=1664,2,0,3
 2026-10-01,celio,all,pantalon homme,https://www.celio.com/fr-fr/store?StoreID=1683,4,0,2
 2026-10-02,celio,all,pantalon homme,https://www.celio.com/fr-be/c/pantalons,6.3,0,11
-2026-10-02,celio,all,pantalon homme,https://www.celio.com/fr-fr/c/pantalons,2.0,14,566
+2026-10-02,celio,all,pantalon homme,https://www.celio.com/fr-fr/c/pantalons,2.0,15,581
 2026-10-02,celio,all,pantalon homme,https://www.celio.com/fr-fr/c/pantalons-pantalons-decontractes,15,0,2
 2026-10-02,celio,all,pantalon homme,https://www.celio.com/fr-fr/c/vetements-pas-chers-pantalons-pas-chers,27,0,2
 2026-10-02,celio,all,pantalon homme,https://www.celio.com/fr-fr/store?StoreID=0080,7,0,3
 2026-10-02,celio,all,pantalon homme,https://www.celio.com/fr-fr/store?StoreID=0149,5,0,2
 2026-10-02,celio,all,pantalon homme,https://www.celio.com/fr-fr/store?StoreID=0218,7,0,2
 2026-10-02,celio,all,pantalon homme,https://www.celio.com/fr-fr/store?StoreID=0230,4.7,0,3
+2026-10-02,celio,all,pantalon homme,https://www.celio.com/fr-fr/store?StoreID=0263,4.5,0,2
 2026-10-02,celio,all,pantalon homme,https://www.celio.com/fr-fr/store?StoreID=0296,4,0,2
 2026-10-02,celio,all,pantalon homme,https://www.celio.com/fr-fr/store?StoreID=1623,8,0,2
 2026-07-05,celio,all,pantalon lin homme,https://www.celio.com/fr-be/c/pantalons-pantalons-en-lin,1.2,2,36
@@ -6724,7 +6728,8 @@ date,site,country,query,page,position,clicks,impressions
 2026-09-30,celio,all,pantalon lin homme,https://www.celio.com/fr-fr/stores,97.5,0,2
 2026-10-01,celio,all,pantalon lin homme,https://www.celio.com/fr-be/c/pantalons-pantalons-en-lin,2,0,4
 2026-10-01,celio,all,pantalon lin homme,https://www.celio.com/fr-fr/c/pantalons-pantalons-en-lin,1.3,8,145
-2026-10-02,celio,all,pantalon lin homme,https://www.celio.com/fr-fr/c/pantalons-pantalons-en-lin,1.6,2,130
+2026-10-02,celio,all,pantalon lin homme,https://www.celio.com/fr-be/c/pantalons-pantalons-en-lin,4,0,2
+2026-10-02,celio,all,pantalon lin homme,https://www.celio.com/fr-fr/c/pantalons-pantalons-en-lin,1.6,2,132
 2026-10-02,celio,all,pantalon lin homme,https://www.celio.com/fr-fr/p/pantalon-straight-100-lin---blanc/1124635.html,24.5,0,2
 2026-10-02,celio,all,pantalon lin homme,https://www.celio.com/fr-fr/store?StoreID=0227,8,0,2
 2026-07-05,celio,all,parka homme,https://www.celio.com/fr-be/c/manteaux-parkas-longues-et-anoraks,14.2,0,4
@@ -6901,7 +6906,7 @@ date,site,country,query,page,position,clicks,impressions
 2026-09-30,celio,all,parka homme,https://www.celio.com/fr-fr/c/blousons-et-manteaux-parkas,3.2,18,312
 2026-10-01,celio,all,parka homme,https://www.celio.com/fr-be/c/manteaux-parkas-longues-et-anoraks,16.7,0,3
 2026-10-01,celio,all,parka homme,https://www.celio.com/fr-fr/c/blousons-et-manteaux-parkas,2.6,12,291
-2026-10-02,celio,all,parka homme,https://www.celio.com/fr-fr/c/blousons-et-manteaux-parkas,2.0,9,218
+2026-10-02,celio,all,parka homme,https://www.celio.com/fr-fr/c/blousons-et-manteaux-parkas,2.1,9,226
 2026-07-05,celio,all,polo homme,https://www.celio.com/fr-be/c/polos,4.5,0,32
 2026-07-05,celio,all,polo homme,https://www.celio.com/fr-fr/c/polos,2.0,28,723
 2026-07-05,celio,all,polo homme,https://www.celio.com/fr-fr/store?StoreID=0206,10.5,0,2
@@ -7293,11 +7298,14 @@ date,site,country,query,page,position,clicks,impressions
 2026-10-01,celio,all,polo homme,https://www.celio.com/fr-fr/store?StoreID=0685,4,0,2
 2026-10-01,celio,all,polo homme,https://www.celio.com/fr-fr/store?StoreID=1461,3.5,0,2
 2026-10-01,celio,all,polo homme,https://www.celio.com/fr-fr/store?StoreID=1475,4,0,4
-2026-10-02,celio,all,polo homme,https://www.celio.com/fr-fr/c/polos,6.4,2,124
+2026-10-02,celio,all,polo homme,https://www.celio.com/fr-be/c/polos,12.3,0,3
+2026-10-02,celio,all,polo homme,https://www.celio.com/fr-be/store?StoreID=3507,4,0,3
+2026-10-02,celio,all,polo homme,https://www.celio.com/fr-fr/c/polos,6.4,2,127
 2026-10-02,celio,all,polo homme,https://www.celio.com/fr-fr/store?StoreID=0235,2,0,3
 2026-10-02,celio,all,polo homme,https://www.celio.com/fr-fr/store?StoreID=0272,2,0,2
 2026-10-02,celio,all,polo homme,https://www.celio.com/fr-fr/store?StoreID=0687,2.6,0,19
 2026-10-02,celio,all,polo homme,https://www.celio.com/fr-fr/store?StoreID=0765,2,0,3
+2026-10-02,celio,all,polo homme,https://www.celio.com/fr-fr/store?StoreID=0770,2,0,2
 2026-07-05,celio,all,pull homme,https://www.celio.com/fr-be/c/pulls,13,0,2
 2026-07-05,celio,all,pull homme,https://www.celio.com/fr-fr/c/pulls,2.4,2,162
 2026-07-06,celio,all,pull homme,https://www.celio.com/fr-fr/c/pulls,2.1,8,136
@@ -7512,8 +7520,8 @@ date,site,country,query,page,position,clicks,impressions
 2026-10-01,celio,all,pull homme,https://www.celio.com/fr-fr/store?StoreID=0080,8,0,2
 2026-10-01,celio,all,pull homme,https://www.celio.com/fr-fr/store?StoreID=0174,10.3,0,3
 2026-10-01,celio,all,pull homme,https://www.celio.com/fr-fr/store?StoreID=1035,11,0,3
-2026-10-02,celio,all,pull homme,https://www.celio.com/fr-be/c/pulls,5.4,0,12
-2026-10-02,celio,all,pull homme,https://www.celio.com/fr-fr/c/pulls,2.1,15,663
+2026-10-02,celio,all,pull homme,https://www.celio.com/fr-be/c/pulls,5.2,0,14
+2026-10-02,celio,all,pull homme,https://www.celio.com/fr-fr/c/pulls,2.1,16,680
 2026-07-05,celio,all,pyjama homme,https://www.celio.com/fr-be/c/sous-vetements-pyjamas,7.0,0,29
 2026-07-05,celio,all,pyjama homme,https://www.celio.com/fr-fr/c/sous-vetements-pyjamas,2.0,39,661
 2026-07-06,celio,all,pyjama homme,https://www.celio.com/fr-be/c/sous-vetements-pyjamas,5.7,1,39
@@ -7749,9 +7757,9 @@ date,site,country,query,page,position,clicks,impressions
 2026-10-01,celio,all,pyjama homme,https://www.celio.com/fr-be/store?StoreID=0375,5.5,0,4
 2026-10-01,celio,all,pyjama homme,https://www.celio.com/fr-fr/c/sous-vetements-pyjamas,2.6,46,916
 2026-10-01,celio,all,pyjama homme,https://www.celio.com/fr-fr/store?StoreID=0123,6,0,4
-2026-10-02,celio,all,pyjama homme,https://www.celio.com/fr-be/c/sous-vetements-pyjamas,8.7,1,40
-2026-10-02,celio,all,pyjama homme,https://www.celio.com/fr-fr/c/sous-vetements-pyjamas,2.4,36,763
-2026-10-02,celio,all,pyjama homme,https://www.celio.com/fr-fr/store?StoreID=0123,3.4,0,5
+2026-10-02,celio,all,pyjama homme,https://www.celio.com/fr-be/c/sous-vetements-pyjamas,8.5,1,41
+2026-10-02,celio,all,pyjama homme,https://www.celio.com/fr-fr/c/sous-vetements-pyjamas,2.4,36,785
+2026-10-02,celio,all,pyjama homme,https://www.celio.com/fr-fr/store?StoreID=0123,3.6,0,7
 2026-10-02,celio,all,pyjama homme,https://www.celio.com/fr-fr/store?StoreID=0614,8.5,0,2
 2026-07-05,celio,all,short homme,https://www.celio.com/fr-be/c/bermudas,8.8,3,123
 2026-07-05,celio,all,short homme,https://www.celio.com/fr-fr/c/bermudas,1.8,126,2931
@@ -7991,7 +7999,7 @@ date,site,country,query,page,position,clicks,impressions
 2026-09-29,celio,all,short homme,https://www.celio.com/fr-fr/c/bermudas,2.1,5,288
 2026-09-30,celio,all,short homme,https://www.celio.com/fr-fr/c/bermudas,2.0,8,271
 2026-10-01,celio,all,short homme,https://www.celio.com/fr-fr/c/bermudas,2.0,0,235
-2026-10-02,celio,all,short homme,https://www.celio.com/fr-fr/c/bermudas,2.0,7,200
+2026-10-02,celio,all,short homme,https://www.celio.com/fr-fr/c/bermudas,2.0,7,203
 2026-07-05,celio,all,sweat homme,https://www.celio.com/fr-be/c/sweats,11.7,1,10
 2026-07-05,celio,all,sweat homme,https://www.celio.com/fr-fr/c/sweats,2.0,4,204
 2026-07-06,celio,all,sweat homme,https://www.celio.com/fr-be/c/sweats,11.8,0,12
@@ -8209,8 +8217,8 @@ date,site,country,query,page,position,clicks,impressions
 2026-09-30,celio,all,sweat homme,https://www.celio.com/fr-fr/c/sweats-sweat-original?page=3,11.5,0,2
 2026-10-01,celio,all,sweat homme,https://www.celio.com/fr-be/c/sweats,7.5,0,8
 2026-10-01,celio,all,sweat homme,https://www.celio.com/fr-fr/c/sweats,2.1,19,429
-2026-10-02,celio,all,sweat homme,https://www.celio.com/fr-be/c/sweats,8.3,0,7
-2026-10-02,celio,all,sweat homme,https://www.celio.com/fr-fr/c/sweats,2.1,12,362
+2026-10-02,celio,all,sweat homme,https://www.celio.com/fr-be/c/sweats,8,0,8
+2026-10-02,celio,all,sweat homme,https://www.celio.com/fr-fr/c/sweats,2.0,12,371
 2026-07-05,celio,all,t shirt homme,https://www.celio.com/fr-be/c/t-shirts,9.2,1,18
 2026-07-05,celio,all,t shirt homme,https://www.celio.com/fr-be/store?StoreID=0389,6,0,2
 2026-07-05,celio,all,t shirt homme,https://www.celio.com/fr-be/store?StoreID=3507,11,0,2
@@ -8855,12 +8863,12 @@ date,site,country,query,page,position,clicks,impressions
 2026-10-01,celio,all,t shirt homme,https://www.celio.com/fr-fr/store?StoreID=1634,3,0,2
 2026-10-02,celio,all,t shirt homme,https://www.celio.com/fr-be/store?StoreID=3507,2.7,0,3
 2026-10-02,celio,all,t shirt homme,https://www.celio.com/fr-fr/c/soldes-soldes-t-shirts,11.7,0,3
-2026-10-02,celio,all,t shirt homme,https://www.celio.com/fr-fr/c/t-shirts,2.6,4,217
-2026-10-02,celio,all,t shirt homme,https://www.celio.com/fr-fr/store?StoreID=0212,5.8,0,5
+2026-10-02,celio,all,t shirt homme,https://www.celio.com/fr-fr/c/t-shirts,2.6,4,222
+2026-10-02,celio,all,t shirt homme,https://www.celio.com/fr-fr/store?StoreID=0212,6.2,0,6
 2026-10-02,celio,all,t shirt homme,https://www.celio.com/fr-fr/store?StoreID=0226,2,0,2
 2026-10-02,celio,all,t shirt homme,https://www.celio.com/fr-fr/store?StoreID=0230,1.8,0,5
 2026-10-02,celio,all,t shirt homme,https://www.celio.com/fr-fr/store?StoreID=0623,4,0,2
-2026-10-02,celio,all,t shirt homme,https://www.celio.com/fr-fr/store?StoreID=0698,5.1,0,20
+2026-10-02,celio,all,t shirt homme,https://www.celio.com/fr-fr/store?StoreID=0698,5.0,0,21
 2026-10-02,celio,all,t shirt homme,https://www.celio.com/fr-fr/store?StoreID=0757,4,0,4
 2026-10-02,celio,all,t shirt homme,https://www.celio.com/fr-fr/store?StoreID=1704,4,0,2
 2026-07-05,celio,all,tee shirt homme,https://www.celio.com/fr-fr/c/t-shirts,3.9,1,223
@@ -9259,8 +9267,8 @@ date,site,country,query,page,position,clicks,impressions
 2026-10-01,celio,all,tee shirt homme,https://www.celio.com/fr-fr/c/t-shirts,1.7,6,376
 2026-10-01,celio,all,tee shirt homme,https://www.celio.com/fr-fr/store?StoreID=0109,3.5,0,4
 2026-10-02,celio,all,tee shirt homme,https://www.celio.com/fr-be/c/t-shirts,7.5,0,2
-2026-10-02,celio,all,tee shirt homme,https://www.celio.com/fr-fr/c/soldes-soldes-t-shirts,45.2,0,4
-2026-10-02,celio,all,tee shirt homme,https://www.celio.com/fr-fr/c/t-shirts,1.8,7,380
+2026-10-02,celio,all,tee shirt homme,https://www.celio.com/fr-fr/c/soldes-soldes-t-shirts,39.6,0,5
+2026-10-02,celio,all,tee shirt homme,https://www.celio.com/fr-fr/c/t-shirts,1.8,7,386
 2026-10-02,celio,all,tee shirt homme,https://www.celio.com/fr-fr/store?StoreID=0109,4.5,0,2
 2026-10-02,celio,all,tee shirt homme,https://www.celio.com/fr-fr/store?StoreID=1692,13,0,2
 2026-07-05,celio,all,tshirt homme,https://www.celio.com/fr-be/c/t-shirts,10,1,12
@@ -10244,11 +10252,12 @@ date,site,country,query,page,position,clicks,impressions
 2026-10-01,celio,all,veste homme,https://www.celio.com/fr-fr/store?StoreID=1613,13,0,2
 2026-10-02,celio,all,veste homme,https://www.celio.com/fr-be/c/manteaux-vestes,8.7,1,9
 2026-10-02,celio,all,veste homme,https://www.celio.com/fr-fr/c/blousons-et-manteaux,15.5,0,4
-2026-10-02,celio,all,veste homme,https://www.celio.com/fr-fr/c/blousons-et-manteaux-vestes,7.3,3,160
+2026-10-02,celio,all,veste homme,https://www.celio.com/fr-fr/c/blousons-et-manteaux-vestes,7.2,3,169
 2026-10-02,celio,all,veste homme,https://www.celio.com/fr-fr/c/vestes-vestes-legeres,27.2,0,5
 2026-10-02,celio,all,veste homme,https://www.celio.com/fr-fr/store?StoreID=0162,6,0,2
+2026-10-02,celio,all,veste homme,https://www.celio.com/fr-fr/store?StoreID=0224,5,0,2
 2026-10-02,celio,all,veste homme,https://www.celio.com/fr-fr/store?StoreID=0291,3.8,0,6
-2026-10-02,celio,all,veste homme,https://www.celio.com/fr-fr/store?StoreID=0296,8.7,0,3
+2026-10-02,celio,all,veste homme,https://www.celio.com/fr-fr/store?StoreID=0296,8.2,0,4
 2026-10-02,celio,all,veste homme,https://www.celio.com/fr-fr/store?StoreID=0603,10,0,3
 2026-10-02,celio,all,veste homme,https://www.celio.com/fr-fr/store?StoreID=0690,8.5,0,2
 2026-10-02,celio,all,veste homme,https://www.celio.com/fr-fr/store?StoreID=0769,5.3,0,3
@@ -10339,7 +10348,7 @@ date,site,country,query,page,position,clicks,impressions
 2026-09-28,celio,bel,blouson homme,https://www.celio.com/fr-be/c/manteaux-blousons,3.5,0,8
 2026-09-29,celio,bel,blouson homme,https://www.celio.com/fr-be/c/manteaux-blousons,2.6,2,7
 2026-10-01,celio,bel,blouson homme,https://www.celio.com/fr-be/c/manteaux-blousons,3.6,0,5
-2026-10-02,celio,bel,blouson homme,https://www.celio.com/fr-be/c/manteaux-blousons,5.4,0,10
+2026-10-02,celio,bel,blouson homme,https://www.celio.com/fr-be/c/manteaux-blousons,5.4,0,11
 2026-07-05,celio,bel,cardigan homme,https://www.celio.com/fr-be/c/pulls-gilets-et-cardigans,12,0,2
 2026-07-06,celio,bel,cardigan homme,https://www.celio.com/fr-be/c/pulls-gilets-et-cardigans,11.3,0,7
 2026-07-07,celio,bel,cardigan homme,https://www.celio.com/fr-be/c/pulls-gilets-et-cardigans,11.5,0,4
@@ -10433,7 +10442,7 @@ date,site,country,query,page,position,clicks,impressions
 2026-09-29,celio,bel,cardigan homme,https://www.celio.com/fr-be/c/pulls-gilets-et-cardigans,9.5,0,18
 2026-09-30,celio,bel,cardigan homme,https://www.celio.com/fr-be/c/pulls-gilets-et-cardigans,8.9,0,10
 2026-10-01,celio,bel,cardigan homme,https://www.celio.com/fr-be/c/pulls-gilets-et-cardigans,12.6,0,5
-2026-10-02,celio,bel,cardigan homme,https://www.celio.com/fr-be/c/pulls-gilets-et-cardigans,11,0,2
+2026-10-02,celio,bel,cardigan homme,https://www.celio.com/fr-be/c/pulls-gilets-et-cardigans,12,0,3
 2026-07-06,celio,bel,cargo homme,https://www.celio.com/fr-be/c/pantalons-pantalons-cargos,4.7,0,3
 2026-07-08,celio,bel,cargo homme,https://www.celio.com/fr-be/c/pantalons-pantalons-cargos,7,0,2
 2026-07-09,celio,bel,cargo homme,https://www.celio.com/fr-be/c/pantalons-pantalons-cargos,6.5,0,2
@@ -10908,7 +10917,7 @@ date,site,country,query,page,position,clicks,impressions
 2026-09-28,celio,bel,costume 3 pièces homme,https://www.celio.com/fr-be/c/costumes-costume-3-pieces-pour-homme,1.8,0,4
 2026-09-29,celio,bel,costume 3 pièces homme,https://www.celio.com/fr-be/c/costumes-costume-3-pieces-pour-homme,1,1,4
 2026-10-01,celio,bel,costume 3 pièces homme,https://www.celio.com/fr-be/c/costumes-costume-3-pieces-pour-homme,1,0,3
-2026-10-02,celio,bel,costume 3 pièces homme,https://www.celio.com/fr-be/c/costumes-costume-3-pieces-pour-homme,1,0,2
+2026-10-02,celio,bel,costume 3 pièces homme,https://www.celio.com/fr-be/c/costumes-costume-3-pieces-pour-homme,1,0,3
 2026-07-05,celio,bel,costume homme,https://www.celio.com/fr-be/c/costumes,4.2,3,45
 2026-07-06,celio,bel,costume homme,https://www.celio.com/fr-be/c/costumes,4.3,2,52
 2026-07-07,celio,bel,costume homme,https://www.celio.com/fr-be/c/costumes,4.8,2,66
@@ -11011,7 +11020,7 @@ date,site,country,query,page,position,clicks,impressions
 2026-09-30,celio,bel,costume homme,https://www.celio.com/fr-be/c/costumes,4.2,1,53
 2026-09-30,celio,bel,costume homme,https://www.celio.com/fr-be/store?StoreID=0389,7,0,2
 2026-10-01,celio,bel,costume homme,https://www.celio.com/fr-be/c/costumes,4.2,2,55
-2026-10-02,celio,bel,costume homme,https://www.celio.com/fr-be/c/costumes,4.1,1,44
+2026-10-02,celio,bel,costume homme,https://www.celio.com/fr-be/c/costumes,4.1,1,45
 2026-07-05,celio,bel,costume homme pas cher,https://www.celio.com/fr-be/c/vetements-pas-chers-costumes-pas-chers,2,0,4
 2026-07-06,celio,bel,costume homme pas cher,https://www.celio.com/fr-be/c/costumes-costumes-a---de-100e,1,1,3
 2026-07-07,celio,bel,costume homme pas cher,https://www.celio.com/fr-be/c/vetements-pas-chers-costumes-pas-chers,3.4,0,5
@@ -11402,6 +11411,8 @@ date,site,country,query,page,position,clicks,impressions
 2026-09-30,celio,bel,jean homme,https://www.celio.com/fr-be/c/jeans,1.7,0,6
 2026-09-30,celio,bel,jean homme,https://www.celio.com/fr-be/store?StoreID=3507,8,0,2
 2026-10-01,celio,bel,jean homme,https://www.celio.com/fr-be/c/jeans,3.5,0,2
+2026-10-02,celio,bel,jean homme,https://www.celio.com/fr-be/c/jeans,4,0,2
+2026-10-02,celio,bel,jean homme,https://www.celio.com/fr-be/store?StoreID=3507,6.5,0,2
 2026-07-05,celio,bel,jeans homme,https://www.celio.com/fr-be/c/jeans,22,0,3
 2026-07-08,celio,bel,jeans homme,https://www.celio.com/fr-be/c/jeans,14.5,0,4
 2026-07-08,celio,bel,jeans homme,https://www.celio.com/fr-be/store?StoreID=0346,13.7,0,3
@@ -11569,8 +11580,9 @@ date,site,country,query,page,position,clicks,impressions
 2026-09-28,celio,bel,jeans homme,https://www.celio.com/fr-be/store?StoreID=0346,3.5,0,2
 2026-09-29,celio,bel,jeans homme,https://www.celio.com/fr-be/c/jeans,13,0,2
 2026-09-29,celio,bel,jeans homme,https://www.celio.com/fr-be/store?StoreID=0389,3,0,2
+2026-10-02,celio,bel,jeans homme,https://www.celio.com/fr-be/c/jeans,19,0,2
 2026-10-02,celio,bel,jeans homme,https://www.celio.com/fr-be/store?StoreID=0389,1,0,2
-2026-10-02,celio,bel,jeans homme,https://www.celio.com/fr-be/store?StoreID=3507,2,0,4
+2026-10-02,celio,bel,jeans homme,https://www.celio.com/fr-be/store?StoreID=3507,2,0,5
 2026-07-05,celio,bel,manteau homme,https://www.celio.com/fr-be/c/manteaux-manteaux,2.2,0,4
 2026-07-06,celio,bel,manteau homme,https://www.celio.com/fr-be/c/manteaux-manteaux,2.5,0,6
 2026-07-07,celio,bel,manteau homme,https://www.celio.com/fr-be/c/manteaux-manteaux,2.5,0,4
@@ -11676,7 +11688,7 @@ date,site,country,query,page,position,clicks,impressions
 2026-09-29,celio,bel,manteau homme,https://www.celio.com/fr-be/c/manteaux-manteaux,4.6,0,11
 2026-09-30,celio,bel,manteau homme,https://www.celio.com/fr-be/c/manteaux-manteaux,6.2,0,10
 2026-10-01,celio,bel,manteau homme,https://www.celio.com/fr-be/c/manteaux-manteaux,4.5,2,11
-2026-10-02,celio,bel,manteau homme,https://www.celio.com/fr-be/c/manteaux-manteaux,5,0,5
+2026-10-02,celio,bel,manteau homme,https://www.celio.com/fr-be/c/manteaux-manteaux,5.2,0,6
 2026-07-05,celio,bel,pantalon blanc homme,https://www.celio.com/fr-be/c/pantalons-pantalons-blancs,6.8,0,13
 2026-07-06,celio,bel,pantalon blanc homme,https://www.celio.com/fr-be/c/pantalons-pantalons-blancs,5.5,1,11
 2026-07-07,celio,bel,pantalon blanc homme,https://www.celio.com/fr-be/c/pantalons-pantalons-blancs,3.1,0,10
@@ -11787,7 +11799,7 @@ date,site,country,query,page,position,clicks,impressions
 2026-09-30,celio,bel,pantalon blanc homme,https://www.celio.com/fr-be/c/pantalons-pantalons-blancs,9.6,0,5
 2026-09-30,celio,bel,pantalon blanc homme,https://www.celio.com/fr-be/p/pantalon-straight-100-lin---blanc/1124635.html,5.7,0,3
 2026-10-01,celio,bel,pantalon blanc homme,https://www.celio.com/fr-be/c/pantalons-pantalons-blancs,12.3,0,3
-2026-10-02,celio,bel,pantalon blanc homme,https://www.celio.com/fr-be/c/pantalons-pantalons-blancs,8.7,0,3
+2026-10-02,celio,bel,pantalon blanc homme,https://www.celio.com/fr-be/c/pantalons-pantalons-blancs,9.8,0,4
 2026-07-05,celio,bel,pantalon cargo homme,https://www.celio.com/fr-be/c/pantalons-pantalons-cargos,4.1,1,21
 2026-07-06,celio,bel,pantalon cargo homme,https://www.celio.com/fr-be/c/pantalons-pantalons-cargos,4.8,1,16
 2026-07-07,celio,bel,pantalon cargo homme,https://www.celio.com/fr-be/c/pantalons-pantalons-cargos,4.8,2,25
@@ -12312,6 +12324,7 @@ date,site,country,query,page,position,clicks,impressions
 2026-09-29,celio,bel,pantalon lin homme,https://www.celio.com/fr-be/store?StoreID=0334,9,0,2
 2026-09-30,celio,bel,pantalon lin homme,https://www.celio.com/fr-be/c/pantalons-pantalons-en-lin,1.7,1,3
 2026-10-01,celio,bel,pantalon lin homme,https://www.celio.com/fr-be/c/pantalons-pantalons-en-lin,2,0,4
+2026-10-02,celio,bel,pantalon lin homme,https://www.celio.com/fr-be/c/pantalons-pantalons-en-lin,4,0,2
 2026-07-05,celio,bel,parka homme,https://www.celio.com/fr-be/c/manteaux-parkas-longues-et-anoraks,14.2,0,4
 2026-07-06,celio,bel,parka homme,https://www.celio.com/fr-be/c/manteaux-parkas-longues-et-anoraks,14.8,0,4
 2026-07-07,celio,bel,parka homme,https://www.celio.com/fr-be/c/manteaux-parkas-longues-et-anoraks,12.5,0,6
@@ -12470,6 +12483,8 @@ date,site,country,query,page,position,clicks,impressions
 2026-09-29,celio,bel,polo homme,https://www.celio.com/fr-be/store?StoreID=3522,6.5,0,2
 2026-09-30,celio,bel,polo homme,https://www.celio.com/fr-be/c/polos,8,0,3
 2026-10-01,celio,bel,polo homme,https://www.celio.com/fr-be/c/polos,12,0,3
+2026-10-02,celio,bel,polo homme,https://www.celio.com/fr-be/c/polos,12.3,0,3
+2026-10-02,celio,bel,polo homme,https://www.celio.com/fr-be/store?StoreID=3507,4,0,3
 2026-07-05,celio,bel,pull homme,https://www.celio.com/fr-be/c/pulls,13,0,2
 2026-07-08,celio,bel,pull homme,https://www.celio.com/fr-be/c/pulls,9.8,0,5
 2026-07-09,celio,bel,pull homme,https://www.celio.com/fr-be/c/pulls,17.5,0,2
@@ -12566,7 +12581,7 @@ date,site,country,query,page,position,clicks,impressions
 2026-09-30,celio,bel,pull homme,https://www.celio.com/fr-be/c/pulls,5.1,1,13
 2026-09-30,celio,bel,pull homme,https://www.celio.com/fr-be/store?StoreID=3516,6.5,0,2
 2026-10-01,celio,bel,pull homme,https://www.celio.com/fr-be/c/pulls,3.7,0,6
-2026-10-02,celio,bel,pull homme,https://www.celio.com/fr-be/c/pulls,5.4,0,12
+2026-10-02,celio,bel,pull homme,https://www.celio.com/fr-be/c/pulls,5.2,0,14
 2026-07-05,celio,bel,pyjama homme,https://www.celio.com/fr-be/c/sous-vetements-pyjamas,7.0,0,29
 2026-07-06,celio,bel,pyjama homme,https://www.celio.com/fr-be/c/sous-vetements-pyjamas,5.7,1,39
 2026-07-07,celio,bel,pyjama homme,https://www.celio.com/fr-be/c/sous-vetements-pyjamas,6.3,0,27
@@ -12674,7 +12689,7 @@ date,site,country,query,page,position,clicks,impressions
 2026-09-30,celio,bel,pyjama homme,https://www.celio.com/fr-be/c/sous-vetements-pyjamas,9.7,2,18
 2026-10-01,celio,bel,pyjama homme,https://www.celio.com/fr-be/c/sous-vetements-pyjamas,9.2,1,26
 2026-10-01,celio,bel,pyjama homme,https://www.celio.com/fr-be/store?StoreID=0375,5.5,0,4
-2026-10-02,celio,bel,pyjama homme,https://www.celio.com/fr-be/c/sous-vetements-pyjamas,8.8,1,39
+2026-10-02,celio,bel,pyjama homme,https://www.celio.com/fr-be/c/sous-vetements-pyjamas,8.7,1,40
 2026-10-02,celio,bel,pyjama homme,https://www.celio.com/fr-fr/c/sous-vetements-pyjamas,2.3,1,3
 2026-07-05,celio,bel,short homme,https://www.celio.com/fr-be/c/bermudas,8.8,3,121
 2026-07-06,celio,bel,short homme,https://www.celio.com/fr-be/c/bermudas,9.7,0,97
@@ -13445,7 +13460,7 @@ date,site,country,query,page,position,clicks,impressions
 2026-10-01,celio,fra,blouson homme,https://www.celio.com/fr-fr/store?StoreID=0224,2,0,2
 2026-10-01,celio,fra,blouson homme,https://www.celio.com/fr-fr/store?StoreID=0702,6,0,2
 2026-10-01,celio,fra,blouson homme,https://www.celio.com/fr-fr/store?StoreID=1461,2.3,0,3
-2026-10-02,celio,fra,blouson homme,https://www.celio.com/fr-fr/c/blousons-et-manteaux-blousons,3.0,12,256
+2026-10-02,celio,fra,blouson homme,https://www.celio.com/fr-fr/c/blousons-et-manteaux-blousons,3.0,13,262
 2026-07-05,celio,fra,cardigan homme,https://www.celio.com/fr-fr/c/gilets-et-cardigans-gilets-et-cardigans-en-laine,88,0,2
 2026-07-05,celio,fra,cardigan homme,https://www.celio.com/fr-fr/c/gilets-et-cardigans-gilets-et-cardigans-noirs,77.7,0,3
 2026-07-05,celio,fra,cardigan homme,https://www.celio.com/fr-fr/c/pulls-gilets-et-cardigans,2.0,1,113
@@ -13571,7 +13586,7 @@ date,site,country,query,page,position,clicks,impressions
 2026-09-30,celio,fra,cardigan homme,https://www.celio.com/fr-fr/store?StoreID=1489,11.5,0,2
 2026-10-01,celio,fra,cardigan homme,https://www.celio.com/fr-fr/c/pulls-gilets-et-cardigans,1.7,29,484
 2026-10-01,celio,fra,cardigan homme,https://www.celio.com/fr-fr/store?StoreID=0671,10,0,3
-2026-10-02,celio,fra,cardigan homme,https://www.celio.com/fr-fr/c/pulls-gilets-et-cardigans,1.4,23,416
+2026-10-02,celio,fra,cardigan homme,https://www.celio.com/fr-fr/c/pulls-gilets-et-cardigans,1.4,23,429
 2026-07-05,celio,fra,cargo homme,https://www.celio.com/fr-fr/c/pantalons-pantalons-cargos,2.2,1,161
 2026-07-06,celio,fra,cargo homme,https://www.celio.com/fr-fr/c/pantalons-pantalons-cargos,1.8,3,147
 2026-07-07,celio,fra,cargo homme,https://www.celio.com/fr-fr/c/pantalons-pantalons-cargos,1.7,8,146
@@ -13768,7 +13783,7 @@ date,site,country,query,page,position,clicks,impressions
 2026-10-01,celio,fra,cargo homme,https://www.celio.com/fr-fr/store?StoreID=0002,5,0,2
 2026-10-01,celio,fra,cargo homme,https://www.celio.com/fr-fr/store?StoreID=0025,5.3,0,3
 2026-10-01,celio,fra,cargo homme,https://www.celio.com/fr-fr/store?StoreID=0770,5.5,0,2
-2026-10-02,celio,fra,cargo homme,https://www.celio.com/fr-fr/c/pantalons-pantalons-cargos,3.0,8,129
+2026-10-02,celio,fra,cargo homme,https://www.celio.com/fr-fr/c/pantalons-pantalons-cargos,3.1,8,134
 2026-10-02,celio,fra,cargo homme,https://www.celio.com/fr-fr/store?StoreID=0002,5.8,0,4
 2026-10-02,celio,fra,cargo homme,https://www.celio.com/fr-fr/store?StoreID=0230,5.3,0,3
 2026-10-02,celio,fra,cargo homme,https://www.celio.com/fr-fr/store?StoreID=0763,4,0,2
@@ -13875,7 +13890,7 @@ date,site,country,query,page,position,clicks,impressions
 2026-09-29,celio,fra,chemise blanche homme,https://www.celio.com/fr-fr/store?StoreID=0615,3,0,2
 2026-09-30,celio,fra,chemise blanche homme,https://www.celio.com/fr-fr/c/chemises-chemises-blanches,2.6,6,203
 2026-10-01,celio,fra,chemise blanche homme,https://www.celio.com/fr-fr/c/chemises-chemises-blanches,1.9,8,198
-2026-10-02,celio,fra,chemise blanche homme,https://www.celio.com/fr-fr/c/chemises-chemises-blanches,1.4,7,178
+2026-10-02,celio,fra,chemise blanche homme,https://www.celio.com/fr-fr/c/chemises-chemises-blanches,1.4,7,183
 2026-07-05,celio,fra,chemise homme,https://www.celio.com/fr-fr/c/chemises,1.9,26,915
 2026-07-05,celio,fra,chemise homme,https://www.celio.com/fr-fr/store?StoreID=0012,4,0,2
 2026-07-05,celio,fra,chemise homme,https://www.celio.com/fr-fr/store?StoreID=0291,1,1,4
@@ -14185,7 +14200,7 @@ date,site,country,query,page,position,clicks,impressions
 2026-10-01,celio,fra,chemise homme,https://www.celio.com/fr-fr/store?StoreID=1410,9.5,0,2
 2026-10-01,celio,fra,chemise homme,https://www.celio.com/fr-fr/store?StoreID=1498,2,0,2
 2026-10-01,celio,fra,chemise homme,https://www.celio.com/fr-fr/store?StoreID=1675,6,0,2
-2026-10-02,celio,fra,chemise homme,https://www.celio.com/fr-fr/c/chemises,4,21,533
+2026-10-02,celio,fra,chemise homme,https://www.celio.com/fr-fr/c/chemises,4.0,21,549
 2026-10-02,celio,fra,chemise homme,https://www.celio.com/fr-fr/store?StoreID=0235,4.5,0,4
 2026-10-02,celio,fra,chemise homme,https://www.celio.com/fr-fr/store?StoreID=0263,10,0,2
 2026-10-02,celio,fra,chemise homme,https://www.celio.com/fr-fr/store?StoreID=0292,6,0,2
@@ -14317,7 +14332,7 @@ date,site,country,query,page,position,clicks,impressions
 2026-09-30,celio,fra,chino,https://www.celio.com/fr-fr/c/pantalons-pantalons-chinos,2.3,7,280
 2026-09-30,celio,fra,chino,https://www.celio.com/fr-fr/store?StoreID=0156,2,0,2
 2026-10-01,celio,fra,chino,https://www.celio.com/fr-fr/c/pantalons-pantalons-chinos,2.6,4,277
-2026-10-02,celio,fra,chino,https://www.celio.com/fr-fr/c/pantalons-pantalons-chinos,2.6,4,234
+2026-10-02,celio,fra,chino,https://www.celio.com/fr-fr/c/pantalons-pantalons-chinos,2.6,4,246
 2026-07-05,celio,fra,costume 3 pièces homme,https://www.celio.com/fr-fr/c/costumes-costume-3-pieces-pour-homme,2.3,7,113
 2026-07-06,celio,fra,costume 3 pièces homme,https://www.celio.com/fr-fr/c/costumes-costume-3-pieces-pour-homme,2.3,12,78
 2026-07-07,celio,fra,costume 3 pièces homme,https://www.celio.com/fr-fr/c/costumes-costume-3-pieces-pour-homme,1.6,9,83
@@ -14408,7 +14423,7 @@ date,site,country,query,page,position,clicks,impressions
 2026-09-29,celio,fra,costume 3 pièces homme,https://www.celio.com/fr-fr/c/costumes-costume-3-pieces-pour-homme,2.9,9,69
 2026-09-30,celio,fra,costume 3 pièces homme,https://www.celio.com/fr-fr/c/costumes-costume-3-pieces-pour-homme,2.4,6,78
 2026-10-01,celio,fra,costume 3 pièces homme,https://www.celio.com/fr-fr/c/costumes-costume-3-pieces-pour-homme,2.5,5,68
-2026-10-02,celio,fra,costume 3 pièces homme,https://www.celio.com/fr-fr/c/costumes-costume-3-pieces-pour-homme,2.3,9,63
+2026-10-02,celio,fra,costume 3 pièces homme,https://www.celio.com/fr-fr/c/costumes-costume-3-pieces-pour-homme,2.3,9,66
 2026-07-05,celio,fra,costume homme,https://www.celio.com/fr-fr/c/costumes,3.6,36,1130
 2026-07-05,celio,fra,costume homme,https://www.celio.com/fr-fr/store?StoreID=0037,1,0,2
 2026-07-06,celio,fra,costume homme,https://www.celio.com/fr-fr/c/costumes,3.1,60,984
@@ -14668,7 +14683,7 @@ date,site,country,query,page,position,clicks,impressions
 2026-10-01,celio,fra,costume homme,https://www.celio.com/fr-fr/store?StoreID=0025,2,0,2
 2026-10-01,celio,fra,costume homme,https://www.celio.com/fr-fr/store?StoreID=1531,2,0,2
 2026-10-01,celio,fra,costume homme,https://www.celio.com/fr-fr/store?StoreID=1693,2,0,3
-2026-10-02,celio,fra,costume homme,https://www.celio.com/fr-fr/c/costumes,4.1,37,909
+2026-10-02,celio,fra,costume homme,https://www.celio.com/fr-fr/c/costumes,4.1,38,935
 2026-10-02,celio,fra,costume homme,https://www.celio.com/fr-fr/store?StoreID=0037,2,0,2
 2026-10-02,celio,fra,costume homme,https://www.celio.com/fr-fr/store?StoreID=0623,2,0,2
 2026-10-02,celio,fra,costume homme,https://www.celio.com/fr-fr/store?StoreID=0676,4,0,2
@@ -14918,7 +14933,7 @@ date,site,country,query,page,position,clicks,impressions
 2026-09-29,celio,fra,doudoune homme,https://www.celio.com/fr-fr/c/blousons-et-manteaux-doudounes,9.7,2,123
 2026-09-30,celio,fra,doudoune homme,https://www.celio.com/fr-fr/c/blousons-et-manteaux-doudounes,4.1,3,248
 2026-10-01,celio,fra,doudoune homme,https://www.celio.com/fr-fr/c/blousons-et-manteaux-doudounes,2.0,3,416
-2026-10-02,celio,fra,doudoune homme,https://www.celio.com/fr-fr/c/blousons-et-manteaux-doudounes,2.6,0,246
+2026-10-02,celio,fra,doudoune homme,https://www.celio.com/fr-fr/c/blousons-et-manteaux-doudounes,2.5,0,257
 2026-07-05,celio,fra,doudounes homme,https://www.celio.com/fr-fr/c/blousons-et-manteaux-doudounes,11.4,0,13
 2026-07-06,celio,fra,doudounes homme,https://www.celio.com/fr-fr/c/blousons-et-manteaux-doudounes,9.7,0,18
 2026-07-07,celio,fra,doudounes homme,https://www.celio.com/fr-fr/c/blousons-et-manteaux-doudounes,10.3,0,19
@@ -15172,7 +15187,7 @@ date,site,country,query,page,position,clicks,impressions
 2026-09-29,celio,fra,ensemble homme,https://www.celio.com/fr-fr/c/saisonniers-ensemble,4.2,9,278
 2026-09-30,celio,fra,ensemble homme,https://www.celio.com/fr-fr/c/saisonniers-ensemble,2.4,3,295
 2026-10-01,celio,fra,ensemble homme,https://www.celio.com/fr-fr/c/saisonniers-ensemble,3.4,10,325
-2026-10-02,celio,fra,ensemble homme,https://www.celio.com/fr-fr/c/saisonniers-ensemble,3.7,2,253
+2026-10-02,celio,fra,ensemble homme,https://www.celio.com/fr-fr/c/saisonniers-ensemble,3.7,2,258
 2026-07-05,celio,fra,jean homme,https://www.celio.com/fr-fr/c/jeans,1.5,3,261
 2026-07-06,celio,fra,jean homme,https://www.celio.com/fr-fr/c/jeans,1.4,5,206
 2026-07-07,celio,fra,jean homme,https://www.celio.com/fr-fr/c/jeans,1.4,2,225
@@ -15461,7 +15476,7 @@ date,site,country,query,page,position,clicks,impressions
 2026-10-01,celio,fra,jean homme,https://www.celio.com/fr-fr/store?StoreID=0769,4.5,0,2
 2026-10-01,celio,fra,jean homme,https://www.celio.com/fr-fr/store?StoreID=1664,2,0,2
 2026-10-01,celio,fra,jean homme,https://www.celio.com/fr-fr/store?StoreID=1683,4.5,0,2
-2026-10-02,celio,fra,jean homme,https://www.celio.com/fr-fr/c/jeans,1.4,11,344
+2026-10-02,celio,fra,jean homme,https://www.celio.com/fr-fr/c/jeans,1.4,12,359
 2026-10-02,celio,fra,jean homme,https://www.celio.com/fr-fr/store?StoreID=0012,4.5,0,4
 2026-10-02,celio,fra,jean homme,https://www.celio.com/fr-fr/store?StoreID=0044,4.5,0,4
 2026-10-02,celio,fra,jean homme,https://www.celio.com/fr-fr/store?StoreID=0061,12,0,2
@@ -15928,7 +15943,7 @@ date,site,country,query,page,position,clicks,impressions
 2026-10-01,celio,fra,jeans homme,https://www.celio.com/fr-fr/store?StoreID=1638,5,0,2
 2026-10-01,celio,fra,jeans homme,https://www.celio.com/fr-fr/store?StoreID=1664,2,0,2
 2026-10-01,celio,fra,jeans homme,https://www.celio.com/fr-fr/store?StoreID=1688,2,0,3
-2026-10-02,celio,fra,jeans homme,https://www.celio.com/fr-fr/c/jeans,5.4,6,373
+2026-10-02,celio,fra,jeans homme,https://www.celio.com/fr-fr/c/jeans,5.4,6,382
 2026-10-02,celio,fra,jeans homme,https://www.celio.com/fr-fr/store?StoreID=0012,2.5,0,4
 2026-10-02,celio,fra,jeans homme,https://www.celio.com/fr-fr/store?StoreID=0035,1.5,0,2
 2026-10-02,celio,fra,jeans homme,https://www.celio.com/fr-fr/store?StoreID=0108,1,0,4
@@ -16104,7 +16119,7 @@ date,site,country,query,page,position,clicks,impressions
 2026-09-30,celio,fra,manteau homme,https://www.celio.com/fr-fr/store?StoreID=1624,7.4,0,5
 2026-10-01,celio,fra,manteau homme,https://www.celio.com/fr-fr/c/blousons-et-manteaux-manteaux,2.3,16,540
 2026-10-01,celio,fra,manteau homme,https://www.celio.com/fr-fr/store?StoreID=0123,7,0,3
-2026-10-02,celio,fra,manteau homme,https://www.celio.com/fr-fr/c/blousons-et-manteaux-manteaux,2.3,22,494
+2026-10-02,celio,fra,manteau homme,https://www.celio.com/fr-fr/c/blousons-et-manteaux-manteaux,2.4,23,512
 2026-07-05,celio,fra,pantalon blanc homme,https://www.celio.com/fr-fr/c/pantalons-chinos-pantalon-chino-slim,1,0,2
 2026-07-05,celio,fra,pantalon blanc homme,https://www.celio.com/fr-fr/c/pantalons-chinos-pantalons-chinos-stretch,1,0,2
 2026-07-05,celio,fra,pantalon blanc homme,https://www.celio.com/fr-fr/c/pantalons-pantalons-blancs,2.9,6,214
@@ -16296,7 +16311,7 @@ date,site,country,query,page,position,clicks,impressions
 2026-09-30,celio,fra,pantalon blanc homme,https://www.celio.com/fr-fr/c/pantalons-pantalons-blancs,2.6,3,107
 2026-10-01,celio,fra,pantalon blanc homme,https://www.celio.com/fr-fr/c/pantalons-pantalons-blancs,2.0,1,91
 2026-10-02,celio,fra,pantalon blanc homme,https://www.celio.com/fr-fr/c/pantalons-chinos-pantalons-chino-blancs,11,0,2
-2026-10-02,celio,fra,pantalon blanc homme,https://www.celio.com/fr-fr/c/pantalons-pantalons-blancs,1.5,8,102
+2026-10-02,celio,fra,pantalon blanc homme,https://www.celio.com/fr-fr/c/pantalons-pantalons-blancs,1.5,8,103
 2026-10-02,celio,fra,pantalon blanc homme,https://www.celio.com/fr-fr/p/pantalon-straight-100-lin---blanc/1124635.html,5.5,0,2
 2026-07-05,celio,fra,pantalon cargo homme,https://www.celio.com/fr-fr/c/pantalons-pantalons-cargos,2.3,11,421
 2026-07-05,celio,fra,pantalon cargo homme,https://www.celio.com/fr-fr/c/vetements-pas-chers-pantalons-cargo-pas-chers,28.7,0,3
@@ -16743,8 +16758,8 @@ date,site,country,query,page,position,clicks,impressions
 2026-10-01,celio,fra,pantalon cargo homme,https://www.celio.com/fr-fr/store?StoreID=1475,8,0,3
 2026-10-01,celio,fra,pantalon cargo homme,https://www.celio.com/fr-fr/store?StoreID=1683,5.2,0,5
 2026-10-01,celio,fra,pantalon cargo homme,https://www.celio.com/fr-fr/store?StoreID=1688,6.7,0,3
-2026-10-02,celio,fra,pantalon cargo homme,https://www.celio.com/fr-fr/c/pantalons-pantalons-cargos,3.8,22,442
-2026-10-02,celio,fra,pantalon cargo homme,https://www.celio.com/fr-fr/store?StoreID=0080,5,0,2
+2026-10-02,celio,fra,pantalon cargo homme,https://www.celio.com/fr-fr/c/pantalons-pantalons-cargos,3.8,22,450
+2026-10-02,celio,fra,pantalon cargo homme,https://www.celio.com/fr-fr/store?StoreID=0080,5.3,0,3
 2026-10-02,celio,fra,pantalon cargo homme,https://www.celio.com/fr-fr/store?StoreID=0118,7.7,0,3
 2026-10-02,celio,fra,pantalon cargo homme,https://www.celio.com/fr-fr/store?StoreID=0206,7,0,2
 2026-10-02,celio,fra,pantalon cargo homme,https://www.celio.com/fr-fr/store?StoreID=0230,5.5,0,2
@@ -16983,7 +16998,7 @@ date,site,country,query,page,position,clicks,impressions
 2026-10-02,celio,fra,pantalon chino homme,https://www.celio.com/fr-fr/c/pantalons-chinos-pantalon-chino-noir,38,0,2
 2026-10-02,celio,fra,pantalon chino homme,https://www.celio.com/fr-fr/c/pantalons-chinos-pantalons-chinos-beiges,13,0,3
 2026-10-02,celio,fra,pantalon chino homme,https://www.celio.com/fr-fr/c/pantalons-chinos-pantalons-chinos-vert,15.5,0,2
-2026-10-02,celio,fra,pantalon chino homme,https://www.celio.com/fr-fr/c/pantalons-pantalons-chinos,1.5,13,236
+2026-10-02,celio,fra,pantalon chino homme,https://www.celio.com/fr-fr/c/pantalons-pantalons-chinos,1.5,13,238
 2026-10-02,celio,fra,pantalon chino homme,https://www.celio.com/fr-fr/store?StoreID=0080,10,0,2
 2026-10-02,celio,fra,pantalon chino homme,https://www.celio.com/fr-fr/store?StoreID=0218,10.5,0,2
 2026-10-02,celio,fra,pantalon chino homme,https://www.celio.com/fr-fr/store?StoreID=0263,7,0,2
@@ -17162,7 +17177,7 @@ date,site,country,query,page,position,clicks,impressions
 2026-09-30,celio,fra,pantalon en lin homme,https://www.celio.com/fr-fr/c/pantalons-pantalons-en-lin,1.4,3,52
 2026-09-30,celio,fra,pantalon en lin homme,https://www.celio.com/fr-fr/store?StoreID=1636,9.5,0,2
 2026-10-01,celio,fra,pantalon en lin homme,https://www.celio.com/fr-fr/c/pantalons-pantalons-en-lin,2.0,6,59
-2026-10-02,celio,fra,pantalon en lin homme,https://www.celio.com/fr-fr/c/pantalons-pantalons-en-lin,1.6,2,57
+2026-10-02,celio,fra,pantalon en lin homme,https://www.celio.com/fr-fr/c/pantalons-pantalons-en-lin,1.6,2,60
 2026-10-02,celio,fra,pantalon en lin homme,https://www.celio.com/fr-fr/store?StoreID=1636,7,0,4
 2026-07-05,celio,fra,pantalon homme,https://www.celio.com/fr-fr/c/pantalons,2.0,12,402
 2026-07-05,celio,fra,pantalon homme,https://www.celio.com/fr-fr/c/pantalons-pantalons-droits,32.7,0,9
@@ -17606,12 +17621,13 @@ date,site,country,query,page,position,clicks,impressions
 2026-10-01,celio,fra,pantalon homme,https://www.celio.com/fr-fr/store?StoreID=1455,1,0,2
 2026-10-01,celio,fra,pantalon homme,https://www.celio.com/fr-fr/store?StoreID=1664,2,0,3
 2026-10-01,celio,fra,pantalon homme,https://www.celio.com/fr-fr/store?StoreID=1683,4,0,2
-2026-10-02,celio,fra,pantalon homme,https://www.celio.com/fr-fr/c/pantalons,1.9,13,515
+2026-10-02,celio,fra,pantalon homme,https://www.celio.com/fr-fr/c/pantalons,1.9,14,525
 2026-10-02,celio,fra,pantalon homme,https://www.celio.com/fr-fr/c/vetements-pas-chers-pantalons-pas-chers,27,0,2
 2026-10-02,celio,fra,pantalon homme,https://www.celio.com/fr-fr/store?StoreID=0080,7,0,3
 2026-10-02,celio,fra,pantalon homme,https://www.celio.com/fr-fr/store?StoreID=0149,5,0,2
 2026-10-02,celio,fra,pantalon homme,https://www.celio.com/fr-fr/store?StoreID=0218,7,0,2
 2026-10-02,celio,fra,pantalon homme,https://www.celio.com/fr-fr/store?StoreID=0230,4.7,0,3
+2026-10-02,celio,fra,pantalon homme,https://www.celio.com/fr-fr/store?StoreID=0263,4.5,0,2
 2026-10-02,celio,fra,pantalon homme,https://www.celio.com/fr-fr/store?StoreID=0296,4,0,2
 2026-10-02,celio,fra,pantalon homme,https://www.celio.com/fr-fr/store?StoreID=1623,8,0,2
 2026-07-05,celio,fra,pantalon lin homme,https://www.celio.com/fr-fr/c/collection-ete-selection-lin,27,0,2
@@ -17792,7 +17808,7 @@ date,site,country,query,page,position,clicks,impressions
 2026-09-29,celio,fra,pantalon lin homme,https://www.celio.com/fr-fr/c/pantalons-pantalons-en-lin,1.6,11,150
 2026-09-30,celio,fra,pantalon lin homme,https://www.celio.com/fr-fr/c/pantalons-pantalons-en-lin,1.8,7,147
 2026-10-01,celio,fra,pantalon lin homme,https://www.celio.com/fr-fr/c/pantalons-pantalons-en-lin,1.2,8,125
-2026-10-02,celio,fra,pantalon lin homme,https://www.celio.com/fr-fr/c/pantalons-pantalons-en-lin,1.6,2,115
+2026-10-02,celio,fra,pantalon lin homme,https://www.celio.com/fr-fr/c/pantalons-pantalons-en-lin,1.6,2,116
 2026-10-02,celio,fra,pantalon lin homme,https://www.celio.com/fr-fr/p/pantalon-straight-100-lin---blanc/1124635.html,24.5,0,2
 2026-10-02,celio,fra,pantalon lin homme,https://www.celio.com/fr-fr/store?StoreID=0227,8,0,2
 2026-07-05,celio,fra,parka homme,https://www.celio.com/fr-fr/c/blousons-et-manteaux-parkas,10.2,0,50
@@ -17900,7 +17916,7 @@ date,site,country,query,page,position,clicks,impressions
 2026-09-29,celio,fra,parka homme,https://www.celio.com/fr-fr/store?StoreID=0230,8,0,2
 2026-09-30,celio,fra,parka homme,https://www.celio.com/fr-fr/c/blousons-et-manteaux-parkas,3.0,18,300
 2026-10-01,celio,fra,parka homme,https://www.celio.com/fr-fr/c/blousons-et-manteaux-parkas,2.4,12,281
-2026-10-02,celio,fra,parka homme,https://www.celio.com/fr-fr/c/blousons-et-manteaux-parkas,1.8,9,213
+2026-10-02,celio,fra,parka homme,https://www.celio.com/fr-fr/c/blousons-et-manteaux-parkas,1.8,9,220
 2026-07-05,celio,fra,polo homme,https://www.celio.com/fr-fr/c/polos,2.0,28,703
 2026-07-05,celio,fra,polo homme,https://www.celio.com/fr-fr/store?StoreID=0206,10.5,0,2
 2026-07-06,celio,fra,polo homme,https://www.celio.com/fr-fr/c/polos,1.7,28,641
@@ -18196,11 +18212,12 @@ date,site,country,query,page,position,clicks,impressions
 2026-10-01,celio,fra,polo homme,https://www.celio.com/fr-fr/store?StoreID=0685,4,0,2
 2026-10-01,celio,fra,polo homme,https://www.celio.com/fr-fr/store?StoreID=1461,3.5,0,2
 2026-10-01,celio,fra,polo homme,https://www.celio.com/fr-fr/store?StoreID=1475,4,0,4
-2026-10-02,celio,fra,polo homme,https://www.celio.com/fr-fr/c/polos,5.8,2,117
+2026-10-02,celio,fra,polo homme,https://www.celio.com/fr-fr/c/polos,5.9,2,120
 2026-10-02,celio,fra,polo homme,https://www.celio.com/fr-fr/store?StoreID=0235,2,0,3
 2026-10-02,celio,fra,polo homme,https://www.celio.com/fr-fr/store?StoreID=0272,2,0,2
 2026-10-02,celio,fra,polo homme,https://www.celio.com/fr-fr/store?StoreID=0687,1.9,0,18
 2026-10-02,celio,fra,polo homme,https://www.celio.com/fr-fr/store?StoreID=0765,2,0,3
+2026-10-02,celio,fra,polo homme,https://www.celio.com/fr-fr/store?StoreID=0770,2,0,2
 2026-07-05,celio,fra,pull homme,https://www.celio.com/fr-fr/c/pulls,2.1,2,139
 2026-07-06,celio,fra,pull homme,https://www.celio.com/fr-fr/c/pulls,2.0,8,122
 2026-07-07,celio,fra,pull homme,https://www.celio.com/fr-fr/c/pulls,1.7,6,127
@@ -18318,7 +18335,7 @@ date,site,country,query,page,position,clicks,impressions
 2026-10-01,celio,fra,pull homme,https://www.celio.com/fr-fr/store?StoreID=0080,8,0,2
 2026-10-01,celio,fra,pull homme,https://www.celio.com/fr-fr/store?StoreID=0174,10.3,0,3
 2026-10-01,celio,fra,pull homme,https://www.celio.com/fr-fr/store?StoreID=1035,11,0,3
-2026-10-02,celio,fra,pull homme,https://www.celio.com/fr-fr/c/pulls,2.1,15,642
+2026-10-02,celio,fra,pull homme,https://www.celio.com/fr-fr/c/pulls,2.1,16,659
 2026-07-05,celio,fra,pyjama homme,https://www.celio.com/fr-fr/c/sous-vetements-pyjamas,1.8,37,624
 2026-07-06,celio,fra,pyjama homme,https://www.celio.com/fr-fr/c/sous-vetements-pyjamas,2.1,24,498
 2026-07-07,celio,fra,pyjama homme,https://www.celio.com/fr-fr/c/sous-vetements-pyjamas,3.1,21,521
@@ -18444,8 +18461,8 @@ date,site,country,query,page,position,clicks,impressions
 2026-09-30,celio,fra,pyjama homme,https://www.celio.com/fr-fr/store?StoreID=0123,2,0,2
 2026-10-01,celio,fra,pyjama homme,https://www.celio.com/fr-fr/c/sous-vetements-pyjamas,2.6,44,879
 2026-10-01,celio,fra,pyjama homme,https://www.celio.com/fr-fr/store?StoreID=0123,6,0,4
-2026-10-02,celio,fra,pyjama homme,https://www.celio.com/fr-fr/c/sous-vetements-pyjamas,2.4,31,721
-2026-10-02,celio,fra,pyjama homme,https://www.celio.com/fr-fr/store?StoreID=0123,4,0,4
+2026-10-02,celio,fra,pyjama homme,https://www.celio.com/fr-fr/c/sous-vetements-pyjamas,2.4,31,740
+2026-10-02,celio,fra,pyjama homme,https://www.celio.com/fr-fr/store?StoreID=0123,4,0,6
 2026-10-02,celio,fra,pyjama homme,https://www.celio.com/fr-fr/store?StoreID=0614,8.5,0,2
 2026-07-05,celio,fra,short homme,https://www.celio.com/fr-fr/c/bermudas,1.8,125,2899
 2026-07-06,celio,fra,short homme,https://www.celio.com/fr-fr/c/bermudas,1.8,115,2647
@@ -18597,7 +18614,7 @@ date,site,country,query,page,position,clicks,impressions
 2026-09-29,celio,fra,short homme,https://www.celio.com/fr-fr/c/bermudas,2.1,5,272
 2026-09-30,celio,fra,short homme,https://www.celio.com/fr-fr/c/bermudas,1.9,7,250
 2026-10-01,celio,fra,short homme,https://www.celio.com/fr-fr/c/bermudas,1.9,0,224
-2026-10-02,celio,fra,short homme,https://www.celio.com/fr-fr/c/bermudas,2.0,7,189
+2026-10-02,celio,fra,short homme,https://www.celio.com/fr-fr/c/bermudas,2.0,7,192
 2026-07-05,celio,fra,sweat homme,https://www.celio.com/fr-fr/c/sweats,2.0,4,197
 2026-07-06,celio,fra,sweat homme,https://www.celio.com/fr-fr/c/sweats,1.8,2,150
 2026-07-07,celio,fra,sweat homme,https://www.celio.com/fr-fr/c/sweats,1.8,1,167
@@ -18719,7 +18736,7 @@ date,site,country,query,page,position,clicks,impressions
 2026-09-30,celio,fra,sweat homme,https://www.celio.com/fr-fr/c/sweats,2.1,20,434
 2026-09-30,celio,fra,sweat homme,https://www.celio.com/fr-fr/c/sweats-sweat-original?page=3,11.5,0,2
 2026-10-01,celio,fra,sweat homme,https://www.celio.com/fr-fr/c/sweats,2.0,16,409
-2026-10-02,celio,fra,sweat homme,https://www.celio.com/fr-fr/c/sweats,2.0,10,342
+2026-10-02,celio,fra,sweat homme,https://www.celio.com/fr-fr/c/sweats,2,10,351
 2026-07-05,celio,fra,t shirt homme,https://www.celio.com/fr-fr/c/t-shirts,1.6,10,617
 2026-07-05,celio,fra,t shirt homme,https://www.celio.com/fr-fr/store?StoreID=0012,3.9,0,9
 2026-07-05,celio,fra,t shirt homme,https://www.celio.com/fr-fr/store?StoreID=0284,9.5,0,2
@@ -19216,12 +19233,12 @@ date,site,country,query,page,position,clicks,impressions
 2026-10-01,celio,fra,t shirt homme,https://www.celio.com/fr-fr/store?StoreID=0674,3.3,0,3
 2026-10-01,celio,fra,t shirt homme,https://www.celio.com/fr-fr/store?StoreID=1634,3,0,2
 2026-10-02,celio,fra,t shirt homme,https://www.celio.com/fr-fr/c/soldes-soldes-t-shirts,9.5,0,2
-2026-10-02,celio,fra,t shirt homme,https://www.celio.com/fr-fr/c/t-shirts,2.6,4,202
-2026-10-02,celio,fra,t shirt homme,https://www.celio.com/fr-fr/store?StoreID=0212,5.8,0,5
+2026-10-02,celio,fra,t shirt homme,https://www.celio.com/fr-fr/c/t-shirts,2.6,4,207
+2026-10-02,celio,fra,t shirt homme,https://www.celio.com/fr-fr/store?StoreID=0212,6.2,0,6
 2026-10-02,celio,fra,t shirt homme,https://www.celio.com/fr-fr/store?StoreID=0226,2,0,2
 2026-10-02,celio,fra,t shirt homme,https://www.celio.com/fr-fr/store?StoreID=0230,1.8,0,5
 2026-10-02,celio,fra,t shirt homme,https://www.celio.com/fr-fr/store?StoreID=0623,4,0,2
-2026-10-02,celio,fra,t shirt homme,https://www.celio.com/fr-fr/store?StoreID=0698,5.3,0,19
+2026-10-02,celio,fra,t shirt homme,https://www.celio.com/fr-fr/store?StoreID=0698,5.1,0,20
 2026-10-02,celio,fra,t shirt homme,https://www.celio.com/fr-fr/store?StoreID=0757,4,0,4
 2026-10-02,celio,fra,t shirt homme,https://www.celio.com/fr-fr/store?StoreID=1704,4,0,2
 2026-07-05,celio,fra,tee shirt homme,https://www.celio.com/fr-fr/c/t-shirts,3.8,1,211
@@ -19563,7 +19580,7 @@ date,site,country,query,page,position,clicks,impressions
 2026-10-01,celio,fra,tee shirt homme,https://www.celio.com/fr-fr/c/t-shirts,1.7,6,367
 2026-10-01,celio,fra,tee shirt homme,https://www.celio.com/fr-fr/store?StoreID=0109,3.5,0,4
 2026-10-02,celio,fra,tee shirt homme,https://www.celio.com/fr-fr/c/soldes-soldes-t-shirts,45.2,0,4
-2026-10-02,celio,fra,tee shirt homme,https://www.celio.com/fr-fr/c/t-shirts,1.7,7,368
+2026-10-02,celio,fra,tee shirt homme,https://www.celio.com/fr-fr/c/t-shirts,1.7,7,373
 2026-10-02,celio,fra,tee shirt homme,https://www.celio.com/fr-fr/store?StoreID=0109,4.5,0,2
 2026-10-02,celio,fra,tee shirt homme,https://www.celio.com/fr-fr/store?StoreID=1692,13,0,2
 2026-07-05,celio,fra,tshirt homme,https://www.celio.com/fr-fr/c/t-shirts,3.7,11,310
@@ -20285,11 +20302,12 @@ date,site,country,query,page,position,clicks,impressions
 2026-10-01,celio,fra,veste homme,https://www.celio.com/fr-fr/store?StoreID=1435,2,0,2
 2026-10-01,celio,fra,veste homme,https://www.celio.com/fr-fr/store?StoreID=1613,13,0,2
 2026-10-02,celio,fra,veste homme,https://www.celio.com/fr-fr/c/blousons-et-manteaux,15.5,0,4
-2026-10-02,celio,fra,veste homme,https://www.celio.com/fr-fr/c/blousons-et-manteaux-vestes,7.1,3,119
+2026-10-02,celio,fra,veste homme,https://www.celio.com/fr-fr/c/blousons-et-manteaux-vestes,7.0,3,125
 2026-10-02,celio,fra,veste homme,https://www.celio.com/fr-fr/c/vestes-vestes-legeres,29,0,2
 2026-10-02,celio,fra,veste homme,https://www.celio.com/fr-fr/store?StoreID=0162,6,0,2
+2026-10-02,celio,fra,veste homme,https://www.celio.com/fr-fr/store?StoreID=0224,5,0,2
 2026-10-02,celio,fra,veste homme,https://www.celio.com/fr-fr/store?StoreID=0291,3.8,0,6
-2026-10-02,celio,fra,veste homme,https://www.celio.com/fr-fr/store?StoreID=0296,8.7,0,3
+2026-10-02,celio,fra,veste homme,https://www.celio.com/fr-fr/store?StoreID=0296,8.2,0,4
 2026-10-02,celio,fra,veste homme,https://www.celio.com/fr-fr/store?StoreID=0603,10,0,3
 2026-10-02,celio,fra,veste homme,https://www.celio.com/fr-fr/store?StoreID=0690,8.5,0,2
 2026-10-02,celio,fra,veste homme,https://www.celio.com/fr-fr/store?StoreID=0769,5.3,0,3

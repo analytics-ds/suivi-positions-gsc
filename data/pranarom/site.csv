@@ -478,7 +478,7 @@ date,site,country,segment,position,clicks,impressions,data_state
 2026-09-29,pranarom,all,brand,3.0,503,2762,final
 2026-09-30,pranarom,all,brand,2.9,510,3686,final
 2026-10-01,pranarom,all,brand,2.3,456,2750,fresh
-2026-10-02,pranarom,all,brand,1.9,382,2338,fresh
+2026-10-02,pranarom,all,brand,2.0,395,2402,fresh
 2025-06-10,pranarom,all,nonbrand,10.3,1360,58373,final
 2025-06-11,pranarom,all,nonbrand,10.7,1297,57586,final
 2025-06-12,pranarom,all,nonbrand,11.2,1249,57465,final
@@ -958,7 +958,7 @@ date,site,country,segment,position,clicks,impressions,data_state
 2026-09-29,pranarom,all,nonbrand,8.5,729,39335,final
 2026-09-30,pranarom,all,nonbrand,8.0,703,39694,final
 2026-10-01,pranarom,all,nonbrand,8.4,580,37179,fresh
-2026-10-02,pranarom,all,nonbrand,7.5,481,31158,fresh
+2026-10-02,pranarom,all,nonbrand,7.6,507,32628,fresh
 2025-06-10,pranarom,all,total,11.0,4172,158243,final
 2025-06-11,pranarom,all,total,11.6,3925,150227,final
 2025-06-12,pranarom,all,total,11.5,3884,145358,final
@@ -1438,7 +1438,7 @@ date,site,country,segment,position,clicks,impressions,data_state
 2026-09-29,pranarom,all,total,8.0,2663,110873,final
 2026-09-30,pranarom,all,total,8.3,2693,113365,final
 2026-10-01,pranarom,all,total,8.4,2350,104681,fresh
-2026-10-02,pranarom,all,total,8.1,2034,86230,fresh
+2026-10-02,pranarom,all,total,8.1,2108,89898,fresh
 2025-06-10,pranarom,fra,brand,1.2,501,2436,final
 2025-06-11,pranarom,fra,brand,1.3,456,2232,final
 2025-06-12,pranarom,fra,brand,1.2,488,2194,final
@@ -1918,7 +1918,7 @@ date,site,country,segment,position,clicks,impressions,data_state
 2026-09-29,pranarom,fra,brand,2.0,423,2244,final
 2026-09-30,pranarom,fra,brand,2.5,418,2982,final
 2026-10-01,pranarom,fra,brand,1.7,387,2257,fresh
-2026-10-02,pranarom,fra,brand,1.3,320,1754,fresh
+2026-10-02,pranarom,fra,brand,1.4,329,1786,fresh
 2025-06-10,pranarom,fra,nonbrand,6.9,1159,50177,final
 2025-06-11,pranarom,fra,nonbrand,7.5,1096,50193,final
 2025-06-12,pranarom,fra,nonbrand,7.4,1066,49639,final
@@ -2398,7 +2398,7 @@ date,site,country,segment,position,clicks,impressions,data_state
 2026-09-29,pranarom,fra,nonbrand,9.5,592,42907,final
 2026-09-30,pranarom,fra,nonbrand,7.3,597,34611,final
 2026-10-01,pranarom,fra,nonbrand,7.3,495,32567,fresh
-2026-10-02,pranarom,fra,nonbrand,7.0,402,27343,fresh
+2026-10-02,pranarom,fra,nonbrand,7.0,416,28247,fresh
 2025-06-10,pranarom,fra,total,6.5,3420,90999,final
 2025-06-11,pranarom,fra,total,6.7,3215,89580,final
 2025-06-12,pranarom,fra,total,6.6,3203,87886,final
@@ -2878,4 +2878,4 @@ date,site,country,segment,position,clicks,impressions,data_state
 2026-09-29,pranarom,fra,total,7.7,2170,84036,final
 2026-09-30,pranarom,fra,total,8.1,2238,86478,final
 2026-10-01,pranarom,fra,total,7.9,1955,78519,fresh
-2026-10-02,pranarom,fra,total,7.7,1696,65781,fresh
+2026-10-02,pranarom,fra,total,7.7,1744,67817,fresh
