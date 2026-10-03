@@ -3,6 +3,7 @@
 Commandes :
   python scripts/tracker.py fetch [--days 10] [--site celio]   collecte GSC + mises à jour Google (+ inspection des pages jamais vérifiées)
   python scripts/tracker.py inspect <site> [--pages-file f]     vérifie l'indexation (inspection d'URL) des pages suivies, ou de celles du fichier
+  python scripts/tracker.py sections [--days 10] [--site celio] collecte des dossiers du site seule (Trafic > Par dossier)
   python scripts/tracker.py build                               calculs (alertes, impact, opportunités…) et docs/data/*.json
   python scripts/tracker.py seed <site> [--n 20]                pré-remplit les mots-clés d'un nouveau projet (top hors marque)
   python scripts/tracker.py notify                              digest Slack (si SLACK_WEBHOOK_URL est défini)
@@ -23,7 +24,7 @@ import time
 from collections import defaultdict
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
-from urllib.parse import quote
+from urllib.parse import quote, urlparse
 
 import requests
 import yaml
@@ -49,6 +50,19 @@ F_POS = ["date", "site", "country", "keyword", "page", "position", "clicks", "im
 F_KW = ["date", "site", "country", "query", "position", "clicks", "impressions", "data_state"]
 F_QP = ["date", "site", "country", "query", "page", "position", "clicks", "impressions"]
 F_SITE = ["date", "site", "country", "segment", "position", "clicks", "impressions", "data_state"]
+F_SEC = ["date", "site", "country", "grouping", "section", "segment", "position", "clicks", "impressions", "data_state"]
+
+# Dossiers du site (Trafic > Par dossier)
+SEC_MIN_PAGES = 5           # un premier segment d'URL devient un dossier à partir de 5 pages vues dans la GSC...
+SEC_MIN_SHARE = 0.01        # ... ou de 1 % des clics du marché
+SEC_MAX = 15                # au-delà, les plus petits rejoignent « Autres pages » (un dossier déjà détecté le reste)
+SEC_QUERY_ROWS = 10000      # requêtes récupérées par dossier et par période, triées par clics
+SEC_TOP = 20                # longueur des listes (gagnantes, perdantes, apparues, disparues)
+SEC_SUMMARY_WEEKDAY = 0     # tops pages et mots-clés des dossiers recalculés le lundi
+SEC_MIN_IMPR = 10           # impressions minimales d'une requête pour la répartition des positions
+LANGS = set("fr en es pt nl de it pl ro cs sk hu el sv da fi no nb ru uk tr ar he ja zh ko id th vi bg hr sl lt lv et ca eu lb".split())
+LOCALE = re.compile(r"^([a-z]{2})(?:[-_][a-z]{2})?$", re.I)
+GROUPINGS = {"dossier": "Par dossier", "langue": "Par langue"}
 
 COUNTRIES = {"fra": "France", "bel": "Belgique", "che": "Suisse", "lux": "Luxembourg", "can": "Canada", "mco": "Monaco",
              "esp": "Espagne", "ita": "Italie", "deu": "Allemagne", "gbr": "Royaume-Uni", "usa": "États-Unis",
@@ -205,7 +219,14 @@ def token(account):
 
 def post(url, tok, body):
     for attempt in range(5):
-        r = requests.post(url, json=body, headers={"Authorization": f"Bearer {tok}"}, timeout=90)
+        try:
+            r = requests.post(url, json=body, headers={"Authorization": f"Bearer {tok}"}, timeout=180)
+        except (requests.Timeout, requests.ConnectionError) as e:  # appels lourds (page × requête) : on réessaie
+            if attempt == 4:
+                raise
+            print(f"  GSC lente ({type(e).__name__}), nouvel essai")
+            time.sleep(2 ** attempt * 3)
+            continue
         if r.status_code in (429, 500, 503):
             time.sleep(2 ** attempt * 3)
             continue
@@ -323,6 +344,10 @@ def fetch(days, only=None):
 
                 extras = fetch_extras(tok, s, queries, pages, end, brand, geo, scope)
                 write_json(pdir(name) / f"extras{suffix(mk)}.json", extras, compact=True)
+                try:  # un échec sur les dossiers ne bloque pas le suivi des positions
+                    fetch_sections(tok, s, m, days, today, brand, scope)
+                except Exception as e:
+                    print(f"[{name}/{mk}] dossiers : ERREUR {e}")
                 done |= keys
                 backfilled[name] = sorted(done)
 
@@ -380,6 +405,268 @@ def fetch_extras(tok, s, queries, pages, end, brand, geo=(), scope=()):
     out["queries"] = [[q, int(a["clicks"]), int(a["impressions"]), round(a["pw"] / a["impressions"], 1) if a["impressions"] else None,
                        a["best"], prev.get(q, 0)] for q, a in top]
     return out
+
+
+# ---------------------------------------------------------------- dossiers du site
+
+def url_host(u):
+    h = urlparse(u).netloc.lower()
+    return h[4:] if h.startswith("www.") else h
+
+
+def detect_sections(pages, m, previous=None):
+    """Découpe les pages d'un marché en sections, pour chaque regroupement (dossier, langue).
+
+    pages = {url: clics} sur l'union des périodes observées. Lecture d'une URL : hôte (un sous-domaine est une section à
+    part, www et sans www fusionnés), puis préfixe du marché déclaré ou préfixe de langue détecté, puis premier segment.
+    Chaque section porte la regex (RE2) qui sert aussi de filtre GSC, pour que le classement des pages et les séries
+    soient identiques. « Autres pages » = tout ce qu'aucune regex ne prend. Une section déjà détectée est conservée."""
+    previous = previous or {}
+    hosts = defaultdict(float)
+    for u, c in pages.items():
+        hosts[url_host(u)] += c + 1e-6
+    if not hosts:
+        return previous, {}
+    main = max(hosts, key=hosts.get)
+    main_pages = [u for u in pages if url_host(u) == main]
+    mp = "/".join(x for x in (m.get("path") or "").split("/") if x)
+    codes = []
+    if not mp:
+        cnt = defaultdict(int)
+        for u in main_pages:
+            first = urlparse(u).path.lstrip("/").split("/", 1)[0]
+            lm = LOCALE.match(first)
+            if lm and lm.group(1).lower() in LANGS:
+                cnt[first] += 1
+        # Préfixe de langue : plusieurs codes bien présents, ou un code qui couvre une bonne part du site
+        # (évite de prendre une rubrique /it/ ou /tv/ pour une langue)
+        if main_pages and (sum(v >= SEC_MIN_PAGES for v in cnt.values()) >= 2 or sum(cnt.values()) / len(main_pages) >= 0.3):
+            codes = sorted(cnt)
+    host_rx = r"^https?://(?:www\.)?" + re.escape(main) + "/"
+    if mp:
+        pre = pre_root = re.escape(mp) + "/"
+    elif codes:
+        alt = "|".join(re.escape(c) for c in codes)
+        pre, pre_root = f"(?:(?:{alt})/)?", f"(?:(?:{alt})/?)?"
+    else:
+        pre = pre_root = ""
+
+    total = sum(pages.values()) or 1
+    cand, lang = defaultdict(lambda: [0, 0.0]), defaultdict(lambda: [0, 0.0])
+    for u, c in pages.items():
+        h = url_host(u)
+        if h != main:
+            key = "h:" + h
+        else:
+            rest = urlparse(u).path.lstrip("/")
+            if mp:
+                if not rest.startswith(mp + "/"):
+                    continue
+                rest = rest[len(mp) + 1:]
+            elif codes:
+                head, _, tail = rest.partition("/")
+                if head in codes:
+                    lang["l:" + head][0] += 1; lang["l:" + head][1] += c
+                    rest = tail
+            seg, slash, _ = rest.partition("/")
+            if not slash or not seg:
+                continue  # page de premier niveau
+            key = "d:" + seg
+        cand[key][0] += 1; cand[key][1] += c
+
+    def label(key):
+        kind, _, v = key.partition(":")
+        return {"h": v, "d": f"/{v}/", "l": f"/{v}/"}.get(kind) or {"racine": "Pages de premier niveau", "autres": "Autres pages"}[key]
+
+    def rx(key):
+        kind, _, v = key.partition(":")
+        if kind == "h":
+            return r"^https?://" + re.escape(v) + "/"
+        if kind == "d":
+            return host_rx + pre + re.escape(v) + "/"
+        if kind == "l":
+            return host_rx + re.escape(v) + "(?:/|$)"
+        return host_rx + pre_root + "[^/]*$" if key == "racine" else None
+
+    def pick(pool, prev_list):
+        prev_keys = [x["key"] for x in prev_list if x["key"] not in ("racine", "autres")]
+        new = sorted((k for k, (n, c) in pool.items() if k not in prev_keys and (n >= SEC_MIN_PAGES or c / total >= SEC_MIN_SHARE)),
+                     key=lambda k: -pool[k][1])
+        return prev_keys + new[:max(0, SEC_MAX - len(prev_keys))]
+
+    out = {"dossier": [{"key": k, "label": label(k), "rx": rx(k)} for k in ["racine"] + pick(cand, previous.get("dossier", []))]}
+    if codes:
+        keys = pick(lang, previous.get("langue", []))
+        if len(keys) >= 2:
+            out["langue"] = [{"key": k, "label": label(k), "rx": rx(k)} for k in keys]
+    for secs in out.values():
+        secs.append({"key": "autres", "label": "Autres pages", "rx": None})
+    return out, {"main_host": main, "market_path": mp or None, "languages": codes}
+
+
+def section_classifier(secs):
+    comp = [(x["key"], re.compile(x["rx"])) for x in secs if x.get("rx")]
+    def which(u):
+        for key, r in comp:
+            if r.search(u):
+                return key
+        return "autres"
+    return which
+
+
+def page_filter(sec, secs):
+    if sec.get("rx"):
+        return f("page", "includingRegex", sec["rx"])
+    return f("page", "excludingRegex", "|".join(f"(?:{x['rx']})" for x in secs if x.get("rx")))
+
+
+def compare_lists(cur, ref, top=SEC_TOP, truncated=False):
+    """cur / ref = {clé: [clics, impressions, position]}. Gagnants, perdants (écart de clics), apparus, disparus."""
+    keys = set(cur) | set(ref)
+    z = [0, 0, None]
+    rows = [[k, *cur.get(k, z), *ref.get(k, z)] for k in keys]  # clé, clics, impr, pos, clics réf, impr réf, pos réf
+    both = [r for r in rows if r[0] in cur and r[0] in ref]   # hausses et baisses : présents aux deux périodes
+    win = sorted((r for r in both if r[1] > r[4]), key=lambda r: r[4] - r[1])[:top]
+    lose = sorted((r for r in both if r[1] < r[4]), key=lambda r: r[1] - r[4])[:top]
+    new = sorted((r for r in rows if r[0] not in ref), key=lambda r: (-r[1], -r[2]))
+    # Liste courante tronquée par Google : une absence n'est sûre que pour ce qui faisait plus que le plus petit retenu
+    floor = min((v[0] for v in cur.values()), default=0) if truncated else -1
+    gone = sorted((r for r in rows if r[0] not in cur and r[4] > floor), key=lambda r: (-r[4], -r[5]))
+    return {"win": win, "lose": lose, "new": new[:top], "gone": gone[:top], "n_new": len(new), "n_gone": len(gone),
+            "new_clicks": sum(r[1] for r in new), "gone_clicks": sum(r[4] for r in gone)}
+
+
+def fetch_sections(tok, s, m, days, today, brand, scope=()):
+    """Dossiers d'un marché (Trafic > Par dossier).
+
+    Appels GSC, tous triés ensuite localement par les regex des sections :
+    - séries quotidiennes : un seul appel jour × page sur la fenêtre de la synchro, réparti entre les sections ; une section
+      nouvelle ou redéfinie récupère une fois ses 16 mois par un appel filtré sur sa regex ;
+    - comparaisons sur 28 jours (vs période précédente et N-1) : 3 appels page et 3 appels page × requête, une fois par jour
+      (sautés si le dernier jour définitif n'a pas changé depuis la dernière collecte)."""
+    name, prop, mk = s["name"], s["property"], m["code"]
+    scope = list(scope)  # filtres du marché : pays et dossier d'URL déclaré
+    meta_path = pdir(name) / f"sections{suffix(mk)}.json"
+    old = read_json(meta_path, {})
+    end = today - timedelta(days=1)
+    lf = today - timedelta(days=FINAL_AFTER_DAYS)      # comparaisons sur données définitives
+    state = lambda d: "final" if date.fromisoformat(d) <= lf else "fresh"
+    a = lf - timedelta(days=27)
+    win = {"cur": [a, lf], "prev": [a - timedelta(days=28), a - timedelta(days=1)], "n1": [a - timedelta(days=364), lf - timedelta(days=364)]}
+    windows = {"28": {lbl: [str(x), str(y)] for lbl, (x, y) in win.items()}}
+    t0 = time.time()
+
+    snaps = {lbl: {r["keys"][0]: [int(r["clicks"]), int(r["impressions"]), round(r["position"], 1)]
+                   for r in gsc(tok, prop, x, y, ["page"], scope)} for lbl, (x, y) in win.items()}
+    pool = defaultdict(float)
+    for rows in snaps.values():
+        for u, v in rows.items():
+            pool[u] += v[0]
+    groupings, info = detect_sections(pool, m, old.get("groupings") or {})
+
+    # Séries quotidiennes
+    start = today - timedelta(days=days)
+    daily_rows = gsc(tok, prop, start, end, ["date", "page"], scope)
+    path = pdir(name) / "sections.csv"
+    old_secs = {(g, x["key"]): x for g, lst in (old.get("groupings") or {}).items() for x in lst}
+    fetched, new_rows = {}, []
+    for g, secs in groupings.items():
+        which = section_classifier(secs)
+        agg = defaultdict(lambda: [0, 0, 0.0])   # (section, jour) -> clics, impressions, position × impressions
+        for r in daily_rows:
+            d, u = r["keys"]
+            x = agg[(which(u), d)]
+            x[0] += r["clicks"]; x[1] += r["impressions"]; x[2] += r["position"] * r["impressions"]
+        for sec in secs:
+            pf = page_filter(sec, secs)
+            sec["sig"] = pf["operator"] + ":" + pf["expression"]
+            known = old_secs.get((g, sec["key"]))
+            if not (known and known.get("sig") == sec["sig"]):   # section nouvelle ou redéfinie : 16 mois d'un coup
+                for r in gsc(tok, prop, today - timedelta(days=BACKFILL_DAYS), start - timedelta(days=1), ["date"], [pf] + scope):
+                    new_rows.append({"date": r["keys"][0], "site": name, "country": mk, "grouping": g, "section": sec["key"], "segment": "total",
+                                     "position": round(r["position"], 1), "clicks": int(r["clicks"]), "impressions": int(r["impressions"]),
+                                     "data_state": "final"})
+                fetched[(g, sec["key"])] = "0000"
+            else:
+                fetched[(g, sec["key"])] = str(start)
+        for (k, d), (c, i, pw) in agg.items():
+            if i:
+                new_rows.append({"date": d, "site": name, "country": mk, "grouping": g, "section": k, "segment": "total",
+                                 "position": round(pw / i, 1), "clicks": int(c), "impressions": int(i), "data_state": state(d)})
+    keep = [r for r in read_csv(path)
+            if r["country"] != mk or ((r["grouping"], r["section"]) in fetched and r["date"] < fetched[(r["grouping"], r["section"])])]
+    write_csv(path, F_SEC, keep + new_rows, lambda r: (r["country"], r["grouping"], r["section"], r["segment"], r["date"]))
+
+    # Comparaisons sur 28 jours : l'appel page × requête est le plus lourd (3 min pour Celio tous pays), elles sont donc
+    # recalculées le lundi (SEC_SUMMARY_WEEKDAY), ou si les sections ont changé, et conservées le reste de la semaine
+    same_keys = {g: [x["key"] for x in v] for g, v in groupings.items()} == {g: [x["key"] for x in v] for g, v in (old.get("groupings") or {}).items()}
+    if old.get("summary") and same_keys and (old.get("windows") == windows or today.weekday() != SEC_SUMMARY_WEEKDAY):
+        summary, windows = old["summary"], old["windows"]
+    else:
+        qrows = {lbl: gsc(tok, prop, x, y, ["page", "query"], scope) for lbl, (x, y) in win.items()}
+        summary = {}
+        for g, secs in groupings.items():
+            which = section_classifier(secs)
+            cls = {u: which(u) for u in pool}
+            for rows in qrows.values():
+                for r in rows:
+                    u = r["keys"][0]
+                    if u not in cls:
+                        cls[u] = which(u)
+            pages = {lbl: defaultdict(dict) for lbl in win}
+            for lbl, rows in snaps.items():
+                for u, v in rows.items():
+                    pages[lbl][cls[u]][u] = v
+            qs = {lbl: defaultdict(lambda: defaultdict(lambda: [0, 0, 0.0])) for lbl in win}
+            for lbl, rows in qrows.items():
+                for r in rows:
+                    x = qs[lbl][cls[r["keys"][0]]][r["keys"][1]]
+                    x[0] += int(r["clicks"]); x[1] += int(r["impressions"]); x[2] += r["position"] * r["impressions"]
+            summary[g] = {}
+            for sec in secs:
+                k = sec["key"]
+                pg = {lbl: pages[lbl].get(k, {}) for lbl in win}
+                q = {lbl: {kw: [c, i, round(pw / i, 1) if i else None] for kw, (c, i, pw) in qs[lbl].get(k, {}).items()} for lbl in win}
+                cur = pg["cur"]
+                tot = sum(v[0] for v in cur.values())
+                top10 = sum(sorted((v[0] for v in cur.values()), reverse=True)[:10])
+
+                def dist(rows):
+                    b = [0, 0, 0, 0]
+                    for c, i, p in rows.values():
+                        if i >= SEC_MIN_IMPR and p is not None:
+                            b[0 if p <= 3 else 1 if p <= 10 else 2 if p <= 20 else 3] += 1
+                    return b
+                brand_re = re.compile(brand)
+                qn = {lbl: {kw: v for kw, v in rows.items() if not brand_re.search(kw)} for lbl, rows in q.items()}
+
+                def qblock(q):
+                    return {"count": len(q["cur"]), "named_clicks": sum(v[0] for v in q["cur"].values()), "dist": dist(q["cur"]),
+                            **{ref: {"count": len(q[ref]), "dist": dist(q[ref]), **compare_lists(q["cur"], q[ref])} for ref in ("prev", "n1")}}
+                summary[g][k] = {
+                    "pages": {"active": len(cur), "clicks": tot, "top10_share": round(top10 / tot * 100, 1) if tot else None,
+                              **{ref: {"active": len(pg[ref]), "clicks": sum(v[0] for v in pg[ref].values()), **compare_lists(cur, pg[ref])}
+                                 for ref in ("prev", "n1")}},
+                    "queries": qblock(q), "queries_nonbrand": qblock(qn),
+                }
+
+    write_json(meta_path, {"generated_at": datetime.now(timezone.utc).isoformat(timespec="minutes"), **info,
+                           "groupings": groupings, "windows": windows, "summary": summary}, compact=True)
+    print(f"[{name}/{mk}] dossiers : " + ", ".join(f"{g} {len(x)}" for g, x in groupings.items()) + f" ({time.time() - t0:.0f} s)")
+
+
+def sections_only(days, only=None):
+    """Collecte des dossiers seule (sans les positions), pour un premier remplissage ou un test."""
+    today = datetime.now(timezone.utc).date()
+    for s in load_sites():
+        if only and s["name"] != only:
+            continue
+        tok = token(s["account"])
+        brand = "(?i)(" + s.get("brand_regex", "^$") + ")"
+        for m in markets(s):
+            geo = [f("country", "equals", m["code"])] if m["code"] != ALL else []
+            scope = geo + ([f("page", "contains", m["path"])] if m.get("path") else [])
+            fetch_sections(tok, s, m, days, today, brand, scope)
 
 
 def inspect_pages(tok, s, pages, only_new=False, tracked=None):
@@ -549,6 +836,10 @@ def build():
         for n in by:
             for r in read_csv(pdir(s["name"]) / n):
                 by[n][(s["name"], r["country"])].append(r)
+    sec_rows = defaultdict(list)
+    for s in sites:
+        for r in read_csv(pdir(s["name"]) / "sections.csv"):
+            sec_rows[(s["name"], r["country"])].append(r)
     status = read_json(DATA / "status.json", {})
     updates = read_json(DATA / "google_updates.json", [])
     generated = datetime.now(timezone.utc).isoformat(timespec="minutes")
@@ -567,12 +858,33 @@ def build():
             p = build_project(s, m, ms, dm, by["positions.csv"][key], by["keywords.csv"][key], by["query_pages.csv"][key],
                               by["site.csv"][key], extras, insp, status.get(name, {}), generated)
             write_json(OUT / f"{name}{suffix(m['code'])}.json", p, compact=True)
+            sec = sections_payload(name, m["code"], sec_rows[key])
+            if sec:
+                write_json(OUT / f"{name}{suffix(m['code'])}.sections.json", sec, compact=True)
             if m["code"] == dm:
                 index["projects"].append(summary(p))
             print(f"[{name}/{m['code']}] {len(p['keywords'])} mots-clés, {len(p['alerts'])} alertes, {len(p['events'])} événements, "
                   f"{len(p['actions'])} actions")
 
     write_json(OUT / "index.json", index, compact=True)
+
+
+def sections_payload(name, mk, rows):
+    """Fichier du dashboard pour Trafic > Par dossier : sections, séries quotidiennes et comparaisons (chargé à la demande)."""
+    meta = read_json(pdir(name) / f"sections{suffix(mk)}.json", None)
+    if not meta or not meta.get("groupings"):
+        return None
+    series = defaultdict(lambda: defaultdict(list))
+    for r in sorted(rows, key=lambda r: r["date"]):
+        series[(r["grouping"], r["section"])][r["segment"]].append(
+            [r["date"], float(r["position"]), int(r["clicks"]), int(r["impressions"]), 1 if r["data_state"] == "fresh" else 0])
+    groupings = []
+    for g, secs in meta["groupings"].items():
+        groupings.append({"id": g, "label": GROUPINGS.get(g, g), "sections": [
+            {"key": x["key"], "label": x["label"], "rx": x["rx"], "series": series.get((g, x["key"]), {}),
+             "summary": (meta.get("summary") or {}).get(g, {}).get(x["key"])} for x in secs]})
+    return {"generated_at": meta.get("generated_at"), "main_host": meta.get("main_host"), "market_path": meta.get("market_path"),
+            "languages": meta.get("languages"), "windows": meta.get("windows") or {}, "groupings": groupings}
 
 
 def build_project(s, m, ms, dm, pos_rows, kw_rows, qp_rows, site_rows, extras, insp, st, generated):
@@ -951,6 +1263,9 @@ if __name__ == "__main__":
     fa.add_argument("--days", type=int, default=10)
     fa.add_argument("--site")
     sub.add_parser("build")
+    xa = sub.add_parser("sections")
+    xa.add_argument("--days", type=int, default=10)
+    xa.add_argument("--site")
     ia = sub.add_parser("inspect")
     ia.add_argument("site")
     ia.add_argument("--pages-file")
@@ -961,6 +1276,8 @@ if __name__ == "__main__":
     a = ap.parse_args()
     if a.cmd == "fetch":
         fetch(a.days, a.site)
+    elif a.cmd == "sections":
+        sections_only(a.days, a.site)
     elif a.cmd == "build":
         build()
     elif a.cmd == "inspect":

@@ -531,3 +531,6 @@ details.overview > summary .hint { display: flex; gap: 14px; flex-wrap: wrap; al
 .sev, .badge, .pill, .st, .rank, .fresh-tag { flex-shrink: 0; }
 
 [hidden] { display: none !important; }
+tbody tr.click.selected td { background: var(--gray-1); }
+.sec-list .url { max-width: 260px; }
+#t-sec td .light { margin-top: 2px; }

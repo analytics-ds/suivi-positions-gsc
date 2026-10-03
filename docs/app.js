@@ -46,6 +46,10 @@ const DEF = {
   anonymes: "Requêtes trop rares que Google masque dans le détail : leurs clics comptent dans le total mais ni en marque ni en hors marque.",
   n1: "Même période, un an plus tôt (décalée de 364 jours pour comparer les mêmes jours de la semaine).",
   provisoire: "Les 2 à 3 derniers jours de la Search Console ne sont pas consolidés : ils sont tracés en pointillés et réécrits à la synchro suivante.",
+  dossier: "Pages regroupées par premier dossier de l'URL, détecté automatiquement : après le dossier du pays déclaré ou le préfixe de langue (fr-fr, es-es…). Un dossier compte à partir de 5 pages vues dans la Search Console ou de 1 % des clics. Les pages sans dossier sont dans « Pages de premier niveau », chaque sous-domaine à part, les petits dossiers dans « Autres pages ».",
+  pagesActives: "Pages du dossier qui ont eu au moins une impression sur les 28 jours des tops (recalculés chaque lundi, dates affichées dans le détail du dossier). L'écart compare à N-1 ou à la période précédente.",
+  part: "Part des clics du marché faite par le dossier sur la période.",
+  repartition: "Mots-clés du dossier avec au moins 10 impressions sur 28 jours, par position moyenne. L'écart compare au même calcul sur la période de comparaison.",
   impact: "Clics par jour après l'action moins clics par jour avant, corrigés de la tendance des mots-clés non travaillés (groupe témoin), ramenés à un mois.",
 };
 const info = key => `<i class="info" title="${esc(DEF[key] || key)}">i</i>`;
@@ -92,6 +96,7 @@ const ui = {
   sel: {}, query: "", tags: new Set(), statuses: new Set(), view: "", openKw: null, pendingKw: null,
   sug: "all", sugSel: new Set(), month: null, kwMode: "kw", who: store.get("who") || "",
   chartOpen: store.get("chartOpen") === "1", metric: "position", trafSeg: "nonbrand",
+  trafMode: store.get("trafMode") || "global", secGroup: null, secSort: { key: "clicks", dir: -1 }, secOpen: null, secRef: null, secMetric: "clicks", secBrand: store.get("secBrand") || "nonbrand",
   actMetric: store.get("actMetric") || "position", ovOpen: store.get("ovOpen2") === "1", ovChart: store.get("ovChart") || "pos",
 };
 
@@ -200,7 +205,7 @@ async function onRoute() {
   closeDrawer();
   closeCmdk();
   $("app").classList.remove("nav-open");
-  if (site !== route.site) { ui.tags.clear(); ui.statuses.clear(); ui.query = ""; ui.month = null; ui.sugSel.clear(); }
+  if (site !== route.site) { ui.tags.clear(); ui.statuses.clear(); ui.query = ""; ui.month = null; ui.sugSel.clear(); ui.secOpen = null; ui.secGroup = null; }
   route = { site, view };
   destroyCharts();
   if (site === "guide") { P = null; renderChrome(); return renderGuide(); }
@@ -1099,13 +1104,21 @@ function closeDrawer() {
 function renderTraffic() {
   const R = ranges();
   const cl = cmpLabel();
+  const modeTabs = `<div class="tabs" id="t-mode"><button data-m="global" class="${ui.trafMode !== "dossier" ? "active" : ""}">Vue globale</button><button data-m="dossier" class="${ui.trafMode === "dossier" ? "active" : ""}">Par dossier</button></div>`;
+  const note = `<span class="light ref-note">${rangeText(R)}${R.cmp ? ` · comparé au ${rangeText(R.cmp)}` : ""}${P.market !== "all" ? ` · ${esc(P.market_label)}${P.market_path ? ` (URL contenant ${esc(P.market_path)})` : ""}` : ""}</span>`;
+  const bindMode = () => document.querySelectorAll("#t-mode button").forEach(b => b.onclick = () => { ui.trafMode = b.dataset.m; store.set("trafMode", ui.trafMode); renderView(); });
+  if (ui.trafMode === "dossier") {
+    $("view").innerHTML = viewBar(modeTabs + note) + '<div id="folders"></div>';
+    bindMode();
+    return renderFolders();
+  }
   const S = ["nonbrand", "brand", "total"].reduce((o, s) => ({ ...o, [s]: segSum(s, R.dates), [s + "c"]: R.cmp ? segSum(s, R.cmp.dates) : null }), {});
   const sub = (cur, ref) => R.cmp ? vsPct(cur, ref) : "";
   const SEGS = [["nonbrand", "Hors marque"], ["brand", "Marque"], ["total", "Total"], ["impr", "Impressions"]];
   const seg = ui.trafSeg, segData = seg === "impr" ? "total" : seg, idx = seg === "impr" ? 3 : 2;
   const months = []; const lm = R.to.slice(0, 7);
   for (let i = 12; i >= 0; i--) months.push(shiftMonth(lm, -i));
-  $("view").innerHTML = viewBar(`<span class="light ref-note">${rangeText(R)}${R.cmp ? ` · comparé au ${rangeText(R.cmp)}` : ""}${P.market !== "all" ? ` · ${esc(P.market_label)}${P.market_path ? ` (URL contenant ${esc(P.market_path)})` : ""}` : ""}</span>`)
+  $("view").innerHTML = viewBar(modeTabs + note)
     + `<div class="card stats">
       ${kpi("Clics hors marque", fmt(S.nonbrand.clicks), sub(S.nonbrand.clicks, S.nonbrandc && S.nonbrandc.clicks), "horsMarque")}
       ${kpi("Clics marque", fmt(S.brand.clicks), sub(S.brand.clicks, S.brandc && S.brandc.clicks), "marque")}
@@ -1119,6 +1132,7 @@ function renderTraffic() {
     <div class="card"><div class="card-head"><h2>Par mois</h2><span class="hint">13 mois, ${SEGS.find(s => s[0] === seg)[1].toLowerCase()}</span></div>
       <div class="card-body"><div class="chart-box sm"><canvas id="c-months"></canvas></div></div></div>
     ${P.anonymized_share != null ? `<p class="footnote">${fmt1(P.anonymized_share)} % des clics viennent de requêtes masquées par Google ${info("anonymes")}, comptées dans le total seulement.</p>` : ""}`;
+  bindMode();
   document.querySelectorAll("#t-seg button").forEach(b => b.onclick = () => { ui.trafSeg = b.dataset.v; renderTraffic(); });
   const segPts = ds_ => ds_.map(d => (P.seg[segData] && P.seg[segData].get(d)) || null);
   const tb = bucket(segPts(R.dates), R.dates);
@@ -1133,6 +1147,153 @@ function renderTraffic() {
   chart("c-months", { type: "bar", data: { labels: months.map(x => MONTHS[+x.slice(5) - 1].slice(0, 4) + ". " + x.slice(2, 4)),
       datasets: [{ data: months.map(mval), backgroundColor: months.map((x, i) => i === months.length - 1 ? "#C9C9C9" : "#101010"), borderRadius: { topLeft: 4, topRight: 4 }, borderSkipped: "bottom", maxBarThickness: 36 }] },
     options: { maintainAspectRatio: false, scales: { y: linScale(), x: { grid: { display: false } } }, plugins: { legend: { display: false }, tooltip: tooltip({ label: c => ` ${fmt(c.parsed.y)}` }) } } });
+}
+
+// ---------------------------------------------------------------- Trafic > Par dossier
+
+async function sectionsData() {
+  const key = P.name + "|" + P.market + "|sections";
+  if (!(key in cache)) {
+    const file = P.market === "all" ? P.name : `${P.name}.${P.market}`;
+    const r = await fetch(`data/${file}.sections.json?v=` + Date.now());
+    const d = r.ok ? await r.json() : null;
+    if (d) d.groupings.forEach(g => g.sections.forEach(s => { s.map = new Map((s.series.total || []).map(x => [x[0], x])); }));
+    cache[key] = d;
+  }
+  return cache[key];
+}
+
+function secSum(s, dates) {
+  let c = 0, i = 0, pw = 0;
+  dates.forEach(d => { const x = s.map.get(d); if (x) { c += x[2]; i += x[3]; pw += x[1] * x[3]; } });
+  return { clicks: c, impr: i, ctr: i ? c / i * 100 : null, pos: i ? pw / i : null };
+}
+
+async function renderFolders() {
+  const site = P.name, market = P.market;
+  $("folders").innerHTML = '<div class="loading">Chargement…</div>';
+  const D = await sectionsData();
+  if (!P || P.name !== site || P.market !== market || route.view !== "trafic" || ui.trafMode !== "dossier") return;
+  if (!D) { $("folders").innerHTML = '<div class="card empty">Les dossiers de ce projet arrivent à la prochaine synchro.</div>'; return; }
+  const G = D.groupings.find(g => g.id === ui.secGroup) || D.groupings[0];
+  const R = ranges(), ref = ui.secRef || (ui.cmp.mode === "prev" ? "prev" : "n1");
+  const rows = G.sections.map(s => {
+    const cur = secSum(s, R.dates), cmp = R.cmp ? secSum(s, R.cmp.dates) : null, sm = s.summary || {};
+    return { s, cur, cmp, active: sm.pages ? sm.pages.active : null, activeRef: sm.pages && sm.pages[ref] ? sm.pages[ref].active : null };
+  });
+  const tot = rows.reduce((a, r) => a + r.cur.clicks, 0);
+  rows.forEach(r => { r.share = tot ? r.cur.clicks / tot * 100 : null; r.dc = R.cmp ? pct(r.cur.clicks, r.cmp.clicks) : null; });
+  const sk = ui.secSort.key, dir = ui.secSort.dir;
+  const val = r => ({ label: r.s.label, clicks: r.cur.clicks, dc: r.dc ?? -Infinity, impr: r.cur.impr, ctr: r.cur.ctr ?? -1, pos: r.cur.pos ?? 999, active: r.active ?? -1 }[sk]);
+  rows.sort((a, b) => { const x = val(a), y = val(b); return (typeof x === "string" ? x.localeCompare(y) : x - y) * dir; });
+  const root = rows.find(r => r.s.key === "racine");
+  const named = rows.filter(r => r.s.key.startsWith("d:")).length;
+  const flat = G.id === "dossier" && root && root.share >= 80 && named <= 1;
+  const scopeNote = G.id === "langue" ? "Pages regroupées par préfixe de langue"
+    : D.market_path ? `Dossiers lus après /${esc(D.market_path)}/` : D.languages && D.languages.length ? `Dossiers lus après le préfixe de langue (${D.languages.length} langues détectées)` : "Dossiers lus à la racine du site";
+  const week = s => { const out = []; for (let e = R.dates.length; e > 0; e -= 7) { let c = 0; R.dates.slice(Math.max(0, e - 7), e).forEach(d => { const x = s.map.get(d); if (x) c += x[2]; }); out.unshift([null, -c]); } return out; };
+  const th = (k, l, cls = "num", def) => `<th class="${cls}${def ? " def" : ""}" data-sort="${k}" ${def ? `title="${esc(DEF[def])}"` : ""}>${l}<span class="arrow">${sk === k ? (dir > 0 ? "↑" : "↓") : "↕"}</span></th>`;
+  $("folders").innerHTML = `${D.groupings.length > 1 ? `<div class="view-bar"><div class="tabs" id="sec-group">${D.groupings.map(g => `<button data-g="${g.id}" class="${g.id === G.id ? "active" : ""}">${esc(g.label)}</button>`).join("")}</div></div>` : ""}
+    ${flat ? `<div class="note-box" style="margin-bottom:12px">Structure plate : ${fmt1(root.share)} % des clics vont à des pages sans dossier. Le découpage automatique n'apporte pas grand-chose sur ce site.</div>` : ""}
+    <div class="card" style="margin-bottom:12px"><div class="card-head"><h2>${G.id === "langue" ? "Langues" : "Dossiers"}</h2><span class="hint">${scopeNote} ${info("dossier")}</span></div>
+    <div class="table-wrap"><table id="t-sec"><thead><tr>${th("label", G.id === "langue" ? "Langue" : "Dossier", "")}${th("clicks", "Clics")}${R.cmp ? th("dc", cmpLabel()) : ""}<th class="num def" title="${esc(DEF.part)}">Part</th>${th("impr", "Impressions")}${th("ctr", "CTR")}${th("pos", "Position moy.")}${th("active", "Pages actives", "num", "pagesActives")}<th>Clics par semaine</th></tr></thead><tbody>
+    ${rows.map(r => `<tr class="click${ui.secOpen === r.s.key ? " selected" : ""}" data-k="${esc(r.s.key)}"><td><b>${esc(r.s.label)}</b></td>
+      <td class="num">${fmt(r.cur.clicks)}</td>${R.cmp ? `<td class="num">${r.cmp.clicks ? deltaPill(r.dc, { pct: true }) : r.cur.clicks ? '<span class="badge info">nouveau</span>' : NA}</td>` : ""}
+      <td class="num">${r.share == null ? NA : fmt1(r.share) + " %"}</td>
+      <td class="num">${fmt(r.cur.impr)}${R.cmp && r.cmp.impr ? `<div class="light">${deltaPill(pct(r.cur.impr, r.cmp.impr), { pct: true })}</div>` : ""}</td>
+      <td class="num">${r.cur.ctr == null ? NA : fmt1(r.cur.ctr) + " %"}</td>
+      <td class="num">${fmt1(r.cur.pos)}${R.cmp && r.cmp.pos != null && r.cur.pos != null ? `<div class="light">${placesPill(r.cmp.pos - r.cur.pos)}</div>` : ""}</td>
+      <td class="num">${r.active == null ? NA : fmt(r.active)}${r.activeRef != null ? `<div class="light">${countPill(r.active - r.activeRef)}</div>` : ""}</td>
+      <td>${sparkline(week(r.s), INK)}</td></tr>`).join("")}
+    </tbody></table></div></div>
+    <div id="sec-detail"></div>`;
+  document.querySelectorAll("#sec-group button").forEach(b => b.onclick = () => { ui.secGroup = b.dataset.g; ui.secOpen = null; renderFolders(); });
+  document.querySelectorAll("#t-sec th[data-sort]").forEach(h => h.onclick = e => {
+    if (e.target.closest(".info")) return;
+    const k = h.dataset.sort; ui.secSort = ui.secSort.key === k ? { key: k, dir: -ui.secSort.dir } : { key: k, dir: k === "label" || k === "pos" ? 1 : -1 };
+    renderFolders();
+  });
+  document.querySelectorAll("#t-sec tr.click").forEach(tr => tr.onclick = () => {
+    ui.secOpen = ui.secOpen === tr.dataset.k ? null : tr.dataset.k; renderFolders();
+    if (ui.secOpen) setTimeout(() => $("sec-detail").scrollIntoView({ behavior: "smooth", block: "start" }), 50);
+  });
+  const open = rows.find(r => r.s.key === ui.secOpen);
+  if (open) renderSectionDetail(open, D, R, ref);
+}
+
+function renderSectionDetail(row, D, R, ref) {
+  const s = row.s, sm = s.summary, cur = row.cur, cmp = row.cmp;
+  const w = D.windows["28"], refW = w[ref];
+  const metric = ui.secMetric, idx = { clicks: 2, impr: 3, pos: 1 }[metric];
+  const sub = (a, b) => R.cmp ? vsPct(a, b) : "";
+  const nb = ui.secBrand !== "all" && sm && sm.queries_nonbrand;
+  const pg = sm && sm.pages, q = sm && (nb ? sm.queries_nonbrand : sm.queries);
+  const refLabel = ref === "n1" ? "N-1" : "période précédente";
+  const refText = `28 jours du ${fmtDateY(w.cur[0])} au ${fmtDateY(w.cur[1])}, comparés au ${fmtDateY(refW[0])} au ${fmtDateY(refW[1])}`;
+  const pageCell = u => `<td>${urlLink(u)}</td>`;
+  const list = (title, items, kind, mode, extra = "") => {
+    const isPage = kind === "page";
+    const head = mode === "gone" ? `<th class="num">Clics avant</th><th class="num">Position avant</th>` : mode === "new" ? `<th class="num">Clics</th><th class="num">Impr.</th><th class="num">Position</th>`
+      : `<th class="num">Clics</th><th class="num">Écart</th><th class="num">Position</th>`;
+    const body = items.length ? items.map(r => {
+      const first = isPage ? pageCell(r[0]) : `<td>${esc(r[0])}</td>`;
+      if (mode === "gone") return `<tr>${first}<td class="num">${fmt(r[4])}</td><td class="num">${fmt1(r[6])}</td></tr>`;
+      if (mode === "new") return `<tr>${first}<td class="num">${fmt(r[1])}</td><td class="num">${fmt(r[2])}</td><td class="num">${fmt1(r[3])}</td></tr>`;
+      return `<tr>${first}<td class="num">${fmt(r[1])}</td><td class="num">${countPill(r[1] - r[4])}</td><td class="num">${fmt1(r[3])}${r[6] != null && r[3] != null ? `<div class="light">${placesPill(r[6] - r[3])}</div>` : ""}</td></tr>`;
+    }).join("") : `<tr><td colspan="4" class="empty" style="padding:16px">Rien sur la période.</td></tr>`;
+    return `<div class="card"><div class="card-head"><h2>${title}</h2><span class="hint">${extra}</span></div><div class="table-wrap"><table class="sec-list"><thead><tr><th>${isPage ? "Page" : "Mot-clé"}</th>${head}</tr></thead><tbody>${body}</tbody></table></div></div>`;
+  };
+  const distRow = (lbl, a, b, color) => `<div class="dist-row"><span class="sw" style="background:${color}"></span>${lbl}<span class="n">${fmt(a)}</span>${b != null ? countPill(a - b) : ""}</div>`;
+  $("sec-detail").innerHTML = `<div class="view-bar"><div class="left"><h1>${esc(s.label)}</h1><button class="btn ghost sm" id="sec-close">Fermer</button></div></div>
+    <div class="card stats">
+      ${kpi("Clics", fmt(cur.clicks), sub(cur.clicks, cmp && cmp.clicks))}
+      ${kpi("Impressions", fmt(cur.impr), sub(cur.impr, cmp && cmp.impr))}
+      ${kpi("CTR", cur.ctr == null ? NA : fmt1(cur.ctr) + "<small> %</small>", R.cmp && cmp && cmp.ctr != null && cur.ctr != null ? `<span>${deltaPill(cur.ctr - cmp.ctr, { suffix: " pt" })} ${cmpLabel()}</span>` : "")}
+      ${kpi("Position moy.", fmt1(cur.pos), R.cmp && cmp && cmp.pos != null && cur.pos != null ? `<span>${placesPill(cmp.pos - cur.pos)} ${cmpLabel()}</span>` : "")}
+      ${kpi("Pages actives", pg ? fmt(pg.active) : NA, pg && pg[ref] ? `<span>${countPill(pg.active - pg[ref].active)} vs ${refLabel}</span>` : "", "pagesActives")}
+    </div>
+    <div class="card" style="margin-bottom:12px"><div class="card-head"><h2>Par jour</h2>
+      <div class="tabs" id="sec-metric">${[["clicks", "Clics"], ["impr", "Impressions"], ["pos", "Position"]].map(([v, l]) => `<button data-v="${v}" class="${metric === v ? "active" : ""}">${l}</button>`).join("")}</div></div>
+      <div class="card-body"><div class="legend-static"><span><span class="line-sw" style="border-color:${INK}"></span>${rangeText(R)}</span>${R.cmp ? `<span><span class="line-sw dash" style="border-color:${CMP}"></span>${rangeText(R.cmp)}</span>` : ""}</div>
+      <div class="chart-box"><canvas id="c-sec"></canvas></div><div id="marks-sec"></div></div></div>
+    ${sm ? `<div class="view-bar"><div class="left"><div class="tabs" id="sec-ref"><button data-r="n1" class="${ref === "n1" ? "active" : ""}">vs N-1</button><button data-r="prev" class="${ref === "prev" ? "active" : ""}">vs période précédente</button></div>
+        <span class="light ref-note">${refText}</span></div></div>
+      <div class="grid-eq">
+        ${list("Pages en hausse", pg[ref].win, "page", "delta")}
+        ${list("Pages en baisse", pg[ref].lose, "page", "delta")}
+        ${list(`Pages apparues`, pg[ref].new, "page", "new", `${fmt(pg[ref].n_new)} pages, ${fmt(pg[ref].new_clicks)} clics`)}
+        ${list(`Pages disparues`, pg[ref].gone, "page", "gone", `${fmt(pg[ref].n_gone)} pages, ${fmt(pg[ref].gone_clicks)} clics avant`)}
+      </div>
+      ${sm.queries_nonbrand ? `<div class="view-bar"><div class="left"><div class="tabs" id="sec-brand"><button data-b="nonbrand" class="${nb ? "active" : ""}">Mots-clés hors marque</button><button data-b="all" class="${nb ? "" : "active"}">Tous les mots-clés</button></div></div></div>` : ""}
+      <div class="grid-eq">
+        ${list("Mots-clés en hausse", q[ref].win, "q", "delta")}
+        ${list("Mots-clés en baisse", q[ref].lose, "q", "delta")}
+        ${list("Nouveaux mots-clés", q[ref].new, "q", "new", `${fmt(q[ref].n_new)} mots-clés, ${fmt(q[ref].new_clicks)} clics`)}
+        ${list("Mots-clés perdus", q[ref].gone, "q", "gone", `${fmt(q[ref].n_gone)} mots-clés, ${fmt(q[ref].gone_clicks)} clics avant`)}
+      </div>
+      <div class="grid-eq">
+        <div class="card"><div class="card-head"><h2>Répartition des mots-clés${nb ? " hors marque" : ""}</h2><span class="hint def" title="${esc(DEF.repartition)}">${fmt(q.count)} mots-clés, écart vs ${refLabel}</span></div><div class="card-body">
+          ${DIST.slice(0, 4).map((b, n) => distRow(b.name, q.dist[n], q[ref].dist[n], b.color)).join("")}</div></div>
+        <div class="card"><div class="card-head"><h2>Concentration</h2></div><div class="card-body">
+          <div class="dist-row">Pages actives sur 28 jours<span class="n">${fmt(pg.active)}</span></div>
+          <div class="dist-row">Part des clics faite par les 10 premières pages<span class="n">${pg.top10_share == null ? NA : fmt1(pg.top10_share) + " %"}</span></div>
+</div></div>
+      </div>` : `<div class="card empty">Les comparaisons de pages et de mots-clés arrivent à la prochaine synchro.</div>`}`;
+  $("sec-close").onclick = () => { ui.secOpen = null; renderFolders(); };
+  document.querySelectorAll("#sec-metric button").forEach(b => b.onclick = () => { ui.secMetric = b.dataset.v; renderSectionDetail(row, D, R, ref); });
+  document.querySelectorAll("#sec-brand button").forEach(b => b.onclick = () => { ui.secBrand = b.dataset.b; store.set("secBrand", ui.secBrand); renderSectionDetail(row, D, R, ref); });
+  document.querySelectorAll("#sec-ref button").forEach(b => b.onclick = () => { ui.secRef = b.dataset.r; renderFolders(); });
+  const pts = ds_ => ds_.map(d => s.map.get(d) || null);
+  const tb = bucket(pts(R.dates), R.dates);
+  const ds = [lineDs(rangeText(R), tb.pts.map(p => p && p[idx]), INK, { fresh: tb.pts.map(p => p && p[4]) })];
+  if (R.cmp) { const tc = bucket(pts(R.cmp.dates), R.cmp.dates); ds.push(lineDs(rangeText(R.cmp), tb.labels.map((_, n) => tc.pts[n] ? tc.pts[n][idx] : null), CMP, { dash: [4, 4], width: 1.5 })); }
+  const mk = marksFor(tb.ranges);
+  const vals = ds.flatMap(d => d.data);
+  chart("c-sec", { type: "line", data: { labels: tb.labels, datasets: ds },
+    options: { maintainAspectRatio: false, interaction: { mode: "index", intersect: false }, layout: { padding: { top: 12 } },
+      scales: { y: metric === "pos" ? posScale(vals) : linScale(), x: xScale() },
+      plugins: { legend: { display: false }, marks: { items: mk.items }, tooltip: tooltip({ label: c => ` ${c.dataset.label} : ${metric === "pos" ? fmt1(c.parsed.y) : fmt(c.parsed.y)}` }) } } });
+  $("marks-sec").innerHTML = mk.html;
 }
 
 // ---------------------------------------------------------------- Actions
@@ -1422,7 +1583,7 @@ function renderGuide() {
     ${viewBar("<h1>Guide d'utilisation</h1>")}
     <div class="card"><h2>Les onglets</h2><div class="qa">
       <a href="#/${first}/mots-cles"><b>Mots-clés</b><span>L'onglet d'arrivée : vue d'ensemble (hausses, baisses, entrées et sorties du top, évolution globale, tags), puis la position du jour de chaque mot-clé. Par page : indexation et requêtes de chaque page suivie.</span></a>
-      <a href="#/${first}/trafic"><b>Trafic du site</b><span>Clics hors marque, marque, total et impressions, comparés à la période choisie.</span></a>
+      <a href="#/${first}/trafic"><b>Trafic du site</b><span>Clics hors marque, marque, total et impressions, comparés à la période choisie. Par dossier : le trafic de chaque dossier du site (détecté automatiquement), puis pour un dossier ses pages et mots-clés en hausse, en baisse, apparus et disparus sur 28 jours.</span></a>
       <a href="#/${first}/actions"><b>Actions</b><span>Journal des optimisations et leur effet mesuré.</span></a>
       <a href="#/${first}/opportunites"><b>Opportunités</b><span>Mots-clés suivis à pousser et requêtes à ajouter au suivi.</span></a>
       <a href="#/${first}/rapport"><b>Rapport</b><span>Rapport mensuel figé sur son mois, modifiable, imprimable en PDF.</span></a>
