@@ -830,10 +830,9 @@ function renderOverview(kws, R) {
     + `<span class="light">sur la période, ${span}</span>`;
   if (!ui.ovOpen || !$("ov-body")) return;
 
-  const moveTable = (list, empty) => `<table class="mini"><thead><tr><th>Mot-clé</th><th class="num">Position</th><th class="num">Variation</th></tr></thead><tbody>
-    ${list.slice(0, 6).map(r => `<tr class="click" data-i="${r.k.i}"><td><b>${esc(r.k.keyword)}</b><div class="light sub" title="${esc(DEF.demande)}">${fmt(r.k.st.demand)} impr./mois</div></td><td class="num">${fmt1(r.p0)} → <b>${fmt1(r.p1)}</b></td><td class="num">${placesPill(r.d)}</td></tr>`).join("")
-      || `<tr><td colspan="3" class="empty-note">${empty}</td></tr>`}</tbody></table>`;
-  const chips = (list, cls) => list.length ? list.map(r => `<button class="kchip ${cls}" data-i="${r.k.i}" title="${esc(r.k.keyword)} : ${r.p0 == null ? "absent" : fmt1(r.p0)} → ${r.p1 == null ? "absent" : fmt1(r.p1)}">${esc(r.k.keyword)} <span class="kp">${r.p0 == null ? "absent" : fmt1(r.p0)} → ${r.p1 == null ? "absent" : fmt1(r.p1)}</span></button>`).join("") : '<span class="light">aucun</span>';
+  // Listes compactes : mot-clé (coupé proprement), position avant → après, variation
+  const moveList = (list, empty) => list.length ? `<div class="ov-list">${list.slice(0, 5).map(r => `<div class="ov-li" data-i="${r.k.i}" title="${esc(r.k.keyword)} · ${fmt(r.k.st.demand)} impr./mois"><span class="k">${esc(r.k.keyword)}</span><span class="p">${fmt1(r.p0)} → <b>${fmt1(r.p1)}</b></span>${placesPill(r.d)}</div>`).join("")}</div>${list.length > 5 ? `<div class="ov-more">et ${list.length - 5} autre${list.length > 6 ? "s" : ""} dans le tableau</div>` : ""}` : `<p class="empty-note">${empty}</p>`;
+  const chips = (list, cls) => list.length ? list.map(r => `<button class="kchip ${cls}" data-i="${r.k.i}" title="${esc(r.k.keyword)} : ${r.p0 == null ? "absent" : fmt1(r.p0)} → ${r.p1 == null ? "absent" : fmt1(r.p1)}">${esc(r.k.keyword)}</button>`).join("") : '<span class="light">aucun</span>';
 
   // Par tag : position moyenne, variation sur la même base, clics vs comparaison
   const tags = [...new Set(kws.flatMap(k => k.tags))];
@@ -845,47 +844,49 @@ function renderOverview(kws, R) {
     return { tg, n: ks.length, pos: mean(now), d: pr.length ? mean(pr.map(r => r.p0)) - mean(pr.map(r => r.p1)) : null, top3: now.filter(v => v <= 3).length, clicks, dc: cc ? pct(clicks, cc) : null };
   }).sort((a, b) => b.clicks - a.clicks);
 
-  const charts_ = [["pos", "Position moyenne"], ["vis", "Visibilité"], ["clicks", "Clics"], ["dist", "Répartition"]];
+  if (ui.ovChart === "dist") ui.ovChart = "pos";   // la répartition a désormais son propre graphique
+  const charts_ = [["pos", "Position moyenne"], ["vis", "Visibilité"], ["clicks", "Clics"]];
   $("ov-body").innerHTML = `
+    <div class="ov-charts">
+      <div class="ov-card"><div class="ov-head"><div class="tabs" id="ov-chart">${charts_.map(([v, l]) => `<button data-v="${v}" class="${ui.ovChart === v ? "active" : ""}">${l}</button>`).join("")}</div><div class="legend" id="ov-legend"></div></div>
+        <div class="chart-box"><canvas id="c-ov"></canvas></div><div id="ov-marks"></div></div>
+      <div class="ov-card"><div class="ov-head"><h3>Répartition des positions</h3><div class="legend" id="ov-legend-dist"></div></div>
+        <div class="chart-box"><canvas id="c-ov-dist"></canvas></div></div>
+    </div>
     <div class="ov-grid3">
-      <div class="ov-card"><h3>Plus fortes hausses <span class="badge ok">${ups.length}</span><span class="light h-note">${span}</span></h3>${moveTable(ups, "Aucune hausse d'au moins une demi-place.")}</div>
-      <div class="ov-card"><h3>Plus fortes baisses <span class="badge ko">${downs.length}</span><span class="light h-note">${span}</span></h3>${moveTable(downs, "Aucune baisse d'au moins une demi-place.")}</div>
-      <div class="ov-card"><h3>Entrées et sorties <span class="light h-note">${span}</span></h3>
-        <div class="io"><div class="l">Entrent dans le top 3</div><div>${chips(c3.in, "up")}</div></div>
+      <div class="ov-card"><h3>Hausses <span class="badge ok">${ups.length}</span></h3>${moveList(ups, "Aucune hausse d'au moins une demi-place.")}</div>
+      <div class="ov-card"><h3>Baisses <span class="badge ko">${downs.length}</span></h3>${moveList(downs, "Aucune baisse d'au moins une demi-place.")}</div>
+      <div class="ov-card"><h3>Top 3 et top 10</h3>
+        <div class="io"><div class="l">Entrent top 3</div><div>${chips(c3.in, "up")}</div></div>
         <div class="io"><div class="l">Sortent du top 3</div><div>${chips(c3.out, "down")}</div></div>
-        <div class="io"><div class="l">Entrent dans le top 10</div><div>${chips(c10.in, "up")}</div></div>
+        <div class="io"><div class="l">Entrent top 10</div><div>${chips(c10.in, "up")}</div></div>
         <div class="io"><div class="l">Sortent du top 10</div><div>${chips(c10.out, "down")}</div></div></div>
     </div>
-    <div class="grid-eq" style="margin:12px 0 0">
-      <div class="ov-card"><div class="ov-head"><h3>Évolution, ${rangeText(R)}</h3><div class="tabs" id="ov-chart">${charts_.map(([v, l]) => `<button data-v="${v}" class="${ui.ovChart === v ? "active" : ""}">${l}</button>`).join("")}</div></div>
-        <div class="legend" id="ov-legend"></div><div class="chart-box sm"><canvas id="c-ov"></canvas></div><div id="ov-marks"></div></div>
-      <div class="ov-card"><h3>Par tag</h3>${byTag.length ? `<div class="table-wrap"><table class="mini"><thead><tr><th>Tag</th><th class="num def" title="${esc(DEF.posMoy)}">Position moy.</th><th class="num" title="Sur la période, ${span}">Évol. position</th><th class="num">Top 3</th><th class="num">Clics</th>${R.cmp ? `<th class="num">Clics ${cmpLabel()}</th>` : ""}</tr></thead><tbody>
+    ${byTag.length ? `<div class="ov-card" style="margin-top:12px"><h3>Par tag</h3><div class="table-wrap"><table class="mini"><thead><tr><th>Tag</th><th class="num def" title="${esc(DEF.posMoy)}">Position moy.</th><th class="num" title="Sur la période, ${span}">Évol. position</th><th class="num">Top 3</th><th class="num">Clics</th>${R.cmp ? `<th class="num">Clics ${cmpLabel()}</th>` : ""}</tr></thead><tbody>
         ${byTag.map(x => `<tr class="click" data-tag="${esc(x.tg)}" title="Filtrer le tableau sur ce tag"><td><span class="tag">${esc(x.tg)}</span> <span class="light">${x.n}</span></td><td class="num">${fmt1(x.pos)}</td><td class="num">${placesPill(x.d)}</td><td class="num">${x.top3}/${x.n}</td><td class="num">${fmt(x.clicks)}</td>${R.cmp ? `<td class="num">${deltaPill(x.dc, { pct: true })}</td>` : ""}</tr>`).join("")}
-        </tbody></table></div>` : '<p class="empty-note">Aucun tag sur ces mots-clés. Les tags se saisissent avec les mots-clés (silo, type de page, priorité…).</p>'}</div>
-    </div>`;
+        </tbody></table></div></div>` : ""}`;
   document.querySelectorAll("#ov-body [data-i]").forEach(el => el.onclick = () => openDrawer(+el.dataset.i));
   document.querySelectorAll("#ov-body [data-tag]").forEach(el => el.onclick = () => { ui.tags = new Set([el.dataset.tag]); ui.view = ""; renderKeywords(); document.querySelector("#t-kw").scrollIntoView({ behavior: "smooth", block: "start" }); });
   document.querySelectorAll("#ov-chart button").forEach(b => b.onclick = () => { ui.ovChart = b.dataset.v; store.set("ovChart", ui.ovChart); renderOverview(kws, R); });
   drawOverviewChart(kws, R);
+  drawOverviewDist(kws, R);
+}
+
+// Combien de mots-clés dans chaque tranche de position, jour par jour (semaine par semaine au-delà de 3 mois)
+function drawOverviewDist(kws, R) {
+  const per = kws.map(k => bucket(R.dates.map(d => k.map.get(d) || null), R.dates));
+  const base = per[0] || bucket(R.dates.map(() => null), R.dates);
+  const ds = DIST.map(b => ({ label: b.name, data: base.labels.map((_, i) => per.filter(x => b.test(x.pts[i] ? x.pts[i][1] : null)).length),
+    backgroundColor: b.color, borderWidth: 0, borderRadius: 2, maxBarThickness: 22, stack: "s" }));
+  $("ov-legend-dist").innerHTML = DIST.map(b => `<span class="lg"><span class="sw sq" style="background:${b.color}"></span>${b.name}</span>`).join("");
+  chart("c-ov-dist", { type: "bar", data: { labels: base.labels, datasets: ds },
+    options: { maintainAspectRatio: false, interaction: { mode: "index", intersect: false }, layout: { padding: { top: 12 } },
+      scales: { y: { ...linScale(), stacked: true, ticks: { precision: 0 } }, x: { ...xScale(), stacked: true } },
+      plugins: { legend: { display: false }, marks: { items: marksFor(base.ranges).items }, tooltip: tooltip({ label: c => ` ${c.dataset.label} : ${c.parsed.y}` }) } } });
 }
 
 function drawOverviewChart(kws, R) {
   const m = ui.ovChart;
-  if (m === "dist") {
-    // Combien de mots-clés dans chaque tranche de position, jour par jour
-    const per = kws.map(k => bucket(R.dates.map(d => k.map.get(d) || null), R.dates));
-    const base = per[0] || bucket(R.dates.map(() => null), R.dates);
-    const ds = DIST.map(b => ({ label: b.name, data: base.labels.map((_, i) => per.filter(x => b.test(x.pts[i] ? x.pts[i][1] : null)).length),
-      backgroundColor: b.color, borderWidth: 0, borderRadius: 2, maxBarThickness: 22, stack: "s" }));
-    $("ov-legend").innerHTML = DIST.map(b => `<span class="lg"><span class="sw sq" style="background:${b.color}"></span>${b.name}</span>`).join("");
-    const mk = marksFor(base.ranges);
-    chart("c-ov", { type: "bar", data: { labels: base.labels, datasets: ds },
-      options: { maintainAspectRatio: false, interaction: { mode: "index", intersect: false }, layout: { padding: { top: 12 } },
-        scales: { y: { ...linScale(), stacked: true, ticks: { precision: 0 } }, x: { ...xScale(), stacked: true } },
-        plugins: { legend: { display: false }, marks: { items: mk.items }, tooltip: tooltip({ label: c => ` ${c.dataset.label} : ${c.parsed.y}` }) } } });
-    $("ov-marks").innerHTML = mk.html;
-    return;
-  }
   const cur = globalSeries(kws, R.dates, m);
   const ds = [lineDs(rangeText(R), cur.vals, INK, { fresh: cur.fresh })];
   if (R.cmp) {
